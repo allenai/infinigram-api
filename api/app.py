@@ -4,6 +4,7 @@ import os
 from fastapi import FastAPI
 from src import glog
 from src.health import health_router
+from src.infinigram import infinigram_router
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")
@@ -13,4 +14,4 @@ logging.basicConfig(level=level, handlers=handlers)
 
 app = FastAPI()
 app.include_router(health_router)
-# app.include_router(router=infinigram_router)
+app.include_router(router=infinigram_router)

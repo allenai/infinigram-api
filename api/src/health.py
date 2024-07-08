@@ -1,13 +1,11 @@
-from typing import Tuple
+from fastapi import APIRouter, status
 
-from apiflask import APIBlueprint
-
-health_blueprint = APIBlueprint(name="health", import_name=__name__)
+health_router = APIRouter(prefix="/health")
 
 
 # This tells the machinery that powers Skiff (Kubernetes) that your application
 # is ready to receive traffic. Returning a non 2XX response code will prevent the
 # application from receiving live requests.
-@health_blueprint.get("/")
-def health() -> Tuple[str, int]:
-    return "", 204
+@health_router.get("/", status_code=status.HTTP_204_NO_CONTENT)
+async def health():
+    return

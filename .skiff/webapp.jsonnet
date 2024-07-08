@@ -335,7 +335,6 @@ function(
                                 name: "infinigram-array",
                                 readOnly: true,
                             }],
-                            command: [ '/api/start.sh' ],
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.
                             #

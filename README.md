@@ -13,6 +13,12 @@ installed on your local machine.
 
 ## Getting Started
 
+### Installing Dependencies
+
+If you're on a Mac, you won't be able to install the infini-gram library locally. (It'll work in the docker-compose though!) To install other dependencies, install dependencies from `api/requirements/common-requirements.txt` instead of from `api/requirements.txt`.
+
+`pip install -r requirements/common-requirements.txt`
+
 ### Adding an index for local development
 
 1. Ensure you have the `aws` cli installed. run `brew install awscli` if you don't.

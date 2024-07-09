@@ -12,6 +12,7 @@ FROM base as builder
 WORKDIR /api
 
 # Install Python dependencies
+COPY requirements requirements
 COPY requirements.txt .
 COPY vendor vendor
 RUN pip install -r requirements.txt

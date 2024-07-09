@@ -1,5 +1,7 @@
 from typing import TypedDict
 
+available_index_ids = ["pileval-llama", "dolma-1_7", "dolma-1_6-sample"]
+
 
 class IndexMapping(TypedDict):
     tokenizer: str

@@ -1,10 +1,11 @@
-from typing import Iterable
+from typing import Annotated, Iterable
 
+from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
 from pydantic import BaseModel
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
-from src.infinigram.index_mappings import index_mappings
+from src.infinigram.index_mappings import available_index_ids, index_mappings
 
 
 class Document(BaseModel):
@@ -57,3 +58,22 @@ class InfiniGramProcessor:
 
 
 processor = InfiniGramProcessor("pileval-llama")
+
+
+indexes = {
+    index: InfiniGramProcessor(index)
+    for index in available_index_ids
+    # "pileval-llama": InfiniGramProcessor("pileval-llama"),
+    # "dolma-1_7": InfiniGramProcessor("dolma-1_7"),
+    # "dolma-1_6-sample": InfiniGramProcessor("dolma-1_6-sample"),
+}
+
+
+class InfiniGramProcessorFactory:
+    def __call__(self, index_id: str = Body()):
+        return indexes[index_id]
+
+
+InfiniGramProcessorFactoryDependency = Annotated[
+    InfiniGramProcessorFactory, Depends(InfiniGramProcessorFactory)
+]

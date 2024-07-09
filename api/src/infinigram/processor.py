@@ -4,6 +4,8 @@ from infini_gram.engine import InfiniGramEngine
 from pydantic import BaseModel
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
+from src.infinigram.index_mappings import index_mappings
+
 
 class Document(BaseModel):
     disp_len: int
@@ -28,13 +30,16 @@ class InfiniGramProcessor:
     tokenizer: PreTrainedTokenizerBase
     infini_gram_engine: InfiniGramEngine
 
-    def __init__(self):
+    def __init__(self, index_id: str):
+        index = index_mappings[index_id]
+
         self.tokenizer = AutoTokenizer.from_pretrained(
-            "./vendor/llama-2-7b-hf/", add_bos_token=False, add_eos_token=False
+            index["tokenizer"], add_bos_token=False, add_eos_token=False
         )
 
         self.infini_gram_engine = InfiniGramEngine(
-            index_dir="/mnt/infinigram-array", eos_token_id=self.tokenizer.eos_token_id
+            index_dir=index["index_dir"],
+            eos_token_id=self.tokenizer.eos_token_id,
         )
 
     def find_docs_with_query(self, query: str) -> InfiniGramQueryResponse:
@@ -48,4 +53,4 @@ class InfiniGramProcessor:
         return self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
 
-processor = InfiniGramProcessor()
+processor = InfiniGramProcessor("pileval-llama")

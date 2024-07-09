@@ -42,8 +42,11 @@ class InfiniGramProcessor:
             eos_token_id=self.tokenizer.eos_token_id,
         )
 
+    def __tokenize(self, query) -> Iterable[int]:
+        return self.tokenizer.encode(query)
+
     def find_docs_with_query(self, query: str) -> InfiniGramQueryResponse:
-        tokenized_query_ids = self.tokenizer.encode(query)
+        tokenized_query_ids = self.__tokenize(query)
         return self.infini_gram_engine.search_docs(
             input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
         )

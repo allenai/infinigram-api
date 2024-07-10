@@ -38,7 +38,10 @@ class InfiniGramProcessor:
         index_mapping = index_mappings[index_id.value]
 
         self.tokenizer = AutoTokenizer.from_pretrained(
-            index_mapping["tokenizer"], add_bos_token=False, add_eos_token=False
+            index_mapping["tokenizer"],
+            add_bos_token=False,
+            add_eos_token=False,
+            trust_remote_code=True,
         )
 
         self.infini_gram_engine = InfiniGramEngine(

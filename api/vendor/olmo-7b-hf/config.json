@@ -1,0 +1,51 @@
+{
+  "activation_type": "swiglu",
+  "alibi": false,
+  "alibi_bias_max": 8.0,
+  "architectures": [
+    "OLMoForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_layer_norm": false,
+  "attention_layer_norm_with_affine": false,
+  "bias_for_layer_norm": false,
+  "block_group_size": 1,
+  "block_type": "sequential",
+  "d_model": 4096,
+  "embedding_dropout": 0.0,
+  "embedding_size": 50304,
+  "eos_token_id": 50279,
+  "flash_attention": true,
+  "include_bias": false,
+  "init_cutoff_factor": null,
+  "init_device": "meta",
+  "init_fn": "mitchell",
+  "init_std": 0.02,
+  "layer_norm_type": "default",
+  "layer_norm_with_affine": false,
+  "max_sequence_length": 2048,
+  "mlp_hidden_size": 22016,
+  "mlp_ratio": 4,
+  "model_type": "hf_olmo",
+  "multi_query_attention": false,
+  "n_heads": 32,
+  "n_layers": 32,
+  "pad_token_id": 1,
+  "precision": "amp_bf16",
+  "residual_dropout": 0.0,
+  "rope": true,
+  "rope_full_precision": true,
+  "scale_logits": false,
+  "transformers_version": "4.36.2",
+  "use_cache": true,
+  "vocab_size": 50280,
+  "weight_tying": false,
+  "auto_map": {
+    "AutoConfig": "configuration_olmo.OLMoConfig",
+    "AutoModelForCausalLM": "modeling_olmo.OLMoForCausalLM",
+    "AutoTokenizer": [
+      "tokenization_olmo_fast.OLMoTokenizerFast",
+      "tokenization_olmo_fast.OLMoTokenizerFast"
+    ]
+  }
+}

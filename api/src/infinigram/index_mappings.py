@@ -32,8 +32,7 @@ index_mappings: IndexMappings = {
         "index_dir": "/mnt/infinigram-array/dolma_1_7",
     },
     AvailableInfiniGramIndexId.DOLMA_1_6_SAMPLE.value: {
-        "tokenizer": "./vendor/llama-2-7b-hf",
-        # "tokenizer": "./vendor/olmo-7b",
+        "tokenizer": "./vendor/olmo-7b-hf",
         "index_dir": "/mnt/infinigram-array/dolma_1_6_sample",
     },
 }

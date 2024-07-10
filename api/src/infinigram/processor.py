@@ -35,14 +35,14 @@ class InfiniGramProcessor:
 
     def __init__(self, index_id: AvailableInfiniGramIndexId):
         self.index_id = index_id.value
-        index = index_mappings[index_id.value]
+        index_mapping = index_mappings[index_id.value]
 
         self.tokenizer = AutoTokenizer.from_pretrained(
-            index["tokenizer"], add_bos_token=False, add_eos_token=False
+            index_mapping["tokenizer"], add_bos_token=False, add_eos_token=False
         )
 
         self.infini_gram_engine = InfiniGramEngine(
-            index_dir=index["index_dir"],
+            index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
         )
 

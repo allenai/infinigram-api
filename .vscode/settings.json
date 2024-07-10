@@ -2,8 +2,11 @@
     "cSpell.words": [
         "apiflask",
         "dolma",
+        "fastapi",
+        "infini",
         "Infinigram",
         "olmo",
-        "pileval"
+        "pileval",
+        "pydantic"
     ]
 }

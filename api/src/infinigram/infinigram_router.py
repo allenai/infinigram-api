@@ -1,22 +1,33 @@
 import sys
 import traceback
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, Body, HTTPException
 
-from src.infinigram.processor import InfiniGramCountResponse, InfiniGramQueryResponse, processor
+from src.infinigram.index_mappings import AvailableInfiniGramIndexId
+from src.infinigram.processor import (
+    InfiniGramCountResponse,
+    InfiniGramProcessorFactoryDependency,
+    InfiniGramQueryResponse,
+)
 
 infinigram_router = APIRouter()
 
 
-class InfiniGramQuery(BaseModel):
-    query: str
+@infinigram_router.get(path="/indexes")
+def get_available_indexes() -> list[AvailableInfiniGramIndexId]:
+    return [index_id for index_id in AvailableInfiniGramIndexId]
 
 
 @infinigram_router.post("/query")
-def query(body: InfiniGramQuery) -> InfiniGramQueryResponse:
+def query(
+    query: Annotated[
+        str, Body(examples=["Seattle", "Economic Growth", "Linda Tuhiwai Smith"])
+    ],
+    infini_gram_processor: InfiniGramProcessorFactoryDependency,
+) -> InfiniGramQueryResponse:
     try:
-        result = processor.find_docs_with_query(query=body.query)
+        result = infini_gram_processor.find_docs_with_query(query=query)
 
         return result
     except Exception as e:
@@ -26,7 +37,8 @@ def query(body: InfiniGramQuery) -> InfiniGramQueryResponse:
         raise HTTPException(
             status_code=500, detail=f"[FastAPI] Internal server error: {e}"
         )
-    
+
+
 @infinigram_router.post("/count")
 def count(body: InfiniGramQuery) -> InfiniGramCountResponse:
     try:

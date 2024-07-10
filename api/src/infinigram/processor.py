@@ -19,6 +19,10 @@ class InfiniGramQueryResponse(BaseModel):
     documents: Iterable[Document]
     idxs: Iterable[int]
 
+class InfiniGramCountResponse(BaseModel):
+    approx: bool
+    count: int
+
 
 class InfiniGramProcessor:
     tokenizer: PreTrainedTokenizerBase
@@ -38,6 +42,10 @@ class InfiniGramProcessor:
         return self.infini_gram_engine.search_docs(
             input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
         )
+    
+    def count_n_gram(self, query: str) -> InfiniGramCountResponse:
+        tokenized_query_ids = self.tokenizer.encode(query)
+        return self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
 
 processor = InfiniGramProcessor()

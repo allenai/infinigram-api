@@ -4,7 +4,7 @@ import traceback
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from src.infinigram.processor import InfiniGramQueryResponse, processor
+from src.infinigram.processor import InfiniGramCountResponse, InfiniGramQueryResponse, processor
 
 infinigram_router = APIRouter()
 
@@ -17,6 +17,20 @@ class InfiniGramQuery(BaseModel):
 def query(body: InfiniGramQuery) -> InfiniGramQueryResponse:
     try:
         result = processor.find_docs_with_query(query=body.query)
+
+        return result
+    except Exception as e:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        traceback.print_exception(exc_type, exc_value, exc_traceback)
+
+        raise HTTPException(
+            status_code=500, detail=f"[FastAPI] Internal server error: {e}"
+        )
+    
+@infinigram_router.post("/count")
+def count(body: InfiniGramQuery) -> InfiniGramCountResponse:
+    try:
+        result = processor.count_n_gram(query=body.query)
 
         return result
     except Exception as e:

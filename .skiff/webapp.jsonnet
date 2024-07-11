@@ -330,8 +330,19 @@ function(
                         {
                             name: fullyQualifiedName + '-api',
                             image: apiImage,
+                            // TODO: point these to the actual indexes
                             volumeMounts: [{
-                                mountPath: "/mnt/infinigram-array",
+                                mountPath: "/mnt/infinigram-array/v4_pileval_llama",
+                                name: "infinigram-array",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/dolma_1_6_sample",
+                                name: "infinigram-array",
+                                readOnly: true,
+                            }, 
+                            {
+                                mountPath: "/mnt/infinigram-array/dolma_1_7",
                                 name: "infinigram-array",
                                 readOnly: true,
                             }],

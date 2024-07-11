@@ -3,4 +3,3 @@ transformers==4.41.2
 python-json-logger==2.0.7
 ai2-olmo==0.3.0
 numpy<2.0.0
-funcy==2.0

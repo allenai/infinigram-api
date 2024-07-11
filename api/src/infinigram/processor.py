@@ -1,5 +1,5 @@
 import json
-from typing import Annotated, Iterable, Union
+from typing import Annotated, Any, Iterable, Tuple, Union
 
 from fastapi import Body, Depends, Path
 from infini_gram.engine import InfiniGramEngine
@@ -43,6 +43,7 @@ class InfiniGramRankResponse(BaseInfiniGramResponse):
     display_length: int = Field(validation_alias="disp_len")
     metadata: dict = Field(validation_alias="parsed_metadata")
     token_ids: Iterable[int]
+    texts: Iterable[str]
 
 
 class InfiniGramProcessor:
@@ -96,10 +97,13 @@ class InfiniGramProcessor:
             return InfiniGramErrorResponse(**get_doc_by_rank_response)
 
         parsed_metadata = json.loads(get_doc_by_rank_response["metadata"])
+        decoded_texts = [self.tokenizer.decode(token_ids) for token_ids in get_doc_by_rank_response['token_ids']]
+
 
         return InfiniGramRankResponse(
             index_id=self.index_id,
             parsed_metadata=parsed_metadata,  # type: ignore - parsed_metadata resolves to metadata with a validation alias
+            texts=decoded_texts,
             **get_doc_by_rank_response,
         )
 

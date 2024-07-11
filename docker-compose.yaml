@@ -7,7 +7,9 @@ services:
       target: dev
     volumes:
       - ./api:/api
-      - ./infinigram-array:/mnt/infinigram-array
+      - ./infinigram-array/v4_pileval_llama:/mnt/infinigram-array/v4_pileval_llama
+      - ./infinigram-array/dolma_1_6_sample:/mnt/infinigram-array/dolma_1_6_sample
+      - ./infinigram-array/dolma_1_7:/mnt/infinigram-array/dolma_1_7
     environment:
       # This ensures that errors are printed as they occur, which
       # makes debugging easier.

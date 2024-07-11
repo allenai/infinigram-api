@@ -22,6 +22,6 @@ If you're on a Mac, you won't be able to install the infini-gram library locally
 ### Adding an index for local development
 
 1. Ensure you have the `aws` cli installed. run `brew install awscli` if you don't.
-2. Download the `v4_pileval_llama` index by running `aws s3 cp --no-sign-request --recursive s3://infini-gram-lite/index/v4_pileval_llama <this repo's folder location>/infinigram-array`
+2. Download the `v4_pileval_llama` index by running `./bin/download-infini-gram-array.sh`
 
 The `infinigram-array` folder is mounted to the Docker container for the API through the `docker-compose`. 

@@ -375,6 +375,9 @@ class Processor:
             spans = [(self.tokenizer.decode(token_ids), d) for (token_ids, d) in spans]
             document["spans"] = spans
         return result
+    
+    def rank(self, shard, rank):
+        return self.engine.get_doc_by_rank(s=shard, rank=rank, max_disp_len=10)
 
     def _replace(self, haystack, needle, label):
         spans = []

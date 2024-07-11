@@ -31,6 +31,12 @@ class InfiniGramCountResponse(BaseInfiniGramResponse):
     approx: bool
     count: int
 
+class InfiniGramRankResponse(BaseInfiniGramResponse):
+    doc_ix: int
+    doc_len: int
+    disp_len: int
+    metadata: str
+    token_ids: Iterable[int]
 
 class InfiniGramProcessor:
     index_id: str
@@ -71,6 +77,10 @@ class InfiniGramProcessor:
         count_result = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
         return InfiniGramCountResponse(index_id=self.index_id, **count_result)
+    
+    def rank(self, shard: int, rank: int) -> InfiniGramRankResponse:
+        return self.infini_gram_engine.rank(shard=shard, rank=rank)
+
 
 
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

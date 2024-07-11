@@ -9,6 +9,7 @@ from src.infinigram.processor import (
     InfiniGramCountResponse,
     InfiniGramProcessorFactoryDependency,
     InfiniGramQueryResponse,
+    InfiniGramRankResponse,
 )
 
 infinigram_router = APIRouter()
@@ -55,3 +56,17 @@ def count(
         raise HTTPException(
             status_code=500, detail=f"[FastAPI] Internal server error: {e}"
         )
+
+@infinigram_router.post("/document/{index}/{shard}/{rank}")
+def rank(index: str, shard: int, rank: int) -> InfiniGramRankResponse:
+        try: 
+            result = processor.rank(shard=shard, rank=rank)
+
+            return result
+        except Exception as e:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback)
+
+            raise HTTPException(
+                status_code=500, detail=f"[FastAPI] Internal server error: {e}"
+            )

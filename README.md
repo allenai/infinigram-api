@@ -25,3 +25,17 @@ If you're on a Mac, you won't be able to install the infini-gram library locally
 2. Download the `v4_pileval_llama` index by running `./bin/download-infini-gram-array.sh`
 
 The `infinigram-array` folder is mounted to the Docker container for the API through the `docker-compose`. 
+
+## Adding a new infini-gram index
+
+### On the prod server
+
+TODO
+
+### Locally
+
+1. Add the ID of the index to `AvailableInfiniGramIndexId` in `api/src/infinigram/index_mappings.py`
+2. Add the ID as a string to `IndexMappings` in `api/src/infinigram/index_mappings.py`
+3. Add the tokenizer and index directory to `index_mappings` in `api/src/infinigram/index_mappings.py`
+4. add a line in /bin/download-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
+5. Add a mount in `docker-compose.yaml` - `- ./infinigram-array/<ARRAY_PATH_NAME>:/mnt/infinigram-array/<ARRAY_PATH_NAME>

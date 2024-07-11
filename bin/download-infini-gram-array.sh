@@ -2,6 +2,8 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 INFINIGRAM_ARRAY_DIR=$SCRIPT_DIR/../infinigram-array
 
+# If you add an array here make sure you add it to docker-compose.yaml too
+
 echo $INFINIGRAM_ARRAY_DIR
 if [ ! -d $INFINIGRAM_ARRAY_DIR/v4_pileval_llama ]; then
     echo "Downloading v4_pileval_llama array"

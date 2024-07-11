@@ -7,6 +7,7 @@ services:
       target: dev
     volumes:
       - ./api:/api
+      # If you add an volume here make sure you add it to /bin/download-infini-gram-array.sh too
       - ./infinigram-array/v4_pileval_llama:/mnt/infinigram-array/v4_pileval_llama
       - ./infinigram-array/dolma_1_6_sample:/mnt/infinigram-array/dolma_1_6_sample
       - ./infinigram-array/dolma_1_7:/mnt/infinigram-array/dolma_1_7

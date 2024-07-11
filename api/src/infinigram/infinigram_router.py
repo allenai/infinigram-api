@@ -40,9 +40,12 @@ def query(
 
 
 @infinigram_router.post("/count")
-def count(body: InfiniGramQuery) -> InfiniGramCountResponse:
+def count(
+    query: Annotated[str, Body(examples=["Seattle"])],
+    infini_gram_processor: InfiniGramProcessorFactoryDependency,
+) -> InfiniGramCountResponse:
     try:
-        result = processor.count_n_gram(query=body.query)
+        result = infini_gram_processor.count_n_gram(query=query)
 
         return result
     except Exception as e:

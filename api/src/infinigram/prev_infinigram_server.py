@@ -375,7 +375,7 @@ class Processor:
             spans = [(self.tokenizer.decode(token_ids), d) for (token_ids, d) in spans]
             document["spans"] = spans
         return result
-    
+
     def _replace(self, haystack, needle, label):
         spans = []
         while True:

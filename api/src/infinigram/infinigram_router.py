@@ -62,7 +62,7 @@ def count(
         )
 
 
-@infinigram_router.get("/document/{index_id}/{shard}/{rank}")
+@infinigram_router.get("/documents/{index_id}/{shard}/{rank}")
 def rank(
     shard: int,
     rank: int,

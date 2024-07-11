@@ -7,6 +7,7 @@ from fastapi import APIRouter, Body, HTTPException
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId
 from src.infinigram.processor import (
     InfiniGramCountResponse,
+    InfiniGramDocumentsResponse,
     InfiniGramErrorResponse,
     InfiniGramProcessorFactoryBodyParamDependency,
     InfiniGramProcessorFactoryPathParamDependency,
@@ -78,3 +79,21 @@ def rank(
         raise HTTPException(
             status_code=500, detail=f"[FastAPI] Internal server error: {e}"
         )
+
+@infinigram_router.get("/documents/{index_id}")
+def get_documents(
+    infini_gram_processor: InfiniGramProcessorFactoryPathParamDependency,
+    search: str | None = None,
+) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]: 
+    try: 
+        result = infini_gram_processor.get_documents(search)
+        
+        return result
+    except Exception as e:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        traceback.print_exception(exc_type, exc_value, exc_traceback)
+
+        raise HTTPException(
+            status_code=500, detail=f"[FastAPI] Internal server error: {e}"
+        )
+

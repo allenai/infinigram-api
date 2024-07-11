@@ -45,6 +45,8 @@ class InfiniGramRankResponse(BaseInfiniGramResponse):
     token_ids: Iterable[int]
     texts: str
 
+class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
+    documents: Iterable[InfiniGramRankResponse]
 
 class InfiniGramProcessor:
     index_id: str
@@ -105,8 +107,22 @@ class InfiniGramProcessor:
             texts=decoded_texts,
             **get_doc_by_rank_response,
         )
+    
+    def get_documents(self, search: str | None) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
+        tokenized_query_ids = self.__tokenize(search)
+        matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
+        docs = []
+        for s, (start, end) in enumerate(matching_documents['segment_by_shard']):
+            for rank in range(start, end):
+                doc = self.rank(shard=s, rank=rank)
+                docs.append(doc)
 
+        return InfiniGramDocumentsResponse(
+            index_id=self.index_id,
+            documents=docs
+        )
 
+        
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
 
 

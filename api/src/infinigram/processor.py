@@ -1,7 +1,7 @@
 import json
-from typing import Annotated, Any, Iterable, Tuple, Union
+from typing import Annotated, Iterable, Union
 
-from fastapi import Body, Depends, Path
+from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
 from pydantic import BaseModel, Field
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
@@ -97,7 +97,10 @@ class InfiniGramProcessor:
             return InfiniGramErrorResponse(**get_doc_by_rank_response)
 
         parsed_metadata = json.loads(get_doc_by_rank_response["metadata"])
-        decoded_texts = ' '.join(self.tokenizer.decode(token_ids) for token_ids in get_doc_by_rank_response['token_ids'])
+        decoded_texts = " ".join(
+            self.tokenizer.decode(token_ids)
+            for token_ids in get_doc_by_rank_response["token_ids"]
+        )
 
         return InfiniGramRankResponse(
             index_id=self.index_id,
@@ -130,15 +133,4 @@ def InfiniGramProcessorFactoryBodyParam(
 
 InfiniGramProcessorFactoryBodyParamDependency = Annotated[
     InfiniGramProcessor, Depends(InfiniGramProcessorFactoryBodyParam)
-]
-
-
-def InfiniGramProcessorFactoryPathParamFactory(
-    index_id: AvailableInfiniGramIndexId = Path(),
-) -> InfiniGramProcessor:
-    return indexes[index_id]
-
-
-InfiniGramProcessorFactoryPathParamDependency = Annotated[
-    InfiniGramEngine, Depends(InfiniGramProcessorFactoryPathParamFactory)
 ]

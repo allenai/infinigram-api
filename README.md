@@ -38,4 +38,4 @@ TODO
 2. Add the ID as a string to `IndexMappings` in `api/src/infinigram/index_mappings.py`
 3. Add the tokenizer and index directory to `index_mappings` in `api/src/infinigram/index_mappings.py`
 4. add a line in /bin/download-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
-5. Add a mount in `docker-compose.yaml` - `- ./infinigram-array/<ARRAY_PATH_NAME>:/mnt/infinigram-array/<ARRAY_PATH_NAME>
+5. Add a mount in `docker-compose.yaml`: `- ./infinigram-array/<ARRAY_PATH_NAME>:/mnt/infinigram-array/<ARRAY_PATH_NAME>

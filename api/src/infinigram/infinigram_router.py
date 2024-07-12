@@ -20,7 +20,7 @@ infinigram_router = APIRouter()
 
 @infinigram_router.get(path="/indexes")
 def get_available_indexes() -> list[AvailableInfiniGramIndexId]:
-    return [index_id for index_id in AvailableInfiniGramIndexId]
+    return [index for index in AvailableInfiniGramIndexId]
 
 
 @infinigram_router.post("/query")
@@ -46,7 +46,6 @@ def query(
 @infinigram_router.post("/count")
 def count(
     query: Annotated[str, Body(examples=["Seattle"])],
-    index_id: Annotated[AvailableInfiniGramIndexId, Body()],
     infini_gram_processor: InfiniGramProcessorFactoryBodyParamDependency,
 ) -> InfiniGramCountResponse:
     try:
@@ -62,7 +61,7 @@ def count(
         )
 
 
-@infinigram_router.get("/documents/{index_id}/{shard}/{rank}")
+@infinigram_router.get("/documents/{index}/{shard}/{rank}")
 def rank(
     shard: int,
     rank: int,
@@ -80,14 +79,15 @@ def rank(
             status_code=500, detail=f"[FastAPI] Internal server error: {e}"
         )
 
-@infinigram_router.get("/documents/{index_id}")
+
+@infinigram_router.get("/documents/{index}")
 def get_documents(
     infini_gram_processor: InfiniGramProcessorFactoryPathParamDependency,
     search: str | None = None,
-) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]: 
-    try: 
+) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
+    try:
         result = infini_gram_processor.get_documents(search)
-        
+
         return result
     except Exception as e:
         exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -96,4 +96,3 @@ def get_documents(
         raise HTTPException(
             status_code=500, detail=f"[FastAPI] Internal server error: {e}"
         )
-

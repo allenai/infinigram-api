@@ -3,21 +3,22 @@ from typing import Annotated, Iterable, Union
 
 from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
-from pydantic import BaseModel, Field
+from pydantic import Field
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
+from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
 
 
-class BaseInfiniGramResponse(BaseModel):
-    index_id: str
+class BaseInfiniGramResponse(CamelCaseModel):
+    index: str
 
 
-class InfiniGramErrorResponse(BaseModel):
+class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
-class Document(BaseModel):
+class Document(CamelCaseModel):
     disp_len: int
     doc_ix: int
     doc_len: int
@@ -45,17 +46,19 @@ class InfiniGramRankResponse(BaseInfiniGramResponse):
     token_ids: Iterable[int]
     texts: str
 
+
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
 
+
 class InfiniGramProcessor:
-    index_id: str
+    index: str
     tokenizer: PreTrainedTokenizerBase
     infini_gram_engine: InfiniGramEngine
 
-    def __init__(self, index_id: AvailableInfiniGramIndexId):
-        self.index_id = index_id.value
-        index_mapping = index_mappings[index_id.value]
+    def __init__(self, index: AvailableInfiniGramIndexId):
+        self.index = index.value
+        index_mapping = index_mappings[index.value]
 
         self.tokenizer = AutoTokenizer.from_pretrained(
             index_mapping["tokenizer"],
@@ -79,14 +82,14 @@ class InfiniGramProcessor:
             input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
         )
 
-        return InfiniGramQueryResponse(index_id=self.index_id, **docs_result)
+        return InfiniGramQueryResponse(index=self.index, **docs_result)
 
     def count_n_gram(self, query: str) -> InfiniGramCountResponse:
         tokenized_query_ids = self.__tokenize(query)
 
         count_result = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
-        return InfiniGramCountResponse(index_id=self.index_id, **count_result)
+        return InfiniGramCountResponse(index=self.index, **count_result)
 
     def rank(
         self, shard: int, rank: int
@@ -105,35 +108,34 @@ class InfiniGramProcessor:
         )
 
         return InfiniGramRankResponse(
-            index_id=self.index_id,
+            index=self.index,
             parsed_metadata=parsed_metadata,  # type: ignore - parsed_metadata resolves to metadata with a validation alias
             texts=decoded_texts,
             **get_doc_by_rank_response,
         )
-    
-    def get_documents(self, search: str | None) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
+
+    def get_documents(
+        self, search: str | None
+    ) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
         tokenized_query_ids = self.__tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
         docs = []
-        for s, (start, end) in enumerate(matching_documents['segment_by_shard']):
+        for s, (start, end) in enumerate(matching_documents["segment_by_shard"]):
             for rank in range(start, end):
                 doc = self.rank(shard=s, rank=rank)
                 docs.append(doc)
 
-        return InfiniGramDocumentsResponse(
-            index_id=self.index_id,
-            documents=docs
-        )
+        return InfiniGramDocumentsResponse(index=self.index, documents=docs)
 
-        
+
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
 
 
 # TODO: See if we can simplify these
 def InfiniGramProcessorFactoryPathParam(
-    index_id: AvailableInfiniGramIndexId,
+    index: AvailableInfiniGramIndexId,
 ) -> InfiniGramProcessor:
-    return indexes[index_id]
+    return indexes[index]
 
 
 InfiniGramProcessorFactoryPathParamDependency = Annotated[
@@ -142,9 +144,11 @@ InfiniGramProcessorFactoryPathParamDependency = Annotated[
 
 
 def InfiniGramProcessorFactoryBodyParam(
-    index_id: AvailableInfiniGramIndexId = Body(),
+    index: AvailableInfiniGramIndexId = Body(
+        alias="indexId",
+    ),
 ) -> InfiniGramProcessor:
-    return indexes[index_id]
+    return indexes[index]
 
 
 InfiniGramProcessorFactoryBodyParamDependency = Annotated[

@@ -43,10 +43,12 @@ class InfiniGramRankResponse(BaseInfiniGramResponse):
     display_length: int = Field(validation_alias="disp_len")
     metadata: dict = Field(validation_alias="parsed_metadata")
     token_ids: Iterable[int]
-    texts: str
+    text: str
+
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
+
 
 class InfiniGramProcessor:
     index_id: str
@@ -99,33 +101,29 @@ class InfiniGramProcessor:
             return InfiniGramErrorResponse(**get_doc_by_rank_response)
 
         parsed_metadata = json.loads(get_doc_by_rank_response["metadata"])
-        decoded_texts = " ".join(
-            self.tokenizer.decode(token_ids)
-            for token_ids in get_doc_by_rank_response["token_ids"]
-        )
+        decoded_text = self.tokenizer.decode(get_doc_by_rank_response["token_ids"])
 
         return InfiniGramRankResponse(
             index_id=self.index_id,
             parsed_metadata=parsed_metadata,  # type: ignore - parsed_metadata resolves to metadata with a validation alias
-            texts=decoded_texts,
+            text=decoded_text,
             **get_doc_by_rank_response,
         )
-    
-    def get_documents(self, search: str | None) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
+
+    def get_documents(
+        self, search: str | None
+    ) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
         tokenized_query_ids = self.__tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
         docs = []
-        for s, (start, end) in enumerate(matching_documents['segment_by_shard']):
+        for s, (start, end) in enumerate(matching_documents["segment_by_shard"]):
             for rank in range(start, end):
                 doc = self.rank(shard=s, rank=rank)
                 docs.append(doc)
 
-        return InfiniGramDocumentsResponse(
-            index_id=self.index_id,
-            documents=docs
-        )
+        return InfiniGramDocumentsResponse(index_id=self.index_id, documents=docs)
 
-        
+
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
 
 

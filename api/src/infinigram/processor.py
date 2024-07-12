@@ -144,9 +144,7 @@ InfiniGramProcessorFactoryPathParamDependency = Annotated[
 
 
 def InfiniGramProcessorFactoryBodyParam(
-    index: AvailableInfiniGramIndexId = Body(
-        alias="indexId",
-    ),
+    index: AvailableInfiniGramIndexId = Body(),
 ) -> InfiniGramProcessor:
     return indexes[index]
 

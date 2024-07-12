@@ -31,4 +31,7 @@ def infini_gram_engine_exception_handler(
         instance=f"{request.url}",
     )
 
-    return JSONResponse(status_code=response.status, content=response.model_dump())
+    return JSONResponse(
+        status_code=response.status,
+        content=response.model_dump(),
+    )

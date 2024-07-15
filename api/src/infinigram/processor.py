@@ -1,5 +1,5 @@
 import json
-from typing import Annotated, Iterable, Union
+from typing import Annotated, Iterable
 
 from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
@@ -8,6 +8,7 @@ from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
+from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
 
 
 class BaseInfiniGramResponse(CamelCaseModel):
@@ -75,12 +76,18 @@ class InfiniGramProcessor:
     def __tokenize(self, query) -> Iterable[int]:
         return self.tokenizer.encode(query)
 
+    def __handleError(self, result: dict) -> None:
+        if "error" in result:
+            raise InfiniGramEngineException(detail=result["error"])
+
     def find_docs_with_query(self, query: str) -> InfiniGramQueryResponse:
         tokenized_query_ids = self.__tokenize(query)
 
         docs_result = self.infini_gram_engine.search_docs(
             input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
         )
+
+        self.__handleError(docs_result)
 
         return InfiniGramQueryResponse(index=self.index, **docs_result)
 
@@ -89,17 +96,16 @@ class InfiniGramProcessor:
 
         count_result = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
+        self.__handleError(count_result)
+
         return InfiniGramCountResponse(index=self.index, **count_result)
 
-    def rank(
-        self, shard: int, rank: int
-    ) -> Union[InfiniGramRankResponse, InfiniGramErrorResponse]:
+    def rank(self, shard: int, rank: int) -> InfiniGramRankResponse:
         get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank(
             s=shard, rank=rank, max_disp_len=10
         )
 
-        if "error" in get_doc_by_rank_response:
-            return InfiniGramErrorResponse(**get_doc_by_rank_response)
+        self.__handleError(get_doc_by_rank_response)
 
         parsed_metadata = json.loads(get_doc_by_rank_response["metadata"])
         decoded_texts = " ".join(
@@ -114,16 +120,18 @@ class InfiniGramProcessor:
             **get_doc_by_rank_response,
         )
 
-    def get_documents(
-        self, search: str | None
-    ) -> Union[InfiniGramDocumentsResponse, InfiniGramErrorResponse]:
+    def get_documents(self, search: str) -> InfiniGramDocumentsResponse:
         tokenized_query_ids = self.__tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
+
+        self.__handleError(matching_documents)
+
         docs = []
         for s, (start, end) in enumerate(matching_documents["segment_by_shard"]):
             for rank in range(start, end):
                 doc = self.rank(shard=s, rank=rank)
                 docs.append(doc)
+
 
         return InfiniGramDocumentsResponse(index=self.index, documents=docs)
 

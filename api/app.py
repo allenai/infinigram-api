@@ -23,7 +23,7 @@ app.include_router(router=infinigram_router)
 @app.exception_handler(InfiniGramEngineException)
 def infini_gram_engine_exception_handler(
     request: Request, exception: InfiniGramEngineException
-):
+) -> JSONResponse:
     response = RFC9457Error(
         title="infini-gram error",
         status=500,

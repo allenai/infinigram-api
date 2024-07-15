@@ -5,8 +5,13 @@
         "fastapi",
         "infini",
         "Infinigram",
+        "jsonlogger",
         "olmo",
         "pileval",
-        "pydantic"
+        "pydantic",
+        "pythonjsonlogger"
+    ],
+    "mypy-type-checker.args": [
+        "--config-file=./api/pyproject.toml"
     ]
 }

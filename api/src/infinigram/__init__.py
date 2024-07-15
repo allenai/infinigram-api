@@ -1,1 +1,1 @@
-from src.infinigram.infinigram_router import infinigram_router  # noqa: F401
+from src.infinigram.infinigram_router import infinigram_router as infinigram_router

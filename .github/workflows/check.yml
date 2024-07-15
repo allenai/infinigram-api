@@ -31,4 +31,4 @@ jobs:
           python-version: '3.12'
           cache: 'pip' 
       - run: pip install -r ./api/requirements/dev-requirements.txt
-      - run: mypy --strict ./api
+      - run: mypy --config ./api/pyproject.toml

@@ -1,10 +1,10 @@
 import json
-from typing import Annotated, Iterable
+from typing import Annotated, Any, Iterable, List
 
 from fastapi import Body, Depends
-from infini_gram.engine import InfiniGramEngine
+from infini_gram.engine import InfiniGramEngine  # type: ignore
 from pydantic import Field
-from transformers import AutoTokenizer, PreTrainedTokenizerBase
+from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
 
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
@@ -43,10 +43,9 @@ class InfiniGramRankResponse(BaseInfiniGramResponse):
     document_index: int = Field(validation_alias="doc_ix")
     document_length: int = Field(validation_alias="doc_len")
     display_length: int = Field(validation_alias="disp_len")
-    metadata: dict = Field(validation_alias="parsed_metadata")
+    metadata: dict[str, str] = Field(validation_alias="parsed_metadata")
     token_ids: Iterable[int]
     text: str
-
 
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
@@ -74,10 +73,12 @@ class InfiniGramProcessor:
             eos_token_id=self.tokenizer.eos_token_id,
         )
 
-    def __tokenize(self, query) -> Iterable[int]:
-        return self.tokenizer.encode(query)
+    def __tokenize(self, query: str) -> Iterable[int]:
+        # mypy didn't think this was always a list for some reason, hence the forced type
+        encoded_query: List[int] = self.tokenizer.encode(query)
+        return encoded_query
 
-    def __handleError(self, result: dict) -> None:
+    def __handleError(self, result: dict[str, Any]) -> None:
         if "error" in result:
             raise InfiniGramEngineException(detail=result["error"])
 
@@ -113,7 +114,8 @@ class InfiniGramProcessor:
 
         return InfiniGramRankResponse(
             index=self.index,
-            parsed_metadata=parsed_metadata,  # type: ignore - parsed_metadata resolves to metadata with a validation alias
+            # parsed_metadata resolves to metadata with a validation alias
+            parsed_metadata=parsed_metadata,  # type: ignore
             text=decoded_text,
             **get_doc_by_rank_response,
         )
@@ -129,7 +131,6 @@ class InfiniGramProcessor:
             for rank in range(start, end):
                 doc = self.rank(shard=s, rank=rank)
                 docs.append(doc)
-
 
         return InfiniGramDocumentsResponse(index=self.index, documents=docs)
 

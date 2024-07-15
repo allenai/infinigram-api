@@ -53,7 +53,6 @@ def rank(
     return result
 
 
-
 @infinigram_router.get("/documents/{index}")
 def get_documents(
     infini_gram_processor: InfiniGramProcessorFactoryPathParamDependency,

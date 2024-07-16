@@ -1,10 +1,11 @@
 import json
-from typing import Annotated, Any, Iterable, List
+from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
 
 from fastapi import Body, Depends
-from infini_gram.engine import InfiniGramEngine  # type: ignore
+from infini_gram.engine import InfiniGramEngine
+from infini_gram.models import ErrorResponse, InfiniGramEngineResponse
 from pydantic import Field
-from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
+from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
@@ -20,11 +21,11 @@ class InfiniGramErrorResponse(CamelCaseModel):
 
 
 class Document(CamelCaseModel):
-    disp_len: int
-    doc_ix: int
-    doc_len: int
-    metadata: str
-    token_ids: Iterable[int]
+    document_index: int = Field(validation_alias="doc_ix")
+    document_length: int = Field(validation_alias="doc_len")
+    display_length: int = Field(validation_alias="disp_len")
+    metadata: dict[str, Any]
+    token_ids: List[int]
 
 
 class InfiniGramQueryResponse(BaseInfiniGramResponse):
@@ -39,17 +40,21 @@ class InfiniGramCountResponse(BaseInfiniGramResponse):
     count: int
 
 
-class InfiniGramRankResponse(BaseInfiniGramResponse):
-    document_index: int = Field(validation_alias="doc_ix")
-    document_length: int = Field(validation_alias="doc_len")
-    display_length: int = Field(validation_alias="disp_len")
-    metadata: dict[str, str] = Field(validation_alias="parsed_metadata")
-    token_ids: Iterable[int]
+class InfiniGramRankResponse(Document, BaseInfiniGramResponse):
     text: str
 
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
+
+
+TInfiniGramResponse = TypeVar("TInfiniGramResponse")
+
+
+def is_infini_gram_error_response(
+    val: InfiniGramEngineResponse[TInfiniGramResponse],
+) -> TypeGuard[ErrorResponse]:
+    return isinstance(val, dict) and "error" in val
 
 
 class InfiniGramProcessor:
@@ -68,6 +73,9 @@ class InfiniGramProcessor:
             trust_remote_code=True,
         )
 
+        if self.tokenizer.eos_token_id is None:
+            raise Exception("An indexer didn't have an eos token id")
+
         self.infini_gram_engine = InfiniGramEngine(
             index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
@@ -78,9 +86,14 @@ class InfiniGramProcessor:
         encoded_query: List[int] = self.tokenizer.encode(query)
         return encoded_query
 
-    def __handleError(self, result: dict[str, Any]) -> None:
-        if "error" in result:
+    def __handle_error(
+        self,
+        result: InfiniGramEngineResponse[TInfiniGramResponse],
+    ) -> TInfiniGramResponse:
+        if is_infini_gram_error_response(result):
             raise InfiniGramEngineException(detail=result["error"])
+
+        return cast(TInfiniGramResponse, result)
 
     def find_docs_with_query(self, query: str) -> InfiniGramQueryResponse:
         tokenized_query_ids = self.__tokenize(query)
@@ -89,16 +102,32 @@ class InfiniGramProcessor:
             input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
         )
 
-        self.__handleError(docs_result)
+        result = self.__handle_error(docs_result)
+        mapped_documents = [
+            Document(
+                document_index=doc_result["doc_ix"],
+                document_length=doc_result["doc_len"],
+                display_length=doc_result["disp_len"],
+                metadata=json.loads(doc_result["metadata"]),
+                token_ids=doc_result["token_ids"],
+            )
+            for doc_result in result["documents"]
+        ]
 
-        return InfiniGramQueryResponse(index=self.index, **docs_result)
+        return InfiniGramQueryResponse(
+            index=self.index,
+            count=result["cnt"],
+            documents=mapped_documents,
+            approx=result["approx"],
+            indexes=result["idxs"],
+        )
 
     def count_n_gram(self, query: str) -> InfiniGramCountResponse:
         tokenized_query_ids = self.__tokenize(query)
 
-        count_result = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
+        count_response = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
 
-        self.__handleError(count_result)
+        count_result = self.__handle_error(count_response)
 
         return InfiniGramCountResponse(index=self.index, **count_result)
 
@@ -107,27 +136,29 @@ class InfiniGramProcessor:
             s=shard, rank=rank, max_disp_len=10
         )
 
-        self.__handleError(get_doc_by_rank_response)
+        doc_result = self.__handle_error(get_doc_by_rank_response)
 
-        parsed_metadata = json.loads(get_doc_by_rank_response["metadata"])
-        decoded_text = self.tokenizer.decode(get_doc_by_rank_response["token_ids"])
+        parsed_metadata = json.loads(doc_result["metadata"])
+        decoded_text = self.tokenizer.decode(doc_result["token_ids"])
 
         return InfiniGramRankResponse(
             index=self.index,
-            # parsed_metadata resolves to metadata with a validation alias
-            parsed_metadata=parsed_metadata,  # type: ignore
             text=decoded_text,
-            **get_doc_by_rank_response,
+            document_index=doc_result["doc_ix"],
+            document_length=doc_result["doc_len"],
+            display_length=doc_result["disp_len"],
+            metadata=parsed_metadata,
+            token_ids=doc_result["token_ids"],
         )
 
     def get_documents(self, search: str) -> InfiniGramDocumentsResponse:
         tokenized_query_ids = self.__tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
-        self.__handleError(matching_documents)
+        matching_documents_result = self.__handle_error(matching_documents)
 
         docs = []
-        for s, (start, end) in enumerate(matching_documents["segment_by_shard"]):
+        for s, (start, end) in enumerate(matching_documents_result["segment_by_shard"]):
             for rank in range(start, end):
                 doc = self.rank(shard=s, rank=rank)
                 docs.append(doc)

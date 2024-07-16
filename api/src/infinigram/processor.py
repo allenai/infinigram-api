@@ -5,7 +5,7 @@ from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import ErrorResponse, InfiniGramEngineResponse
 from pydantic import Field
-from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
+from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings

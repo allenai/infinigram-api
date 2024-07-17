@@ -81,8 +81,20 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
     * I do fine it nice to name the transfer job. Something like `infini-gram-transfer-<index name>`
     * Make sure you don't change the Storage class and don't delete from the source
 
-
-TODO: Transferring from GCS bucket to a PD
+#### Making a Persistent Disk
+  1. ```
+     gcloud compute disks create infini-gram-<index name> \
+       --project=ai2-reviz \
+       --type=pd-balanced \
+       --size=<index size in GB> \
+       --labels=project=infini-gram \
+       --zone=us-west1-b
+       ```
+  2. Change names in `volume-claims/writer-pod.yaml` to match the disk you created and the index name
+  3. Create a writer pod: `kubectl apply -f volume-claims/writer-pod.yaml --namespace=infinigram-api`
+    * (TODO) Set up a baseline image to use for transferring files. Needs to have python3 and gcloud tools
+  4. Download the files from the bucket into /mnt/infini-gram-array
+    * `gcloud storage cp gs://infinigram/index/<index name>/* /mnt/infini-gram-array/`
 
 ### Locally
 

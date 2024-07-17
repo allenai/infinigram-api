@@ -171,24 +171,12 @@ class InfiniGramProcessor:
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
 
 
-# TODO: See if we can simplify these
 def InfiniGramProcessorFactoryPathParam(
     index: AvailableInfiniGramIndexId,
 ) -> InfiniGramProcessor:
     return indexes[index]
 
 
-InfiniGramProcessorFactoryPathParamDependency = Annotated[
+InfiniGramProcessorDependency = Annotated[
     InfiniGramProcessor, Depends(InfiniGramProcessorFactoryPathParam)
-]
-
-
-def InfiniGramProcessorFactoryBodyParam(
-    index: AvailableInfiniGramIndexId = Body(),
-) -> InfiniGramProcessor:
-    return indexes[index]
-
-
-InfiniGramProcessorFactoryBodyParamDependency = Annotated[
-    InfiniGramProcessor, Depends(InfiniGramProcessorFactoryBodyParam)
 ]

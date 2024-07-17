@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: infini-gram-writer
-    image: alpine
+    image: nginx:1.27.0-alpine 
     volumeMounts:
       - mountPath: /mnt/infini-gram-array/
         name: infinigram-array

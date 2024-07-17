@@ -6,6 +6,11 @@ from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import ErrorResponse, InfiniGramEngineResponse
 from pydantic import Field
 from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
+from transformers.tokenization_utils_base import (
+    EncodedInput,
+    PreTokenizedInput,
+    TextInput,
+)
 
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
@@ -48,6 +53,35 @@ class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
 
 
+class AttributionDocument(CamelCaseModel):
+    shard: int
+    pointer: int
+    document_index: int
+
+
+class FullAttributionDocument(AttributionDocument, Document):
+    text: str
+
+
+class AttributionSpan(CamelCaseModel):
+    left: int
+    right: int
+    length: int
+    documents: List[AttributionDocument]
+
+
+class AttributionSpanWithDocuments(AttributionSpan):
+    documents: List[FullAttributionDocument]
+
+
+class InfiniGramAttributionResponse(BaseInfiniGramResponse):
+    spans: List[AttributionSpan]
+
+
+class InfiniGramAttributionResponseWithDocs(InfiniGramAttributionResponse):
+    spans: List[AttributionSpanWithDocuments]
+
+
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
 
 
@@ -81,9 +115,10 @@ class InfiniGramProcessor:
             eos_token_id=self.tokenizer.eos_token_id,
         )
 
-    def __tokenize(self, query: str) -> Iterable[int]:
-        # mypy didn't think this was always a list for some reason, hence the forced type
-        encoded_query: List[int] = self.tokenizer.encode(query)
+    def __tokenize(
+        self, query: TextInput | PreTokenizedInput | EncodedInput
+    ) -> Iterable[int]:
+        encoded_query = self.tokenizer.encode(query)
         return encoded_query
 
     def __handle_error(
@@ -103,6 +138,7 @@ class InfiniGramProcessor:
         )
 
         result = self.__handle_error(docs_result)
+
         mapped_documents = [
             Document(
                 document_index=doc_result["doc_ix"],
@@ -166,6 +202,82 @@ class InfiniGramProcessor:
                 docs.append(doc)
 
         return InfiniGramDocumentsResponse(index=self.index, documents=docs)
+
+    def get_attribution_for_response(
+        self,
+        search: str,
+        delimiters: List[str],
+        minimum_span_length: int,
+        maximum_frequency: int,
+        include_documents: bool,
+    ) -> InfiniGramAttributionResponse:
+        tokenized_query_ids = self.__tokenize(query=search)
+        tokenized_delimiters = self.__tokenize(query=delimiters)
+
+        attribute_response = self.infini_gram_engine.attribute(
+            input_ids=tokenized_query_ids,
+            delim_ids=tokenized_delimiters,
+            min_len=minimum_span_length,
+            max_cnt=maximum_frequency,
+        )
+
+        attribute_result = self.__handle_error(attribute_response)
+
+        if include_documents:
+            spans_with_documents: List[AttributionSpanWithDocuments] = []
+            for span in attribute_result["spans"]:
+                documents: List[FullAttributionDocument] = []
+                for document in span["docs"]:
+                    infini_gram_document = self.infini_gram_engine.get_doc_by_ptr(
+                        s=document["s"], ptr=document["ptr"], max_disp_len=10
+                    )
+
+                    document_result = self.__handle_error(infini_gram_document)
+
+                    new_document = FullAttributionDocument(
+                        document_index=document["doc_ix"],
+                        document_length=document_result["doc_len"],
+                        display_length=document_result["disp_len"],
+                        metadata=json.loads(document_result["metadata"]),
+                        token_ids=document_result["token_ids"],
+                        shard=document["s"],
+                        pointer=document["ptr"],
+                        text=self.tokenizer.decode(document_result["token_ids"]),
+                    )
+                    documents.append(new_document)
+
+                new_span = AttributionSpanWithDocuments(
+                    left=span["l"],
+                    right=span["r"],
+                    length=span["length"],
+                    documents=documents,
+                )
+
+                spans_with_documents.append(new_span)
+
+            return InfiniGramAttributionResponseWithDocs(
+                index=self.index, spans=spans_with_documents
+            )
+
+        else:
+            spans = [
+                AttributionSpan(
+                    left=span["l"],
+                    right=span["r"],
+                    length=span["length"],
+                    documents=[
+                        AttributionDocument(
+                            shard=document["s"],
+                            pointer=document["ptr"],
+                            document_index=document["doc_ix"],
+                        )
+                        for document in span["docs"]
+                    ],
+                )
+                for span in attribute_result["spans"]
+            ]
+
+            return InfiniGramAttributionResponse(index=self.index, spans=spans)
 
 
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

@@ -158,9 +158,11 @@ class InfiniGramProcessor:
         matching_documents_result = self.__handle_error(matching_documents)
 
         docs = []
-        for s, (start, end) in enumerate(matching_documents_result["segment_by_shard"]):
+        for shard, (start, end) in enumerate(
+            matching_documents_result["segment_by_shard"]
+        ):
             for rank in range(start, end):
-                doc = self.rank(shard=s, rank=rank)
+                doc = self.rank(shard=shard, rank=rank)
                 docs.append(doc)
 
         return InfiniGramDocumentsResponse(index=self.index, documents=docs)

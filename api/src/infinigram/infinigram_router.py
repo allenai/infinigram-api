@@ -1,7 +1,9 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Body
+from pydantic import Field
 
+from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId
 from src.infinigram.processor import (
     InfiniGramAttributionResponse,
@@ -65,21 +67,25 @@ def get_documents(
     return result
 
 
-@infinigram_router.post(path="/attribution")
+class AttributionRequest(CamelCaseModel):
+    query: str = Field(examples=["This is a chat bot response"])
+    delimiters: List[str] = Field(examples=[["\n", "."]], default=[])
+    minimum_span_length: int = Field(gt=0, default=5)
+    maximum_frequency: int = Field(gt=0, default=10)
+    include_documents: bool = False
+
+
+@infinigram_router.post(path="/{index}/attribution")
 def get_document_attributions(
-    infini_gram_processor: InfiniGramProcessorFactoryBodyParamDependency,
-    query: Annotated[str, Body(examples=["This is a chat bot response"])],
-    delimiters: Annotated[List[str], Body(examples=[["\n", "."]], default=[])],
-    minimum_span_length: Annotated[int, Body(gt=0, default=5)],
-    maximum_frequency: Annotated[int, Body(gt=0, default=10)],
-    include_documents: Annotated[bool, Body(default=False)],
+    body: AttributionRequest,
+    infini_gram_processor: InfiniGramProcessorFactoryPathParamDependency,
 ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocs:
     result = infini_gram_processor.get_attribution_for_response(
-        search=query,
-        delimiters=delimiters,
-        minimum_span_length=minimum_span_length,
-        maximum_frequency=maximum_frequency,
-        include_documents=include_documents,
+        search=body.query,
+        delimiters=body.delimiters,
+        minimum_span_length=body.minimum_span_length,
+        maximum_frequency=body.maximum_frequency,
+        include_documents=body.include_documents,
     )
 
     return result

@@ -1,7 +1,7 @@
 import json
 from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
 
-from fastapi import Body, Depends
+from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import ErrorResponse, InfiniGramEngineResponse
 from pydantic import Field

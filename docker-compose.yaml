@@ -14,6 +14,7 @@ services:
     environment:
       # This ensures that errors are printed as they occur, which
       # makes debugging easier.
+      - INDEX_BASE_PATH=/mnt/infinigram-array
       - PYTHONUNBUFFERED=1
       - LOG_LEVEL=DEBUG
   proxy:

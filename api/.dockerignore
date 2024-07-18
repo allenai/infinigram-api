@@ -6,3 +6,4 @@
 # Docker artifacts
 Dockerfile
 
+**/.env

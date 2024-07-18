@@ -1,6 +1,8 @@
 from enum import Enum
 from typing import TypedDict
 
+from src.config import config
+
 
 class AvailableInfiniGramIndexId(Enum):
     PILEVAL_LLAMA = "pileval-llama"
@@ -25,14 +27,14 @@ IndexMappings = TypedDict(
 index_mappings: IndexMappings = {
     AvailableInfiniGramIndexId.PILEVAL_LLAMA.value: {
         "tokenizer": "./vendor/llama-2-7b-hf",
-        "index_dir": "/mnt/infinigram-array/v4_pileval_llama",
+        "index_dir": f"{config.index_base_path}/v4_pileval_llama",
     },
     AvailableInfiniGramIndexId.DOLMA_1_7.value: {
         "tokenizer": "./vendor/llama-2-7b-hf",
-        "index_dir": "/mnt/infinigram-array/dolma_1_7",
+        "index_dir": f"{config.index_base_path}/dolma_1_7",
     },
     AvailableInfiniGramIndexId.DOLMA_1_6_SAMPLE.value: {
         "tokenizer": "./vendor/olmo-7b-hf",
-        "index_dir": "/mnt/infinigram-array/dolma_1_6_sample",
+        "index_dir": f"{config.index_base_path}/dolma_1_6_sample",
     },
 }

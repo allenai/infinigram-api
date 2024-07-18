@@ -210,9 +210,13 @@ class InfiniGramProcessor:
         minimum_span_length: int,
         maximum_frequency: int,
         include_documents: bool,
+        maximum_document_display_length: int,
     ) -> InfiniGramAttributionResponse:
         tokenized_query_ids = self.__tokenize(query=search)
-        tokenized_delimiters = self.__tokenize(query=delimiters)
+
+        tokenized_delimiters: Iterable[int] = (
+            self.__tokenize(query=delimiters) if len(delimiters) > 0 else []
+        )
 
         attribute_response = self.infini_gram_engine.attribute(
             input_ids=tokenized_query_ids,
@@ -229,7 +233,9 @@ class InfiniGramProcessor:
                 documents: List[FullAttributionDocument] = []
                 for document in span["docs"]:
                     infini_gram_document = self.infini_gram_engine.get_doc_by_ptr(
-                        s=document["s"], ptr=document["ptr"], max_disp_len=10
+                        s=document["s"],
+                        ptr=document["ptr"],
+                        max_disp_len=maximum_document_display_length,
                     )
 
                     document_result = self.__handle_error(infini_gram_document)

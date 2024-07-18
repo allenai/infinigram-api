@@ -1,12 +1,12 @@
 import json
-from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
+from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
 
 from fastapi import Body, Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import ErrorResponse, InfiniGramEngineResponse
 from pydantic import Field
 from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
-from transformers.tokenization_utils_base import (
+from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
     TextInput,
@@ -67,19 +67,19 @@ class AttributionSpan(CamelCaseModel):
     left: int
     right: int
     length: int
-    documents: List[AttributionDocument]
+    documents: Sequence[AttributionDocument]
 
 
 class AttributionSpanWithDocuments(AttributionSpan):
-    documents: List[FullAttributionDocument]
+    documents: Sequence[FullAttributionDocument]
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: List[AttributionSpan]
+    spans: Sequence[AttributionSpan]
 
 
 class InfiniGramAttributionResponseWithDocs(InfiniGramAttributionResponse):
-    spans: List[AttributionSpanWithDocuments]
+    spans: Sequence[AttributionSpanWithDocuments]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -118,7 +118,7 @@ class InfiniGramProcessor:
     def __tokenize(
         self, query: TextInput | PreTokenizedInput | EncodedInput
     ) -> Iterable[int]:
-        encoded_query = self.tokenizer.encode(query)
+        encoded_query: Iterable[int] = self.tokenizer.encode(query)
         return encoded_query
 
     def __handle_error(

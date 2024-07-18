@@ -10,5 +10,5 @@ class Config(BaseSettings):
 config = Config()
 
 
-def get_config():
+def get_config() -> Config:
     return config

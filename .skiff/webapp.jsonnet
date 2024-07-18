@@ -320,9 +320,15 @@ function(
                     },
                     nodeSelector: nodeSelector,
                     volumes: [{
-                        name: "infinigram-array",
+                        name: "infinigram-array-pileval-gpt2",
                         persistentVolumeClaim: {
                             claimName: "infinigram-pileval-gpt2",
+                            readOnly: true,
+                        }
+                    }, {
+                        name: "infinigram-array-dolma-1-7-llama",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-dolma-1.7-llama",
                             readOnly: true,
                         }
                     }],
@@ -333,17 +339,17 @@ function(
                             // TODO: point these to the actual indexes
                             volumeMounts: [{
                                 mountPath: "/mnt/infinigram-array/v4_pileval_llama",
-                                name: "infinigram-array",
+                                name: "infinigram-array-pileval-gpt2",
                                 readOnly: true,
                             },
                             {
                                 mountPath: "/mnt/infinigram-array/dolma_1_6_sample",
-                                name: "infinigram-array",
+                                name: "infinigram-array-pileval-gpt2",
                                 readOnly: true,
                             }, 
                             {
                                 mountPath: "/mnt/infinigram-array/dolma_1_7",
-                                name: "infinigram-array",
+                                name: "infinigram-array-dolma-1-7-llama",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

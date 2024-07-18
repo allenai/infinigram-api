@@ -1,0 +1,5 @@
+-r common-requirements.txt
+mypy==1.10.1
+pytest==8.2.2
+ruff==0.5.2
+./vendor/infini_gram_playground-2.1.0-cp312-cp312-linux_x86_64.whl

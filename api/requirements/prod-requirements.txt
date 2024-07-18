@@ -1,2 +1,2 @@
 -r common-requirements.txt
-./vendor/infini_gram-2.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+./vendor/infini_gram_playground-2.1.0-cp312-cp312-linux_x86_64.whl

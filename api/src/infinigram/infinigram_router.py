@@ -81,7 +81,7 @@ class AttributionRequest(CamelCaseModel):
 @infinigram_router.post(path="/{index}/attribution")
 def get_document_attributions(
     body: AttributionRequest,
-    infini_gram_processor: InfiniGramProcessorFactoryPathParamDependency,
+    infini_gram_processor: InfiniGramProcessorDependency,
 ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocs:
     result = infini_gram_processor.get_attribution_for_response(
         search=body.query,

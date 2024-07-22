@@ -33,13 +33,6 @@ class Document(CamelCaseModel):
     token_ids: List[int]
 
 
-class InfiniGramQueryResponse(BaseInfiniGramResponse):
-    approx: bool
-    count: int = Field(validation_alias="cnt")
-    documents: Iterable[Document]
-    indexes: Iterable[int] = Field(validation_alias="idxs")
-
-
 class InfiniGramCountResponse(BaseInfiniGramResponse):
     approx: bool
     count: int
@@ -130,34 +123,6 @@ class InfiniGramProcessor:
 
         return cast(TInfiniGramResponse, result)
 
-    def find_docs_with_query(self, query: str) -> InfiniGramQueryResponse:
-        tokenized_query_ids = self.__tokenize(query)
-
-        docs_result = self.infini_gram_engine.search_docs(
-            input_ids=tokenized_query_ids, maxnum=1, max_disp_len=10
-        )
-
-        result = self.__handle_error(docs_result)
-
-        mapped_documents = [
-            Document(
-                document_index=doc_result["doc_ix"],
-                document_length=doc_result["doc_len"],
-                display_length=doc_result["disp_len"],
-                metadata=json.loads(doc_result["metadata"]),
-                token_ids=doc_result["token_ids"],
-            )
-            for doc_result in result["documents"]
-        ]
-
-        return InfiniGramQueryResponse(
-            index=self.index,
-            count=result["cnt"],
-            documents=mapped_documents,
-            approx=result["approx"],
-            indexes=result["idxs"],
-        )
-
     def count_n_gram(self, query: str) -> InfiniGramCountResponse:
         tokenized_query_ids = self.__tokenize(query)
 
@@ -167,9 +132,11 @@ class InfiniGramProcessor:
 
         return InfiniGramCountResponse(index=self.index, **count_result)
 
-    def rank(self, shard: int, rank: int) -> InfiniGramRankResponse:
+    def get_document_by_rank(
+        self, shard: int, rank: int, maximum_document_display_length: int
+    ) -> InfiniGramRankResponse:
         get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank(
-            s=shard, rank=rank, max_disp_len=10
+            s=shard, rank=rank, max_disp_len=maximum_document_display_length
         )
 
         doc_result = self.__handle_error(get_doc_by_rank_response)
@@ -187,7 +154,9 @@ class InfiniGramProcessor:
             token_ids=doc_result["token_ids"],
         )
 
-    def get_documents(self, search: str) -> InfiniGramDocumentsResponse:
+    def search_documents(
+        self, search: str, maximum_document_display_length: int
+    ) -> InfiniGramDocumentsResponse:
         tokenized_query_ids = self.__tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
@@ -198,7 +167,11 @@ class InfiniGramProcessor:
             matching_documents_result["segment_by_shard"]
         ):
             for rank in range(start, end):
-                doc = self.rank(shard=shard, rank=rank)
+                doc = self.get_document_by_rank(
+                    shard=shard,
+                    rank=rank,
+                    maximum_document_display_length=maximum_document_display_length,
+                )
                 docs.append(doc)
 
         return InfiniGramDocumentsResponse(index=self.index, documents=docs)

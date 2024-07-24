@@ -2,15 +2,36 @@ import json
 from itertools import islice
 from typing import List, Sequence
 
+from src.camel_case_model import CamelCaseModel
 from src.infinigram.processor import (
-    AttributionDocument,
-    AttributionSpan,
-    AttributionSpanWithDocuments,
     BaseInfiniGramResponse,
-    FullAttributionDocument,
+    Document,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
+
+
+class AttributionDocument(CamelCaseModel):
+    shard: int
+    pointer: int
+    document_index: int
+
+
+class FullAttributionDocument(AttributionDocument, Document):
+    text: str
+
+
+class AttributionSpan(CamelCaseModel):
+    left: int
+    right: int
+    length: int
+    documents: Sequence[AttributionDocument]
+    text: str
+    tokenIds: Sequence[int]
+
+
+class AttributionSpanWithDocuments(AttributionSpan):
+    documents: Sequence[FullAttributionDocument]
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):

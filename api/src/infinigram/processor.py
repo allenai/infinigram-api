@@ -1,5 +1,5 @@
 import json
-from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
+from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
 
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
@@ -49,29 +49,6 @@ class InfiniGramRankResponse(Document, BaseInfiniGramResponse):
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
-
-
-class AttributionDocument(CamelCaseModel):
-    shard: int
-    pointer: int
-    document_index: int
-
-
-class FullAttributionDocument(AttributionDocument, Document):
-    text: str
-
-
-class AttributionSpan(CamelCaseModel):
-    left: int
-    right: int
-    length: int
-    documents: Sequence[AttributionDocument]
-    text: str
-    tokenIds: Sequence[int]
-
-
-class AttributionSpanWithDocuments(AttributionSpan):
-    documents: Sequence[FullAttributionDocument]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")

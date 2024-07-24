@@ -67,7 +67,7 @@ class AttributionSpan(CamelCaseModel):
     length: int
     documents: Sequence[AttributionDocument]
     text: str
-    tokens: Sequence[int]
+    tokenIds: Sequence[int]
 
 
 class AttributionSpanWithDocuments(AttributionSpan):

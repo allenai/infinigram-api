@@ -1,3 +1,4 @@
+import json
 from itertools import islice
 from typing import List, Sequence
 
@@ -6,6 +7,7 @@ from src.infinigram.processor import (
     AttributionSpan,
     AttributionSpanWithDocuments,
     BaseInfiniGramResponse,
+    FullAttributionDocument,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
@@ -80,7 +82,7 @@ class AttributionService:
                     length=span["length"],
                     documents=documents,
                     text=span_text,
-                    tokens=span_text_tokens,
+                    tokenIds=span_text_tokens,
                 )
 
                 spans_with_documents.append(new_span)
@@ -105,7 +107,7 @@ class AttributionService:
                         right=span["r"],
                         length=span["length"],
                         text=span_text,
-                        tokens=span_text_tokens,
+                        tokenIds=span_text_tokens,
                         documents=[
                             AttributionDocument(
                                 shard=document["s"],

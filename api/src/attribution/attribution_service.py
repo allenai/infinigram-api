@@ -57,8 +57,6 @@ class AttributionService:
         include_documents: bool,
         maximum_document_display_length: int,
     ) -> InfiniGramAttributionResponse:
-        prompt_response_token_ids = self.infini_gram_processor.tokenize(prompt_response)
-
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
             delimiters=delimiters,
@@ -68,7 +66,7 @@ class AttributionService:
 
         if include_documents:
             spans_with_documents: List[AttributionSpanWithDocuments] = []
-            for span in attribute_result["spans"]:
+            for span in attribute_result.spans:
                 documents: List[FullAttributionDocument] = []
                 for document in span["docs"]:
                     document_result = self.infini_gram_processor.get_document_by_pointer(
@@ -92,7 +90,7 @@ class AttributionService:
                     documents.append(new_document)
 
                 span_text_tokens = list(
-                    islice(prompt_response_token_ids, span["l"], span["r"])
+                    islice(attribute_result.input_token_ids, span["l"], span["r"])
                 )
                 span_text = self.infini_gram_processor.decode_tokens(
                     token_ids=span_text_tokens
@@ -114,9 +112,9 @@ class AttributionService:
 
         else:
             spans: List[AttributionSpan] = []
-            for span in attribute_result["spans"]:
+            for span in attribute_result.spans:
                 span_text_tokens = list(
-                    islice(prompt_response_token_ids, span["l"], span["r"])
+                    islice(attribute_result.input_token_ids, span["l"], span["r"])
                 )
                 span_text = self.infini_gram_processor.decode_tokens(
                     token_ids=span_text_tokens

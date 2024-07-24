@@ -4,7 +4,7 @@ from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import (
-    AttributionResponse,
+    AttributionSpan,
     DocResult,
     ErrorResponse,
     InfiniGramEngineResponse,
@@ -49,6 +49,11 @@ class InfiniGramRankResponse(Document, BaseInfiniGramResponse):
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[InfiniGramRankResponse]
+
+
+class InfiniGramAttributionResponse(BaseInfiniGramResponse):
+    spans: List[AttributionSpan]
+    input_token_ids: List[int]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -162,7 +167,7 @@ class InfiniGramProcessor:
         delimiters: List[str],
         minimum_span_length: int,
         maximum_frequency: int,
-    ) -> AttributionResponse:
+    ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
         delimiter_token_ids: Iterable[int] = (
@@ -178,7 +183,9 @@ class InfiniGramProcessor:
 
         attribute_result = self.__handle_error(attribute_response)
 
-        return attribute_result
+        return InfiniGramAttributionResponse(
+            **attribute_result, index=self.index, input_token_ids=input_ids
+        )
 
     # get_document_by_pointer doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def get_document_by_pointer(

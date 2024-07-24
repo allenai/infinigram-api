@@ -96,7 +96,7 @@ class InfiniGramProcessor:
         return encoded_query
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.tokenizer.decode(token_ids)
+        return self.tokenizer.decode(token_ids)  # type: ignore [no-any-return]
 
     def __handle_error(
         self,

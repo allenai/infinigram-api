@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from src import glog
+from src.attribution import attribution_router
 from src.documents import documents_router
 from src.health import health_router
 from src.infinigram import infinigram_router
@@ -21,6 +22,7 @@ app = FastAPI(title="infini-gram API", version="0.0.1")
 app.include_router(health_router)
 app.include_router(router=infinigram_router)
 app.include_router(router=documents_router)
+app.include_router(router=attribution_router)
 
 
 @app.exception_handler(InfiniGramEngineException)

@@ -30,25 +30,18 @@ class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
+class InfiniGramCountResponse(BaseInfiniGramResponse):
+    approx: bool
+    count: int
+
+
 class Document(CamelCaseModel):
     document_index: int = Field(validation_alias="doc_ix")
     document_length: int = Field(validation_alias="doc_len")
     display_length: int = Field(validation_alias="disp_len")
     metadata: dict[str, Any]
     token_ids: List[int]
-
-
-class InfiniGramCountResponse(BaseInfiniGramResponse):
-    approx: bool
-    count: int
-
-
-class InfiniGramRankResponse(Document, BaseInfiniGramResponse):
     text: str
-
-
-class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
-    documents: Iterable[InfiniGramRankResponse]
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
@@ -118,7 +111,7 @@ class InfiniGramProcessor:
 
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
-    ) -> InfiniGramRankResponse:
+    ) -> Document:
         get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank(
             s=shard, rank=rank, max_disp_len=maximum_document_display_length
         )
@@ -128,25 +121,45 @@ class InfiniGramProcessor:
         parsed_metadata = json.loads(doc_result["metadata"])
         decoded_text = self.decode_tokens(doc_result["token_ids"])
 
-        return InfiniGramRankResponse(
-            index=self.index,
-            text=decoded_text,
+        return Document(
             document_index=doc_result["doc_ix"],
             document_length=doc_result["doc_len"],
             display_length=doc_result["disp_len"],
             metadata=parsed_metadata,
             token_ids=doc_result["token_ids"],
+            text=decoded_text,
+        )
+
+    def get_document_by_index(
+        self, document_index: int, maximum_document_display_length: int
+    ) -> Document:
+        get_doc_by_index_response = self.infini_gram_engine.get_doc_by_ix(
+            doc_ix=document_index, max_disp_len=maximum_document_display_length
+        )
+
+        doc_result = self.__handle_error(get_doc_by_index_response)
+
+        parsed_metadata = json.loads(doc_result["metadata"])
+        decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+        return Document(
+            document_index=doc_result["doc_ix"],
+            document_length=doc_result["doc_len"],
+            display_length=doc_result["disp_len"],
+            metadata=parsed_metadata,
+            token_ids=doc_result["token_ids"],
+            text=decoded_text,
         )
 
     def search_documents(
         self, search: str, maximum_document_display_length: int
-    ) -> InfiniGramDocumentsResponse:
+    ) -> List[Document]:
         tokenized_query_ids = self.tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
         matching_documents_result = self.__handle_error(matching_documents)
 
-        docs = []
+        docs: List[Document] = []
         for shard, (start, end) in enumerate(
             matching_documents_result["segment_by_shard"]
         ):
@@ -158,7 +171,7 @@ class InfiniGramProcessor:
                 )
                 docs.append(doc)
 
-        return InfiniGramDocumentsResponse(index=self.index, documents=docs)
+        return docs
 
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def attribute(

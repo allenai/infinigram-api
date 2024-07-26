@@ -1,11 +1,11 @@
 from typing import Annotated, TypeAlias
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
 
-from src.infinigram.processor import (
+from src.documents.documents_service import (
+    DocumentsService,
+    InfiniGramDocumentResponse,
     InfiniGramDocumentsResponse,
-    InfiniGramProcessorDependency,
-    InfiniGramRankResponse,
 )
 
 documents_router = APIRouter()
@@ -18,15 +18,17 @@ MaximumDocumentDisplayLengthType: TypeAlias = Annotated[
     ),
 ]
 
+DocumentsServiceDependency: TypeAlias = Annotated[DocumentsService, Depends()]
+
 
 @documents_router.get("/{index}/documents/{shard}/{rank}", tags=["documents"])
 def get_document_by_rank(
     shard: int,
     rank: int,
-    infini_gram_processor: InfiniGramProcessorDependency,
+    documents_service: DocumentsServiceDependency,
     maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
-) -> InfiniGramRankResponse:
-    result = infini_gram_processor.get_document_by_rank(
+) -> InfiniGramDocumentResponse:
+    result = documents_service.get_document_by_rank(
         shard=shard,
         rank=rank,
         maximum_document_display_length=maximum_document_display_length,
@@ -37,12 +39,40 @@ def get_document_by_rank(
 
 @documents_router.get("/{index}/documents/", tags=["documents"])
 def search_documents(
-    infini_gram_processor: InfiniGramProcessorDependency,
+    documents_service: DocumentsServiceDependency,
     search: str,
     maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
 ) -> InfiniGramDocumentsResponse:
-    result = infini_gram_processor.search_documents(
+    result = documents_service.search_documents(
         search, maximum_document_display_length=maximum_document_display_length
+    )
+
+    return result
+
+
+@documents_router.get("/{index}/documents/{document_index}", tags=["documents"])
+def get_document_by_index(
+    documents_service: DocumentsServiceDependency,
+    document_index: int,
+    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+) -> InfiniGramDocumentResponse:
+    result = documents_service.get_document_by_index(
+        document_index=int(document_index),
+        maximum_document_display_length=maximum_document_display_length,
+    )
+
+    return result
+
+
+@documents_router.get("/{index}/documents", tags=["documents"])
+async def get_documents_by_index(
+    documents_service: DocumentsServiceDependency,
+    document_indexes: Annotated[list[int], Query()],
+    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+) -> InfiniGramDocumentsResponse:
+    result = await documents_service.get_multiple_documents_by_index(
+        document_indexes=document_indexes,
+        maximum_document_display_length=maximum_document_display_length,
     )
 
     return result

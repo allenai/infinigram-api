@@ -9,15 +9,11 @@ from src.infinigram.processor import (
 )
 
 
-class InfiniGramDocument(Document):
-    text: str
-
-
-class InfiniGramDocumentResponse(InfiniGramDocument, BaseInfiniGramResponse): ...
+class InfiniGramDocumentResponse(Document, BaseInfiniGramResponse): ...
 
 
 class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
-    documents: Iterable[InfiniGramDocument]
+    documents: Iterable[Document]
 
 
 class DocumentsService:
@@ -54,7 +50,7 @@ class DocumentsService:
         )
 
         mapped_documents = [
-            InfiniGramDocument(
+            Document(
                 text=document.text,
                 document_index=document.document_index,
                 document_length=document.document_length,
@@ -89,7 +85,7 @@ class DocumentsService:
 
     async def get_multiple_documents_by_index(
         self, document_indexes: Iterable[int], maximum_document_display_length: int
-    ):
+    ) -> InfiniGramDocumentsResponse:
         async with asyncio.TaskGroup() as tg:
             document_tasks = [
                 tg.create_task(
@@ -105,7 +101,7 @@ class DocumentsService:
 
         documents = [document_task.result() for document_task in document_tasks]
         mapped_documents = [
-            InfiniGramDocument(
+            Document(
                 document_index=document.document_index,
                 document_length=document.document_length,
                 display_length=document.display_length,

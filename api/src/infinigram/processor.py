@@ -5,7 +5,6 @@ from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import (
     AttributionSpan,
-    DocResult,
     ErrorResponse,
     InfiniGramEngineResponse,
 )
@@ -42,6 +41,11 @@ class Document(CamelCaseModel):
     metadata: dict[str, Any]
     token_ids: List[int]
     text: str
+
+
+class DocumentWithPointer(Document):
+    shard: int
+    pointer: int
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
@@ -200,16 +204,26 @@ class InfiniGramProcessor:
             **attribute_result, index=self.index, input_token_ids=input_ids
         )
 
-    # get_document_by_pointer doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def get_document_by_pointer(
         self, shard: int, pointer: int, maximum_document_display_length: int
-    ) -> DocResult:
+    ) -> Document:
         document_response = self.infini_gram_engine.get_doc_by_ptr(
             s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
         )
 
         document_result = self.__handle_error(result=document_response)
 
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
+
+        return Document(
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            metadata=parsed_metadata,
+            token_ids=document_result["token_ids"],
+            text=decoded_text,
+        )
         return document_result
 
 

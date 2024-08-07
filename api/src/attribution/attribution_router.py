@@ -6,7 +6,7 @@ from pydantic import Field
 from src.attribution.attribution_service import (
     AttributionService,
     InfiniGramAttributionResponse,
-    InfiniGramAttributionResponseWithDocs,
+    InfiniGramAttributionResponseWithDocuments,
 )
 from src.camel_case_model import CamelCaseModel
 
@@ -44,11 +44,11 @@ class AttributionRequest(CamelCaseModel):
 
 
 @attribution_router.post(path="/{index}/attribution")
-def get_document_attributions(
+async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
-) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocs:
-    result = attribution_service.get_attribution_for_response(
+) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
+    result = await attribution_service.get_attribution_for_response(
         prompt_response=body.query,
         delimiters=body.delimiters,
         minimum_span_length=body.minimum_span_length,

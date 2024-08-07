@@ -128,7 +128,7 @@ class DocumentsService:
         self,
         document_request: GetDocumentByPointerRequest,
         maximum_document_display_length: int,
-    ):
+    ) -> DocumentWithPointer:
         document = self.infini_gram_processor.get_document_by_pointer(
             shard=document_request.shard,
             pointer=document_request.pointer,

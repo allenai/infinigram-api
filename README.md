@@ -115,3 +115,8 @@ To check for `mypy` issues, run `mypy --strict --config ./api/pyproject.toml`
 
 ### VSCode
 Install the [ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) and [mypy](https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker) extensions. These are listed in the "Recommended Extensions" for the workspace as well.
+
+## Performance Profiling
+We have a middleware set up to profile requests with `pyinstrument`. To enable it, you need to have `PROFILING_ENABLED` set to `true` in your env. Then you need to make a request with the query parameter `?profile=true`. If you want to get an HTML formatted profile, also include the query parameter `profile_format=html`.
+
+After the profiling is finished, you can open the performance profile in `/api/performance-profiles/profile.html`

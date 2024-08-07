@@ -8,3 +8,5 @@ __pycache__
 infinigram-array
 
 .DS_Store
+
+api/performance-profiles

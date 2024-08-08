@@ -81,7 +81,7 @@ class InfiniGramProcessor:
         return self.tokenizer.tokenize(input)
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.tokenizer.decode_tokens(token_ids)  # type: ignore [no-any-return]
+        return self.tokenizer.decode_tokens(token_ids)
 
     def __handle_error(
         self,

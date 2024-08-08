@@ -13,7 +13,7 @@ current_dir = Path(os.getcwd())
 performance_profiles_directory = current_dir / "performance-profiles"
 
 
-def register_profiling_middleware(app: FastAPI):
+def register_profiling_middleware(app: FastAPI) -> Any:
     config = get_config()
 
     if config.profiling_enabled is True:

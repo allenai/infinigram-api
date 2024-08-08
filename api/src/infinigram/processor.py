@@ -10,7 +10,6 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from pydantic import Field
-from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
@@ -20,6 +19,8 @@ from transformers.tokenization_utils_base import (  # type: ignore
 from src.camel_case_model import CamelCaseModel
 from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mappings
 from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
+
+from .tokenizers.tokenizer import Tokenizer
 
 
 class BaseInfiniGramResponse(CamelCaseModel):
@@ -60,22 +61,14 @@ def is_infini_gram_error_response(
 
 class InfiniGramProcessor:
     index: str
-    tokenizer: PreTrainedTokenizerBase
+    tokenizer: Tokenizer
     infini_gram_engine: InfiniGramEngine
 
     def __init__(self, index: AvailableInfiniGramIndexId):
         self.index = index.value
         index_mapping = index_mappings[index.value]
 
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            index_mapping["tokenizer"],
-            add_bos_token=False,
-            add_eos_token=False,
-            trust_remote_code=True,
-        )
-
-        if self.tokenizer.eos_token_id is None:
-            raise Exception("An indexer didn't have an eos token id")
+        self.tokenizer = index_mapping["tokenizer"]
 
         self.infini_gram_engine = InfiniGramEngine(
             index_dir=index_mapping["index_dir"],
@@ -85,11 +78,10 @@ class InfiniGramProcessor:
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
     ) -> List[int]:
-        encoded_query: List[int] = self.tokenizer.encode(input)
-        return encoded_query
+        return self.tokenizer.tokenize(input)
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.tokenizer.decode(token_ids)  # type: ignore [no-any-return]
+        return self.tokenizer.decode_tokens(token_ids)  # type: ignore [no-any-return]
 
     def __handle_error(
         self,
@@ -183,9 +175,7 @@ class InfiniGramProcessor:
     ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
-        delimiter_token_ids: Iterable[int] = (
-            self.tokenize(delimiters) if len(delimiters) > 0 else []
-        )
+        delimiter_token_ids = self.tokenizer.tokenize_attribution_delimiters(delimiters)
 
         attribute_response = self.infini_gram_engine.attribute(
             input_ids=input_ids,

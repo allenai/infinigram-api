@@ -1,5 +1,5 @@
 from itertools import islice
-from typing import Iterable, List, Sequence
+from typing import Generic, Iterable, List, Sequence, TypeVar
 
 from src.camel_case_model import CamelCaseModel
 from src.documents.documents_router import DocumentsServiceDependency
@@ -21,20 +21,22 @@ class AttributionDocument(CamelCaseModel):
     document_index: int
 
 
-class BaseAttributionSpan(CamelCaseModel):
+TAttributionDocument = TypeVar("TAttributionDocument")
+
+
+class BaseAttributionSpan(CamelCaseModel, Generic[TAttributionDocument]):
     left: int
     right: int
     length: int
     text: str
     token_ids: Sequence[int]
+    documents: Sequence[TAttributionDocument]
 
 
-class AttributionSpan(BaseAttributionSpan):
-    documents: Sequence[AttributionDocument]
+class AttributionSpan(BaseAttributionSpan[AttributionDocument]): ...
 
 
-class AttributionSpanWithDocuments(BaseAttributionSpan):
-    documents: Sequence[DocumentWithPointer]
+class AttributionSpanWithDocuments(BaseAttributionSpan[DocumentWithPointer]): ...
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):

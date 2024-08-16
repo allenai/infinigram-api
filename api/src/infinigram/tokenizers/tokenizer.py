@@ -47,17 +47,16 @@ class Tokenizer:
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.hf_tokenizer.decode(token_ids)  # pyright: ignore [reportUnknownMemberType]
 
-    def tokenize_to_list(self, input: str) -> Sequence[str]:
+    def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         tokenized_input = self.hf_tokenizer(input, return_offsets_mapping=True)
-        output = [
+
+        return [
             input[offset[0] : offset[1]]
             for offset in cast(
                 List[Tuple[(int, int)]],
                 tokenized_input.data.get("offset_mapping", []),  # pyright: ignore [reportUnknownMemberType]
             )
         ]
-        return output
-        # return [str(word) for word in tokenized_input.words()]
 
     def tokenize_attribution_delimiters(self, delimiters: Iterable[str]) -> List[int]:
         """

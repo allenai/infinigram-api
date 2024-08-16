@@ -41,6 +41,10 @@ class AttributionRequest(CamelCaseModel):
         default=100,
         description="The maximum length in tokens of the returned document text",
     )
+    include_input_as_tokens: bool = Field(
+        default=False,
+        description="Set this to True if you want the response to include the input string as a list of string tokens",
+    )
 
 
 @attribution_router.post(path="/{index}/attribution")
@@ -55,6 +59,7 @@ async def get_document_attributions(
         maximum_frequency=body.maximum_frequency,
         include_documents=body.include_documents,
         maximum_document_display_length=body.maximum_document_display_length,
+        include_input_as_tokens=body.include_input_as_tokens,
     )
 
     return result

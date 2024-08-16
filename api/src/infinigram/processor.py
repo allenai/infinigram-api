@@ -88,6 +88,9 @@ class InfiniGramProcessor:
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
 
+    def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
+        return self.tokenizer.tokenize_to_list(input)
+
     def __handle_error(
         self,
         result: InfiniGramEngineResponse[TInfiniGramResponse],
@@ -220,7 +223,6 @@ class InfiniGramProcessor:
             token_ids=document_result["token_ids"],
             text=decoded_text,
         )
-        return document_result
 
 
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

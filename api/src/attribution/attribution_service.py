@@ -1,5 +1,5 @@
 from itertools import islice
-from typing import Generic, Iterable, List, Sequence, TypeVar
+from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 from src.camel_case_model import CamelCaseModel
 from src.documents.documents_router import DocumentsServiceDependency
@@ -46,7 +46,7 @@ class BaseInfinigramAttributionResponse(
     BaseInfiniGramResponse, Generic[TAttributionSpan]
 ):
     spans: Sequence[TAttributionSpan]
-    input_tokens: Sequence[str]
+    input_tokens: Optional[Sequence[str]]
 
 
 class InfiniGramAttributionResponse(
@@ -85,8 +85,9 @@ class AttributionService:
         delimiters: List[str],
         minimum_span_length: int,
         maximum_frequency: int,
-        include_documents: bool,
         maximum_document_display_length: int,
+        include_documents: Optional[bool] = False,
+        include_input_as_tokens: Optional[bool] = False,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
@@ -133,7 +134,9 @@ class AttributionService:
             return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,
                 spans=spans_with_documents,
-                input_tokens=attribute_result.input_tokens,
+                input_tokens=attribute_result.input_tokens
+                if include_input_as_tokens
+                else None,
             )
 
         else:
@@ -166,5 +169,7 @@ class AttributionService:
             return InfiniGramAttributionResponse(
                 index=self.infini_gram_processor.index,
                 spans=spans,
-                input_tokens=attribute_result.input_tokens,
+                input_tokens=attribute_result.input_tokens
+                if include_input_as_tokens
+                else None,
             )

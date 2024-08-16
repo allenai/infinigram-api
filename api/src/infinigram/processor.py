@@ -1,5 +1,5 @@
 import json
-from typing import Annotated, Any, Iterable, List, TypeGuard, TypeVar, cast
+from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
 
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
@@ -9,6 +9,11 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from pydantic import Field
+from transformers import (  # type: ignore
+    AutoTokenizer,
+    PreTrainedTokenizer,
+    PreTrainedTokenizerFast,
+)
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
@@ -52,6 +57,7 @@ class DocumentWithPointer(Document):
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     spans: List[AttributionSpan]
     input_token_ids: List[int]
+    input_tokens: Iterable[str]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -86,6 +92,9 @@ class InfiniGramProcessor:
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
+
+    def decode_tokens_to_list(self, token_ids: List[int]) -> Sequence[str]:
+        return self.tokenizer.convert_ids_to_tokens(token_ids)
 
     def __handle_error(
         self,
@@ -190,8 +199,13 @@ class InfiniGramProcessor:
 
         attribute_result = self.__handle_error(attribute_response)
 
+        input_tokens = self.decode_tokens_to_list(input_ids)
+
         return InfiniGramAttributionResponse(
-            **attribute_result, index=self.index, input_token_ids=input_ids
+            **attribute_result,
+            index=self.index,
+            input_token_ids=input_ids,
+            input_tokens=input_tokens,
         )
 
     def get_document_by_pointer(

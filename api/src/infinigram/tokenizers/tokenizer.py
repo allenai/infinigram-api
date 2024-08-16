@@ -1,5 +1,5 @@
 from os import PathLike
-from typing import Iterable, List, Sequence
+from typing import Iterable, List, Sequence, Tuple, cast
 
 from transformers import (  # type: ignore
     AutoTokenizer,
@@ -47,8 +47,17 @@ class Tokenizer:
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.hf_tokenizer.decode(token_ids)  # pyright: ignore [reportUnknownMemberType]
 
-    def decode_tokens_to_list(self, token_ids: List[int]) -> Sequence[str]:
-        return self.hf_tokenizer.convert_ids_to_tokens(token_ids)
+    def tokenize_to_list(self, input: str) -> Sequence[str]:
+        tokenized_input = self.hf_tokenizer(input, return_offsets_mapping=True)
+        output = [
+            input[offset[0] : offset[1]]
+            for offset in cast(
+                List[Tuple[(int, int)]],
+                tokenized_input.data.get("offset_mapping", []),  # pyright: ignore [reportUnknownMemberType]
+            )
+        ]
+        return output
+        # return [str(word) for word in tokenized_input.words()]
 
     def tokenize_attribution_delimiters(self, delimiters: Iterable[str]) -> List[int]:
         """

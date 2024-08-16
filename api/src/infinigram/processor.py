@@ -191,7 +191,7 @@ class InfiniGramProcessor:
 
         attribute_result = self.__handle_error(attribute_response)
 
-        input_tokens = self.tokenizer.decode_tokens_to_list(input_ids)
+        input_tokens = self.tokenizer.tokenize_to_list(input=input)
 
         return InfiniGramAttributionResponse(
             **attribute_result,

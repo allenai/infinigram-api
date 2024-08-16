@@ -1,6 +1,8 @@
 from itertools import islice
 from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
+from pydantic import Field
+
 from src.camel_case_model import CamelCaseModel
 from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
@@ -46,7 +48,9 @@ class BaseInfinigramAttributionResponse(
     BaseInfiniGramResponse, Generic[TAttributionSpan]
 ):
     spans: Sequence[TAttributionSpan]
-    input_tokens: Optional[Sequence[str]]
+    input_tokens: Optional[Sequence[str]] = Field(
+        examples=[["busy", " medieval", " streets", "."]]
+    )
 
 
 class InfiniGramAttributionResponse(

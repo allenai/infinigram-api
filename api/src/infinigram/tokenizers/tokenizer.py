@@ -1,9 +1,10 @@
 from os import PathLike
-from typing import Iterable, List
+from typing import Iterable, List, Sequence
 
 from transformers import (  # type: ignore
     AutoTokenizer,
-    PreTrainedTokenizerBase,
+    PreTrainedTokenizer,
+    PreTrainedTokenizerFast,
 )
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
@@ -13,7 +14,7 @@ from transformers.tokenization_utils_base import (  # type: ignore
 
 
 class Tokenizer:
-    hf_tokenizer: PreTrainedTokenizerBase
+    hf_tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
     delimiter_mapping: dict[str, int]
     eos_token_id: int
 
@@ -22,7 +23,7 @@ class Tokenizer:
         pretrained_model_name_or_path: str | PathLike[str],
         delimiter_mapping: dict[str, int] = {},
     ):
-        self.hf_tokenizer = AutoTokenizer.from_pretrained(
+        self.hf_tokenizer = AutoTokenizer.from_pretrained(  # pyright: ignore[reportUnknownMemberType]
             pretrained_model_name_or_path=pretrained_model_name_or_path,
             add_bos_token=False,
             add_eos_token=False,
@@ -40,11 +41,14 @@ class Tokenizer:
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
     ) -> List[int]:
-        encoded_query: List[int] = self.hf_tokenizer.encode(input)
+        encoded_query: List[int] = self.hf_tokenizer.encode(input)  # pyright: ignore[reportUnknownMemberType]
         return encoded_query
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.hf_tokenizer.decode(token_ids)  # type: ignore [no-any-return]
+        return self.hf_tokenizer.decode(token_ids)  # pyright: ignore [reportUnknownMemberType]
+
+    def decode_tokens_to_list(self, token_ids: List[int]) -> Sequence[str]:
+        return self.hf_tokenizer.convert_ids_to_tokens(token_ids)
 
     def tokenize_attribution_delimiters(self, delimiters: Iterable[str]) -> List[int]:
         """
@@ -65,7 +69,7 @@ class Tokenizer:
                 non_mapped_delimiters.append(delimiter)
 
         encoded_delimiters += (
-            self.hf_tokenizer.encode(non_mapped_delimiters)
+            self.hf_tokenizer.encode(non_mapped_delimiters)  # pyright: ignore[reportUnknownMemberType]
             if len(non_mapped_delimiters) > 0
             else []
         )

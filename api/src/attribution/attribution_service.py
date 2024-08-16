@@ -164,5 +164,7 @@ class AttributionService:
                 )
 
             return InfiniGramAttributionResponse(
-                index=self.infini_gram_processor.index, spans=spans
+                index=self.infini_gram_processor.index,
+                spans=spans,
+                input_tokens=attribute_result.input_tokens,
             )

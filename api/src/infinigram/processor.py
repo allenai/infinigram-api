@@ -9,11 +9,6 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from pydantic import Field
-from transformers import (  # type: ignore
-    AutoTokenizer,
-    PreTrainedTokenizer,
-    PreTrainedTokenizerFast,
-)
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
@@ -57,7 +52,7 @@ class DocumentWithPointer(Document):
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     spans: List[AttributionSpan]
     input_token_ids: List[int]
-    input_tokens: Iterable[str]
+    input_tokens: Sequence[str]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -92,9 +87,6 @@ class InfiniGramProcessor:
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
-
-    def decode_tokens_to_list(self, token_ids: List[int]) -> Sequence[str]:
-        return self.tokenizer.convert_ids_to_tokens(token_ids)
 
     def __handle_error(
         self,
@@ -199,7 +191,7 @@ class InfiniGramProcessor:
 
         attribute_result = self.__handle_error(attribute_response)
 
-        input_tokens = self.decode_tokens_to_list(input_ids)
+        input_tokens = self.tokenizer.decode_tokens_to_list(input_ids)
 
         return InfiniGramAttributionResponse(
             **attribute_result,

@@ -39,12 +39,24 @@ class AttributionSpan(BaseAttributionSpan[AttributionDocument]): ...
 class AttributionSpanWithDocuments(BaseAttributionSpan[DocumentWithPointer]): ...
 
 
-class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: Sequence[AttributionSpan]
+TAttributionSpan = TypeVar("TAttributionSpan")
 
 
-class InfiniGramAttributionResponseWithDocuments(BaseInfiniGramResponse):
-    spans: Sequence[AttributionSpanWithDocuments]
+class BaseInfinigramAttributionResponse(
+    BaseInfiniGramResponse, Generic[TAttributionSpan]
+):
+    spans: Sequence[TAttributionSpan]
+    input_tokens: Sequence[str]
+
+
+class InfiniGramAttributionResponse(
+    BaseInfinigramAttributionResponse[AttributionSpan]
+): ...
+
+
+class InfiniGramAttributionResponseWithDocuments(
+    BaseInfinigramAttributionResponse[AttributionSpanWithDocuments]
+): ...
 
 
 class AttributionService:
@@ -119,7 +131,9 @@ class AttributionService:
                 spans_with_documents.append(new_span)
 
             return InfiniGramAttributionResponseWithDocuments(
-                index=self.infini_gram_processor.index, spans=spans_with_documents
+                index=self.infini_gram_processor.index,
+                spans=spans_with_documents,
+                input_tokens=attribute_result.input_tokens,
             )
 
         else:

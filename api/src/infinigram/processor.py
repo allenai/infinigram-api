@@ -52,7 +52,6 @@ class DocumentWithPointer(Document):
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     spans: List[AttributionSpan]
     input_token_ids: List[int]
-    input_tokens: Sequence[str]
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -194,13 +193,10 @@ class InfiniGramProcessor:
 
         attribute_result = self.__handle_error(attribute_response)
 
-        input_tokens = self.tokenizer.tokenize_to_list(input=input)
-
         return InfiniGramAttributionResponse(
             **attribute_result,
             index=self.index,
             input_token_ids=input_ids,
-            input_tokens=input_tokens,
         )
 
     def get_document_by_pointer(

@@ -138,7 +138,9 @@ class AttributionService:
             return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,
                 spans=spans_with_documents,
-                input_tokens=attribute_result.input_tokens
+                input_tokens=self.infini_gram_processor.tokenize_to_list(
+                    prompt_response
+                )
                 if include_input_as_tokens
                 else None,
             )
@@ -173,7 +175,9 @@ class AttributionService:
             return InfiniGramAttributionResponse(
                 index=self.infini_gram_processor.index,
                 spans=spans,
-                input_tokens=attribute_result.input_tokens
+                input_tokens=self.infini_gram_processor.tokenize_to_list(
+                    prompt_response
+                )
                 if include_input_as_tokens
                 else None,
             )

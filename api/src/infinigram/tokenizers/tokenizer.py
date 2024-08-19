@@ -45,7 +45,7 @@ class Tokenizer:
         return encoded_query
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.hf_tokenizer.decode(token_ids)  # pyright: ignore [reportUnknownMemberType]
+        return self.hf_tokenizer.decode(token_ids)  # type: ignore
 
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         tokenized_input = self.hf_tokenizer(input, return_offsets_mapping=True)

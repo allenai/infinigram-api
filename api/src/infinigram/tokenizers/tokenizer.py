@@ -17,10 +17,12 @@ class Tokenizer:
     hf_tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
     delimiter_mapping: dict[str, int]
     eos_token_id: int
+    bow_ids_path: str
 
     def __init__(
         self,
         pretrained_model_name_or_path: str | PathLike[str],
+        bow_ids_path: str,
         delimiter_mapping: dict[str, int] = {},
     ):
         self.hf_tokenizer = AutoTokenizer.from_pretrained(  # pyright: ignore[reportUnknownMemberType]
@@ -37,6 +39,7 @@ class Tokenizer:
 
         self.eos_token_id = self.hf_tokenizer.eos_token_id
         self.delimiter_mapping = delimiter_mapping
+        self.bow_ids_path = bow_ids_path
 
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput

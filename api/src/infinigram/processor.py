@@ -77,7 +77,7 @@ class InfiniGramProcessor:
         self.infini_gram_engine = InfiniGramEngine(
             index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
-            bow_ids_path=index_mapping["bow_ids_path"],
+            bow_ids_path=self.tokenizer.bow_ids_path,
         )
 
     def tokenize(

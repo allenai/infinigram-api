@@ -15,7 +15,6 @@ class AvailableInfiniGramIndexId(Enum):
 class IndexMapping(TypedDict):
     tokenizer: Tokenizer
     index_dir: str
-    bow_ids_path: str
 
 
 IndexMappings = TypedDict(
@@ -30,11 +29,9 @@ index_mappings: IndexMappings = {
     AvailableInfiniGramIndexId.PILEVAL_LLAMA.value: {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": f"{config.index_base_path}/v4_pileval_llama",
-        "bow_ids_path": "./vendor/llama-2_bow_ids.txt",
     },
     AvailableInfiniGramIndexId.DOLMA_1_7.value: {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": f"{config.index_base_path}/dolma_1_7",
-        "bow_ids_path": "./vendor/llama-2_bow_ids.txt",
     },
 }

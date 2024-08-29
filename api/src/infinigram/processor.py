@@ -77,6 +77,7 @@ class InfiniGramProcessor:
         self.infini_gram_engine = InfiniGramEngine(
             index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
+            bow_ids_path=index_mapping["bow_ids_path"],
         )
 
     def tokenize(
@@ -179,6 +180,7 @@ class InfiniGramProcessor:
         delimiters: List[str],
         minimum_span_length: int,
         maximum_frequency: int,
+        allow_spans_with_partial_words: bool,
     ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
@@ -189,6 +191,7 @@ class InfiniGramProcessor:
             delim_ids=delimiter_token_ids,
             min_len=minimum_span_length,
             max_cnt=maximum_frequency,
+            enforce_bow=not allow_spans_with_partial_words,
         )
 
         attribute_result = self.__handle_error(attribute_response)

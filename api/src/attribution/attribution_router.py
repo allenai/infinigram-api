@@ -45,6 +45,10 @@ class AttributionRequest(CamelCaseModel):
         default=False,
         description="Set this to True if you want the response to include the input string as a list of string tokens",
     )
+    allow_spans_with_partial_words: bool = Field(
+        default=False,
+        description="Setting this to False will only check for attributions that start and end with a full word",
+    )
 
 
 @attribution_router.post(path="/{index}/attribution")
@@ -60,6 +64,7 @@ async def get_document_attributions(
         include_documents=body.include_documents,
         maximum_document_display_length=body.maximum_document_display_length,
         include_input_as_tokens=body.include_input_as_tokens,
+        allow_spans_with_partial_words=body.allow_spans_with_partial_words,
     )
 
     return result

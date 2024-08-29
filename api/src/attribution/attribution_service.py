@@ -90,14 +90,16 @@ class AttributionService:
         minimum_span_length: int,
         maximum_frequency: int,
         maximum_document_display_length: int,
-        include_documents: Optional[bool] = False,
-        include_input_as_tokens: Optional[bool] = False,
+        include_documents: bool = False,
+        include_input_as_tokens: bool = False,
+        allow_spans_with_partial_words: bool = False,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
             delimiters=delimiters,
             minimum_span_length=minimum_span_length,
             maximum_frequency=maximum_frequency,
+            allow_spans_with_partial_words=allow_spans_with_partial_words,
         )
 
         if include_documents:

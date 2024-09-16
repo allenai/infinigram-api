@@ -22,6 +22,11 @@ class AttributionRequest(CamelCaseModel):
         default=[],
         description="Token IDs that returned spans shouldn't include",
     )
+    maximum_span_density: float = Field(
+        gt=0,
+        default=0.05,
+        description="The maximum density of spans (measured in number of spans per response token) to return in the response",
+    )
     minimum_span_length: int = Field(
         gt=0,
         default=5,
@@ -59,6 +64,7 @@ async def get_document_attributions(
     result = await attribution_service.get_attribution_for_response(
         prompt_response=body.query,
         delimiters=body.delimiters,
+        maximum_span_density=body.maximum_span_density,
         minimum_span_length=body.minimum_span_length,
         maximum_frequency=body.maximum_frequency,
         include_documents=body.include_documents,

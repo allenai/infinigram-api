@@ -87,6 +87,7 @@ class AttributionService:
         self,
         prompt_response: str,
         delimiters: List[str],
+        maximum_span_density: float,
         minimum_span_length: int,
         maximum_frequency: int,
         maximum_document_display_length: int,
@@ -97,6 +98,7 @@ class AttributionService:
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
             delimiters=delimiters,
+            maximum_span_density=maximum_span_density,
             minimum_span_length=minimum_span_length,
             maximum_frequency=maximum_frequency,
             allow_spans_with_partial_words=allow_spans_with_partial_words,

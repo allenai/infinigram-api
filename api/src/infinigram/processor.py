@@ -1,4 +1,5 @@
 import json
+import numpy as np
 from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
 
 from fastapi import Depends
@@ -178,6 +179,7 @@ class InfiniGramProcessor:
         self,
         input: str,
         delimiters: List[str],
+        maximum_span_density: float,
         minimum_span_length: int,
         maximum_frequency: int,
         allow_spans_with_partial_words: bool,
@@ -193,6 +195,13 @@ class InfiniGramProcessor:
             max_cnt=maximum_frequency,
             enforce_bow=not allow_spans_with_partial_words,
         )
+
+        # Limit the density of spans, and keep the longest ones
+        maximum_num_spans = int(np.ceil(len(input_ids) * maximum_span_density))
+        spans = attribute_response['spans']
+        spans = sorted(spans, key=lambda x: x["length"], reverse=True)[:maximum_num_spans]
+        spans = list(sorted(spans, key=lambda x: x["l"]))
+        attribute_response['spans'] = spans
 
         attribute_result = self.__handle_error(attribute_response)
 

@@ -155,7 +155,7 @@ class DocumentsService:
             document_tasks = [
                 tg.create_task(
                     asyncio.to_thread(
-                        lambda: self.get_document_by_pointer(
+                        lambda documentRequest=documentRequest: self.get_document_by_pointer(
                             document_request=documentRequest,
                             maximum_document_display_length=maximum_document_display_length,
                         )

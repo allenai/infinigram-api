@@ -1,4 +1,3 @@
-import json
 import requests
 
 query_factual = '''Kamala Harris is an American politician who served as the junior U.S. Senator from California from 2017 to 2021. Before joining the Senate, Kamala Harris served as the Attorney General of California from 2011 to 2017. she is possibly running for the Democratic nomination for President in the United States presidential election of 2020. Here are some key facts about Kamala Harris:

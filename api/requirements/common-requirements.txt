@@ -6,3 +6,4 @@ numpy<2.0.0
 pydantic_settings==2.3.4
 pyinstrument==4.7.2
 requests==2.32.3
+types-requests==2.32.0

@@ -1,4 +1,5 @@
 import asyncio
+from functools import partial
 from typing import Iterable
 
 from pydantic import BaseModel
@@ -155,10 +156,9 @@ class DocumentsService:
             document_tasks = [
                 tg.create_task(
                     asyncio.to_thread(
-                        lambda documentRequest=documentRequest: self.get_document_by_pointer(
-                            document_request=documentRequest,
-                            maximum_document_display_length=maximum_document_display_length,
-                        )
+                        partial(self.get_document_by_pointer,
+                                document_request=documentRequest,
+                                maximum_document_display_length=maximum_document_display_length)
                     )
                 )
                 for documentRequest in document_requests

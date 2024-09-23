@@ -43,6 +43,7 @@ class Document(CamelCaseModel):
     metadata: dict[str, Any]
     token_ids: List[int]
     text: str
+    score: float | None = None
 
 
 class DocumentWithPointer(Document):

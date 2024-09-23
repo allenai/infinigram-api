@@ -1,7 +1,10 @@
+from enum import Enum
 from itertools import islice
-from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
+from typing import Generic, Iterable, List, Optional, Sequence, TypeVar, TypedDict
 
+import numpy as np
 from pydantic import Field
+from rank_bm25 import BM25Okapi
 
 from src.camel_case_model import CamelCaseModel
 from src.documents.documents_router import DocumentsServiceDependency
@@ -63,6 +66,11 @@ class InfiniGramAttributionResponseWithDocuments(
 ): ...
 
 
+class FilterMethod(Enum):
+    NONE = "none"
+    BM25 = "bm25"
+
+
 class AttributionService:
     infini_gram_processor: InfiniGramProcessor
     documents_service: DocumentsService
@@ -94,6 +102,8 @@ class AttributionService:
         include_documents: bool = False,
         include_input_as_tokens: bool = False,
         allow_spans_with_partial_words: bool = False,
+        filter_method: FilterMethod = FilterMethod.NONE,
+        filter_bm25_ratio_to_keep: float = 0.27,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
@@ -138,6 +148,39 @@ class AttributionService:
                 )
 
                 spans_with_documents.append(new_span)
+
+            # Filter documents using BM25
+            if filter_method == FilterMethod.BM25.value:
+                docs = [doc.text for span in spans_with_documents for doc in span.documents]
+                tokenized_corpus = [doc.split(" ") for doc in docs]
+                bm25 = BM25Okapi(tokenized_corpus)
+                doc_scores = bm25.get_scores(prompt_response.split(" "))
+
+                # keep the top ratio_to_keep documents
+                ratio_to_keep = filter_bm25_ratio_to_keep
+                num_docs_to_keep = int(np.ceil(len(docs) * ratio_to_keep))
+                indices_to_keep = np.argsort(doc_scores)[-num_docs_to_keep:]
+
+                new_spans_with_documents = []
+                i = 0
+                for span in spans_with_documents:
+                    new_documents = []
+                    for j in range(len(span.documents)):
+                        if i in indices_to_keep:
+                            span.documents[j].score = doc_scores[i]
+                            new_documents.append(span.documents[j])
+                        i += 1
+                    if len(new_documents) > 0:
+                        new_span = AttributionSpanWithDocuments(
+                            left=span.left,
+                            right=span.right,
+                            length=span.length,
+                            documents=new_documents,
+                            text=span.text,
+                            token_ids=span.token_ids,
+                        )
+                        new_spans_with_documents.append(new_span)
+                spans_with_documents = new_spans_with_documents
 
             return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,

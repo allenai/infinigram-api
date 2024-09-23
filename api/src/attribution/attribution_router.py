@@ -54,6 +54,14 @@ class AttributionRequest(CamelCaseModel):
         default=False,
         description="Setting this to False will only check for attributions that start and end with a full word",
     )
+    filter_method: str = Field(
+        default='none',
+        description="Filtering method for post-processing the retrieved documents, options are 'none', 'bm25'",
+    )
+    filter_bm25_ratio_to_keep: float = Field(
+        default=0.27,
+        description="The ratio of documents to keep after filtering with BM25",
+    )
 
 
 @attribution_router.post(path="/{index}/attribution")
@@ -71,6 +79,8 @@ async def get_document_attributions(
         maximum_document_display_length=body.maximum_document_display_length,
         include_input_as_tokens=body.include_input_as_tokens,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,
+        filter_method=body.filter_method,
+        filter_bm25_ratio_to_keep=body.filter_bm25_ratio_to_keep,
     )
 
     return result

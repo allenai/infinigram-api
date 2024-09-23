@@ -139,6 +139,38 @@ class AttributionService:
 
                 spans_with_documents.append(new_span)
 
+            # # Add BM25 score for each document
+            # all_documents = [doc for span in spans_with_documents for doc in span.documents]
+            # tokenized_corpus = [document.text.split(" ") for document in all_documents]
+            # bm25 = BM25Okapi(tokenized_corpus)
+            # doc_scores = bm25.get_scores(prompt_response.split(" "))
+            # i = 0
+            # for span in spans_with_documents:
+            #     for j in range(len(span.documents)):
+            #         span.documents[j].score = doc_scores[i]
+            #         i += 1
+
+            # # Add neural score for each document
+            # all_documents = [doc.text for span in spans_with_documents for doc in span.documents]
+            # import time
+            # from sentence_transformers import SentenceTransformer
+            # # model = SentenceTransformer("Snowflake/snowflake-arctic-embed-s")
+            # # start_time = time.time()
+            # # query_embeddings = model.encode([prompt_response], prompt_name="query")
+            # # document_embeddings = model.encode(all_documents)
+            # model = SentenceTransformer("infgrad/stella-base-en-v2")
+            # start_time = time.time()
+            # query_embeddings = model.encode([prompt_response], normalize_embeddings=True)
+            # document_embeddings = model.encode(all_documents, normalize_embeddings=True)
+            # doc_scores = query_embeddings @ document_embeddings.T
+            # i = 0
+            # for span in spans_with_documents:
+            #     for j in range(len(span.documents)):
+            #         span.documents[j].score = float(doc_scores[0, i])
+            #         i += 1
+            # latency = time.time() - start_time
+            # print(f"Latency: {latency:.4f}s")
+
             return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,
                 spans=spans_with_documents,

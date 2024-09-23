@@ -1,6 +1,6 @@
 from enum import Enum
 from itertools import islice
-from typing import Generic, Iterable, List, Optional, Sequence, TypeVar, TypedDict
+from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 import numpy as np
 from pydantic import Field
@@ -64,11 +64,6 @@ class InfiniGramAttributionResponse(
 class InfiniGramAttributionResponseWithDocuments(
     BaseInfinigramAttributionResponse[AttributionSpanWithDocuments]
 ): ...
-
-
-class FilterMethod(Enum):
-    NONE = "none"
-    BM25 = "bm25"
 
 
 class AttributionService:
@@ -150,7 +145,7 @@ class AttributionService:
                 spans_with_documents.append(new_span)
 
             # Filter documents using BM25
-            if filter_method == FilterMethod.BM25.value:
+            if filter_method == 'bm25':
                 docs = [doc.text for span in spans_with_documents for doc in span.documents]
                 tokenized_corpus = [doc.split(" ") for doc in docs]
                 bm25 = BM25Okapi(tokenized_corpus)

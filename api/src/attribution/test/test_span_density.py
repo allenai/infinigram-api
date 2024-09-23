@@ -63,10 +63,12 @@ result = requests.post('http://0.0.0.0:8000/dolma-1_7/attribution', json=payload
 num_spans = len(result['spans'])
 num_tokens = len(result['inputTokens'])
 density = num_spans / num_tokens if num_tokens > 0 else 0
+num_docs = sum(len(span['documents']) for span in result['spans'])
 print(f'Number of spans: {len(result["spans"])}')
 print(f'Number of tokens in response: {len(result["inputTokens"])}')
 print(f'Span density: {density:.4f} spans per token')
 print(f'Span lengths: {list(sorted([span["length"] for span in result["spans"]]))}')
+print(f'Total number of documents: {num_docs}')
 
 for s, span in enumerate(result['spans']):
     print(f'Span {s}: {span["text"]}')

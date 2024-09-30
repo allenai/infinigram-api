@@ -355,7 +355,7 @@ function(
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-09247",
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924",
                                 name: "infinigram-array-olmoe-mix-0924",
                                 readOnly: true,
                             }],

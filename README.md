@@ -101,6 +101,26 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
   4. Download the files from the bucket into /mnt/infini-gram-array
     * `gcloud storage cp gs://infinigram/index/<index name>/* /mnt/infini-gram-array/`
 
+#### Adding the volume to webapp.jsonnet
+  1. Add a volume to the deployment
+     ```
+      {
+        name: "infinigram-array-<ARRAY_NAME>>",
+        persistentVolumeClaim: {
+            claimName: "infinigram-<ARRAY_NAME>",
+            readOnly: true,
+        }
+      }
+     ```
+  2. Add a volumeMount to the -api container
+     ```
+      {
+          mountPath: "/mnt/infinigram-array/<VOLUME_NAME>",
+          name: "infinigram-array-<ARRAY_NAME>",
+          readOnly: true,
+      }
+     ```
+
 ### Locally
 
 1. Add the ID of the index to `AvailableInfiniGramIndexId` in `api/src/infinigram/index_mappings.py`

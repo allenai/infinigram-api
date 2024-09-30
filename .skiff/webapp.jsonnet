@@ -325,7 +325,15 @@ function(
                             claimName: "infinigram-pileval-gpt2",
                             readOnly: true,
                         }
-                    }, {
+                    },
+                    {
+                        name: "infinigram-array-olmoe-mix-0924",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-olmoe-mix-0924",
+                            readOnly: true,
+                        }
+                    },
+                    {
                         name: "infinigram-array-dolma-1-7-llama",
                         persistentVolumeClaim: {
                             claimName: "infinigram-dolma-1.7-llama",
@@ -336,20 +344,19 @@ function(
                         {
                             name: fullyQualifiedName + '-api',
                             image: apiImage,
-                            // TODO: point these to the actual indexes
                             volumeMounts: [{
                                 mountPath: "/mnt/infinigram-array/v4_pileval_llama",
                                 name: "infinigram-array-pileval-gpt2",
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/dolma_1_6_sample",
-                                name: "infinigram-array-pileval-gpt2",
-                                readOnly: true,
-                            }, 
-                            {
                                 mountPath: "/mnt/infinigram-array/dolma_1_7",
                                 name: "infinigram-array-dolma-1-7-llama",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-09247",
+                                name: "infinigram-array-olmoe-mix-0924",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

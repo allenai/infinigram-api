@@ -55,6 +55,11 @@ class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     input_token_ids: List[int]
 
 
+class InfiniGramSearchResponse(CamelCaseModel):
+    documents: List[Document]
+    total_documents: int
+
+
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
 
 
@@ -162,7 +167,7 @@ class InfiniGramProcessor:
         maximum_document_display_length: int,
         page: int,
         page_size: int,
-    ) -> List[Document]:
+    ) -> InfiniGramSearchResponse:
         tokenized_query_ids = self.tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
@@ -203,7 +208,9 @@ class InfiniGramProcessor:
             ]
         ]
 
-        return docs
+        return InfiniGramSearchResponse(
+            documents=docs, total_documents=matching_documents_result["cnt"]
+        )
 
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def attribute(

@@ -174,8 +174,10 @@ class InfiniGramProcessor:
         matching_documents_result = self.__handle_error(matching_documents)
 
         if (page * page_size) > matching_documents_result["cnt"]:
-            # throw a validation error, we're past what's available
-            ...
+            # Pagination standard is to return an empty array if we're out of bounds
+            return InfiniGramSearchResponse(
+                documents=[], total_documents=matching_documents_result["cnt"]
+            )
 
         all_documents_by_shard_and_rank = [
             {"shard": shard_index, "rank": rank}
@@ -185,17 +187,6 @@ class InfiniGramProcessor:
             for rank in range(start, end)
         ]
         offset = page * page_size
-        # docs: List[Document] = []
-        # for shard, (start, end) in enumerate(
-        #     matching_documents_result["segment_by_shard"]
-        # ):
-        #     for rank in range(start, end):
-        #         doc = self.get_document_by_rank(
-        #             shard=shard,
-        #             rank=rank,
-        #             maximum_document_display_length=maximum_document_display_length,
-        #         )
-        #         docs.append(doc)
 
         docs = [
             self.get_document_by_rank(

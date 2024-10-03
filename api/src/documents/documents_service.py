@@ -20,6 +20,14 @@ class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[Document]
 
 
+class SearchResponse(BaseInfiniGramResponse):
+    documents: Iterable[Document]
+    page: int
+    page_size: int
+    # page_count: int
+    # total_documents: int
+
+
 class GetDocumentByPointerRequest(BaseModel):
     shard: int
     pointer: int
@@ -51,11 +59,17 @@ class DocumentsService:
         )
 
     def search_documents(
-        self, search: str, maximum_document_display_length: int
-    ) -> InfiniGramDocumentsResponse:
+        self,
+        search: str,
+        maximum_document_display_length: int,
+        page_size: int,
+        page: int,
+    ) -> SearchResponse:
         search_documents_result = self.infini_gram_processor.search_documents(
             search=search,
             maximum_document_display_length=maximum_document_display_length,
+            page=page,
+            page_size=page_size,
         )
 
         mapped_documents = [
@@ -70,8 +84,11 @@ class DocumentsService:
             for document in search_documents_result
         ]
 
-        return InfiniGramDocumentsResponse(
-            index=self.infini_gram_processor.index, documents=mapped_documents
+        return SearchResponse(
+            index=self.infini_gram_processor.index,
+            documents=mapped_documents,
+            page=page,
+            page_size=page_size,
         )
 
     def get_document_by_index(
@@ -156,9 +173,11 @@ class DocumentsService:
             document_tasks = [
                 tg.create_task(
                     asyncio.to_thread(
-                        partial(self.get_document_by_pointer,
-                                document_request=documentRequest,
-                                maximum_document_display_length=maximum_document_display_length)
+                        partial(
+                            self.get_document_by_pointer,
+                            document_request=documentRequest,
+                            maximum_document_display_length=maximum_document_display_length,
+                        )
                     )
                 )
                 for documentRequest in document_requests

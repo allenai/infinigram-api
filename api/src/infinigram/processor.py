@@ -1,7 +1,7 @@
 import json
-import numpy as np
 from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
 
+import numpy as np
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import (
@@ -157,24 +157,51 @@ class InfiniGramProcessor:
         )
 
     def search_documents(
-        self, search: str, maximum_document_display_length: int
+        self,
+        search: str,
+        maximum_document_display_length: int,
+        page: int,
+        page_size: int,
     ) -> List[Document]:
         tokenized_query_ids = self.tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
         matching_documents_result = self.__handle_error(matching_documents)
 
-        docs: List[Document] = []
-        for shard, (start, end) in enumerate(
-            matching_documents_result["segment_by_shard"]
-        ):
-            for rank in range(start, end):
-                doc = self.get_document_by_rank(
-                    shard=shard,
-                    rank=rank,
-                    maximum_document_display_length=maximum_document_display_length,
-                )
-                docs.append(doc)
+        if (page * page_size) > matching_documents_result["cnt"]:
+            # throw a validation error, we're past what's available
+            ...
+
+        all_documents_by_shard_and_rank = [
+            {"shard": shard_index, "rank": rank}
+            for shard_index, (start, end) in enumerate(
+                matching_documents_result["segment_by_shard"]
+            )
+            for rank in range(start, end)
+        ]
+        offset = page * page_size
+        # docs: List[Document] = []
+        # for shard, (start, end) in enumerate(
+        #     matching_documents_result["segment_by_shard"]
+        # ):
+        #     for rank in range(start, end):
+        #         doc = self.get_document_by_rank(
+        #             shard=shard,
+        #             rank=rank,
+        #             maximum_document_display_length=maximum_document_display_length,
+        #         )
+        #         docs.append(doc)
+
+        docs = [
+            self.get_document_by_rank(
+                shard=shard_and_rank["shard"],
+                rank=shard_and_rank["rank"],
+                maximum_document_display_length=maximum_document_display_length,
+            )
+            for shard_and_rank in all_documents_by_shard_and_rank[
+                slice(offset, offset + page_size)
+            ]
+        ]
 
         return docs
 
@@ -202,10 +229,12 @@ class InfiniGramProcessor:
 
         # Limit the density of spans, and keep the longest ones
         maximum_num_spans = int(np.ceil(len(input_ids) * maximum_span_density))
-        spans = attribute_response['spans']
-        spans = sorted(spans, key=lambda x: x["length"], reverse=True)[:maximum_num_spans]
+        spans = attribute_response["spans"]
+        spans = sorted(spans, key=lambda x: x["length"], reverse=True)[
+            :maximum_num_spans
+        ]
         spans = list(sorted(spans, key=lambda x: x["l"]))
-        attribute_response['spans'] = spans
+        attribute_response["spans"] = spans
 
         attribute_result = self.__handle_error(attribute_response)
 

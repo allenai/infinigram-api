@@ -1,0 +1,34 @@
+Raw (This is what's currently in WEKA; matches OLMoE-mix-0924 HF, except for arxiv)
+s3://ai2-llm/pretraining-data/sources/proof-pile-2/v0_decontaminated/documents/algebraic-stack/train
+s3://ai2-llm/pretraining-data/sources/proof-pile-2/v0_decontaminated/documents/arxiv/train
+s3://ai2-llm/pretraining-data/sources/proof-pile-2/v0_decontaminated/documents/open-web-math/train
+s3://ai2-llm/pretraining-data/sources/olmo-mix/danyh-compiled-v1_7/documents/pes2o
+s3://ai2-llm/pretraining-data/sources/starcoder/v1-decon-100_to_20k-2star-top_token_030/documents
+s3://ai2-llm/pretraining-data/sources/olmo-mix/danyh-compiled-v1_7/documents/wiki
+s3://ai2-llm/pretraining-data/sources/dclm/v0_repetitions/documents/full
+    [This one has repetition removed compared to v0]
+
+OLMoE training data (w/ old tokenizer)
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/algebraic-stack/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+    [PROBLEMATIC: This is converted from s3://ai2-llm/pretraining-data/sources/olmo-mix/danyh-compiled-v1_7/documents/algebraic-stack]
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/arxiv/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+    [PROBLEMATIC: This is converted from s3://ai2-llm/pretraining-data/sources/olmo-mix/danyh-compiled-v1_7/documents/arxiv]
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/open-web-math/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+    [PROBLEMATIC: This is converted from s3://ai2-llm/pretraining-data/sources/olmo-mix/danyh-compiled-v1_7/documents/open-web-math]
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/pes2o/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/starcoder/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+    [They really meant /weka/oe-training-default/ai2-llm/preprocessed/starcoder/v1-decon-100_to_20k-2star-top_token_030/allenai/gpt-neox-olmo-dolma-v1_5/*.npy]
+/weka/oe-training-default/ai2-llm/preprocessed/danyh-compiled-v1_7/wiki/allenai/gpt-neox-olmo-dolma-v1_5/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/fastdclm/text_openhermes_reddit_eli5_vs_rw_v2_bigram_200k_train/allenai/*.npy
+    [This is converted from /home/ubuntu/fasttext_openhermes_reddit_eli5_vs_rw_v2_bigram_200k_train (probably raw?)]
+
+Peteish training data (w/ new tokenizer)
+/weka/oe-training-default/ai2-llm/preprocessed/proof-pile-2/v0_decontaminated/algebraic-stack/train/allenai/dolma2-tokenizer/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/proof-pile-2/v0_decontaminated/arxiv/train/allenai/dolma2-tokenizer/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/proof-pile-2/v0_decontaminated/open-web-math/train/allenai/dolma2-tokenizer/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/pes2o/allenai/dolma2-tokenizer/*.npy
+    [This is just a rename]
+/weka/oe-training-default/ai2-llm/preprocessed/starcoder/v1-decon-100_to_20k-2star-top_token_030/allenai/dolma2-tokenizer/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/olmo-mix/danyh-compiled-v1_7/documents/wiki/allenai/dolma2-tokenizer/*.npy
+/weka/oe-training-default/ai2-llm/preprocessed/dclm/text_openhermes_reddit_eli5_vs_rw_v2_bigram_200k_train/allenai/dolma2-tokenizer/*.npy
+    [This is converted from from s3://ai2-llm/pretraining-data/sources/dclm/raw, which is same as v0]

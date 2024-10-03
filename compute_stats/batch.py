@@ -12,6 +12,8 @@ parser.add_argument('--workers', type=int, default=1)
 parser.add_argument('--output_path', type=str, required=True)
 args = parser.parse_args()
 
+os.makedirs(os.path.dirname(args.output_path), exist_ok=True)
+
 doccnt_by_source = defaultdict(int)
 doccnt_by_domain_source = defaultdict(int)
 doccnt_by_charlen_by_source = defaultdict(lambda: defaultdict(int))

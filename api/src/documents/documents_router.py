@@ -46,7 +46,7 @@ def search_documents(
     page: Annotated[
         int,
         Query(
-            title="The page of documents from the search query. Uses the pageSize parameter as part of its calculations.",
+            title="The page of documents to retrieve from the search query. Uses the pageSize parameter as part of its calculations. Starts at 0.",
         ),
     ] = 0,
     page_size: Annotated[

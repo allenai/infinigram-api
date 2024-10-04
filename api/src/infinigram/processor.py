@@ -173,7 +173,7 @@ class InfiniGramProcessor:
 
         matching_documents_result = self.__handle_error(matching_documents)
 
-        if (page * page_size) > matching_documents_result["cnt"]:
+        if (page * page_size) >= matching_documents_result["cnt"]:
             # Pagination standard is to return an empty array if we're out of bounds
             return InfiniGramSearchResponse(
                 documents=[], total_documents=matching_documents_result["cnt"]

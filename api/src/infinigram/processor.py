@@ -181,7 +181,8 @@ class InfiniGramProcessor:
 
         shard_and_rank_in_page = []
         shard = 0
-        for offset in range(page * page_size, (page + 1) * page_size):
+        offset = page * page_size
+        for _ in range(page_size):
             while offset >= len(matching_documents_result["segment_by_shard"][shard]):
                 offset -= len(matching_documents_result["segment_by_shard"][shard])
                 shard += 1
@@ -193,6 +194,7 @@ class InfiniGramProcessor:
             shard_and_rank_in_page.append(
                 {"shard": shard, "rank": matching_documents_result["segment_by_shard"][shard][offset]}
             )
+            offset += 1
 
         docs = [
             self.get_document_by_rank(

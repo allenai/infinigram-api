@@ -183,8 +183,8 @@ class InfiniGramProcessor:
         shard = 0
         offset = page * page_size
         for _ in range(page_size):
-            while offset >= len(matching_documents_result["segment_by_shard"][shard]):
-                offset -= len(matching_documents_result["segment_by_shard"][shard])
+            while offset >= matching_documents_result["segment_by_shard"][shard][1] - matching_documents_result["segment_by_shard"][shard][0]:
+                offset -= matching_documents_result["segment_by_shard"][shard][1] - matching_documents_result["segment_by_shard"][shard][0]
                 shard += 1
                 if shard >= len(matching_documents_result["segment_by_shard"]):
                     break

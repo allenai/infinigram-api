@@ -192,7 +192,7 @@ class InfiniGramProcessor:
                 # We have reached the end of results
                 break
             shard_and_rank_in_page.append(
-                {"shard": shard, "rank": matching_documents_result["segment_by_shard"][shard][offset]}
+                {"shard": shard, "rank": matching_documents_result["segment_by_shard"][shard][0] + offset}
             )
             offset += 1
 

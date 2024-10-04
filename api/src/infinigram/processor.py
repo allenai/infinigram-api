@@ -179,14 +179,20 @@ class InfiniGramProcessor:
                 documents=[], total_documents=matching_documents_result["cnt"]
             )
 
-        all_documents_by_shard_and_rank = [
-            {"shard": shard_index, "rank": rank}
-            for shard_index, (start, end) in enumerate(
-                matching_documents_result["segment_by_shard"]
+        shard_and_rank_in_page = []
+        shard = 0
+        for offset in range(page * page_size, (page + 1) * page_size):
+            while offset >= len(matching_documents_result["segment_by_shard"][shard]):
+                offset -= len(matching_documents_result["segment_by_shard"][shard])
+                shard += 1
+                if shard >= len(matching_documents_result["segment_by_shard"]):
+                    break
+            if shard >= len(matching_documents_result["segment_by_shard"]):
+                # We have reached the end of results
+                break
+            shard_and_rank_in_page.append(
+                {"shard": shard, "rank": matching_documents_result["segment_by_shard"][shard][offset]}
             )
-            for rank in range(start, end)
-        ]
-        offset = page * page_size
 
         docs = [
             self.get_document_by_rank(
@@ -194,9 +200,7 @@ class InfiniGramProcessor:
                 rank=shard_and_rank["rank"],
                 maximum_document_display_length=maximum_document_display_length,
             )
-            for shard_and_rank in all_documents_by_shard_and_rank[
-                slice(offset, offset + page_size)
-            ]
+            for shard_and_rank in shard_and_rank_in_page
         ]
 
         return InfiniGramSearchResponse(

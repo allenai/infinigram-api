@@ -334,6 +334,13 @@ function(
                         }
                     },
                     {
+                        name: "infinigram-array-olmoe-adapt",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-olmoe-adapt",
+                            readOnly: true,
+                        }
+                    },
+                    {
                         name: "infinigram-array-dolma-1-7-llama",
                         persistentVolumeClaim: {
                             claimName: "infinigram-dolma-1.7-llama",
@@ -357,6 +364,11 @@ function(
                             {
                                 mountPath: "/mnt/infinigram-array/olmoe-mix-0924",
                                 name: "infinigram-array-olmoe-mix-0924",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-adapt",
+                                name: "infinigram-array-olmoe-adapt",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

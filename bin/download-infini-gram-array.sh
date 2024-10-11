@@ -19,3 +19,8 @@ if [ ! -d $INFINIGRAM_ARRAY_DIR/olmoe-mix-0924 ]; then
     echo "creating a link from v4_pileval_llama to olmoe-mix-0924"
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/olmoe-mix-0924
 fi
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/olmoe-adapt ]; then
+    echo "creating a link from v4_pileval_llama to olmoe-adapt"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/olmoe-adapt
+fi

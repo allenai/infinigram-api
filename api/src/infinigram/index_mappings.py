@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import TypedDict
+from typing import TypedDict, Iterable
 
 from src.config import config
 
@@ -11,11 +11,12 @@ class AvailableInfiniGramIndexId(Enum):
     DOLMA_1_7 = "dolma-1_7"
     PILEVAL_LLAMA = "pileval-llama"
     OLMOE_MIX_0924 = "olmoe-mix-0924"
+    OLMOE = "olmoe"
 
 
 class IndexMapping(TypedDict):
     tokenizer: Tokenizer
-    index_dir: str
+    index_dir: str | Iterable[str]
 
 
 IndexMappings = TypedDict(
@@ -24,6 +25,7 @@ IndexMappings = TypedDict(
         "pileval-llama": IndexMapping,
         "dolma-1_7": IndexMapping,
         "olmoe-mix-0924": IndexMapping,
+        "olmoe": IndexMapping,
     },
 )
 
@@ -39,5 +41,12 @@ index_mappings: IndexMappings = {
     AvailableInfiniGramIndexId.OLMOE_MIX_0924.value: {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": f"{config.index_base_path}/olmoe-mix-0924",
+    },
+    AvailableInfiniGramIndexId.OLMOE.value: {
+        "tokenizer": get_llama_2_tokenizer(),
+        "index_dir": [
+            f"{config.index_base_path}/olmoe-mix-0924",
+            f"{config.index_base_path}/olmoe-adapt",
+        ],
     },
 }

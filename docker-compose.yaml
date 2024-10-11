@@ -2,7 +2,7 @@ version: '3'
 services:
   api:
     platform: linux/amd64
-    build: 
+    build:
       context: ./api
       target: dev
     volumes:
@@ -11,6 +11,7 @@ services:
       - ./infinigram-array/v4_pileval_llama:/mnt/infinigram-array/v4_pileval_llama
       - ./infinigram-array/dolma_1_7:/mnt/infinigram-array/dolma_1_7
       - ./infinigram-array/olmoe-mix-0924:/mnt/infinigram-array/olmoe-mix-0924
+      - ./infinigram-array/olmoe-adapt:/mnt/infinigram-array/olmoe-adapt
     environment:
       # This ensures that errors are printed as they occur, which
       # makes debugging easier.

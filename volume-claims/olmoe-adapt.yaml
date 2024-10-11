@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-olmoe-adapt
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: 4Gi
+  accessModes:
+    - ReadOnlyMany
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-olmoe-adapt
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infini-gram-olmoe-adapt
+    fsType: ext4
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-olmoe-adapt
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-olmoe-adapt
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 4Gi

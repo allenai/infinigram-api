@@ -30,5 +30,5 @@ INDEX_NAME=$INDEX_NAME \
  INDEX_SIZE=$INDEX_SIZE \
  INDEX_BUCKET_NAME=$INDEX_BUCKET_NAME \
  DISK_NAME=$DISK_NAME \
- envsubst '$INDEX_NAME:$INDEX_SIZE:$INDEX_BUCKET_NAME:$DISK_NAME' < ./volume-claims/writer-pod.yaml.template | kubectl apply --namespace=infinigram-api -f -
+ envsubst '$INDEX_NAME:$INDEX_SIZE:$INDEX_BUCKET_NAME:$DISK_NAME' < ./bin/infini-gram-writer/writer-pod.yaml.template | kubectl apply --namespace=infinigram-api -f -
 

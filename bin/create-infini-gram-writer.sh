@@ -15,3 +15,4 @@ if [[ -z $INDEX_SIZE ]]; then
 fi
 
 INDEX_NAME=$INDEX_NAME INDEX_SIZE=$INDEX_SIZE INDEX_BUCKET_NAME=$INDEX_BUCKET_NAME envsubst '$INDEX_NAME:$INDEX_SIZE:$INDEX_BUCKET_NAME' < ./volume-claims/writer-pod.yaml.template | kubectl apply --namespace=infinigram-api -f -
+

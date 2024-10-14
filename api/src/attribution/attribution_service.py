@@ -1,4 +1,3 @@
-from enum import Enum
 from itertools import islice
 from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
@@ -97,7 +96,7 @@ class AttributionService:
         include_documents: bool = False,
         include_input_as_tokens: bool = False,
         allow_spans_with_partial_words: bool = False,
-        filter_method: FilterMethod = FilterMethod.NONE,
+        filter_method: str = 'none',
         filter_bm25_ratio_to_keep: float = 0.27,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
@@ -166,15 +165,16 @@ class AttributionService:
                             new_documents.append(span.documents[j])
                         i += 1
                     if len(new_documents) > 0:
-                        new_span = AttributionSpanWithDocuments(
-                            left=span.left,
-                            right=span.right,
-                            length=span.length,
-                            documents=new_documents,
-                            text=span.text,
-                            token_ids=span.token_ids,
+                        new_spans_with_documents.append(
+                            AttributionSpanWithDocuments(
+                                left=span.left,
+                                right=span.right,
+                                length=span.length,
+                                documents=new_documents,
+                                text=span.text,
+                                token_ids=span.token_ids,
+                            )
                         )
-                        new_spans_with_documents.append(new_span)
                 spans_with_documents = new_spans_with_documents
 
             return InfiniGramAttributionResponseWithDocuments(

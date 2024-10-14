@@ -41,38 +41,21 @@
       ```
 
 #### Starting the transfer job
+  Run this from infinigram-api root folder:
+  `./bin/transfer-index-from-s3.sh <S3_SOURCE> <INDEX_NAME>`
 
-  1. Go to the [create a transfer job page](https://console.cloud.google.com/transfer/create?project=ai2-reviz)
-  2. Set the Source type to "S3-compatible object storage". Destination type should be "Google Cloud Storage"
-  3. Fill in data for the source.
-    * Bucket or folder will be the bucket path. If copying from an s3 URL like `s3://infini-gram-lite/index/v4_pileval_llama` you can take off the `s3://` part, resulting in `infini-gram-lite/index/v4_pileval_llama`
-    * Endpoint depends on the bucket. Most of the time it'll be `s3.us-east-1.amazonaws.com`
-    * Signing region should be the region the bucket is in
-  4. The destination should be `infinigram/index/<index name>`
-  5. The job should run once, starting now
-  6. The rest of the settings can stay the same
-    * I do fine it nice to name the transfer job. Something like `infini-gram-transfer-<index name>`
-    * Make sure you don't change the Storage class and don't delete from the source
+  S3_SOURCE will be prefixed with `s3://`
+  INDEX_NAME may need to be shortened to fit GCP requirements!
+
+  You may need to restart the transfer agents in the infini-gram-transfer pool: https://console.cloud.google.com/transfer/agent-pools/pool/infini-gram-transfer/agents?project=ai2-reviz
 
 ### Making a Persistent Disk
-  1. ```
-     gcloud compute disks create infini-gram-<index name> \
-       --project=ai2-reviz \
-       --type=pd-balanced \
-       --size=<index size in GB> \
-       --labels=project=infini-gram \
-       --zone=us-west1-b
-       ```
-  2. Change names in `volume-claims/writer-pod.yaml` to match the disk you created and the index name
-  3. Create a writer pod: `kubectl apply -f volume-claims/writer-pod.yaml --namespace=infinigram-api`
-    * (TODO) Set up a baseline image to use for transferring files. Needs to have python3 and gcloud tools
-  4. connect to the pod and set it up with python3 and gcloud
-    * kubectl exec --stdin --tty infini-gram-writer --namespace=infinigram-api -- /bin/ash
-    * apk add python3 curl which bash
-    * curl -sSL https://sdk.cloud.google.com | bash
-    * bash
-  4. Download the files from the bucket into /mnt/infini-gram-array
-    * `gcloud storage cp gs://infinigram/index/<index name>/* /mnt/infini-gram-array/`
+  Run this from infinigram-api root folder:
+  `./bin/create-infini-gram-writer.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME>`
+
+  INDEX_NAME should match what you used when starting the transfer job
+  INDEX_SIZE needs to be at least the space required by the index and uses K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+  INDEX_BUCKET_NAME is optional, it defaults to the INDEX_NAME
 
 ### Adding the volume to webapp.jsonnet
   1. Add a volume to the deployment

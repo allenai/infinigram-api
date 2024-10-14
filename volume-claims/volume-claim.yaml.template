@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: infinigram-v4-olmo-2-0325-32b-anneal-adapt
+  name: infinigram-$INDEX_NAME
 spec:
   storageClassName: "infinigram"
   capacity:
-    storage: 300Gi
+    storage: $INDEX_SIZE 
   accessModes:
     - ReadOnlyMany
   claimRef:
     namespace: infinigram-api
-    name: infinigram-v4-olmo-2-0325-32b-anneal-adapt
+    name: infinigram-$INDEX_NAME
   csi:
     driver: pd.csi.storage.gke.io
     volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/$DISK_NAME
@@ -21,12 +21,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: infinigram-api
-  name: infinigram-v4-olmo-2-0325-32b-anneal-adapt
+  name: infinigram-$INDEX_NAME
 spec:
   storageClassName: "infinigram"
-  volumeName: infinigram-v4-olmo-2-0325-32b-anneal-adapt
+  volumeName: infinigram-$INDEX_NAME
   accessModes:
     - ReadOnlyMany
   resources:
     requests:
-      storage: 300Gi
+      storage: $INDEX_SIZE

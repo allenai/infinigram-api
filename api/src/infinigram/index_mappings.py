@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import TypedDict, Iterable
+from typing import Iterable, TypedDict
 
 from src.config import config
 
@@ -46,7 +46,8 @@ index_mappings: IndexMappings = {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": [
             f"{config.index_base_path}/olmoe-mix-0924",
-            f"{config.index_base_path}/olmoe-adapt",
+            f"{config.index_base_path}/v4-ultrafeedback",
+            f"{config.index_base_path}/v4-tulu-v3-1-mix",
         ],
     },
 }

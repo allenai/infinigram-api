@@ -334,9 +334,16 @@ function(
                         }
                     },
                     {
-                        name: "infinigram-array-olmoe-adapt",
+                        name: "infinigram-array-v4-ultrafeedback",
                         persistentVolumeClaim: {
-                            claimName: "infinigram-olmoe-adapt",
+                            claimName: "infinigram-v4-ultrafeedback",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-tulu-v3-1-mix",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-tulu-v3-1-mix",
                             readOnly: true,
                         }
                     },
@@ -367,8 +374,13 @@ function(
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/olmoe-adapt",
-                                name: "infinigram-array-olmoe-adapt",
+                                mountPath: "/mnt/infinigram-array/v4-ultrafeedback",
+                                name: "infinigram-array-v4-ultrafeedback",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
+                                name: "infinigram-array-v4-tulu-v3-1-mix",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

@@ -20,7 +20,12 @@ if [ ! -d $INFINIGRAM_ARRAY_DIR/olmoe-mix-0924 ]; then
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/olmoe-mix-0924
 fi
 
-if [ ! -d $INFINIGRAM_ARRAY_DIR/olmoe-adapt ]; then
-    echo "creating a link from v4_pileval_llama to olmoe-adapt"
-    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/olmoe-adapt
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-ultrafeedback ]; then
+    echo "creating a link from v4_pileval_llama to v4-ultrafeedback"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-ultrafeedback
+fi
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-v3-1-mix ]; then
+    echo "creating a link from v4_pileval_llama to v4-tulu-v3-1-mix"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-v3-1-mix
 fi

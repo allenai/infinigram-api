@@ -113,12 +113,19 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
       }
      ```
 
+
+#### Updating the transfer docker image
+If you update the docker image or script we use in the writer job, you'l need to rebuild the image and push it to GCP. 
+
+run this:
+`gcloud builds submit --config ./bin/infini-gram-writer/cloudbuild-infini-gram-writer.yaml`
+
 ### Locally
 
 1. Add the ID of the index to `AvailableInfiniGramIndexId` in `api/src/infinigram/index_mappings.py`
 2. Add the ID as a string to `IndexMappings` in `api/src/infinigram/index_mappings.py`
 3. Add the tokenizer and index directory to `index_mappings` in `api/src/infinigram/index_mappings.py`
-4. add a line in /bin/download-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
+4. add a line in /bin/download-local-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
 5. Add a mount in `docker-compose.yaml`: `- ./infinigram-array/<ARRAY_PATH_NAME>:/mnt/infinigram-array/<ARRAY_PATH_NAME>
 
 ## Linting and Formatting

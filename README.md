@@ -85,6 +85,13 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
   INDEX_SIZE needs to be at least the space required by the index and uses K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
   INDEX_BUCKET_NAME is optional, it defaults to the INDEX_NAME
   
+  When the copy job is finished, run the script to create the readonly volume claim:
+  `./bin/create-readonly-volume-claim.sh <INDEX_NAME> <INDEX_SIZE> <Optional:DISK_NAME>`
+  
+  INDEX_NAME should match what you used when starting the transfer job and making the disk
+  INDEX_SIZE should match what you used when starting the transfer job and making the disk
+  DISK_NAME is optional, it defaults to 'infinigram-$INDEX_NAME', which the script above creates.
+  
   
 #### Adding the volume to webapp.jsonnet
   1. Add a volume to the deployment

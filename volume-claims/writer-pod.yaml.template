@@ -1,0 +1,59 @@
+# TODO: See if this can be made into a StatefulSet so it can automatically delete the PVC and PV
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: $INDEX_NAME-infini-gram-writer 
+spec:
+  template:
+    spec:
+      containers:
+      - name: $INDEX_NAME-infini-gram-writer
+        image: gcr.io/ai2-reviz/infinigram-api-writer
+        volumeMounts:
+          - mountPath: /mnt/infini-gram-array/
+            name: infinigram-array
+        env: 
+        - name: INDEX_NAME
+          value: $INDEX_BUCKET_NAME
+      
+      volumes:
+        - name: infinigram-array
+          persistentVolumeClaim:
+            claimName: infinigram-$INDEX_NAME-writer
+
+      restartPolicy: Never
+      
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 60
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-$INDEX_NAME-writer
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: $INDEX_SIZE
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-$INDEX_NAME-writer
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/$DISK_NAME
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-$INDEX_NAME-writer
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-$INDEX_NAME-writer
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: $INDEX_SIZE

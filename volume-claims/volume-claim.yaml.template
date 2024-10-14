@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-$INDEX_NAME
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: $INDEX_SIZE 
+  accessModes:
+    - ReadOnlyMany
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-$INDEX_NAME
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/$DISK_NAME
+    fsType: ext4
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-$INDEX_NAME
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-$INDEX_NAME
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: $INDEX_SIZE

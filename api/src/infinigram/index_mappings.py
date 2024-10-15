@@ -40,14 +40,18 @@ index_mappings: IndexMappings = {
     },
     AvailableInfiniGramIndexId.OLMOE_MIX_0924.value: {
         "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": f"{config.index_base_path}/olmoe-mix-0924",
+        "index_dir": [
+            f"{config.index_base_path}/olmoe-mix-0924-dclm",
+            f"{config.index_base_path}/olmoe-mix-0924-nodclm",
+        ],
     },
     AvailableInfiniGramIndexId.OLMOE.value: {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": [
-            f"{config.index_base_path}/olmoe-mix-0924",
-            f"{config.index_base_path}/v4-ultrafeedback",
+            f"{config.index_base_path}/olmoe-mix-0924-dclm",
+            f"{config.index_base_path}/olmoe-mix-0924-nodclm",
             f"{config.index_base_path}/v4-tulu-v3-1-mix",
+            f"{config.index_base_path}/v4-ultrafeedback",
         ],
     },
 }

@@ -327,9 +327,16 @@ function(
                         }
                     },
                     {
-                        name: "infinigram-array-olmoe-mix-0924",
+                        name: "infinigram-array-olmoe-mix-0924-dclm",
                         persistentVolumeClaim: {
-                            claimName: "infinigram-olmoe-mix-0924",
+                            claimName: "infinigram-olmoe-mix-0924-dclm",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-olmoe-mix-0924-nodclm",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-olmoe-mix-0924-nodclm",
                             readOnly: true,
                         }
                     },
@@ -369,8 +376,13 @@ function(
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924",
-                                name: "infinigram-array-olmoe-mix-0924",
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
+                                name: "infinigram-array-olmoe-mix-0924-dclm",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
+                                name: "infinigram-array-olmoe-mix-0924-nodclm",
                                 readOnly: true,
                             },
                             {

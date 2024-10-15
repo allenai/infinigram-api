@@ -59,7 +59,7 @@ class AttributionRequest(CamelCaseModel):
         description="Filtering method for post-processing the retrieved documents, options are 'none', 'bm25'",
     )
     filter_bm25_ratio_to_keep: float = Field(
-        default=0.27,
+        default=1.0,
         description="The ratio of documents to keep after filtering with BM25",
     )
 

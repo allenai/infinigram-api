@@ -3,7 +3,7 @@ from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 import numpy as np
 from pydantic import Field
-from rank_bm25 import BM25Okapi
+from rank_bm25 import BM25Okapi  # type: ignore
 
 from src.camel_case_model import CamelCaseModel
 from src.documents.documents_router import DocumentsServiceDependency
@@ -97,7 +97,7 @@ class AttributionService:
         include_input_as_tokens: bool = False,
         allow_spans_with_partial_words: bool = False,
         filter_method: str = 'none',
-        filter_bm25_ratio_to_keep: float = 0.27,
+        filter_bm25_ratio_to_keep: float = 1.0,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
             input=prompt_response,
@@ -132,7 +132,7 @@ class AttributionService:
                     stop=span["r"],
                 )
 
-                new_span = AttributionSpanWithDocuments(
+                span_with_document = AttributionSpanWithDocuments(
                     left=span["l"],
                     right=span["r"],
                     length=span["length"],
@@ -141,11 +141,11 @@ class AttributionService:
                     token_ids=span_text_tokens,
                 )
 
-                spans_with_documents.append(new_span)
+                spans_with_documents.append(span_with_document)
 
             # Filter documents using BM25
             if filter_method == 'bm25':
-                docs = [doc.text for span in spans_with_documents for doc in span.documents]
+                docs = [doc.text for span_with_document in spans_with_documents for doc in span_with_document.documents]
                 tokenized_corpus = [doc.split(" ") for doc in docs]
                 bm25 = BM25Okapi(tokenized_corpus)
                 doc_scores = bm25.get_scores(prompt_response.split(" "))
@@ -157,22 +157,22 @@ class AttributionService:
 
                 new_spans_with_documents = []
                 i = 0
-                for span in spans_with_documents:
+                for span_with_document in spans_with_documents:
                     new_documents = []
-                    for j in range(len(span.documents)):
+                    for j in range(len(span_with_document.documents)):
                         if i in indices_to_keep:
-                            span.documents[j].score = doc_scores[i]
-                            new_documents.append(span.documents[j])
+                            span_with_document.documents[j].relevance_score = doc_scores[i]
+                            new_documents.append(span_with_document.documents[j])
                         i += 1
                     if len(new_documents) > 0:
                         new_spans_with_documents.append(
                             AttributionSpanWithDocuments(
-                                left=span.left,
-                                right=span.right,
-                                length=span.length,
+                                left=span_with_document.left,
+                                right=span_with_document.right,
+                                length=span_with_document.length,
                                 documents=new_documents,
-                                text=span.text,
-                                token_ids=span.token_ids,
+                                text=span_with_document.text,
+                                token_ids=span_with_document.token_ids,
                             )
                         )
                 spans_with_documents = new_spans_with_documents

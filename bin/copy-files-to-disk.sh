@@ -3,6 +3,7 @@
 INDEX_NAME=$1
 INDEX_SIZE=$2
 INDEX_BUCKET_NAME=${3:-$INDEX_NAME}
+DISK_NAME=${4:-infinigram-$INDEX_NAME}
 
 if [[ -z $INDEX_NAME ]]; then 
     echo "INDEX_NAME is required"
@@ -13,8 +14,6 @@ if [[ -z $INDEX_SIZE ]]; then
     echo "INDEX_SIZE is required"
     exit 1
 fi
-
-DISK_NAME=infinigram-$INDEX_NAME
 
 echo "Creating disk $DISK_NAME"
 gcloud compute disks create $DISK_NAME \

@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: infinigram-olmoe-mix-0924-nodclm
+  name: infinigram-v4-tulu-v3-1-mix
 spec:
   storageClassName: "infinigram"
   capacity:
-    storage: 1850Gi 
+    storage: 10Gi 
   accessModes:
     - ReadOnlyMany
   claimRef:
     namespace: infinigram-api
-    name: infinigram-olmoe-mix-0924-nodclm
+    name: infinigram-v4-tulu-v3-1-mix
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-olmoe-mix-0924-nodclm
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infini-gram-v4-tulu-v3-1-mix
     fsType: ext4
     readOnly: true
 ---
@@ -21,12 +21,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: infinigram-api
-  name: infinigram-olmoe-mix-0924-nodclm
+  name: infinigram-v4-tulu-v3-1-mix
 spec:
   storageClassName: "infinigram"
-  volumeName: infinigram-olmoe-mix-0924-nodclm
+  volumeName: infinigram-v4-tulu-v3-1-mix
   accessModes:
     - ReadOnlyMany
   resources:
     requests:
-      storage: 1850Gi
+      storage: 10Gi

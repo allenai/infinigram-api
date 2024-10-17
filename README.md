@@ -144,3 +144,11 @@ Install the [ruff](https://marketplace.visualstudio.com/items?itemName=charlierm
 We have a middleware set up to profile requests with `pyinstrument`. To enable it, you need to have `PROFILING_ENABLED` set to `true` in your env. Then you need to make a request with the query parameter `?profile=true`. If you want to get an HTML formatted profile, also include the query parameter `profile_format=html`.
 
 After the profiling is finished, you can open the performance profile in `/api/performance-profiles/profile.html`
+
+## Checking index sizes in the k8s pod
+```
+> gcloud container clusters get-credentials skiff-prod --zone us-west1-b --project ai2-reviz && kubectl exec infinigram-api-prod-8586f77768-vl8vr --namespace infinigram-api -c infinigram-api-prod-api --stdin --tty -- /bin/bash
+
+> cd ../mnt/infinigram-array
+> ls -l <the index you want to check>
+```

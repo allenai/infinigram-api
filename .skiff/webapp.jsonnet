@@ -329,7 +329,8 @@ function(
                     {
                         name: "infinigram-array-olmoe-mix-0924-dclm",
                         persistentVolumeClaim: {
-                            claimName: "infinigram-olmoe-mix-0924-dclm",
+                            // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
+                            claimName: "infinigram-olmoe-mix-0924",
                             readOnly: true,
                         }
                     },

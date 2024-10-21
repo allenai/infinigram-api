@@ -65,11 +65,11 @@ class AttributionRequest(CamelCaseModel):
 
 
 @attribution_router.post(path="/{index}/attribution")
-async def get_document_attributions(
+def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
-    result = await attribution_service.get_attribution_for_response(
+    result = attribution_service.get_attribution_for_response(
         prompt_response=body.query,
         delimiters=body.delimiters,
         maximum_span_density=body.maximum_span_density,

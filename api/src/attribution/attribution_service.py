@@ -84,7 +84,7 @@ class AttributionService:
 
         return (span_text_tokens, span_text)
 
-    async def get_attribution_for_response(
+    def get_attribution_for_response(
         self,
         prompt_response: str,
         delimiters: List[str],

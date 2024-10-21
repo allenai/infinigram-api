@@ -127,7 +127,7 @@ class InfiniGramProcessor:
             s=shard, rank=rank, max_disp_len=maximum_document_display_length
         )
 
-        doc_result = self.__handle_error(get_doc_by_rank_response)
+        doc_result = self.__handle_error(get_doc_by_rank_response)  # type: ignore
 
         parsed_metadata = json.loads(doc_result["metadata"])
         decoded_text = self.decode_tokens(doc_result["token_ids"])

@@ -1,5 +1,3 @@
-import asyncio
-from functools import partial
 from math import ceil
 from typing import Iterable, List
 
@@ -160,7 +158,7 @@ class DocumentsService:
         self,
         document_requests: Iterable[GetDocumentByPointerRequest],
         maximum_document_display_length: int,
-    ) -> list[DocumentWithPointer]:
+    ) -> List[DocumentWithPointer]:
         documents = self.infini_gram_processor.get_documents_by_pointers(
             list_of_shard_and_pointer=[
                 (document_request.shard, document_request.pointer) for document_request in document_requests

@@ -114,7 +114,7 @@ class DocumentsService:
         self, document_indexes: Iterable[int], maximum_document_display_length: int
     ) -> InfiniGramDocumentsResponse:
         documents = self.infini_gram_processor.get_documents_by_indexes(
-            list_of_document_index=document_indexes,
+            list_of_document_index=list(document_indexes),
             maximum_document_display_length=maximum_document_display_length,
         )
         mapped_documents = [

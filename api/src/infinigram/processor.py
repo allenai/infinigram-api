@@ -1,5 +1,5 @@
 import json
-from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
+from typing import Annotated, Any, Iterable, List, Sequence, Tuple, TypeGuard, TypeVar, cast
 
 import numpy as np
 from fastapi import Depends
@@ -141,6 +141,81 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
+    def get_documents_by_ranks(
+        self, list_of_shard_and_rank: List[Tuple[int, int]], maximum_document_display_length: int
+    ) -> List[Document]:
+        get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks(
+            list_of_s_and_rank=list_of_shard_and_rank, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_ranks_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
+
+    def get_document_by_pointer(
+        self, shard: int, pointer: int, maximum_document_display_length: int
+    ) -> Document:
+        document_response = self.infini_gram_engine.get_doc_by_ptr(
+            s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
+        )
+
+        document_result = self.__handle_error(result=document_response)
+
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
+
+        return Document(
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            metadata=parsed_metadata,
+            token_ids=document_result["token_ids"],
+            text=decoded_text,
+        )
+
+    def get_documents_by_pointers(
+        self, list_of_shard_and_pointer: List[Tuple[int, int]], maximum_document_display_length: int
+    ) -> List[Document]:
+        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs(
+            list_of_s_and_ptr=list_of_shard_and_pointer, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_pointers_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
+
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> Document:
@@ -161,6 +236,33 @@ class InfiniGramProcessor:
             token_ids=doc_result["token_ids"],
             text=decoded_text,
         )
+
+    def get_documents_by_indexes(
+        self, list_of_document_index: List[int], maximum_document_display_length: int
+    ) -> List[Document]:
+        get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs(
+            list_of_doc_ix=list_of_document_index, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_indexes_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
 
     def search_documents(
         self,
@@ -247,27 +349,6 @@ class InfiniGramProcessor:
             **attribute_result,
             index=self.index,
             input_token_ids=input_ids,
-        )
-
-    def get_document_by_pointer(
-        self, shard: int, pointer: int, maximum_document_display_length: int
-    ) -> Document:
-        document_response = self.infini_gram_engine.get_doc_by_ptr(
-            s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
-        )
-
-        document_result = self.__handle_error(result=document_response)
-
-        parsed_metadata = json.loads(document_result["metadata"])
-        decoded_text = self.decode_tokens(document_result["token_ids"])
-
-        return Document(
-            document_index=document_result["doc_ix"],
-            document_length=document_result["doc_len"],
-            display_length=document_result["disp_len"],
-            metadata=parsed_metadata,
-            token_ids=document_result["token_ids"],
-            text=decoded_text,
         )
 
 

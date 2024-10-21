@@ -22,7 +22,6 @@ from src.infinigram.processor import (
 class AttributionDocument(CamelCaseModel):
     shard: int
     pointer: int
-    document_index: int
 
 
 TAttributionDocument = TypeVar("TAttributionDocument")
@@ -119,12 +118,10 @@ class AttributionService:
                     for document in span["docs"]
                 ]
 
-                documents = (
-                    await self.documents_service.get_multiple_documents_by_pointer(
+                documents = self.documents_service.get_multiple_documents_by_pointer(
                         document_requests=document_requests,
                         maximum_document_display_length=maximum_document_display_length,
                     )
-                )
 
                 (span_text_tokens, span_text) = self.__get_span_text(
                     input_token_ids=attribute_result.input_token_ids,
@@ -207,7 +204,6 @@ class AttributionService:
                             AttributionDocument(
                                 shard=document["s"],
                                 pointer=document["ptr"],
-                                document_index=document["doc_ix"],
                             )
                             for document in span["docs"]
                         ],

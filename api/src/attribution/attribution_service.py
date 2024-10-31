@@ -1,4 +1,5 @@
 from itertools import islice
+import random
 from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 import numpy as np
@@ -31,6 +32,8 @@ class BaseAttributionSpan(CamelCaseModel, Generic[TAttributionDocument]):
     left: int
     right: int
     length: int
+    count: int
+    unigram_logprob_sum: float
     text: str
     token_ids: Sequence[int]
     documents: Sequence[TAttributionDocument]
@@ -86,25 +89,30 @@ class AttributionService:
 
     def get_attribution_for_response(
         self,
-        prompt_response: str,
+        prompt: str,
+        response: str,
         delimiters: List[str],
-        maximum_span_density: float,
+        allow_spans_with_partial_words: bool,
         minimum_span_length: int,
         maximum_frequency: int,
+        maximum_span_density: float,
+        span_ranking_method: str,
+        include_documents: bool,
         maximum_document_display_length: int,
-        include_documents: bool = False,
-        include_input_as_tokens: bool = False,
-        allow_spans_with_partial_words: bool = False,
-        filter_method: str = 'none',
-        filter_bm25_ratio_to_keep: float = 1.0,
+        maximum_documents_per_span: int,
+        filter_method: str,
+        filter_bm25_fields_considered: str,
+        filter_bm25_ratio_to_keep: float,
+        include_input_as_tokens: bool,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
         attribute_result = self.infini_gram_processor.attribute(
-            input=prompt_response,
+            input=response,
             delimiters=delimiters,
-            maximum_span_density=maximum_span_density,
+            allow_spans_with_partial_words=allow_spans_with_partial_words,
             minimum_span_length=minimum_span_length,
             maximum_frequency=maximum_frequency,
-            allow_spans_with_partial_words=allow_spans_with_partial_words,
+            maximum_span_density=maximum_span_density,
+            span_ranking_method=span_ranking_method,
         )
 
         if include_documents:
@@ -117,6 +125,12 @@ class AttributionService:
                     )
                     for document in span["docs"]
                 ]
+
+                if len(document_requests) > maximum_documents_per_span:
+                    random.seed(42)  # For reproducibility
+                    document_requests = random.sample(
+                        document_requests, maximum_documents_per_span
+                    )
 
                 documents = self.documents_service.get_multiple_documents_by_pointer(
                         document_requests=document_requests,
@@ -133,6 +147,8 @@ class AttributionService:
                     left=span["l"],
                     right=span["r"],
                     length=span["length"],
+                    count=span["count"],
+                    unigram_logprob_sum=span["unigram_logprob_sum"],
                     documents=documents,
                     text=span_text,
                     token_ids=span_text_tokens,
@@ -145,7 +161,18 @@ class AttributionService:
                 docs = [doc.text for span_with_document in spans_with_documents for doc in span_with_document.documents]
                 tokenized_corpus = [doc.split(" ") for doc in docs]
                 bm25 = BM25Okapi(tokenized_corpus)
-                doc_scores = bm25.get_scores(prompt_response.split(" "))
+
+                if filter_bm25_fields_considered == "prompt":
+                    doc_scores = bm25.get_scores(prompt.split(" "))
+                elif filter_bm25_fields_considered == "response":
+                    doc_scores = bm25.get_scores(response.split(" "))
+                elif filter_bm25_fields_considered == "prompt|response":
+                    combined_input = prompt + " " + response
+                    doc_scores = bm25.get_scores(combined_input.split(" "))
+                elif filter_bm25_fields_considered == "prompt+response":
+                    doc_scores = bm25.get_scores(prompt.split(" ")) + bm25.get_scores(response.split(" "))
+                else:
+                    raise ValueError("Invalid filter_bm25_fields_considered value")
 
                 # keep the top ratio_to_keep documents
                 ratio_to_keep = filter_bm25_ratio_to_keep
@@ -167,6 +194,8 @@ class AttributionService:
                                 left=span_with_document.left,
                                 right=span_with_document.right,
                                 length=span_with_document.length,
+                                count=span_with_document.count,
+                                unigram_logprob_sum=span_with_document.unigram_logprob_sum,
                                 documents=new_documents,
                                 text=span_with_document.text,
                                 token_ids=span_with_document.token_ids,
@@ -178,7 +207,7 @@ class AttributionService:
                 index=self.infini_gram_processor.index,
                 spans=spans_with_documents,
                 input_tokens=self.infini_gram_processor.tokenize_to_list(
-                    prompt_response
+                    response
                 )
                 if include_input_as_tokens
                 else None,
@@ -198,6 +227,8 @@ class AttributionService:
                         left=span["l"],
                         right=span["r"],
                         length=span["length"],
+                        count=span["count"],
+                        unigram_logprob_sum=span["unigram_logprob_sum"],
                         text=span_text,
                         token_ids=span_text_tokens,
                         documents=[
@@ -214,7 +245,7 @@ class AttributionService:
                 index=self.infini_gram_processor.index,
                 spans=spans,
                 input_tokens=self.infini_gram_processor.tokenize_to_list(
-                    prompt_response
+                    response
                 )
                 if include_input_as_tokens
                 else None,

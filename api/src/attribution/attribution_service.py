@@ -14,11 +14,17 @@ from src.documents.documents_service import (
     GetDocumentByPointerRequest,
 )
 from src.infinigram.processor import (
+    SpanRankingMethod,
     BaseInfiniGramResponse,
     DocumentWithPointer,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
+
+
+class FilterMethod(Enum):
+    NONE = "none"
+    BM25 = "bm25"
 
 
 class FieldsConsideredForRanking(Enum):
@@ -104,11 +110,11 @@ class AttributionService:
         minimum_span_length: int,
         maximum_frequency: int,
         maximum_span_density: float,
-        span_ranking_method: str,
+        span_ranking_method: SpanRankingMethod,
         include_documents: bool,
         maximum_document_display_length: int,
         maximum_documents_per_span: int,
-        filter_method: str,
+        filter_method: FilterMethod,
         filter_bm25_fields_considered: FieldsConsideredForRanking,
         filter_bm25_ratio_to_keep: float,
         include_input_as_tokens: bool,
@@ -165,7 +171,7 @@ class AttributionService:
                 spans_with_documents.append(span_with_document)
 
             # Filter documents using BM25
-            if filter_method == "bm25":
+            if filter_method == FilterMethod.BM25:
                 docs = [
                     doc.text
                     for span_with_document in spans_with_documents

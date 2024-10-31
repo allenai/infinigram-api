@@ -1,3 +1,4 @@
+from enum import Enum
 import json
 from typing import Annotated, Any, Iterable, List, Sequence, Tuple, TypeGuard, TypeVar, cast
 
@@ -21,6 +22,11 @@ from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mapp
 from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
 
 from .tokenizers.tokenizer import Tokenizer
+
+
+class SpanRankingMethod(Enum):
+    LENGTH = "length"
+    UNIGRAM_LOGPROB_SUM = "unigram_logprob_sum"
 
 
 class BaseInfiniGramResponse(CamelCaseModel):
@@ -322,7 +328,7 @@ class InfiniGramProcessor:
         minimum_span_length: int,
         maximum_frequency: int,
         maximum_span_density: float,
-        span_ranking_method: str,
+        span_ranking_method: SpanRankingMethod,
     ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
@@ -339,9 +345,9 @@ class InfiniGramProcessor:
         # Limit the density of spans, and keep the longest ones
         maximum_num_spans = int(np.ceil(len(input_ids) * maximum_span_density))
         spans = attribute_response["spans"]
-        if span_ranking_method == 'length':
+        if span_ranking_method == SpanRankingMethod.LENGTH:
             spans = sorted(spans, key=lambda x: x["length"], reverse=True)
-        elif span_ranking_method == 'unigram_logprob_sum':
+        elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
             spans = sorted(spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
         else:
             raise ValueError(f"Unknown span ranking method: {span_ranking_method}")

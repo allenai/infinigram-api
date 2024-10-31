@@ -3,8 +3,10 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from pydantic import Field
 
+from src.infinigram.processor import SpanRankingMethod
 from src.attribution.attribution_service import (
     AttributionService,
+    FilterMethod,
     FieldsConsideredForRanking,
     InfiniGramAttributionResponse,
     InfiniGramAttributionResponseWithDocuments,
@@ -44,8 +46,8 @@ class AttributionRequest(CamelCaseModel):
         default=0.05,
         description="The maximum density of spans (measured in number of spans per response token) to return in the response",
     )
-    span_ranking_method: str = Field(
-        default="length",
+    span_ranking_method: SpanRankingMethod = Field(
+        default=SpanRankingMethod.LENGTH,
         description="Ranking method when capping number of spans with maximum_span_density, options are 'length' and 'unigram_logprob_sum'",
     )
     include_documents: bool = Field(
@@ -62,12 +64,12 @@ class AttributionRequest(CamelCaseModel):
         default=100,
         description="The maximum length in tokens of the returned document text",
     )
-    filter_method: str = Field(
-        default="none",
+    filter_method: FilterMethod = Field(
+        default=FilterMethod.NONE,
         description="Filtering method for post-processing the retrieved documents, options are 'none', 'bm25'",
     )
     filter_bm25_fields_considered: FieldsConsideredForRanking = Field(
-        default="response",
+        default=FieldsConsideredForRanking.RESPONSE,
         description="The fields to consider for BM25 filtering, options are 'prompt', 'response', 'prompt|response' (concat), 'prompt+response' (sum of scores)",
     )
     filter_bm25_ratio_to_keep: float = Field(

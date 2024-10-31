@@ -5,6 +5,7 @@ from pydantic import Field
 
 from src.attribution.attribution_service import (
     AttributionService,
+    FieldsConsideredForRanking,
     InfiniGramAttributionResponse,
     InfiniGramAttributionResponseWithDocuments,
 )
@@ -44,7 +45,7 @@ class AttributionRequest(CamelCaseModel):
         description="The maximum density of spans (measured in number of spans per response token) to return in the response",
     )
     span_ranking_method: str = Field(
-        default='length',
+        default="length",
         description="Ranking method when capping number of spans with maximum_span_density, options are 'length' and 'unigram_logprob_sum'",
     )
     include_documents: bool = Field(
@@ -62,10 +63,10 @@ class AttributionRequest(CamelCaseModel):
         description="The maximum length in tokens of the returned document text",
     )
     filter_method: str = Field(
-        default='none',
+        default="none",
         description="Filtering method for post-processing the retrieved documents, options are 'none', 'bm25'",
     )
-    filter_bm25_fields_considered: str = Field(
+    filter_bm25_fields_considered: FieldsConsideredForRanking = Field(
         default="response",
         description="The fields to consider for BM25 filtering, options are 'prompt', 'response', 'prompt|response' (concat), 'prompt+response' (sum of scores)",
     )

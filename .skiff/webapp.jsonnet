@@ -356,6 +356,13 @@ function(
                         }
                     },
                     {
+                        name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
+                            readOnly: true,
+                        }
+                    },
+                    {
                         name: "infinigram-array-dolma-1-7-llama",
                         persistentVolumeClaim: {
                             claimName: "infinigram-dolma-1.7-llama",
@@ -394,6 +401,11 @@ function(
                             {
                                 mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
                                 name: "infinigram-array-v4-tulu-v3-1-mix",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
+                                name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

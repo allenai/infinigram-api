@@ -14,6 +14,7 @@ services:
       - ./infinigram-array/olmoe-mix-0924-nodclm:/mnt/infinigram-array/olmoe-mix-0924-nodclm
       - ./infinigram-array/v4-ultrafeedback:/mnt/infinigram-array/v4-ultrafeedback
       - ./infinigram-array/v4-tulu-v3-1-mix:/mnt/infinigram-array/v4-tulu-v3-1-mix
+      - ./infinigram-array/v4-olmo-2-1124-13b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt
     environment:
       # This ensures that errors are printed as they occur, which
       # makes debugging easier.

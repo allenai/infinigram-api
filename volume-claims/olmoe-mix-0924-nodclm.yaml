@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: "infinigram"
   capacity:
-    storage: 1850Gi 
+    storage: 2Ti 
   accessModes:
     - ReadOnlyMany
   claimRef:
@@ -29,4 +29,4 @@ spec:
     - ReadOnlyMany
   resources:
     requests:
-      storage: 1850Gi
+      storage: 2Ti

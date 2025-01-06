@@ -70,20 +70,22 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
 ##### Starting the transfer job
   Run this from infinigram-api root folder:
   `./bin/transfer-index-from-s3.sh <S3_SOURCE> <INDEX_NAME>`
+  Example:
+  `./bin/transfer-index-from-s3.sh s3://infini-gram/index/v4_olmo-2-1124-13b-anneal-adapt_llama/ v4-olmo-2-1124-13b-anneal-adapt`
 
   S3_SOURCE will be prefixed with `s3://`
-  INDEX_NAME may need to be shortened to fit GCP requirements!
+  INDEX_NAME may need to be shortened to fit GCP requirements! You'll want to keep it as close to the actual index name as possible.
 
   You may need to restart the transfer agents in the infini-gram-transfer pool: https://console.cloud.google.com/transfer/agent-pools/pool/infini-gram-transfer/agents?project=ai2-reviz
 
 
 #### Making a Persistent Disk
   Run this from infinigram-api root folder:
-  `./bin/create-infini-gram-writer.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME>`
+  `./bin/copy-files-to-disk.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME> <Optional:DISK_NAME>`
 
   INDEX_NAME should match what you used when starting the transfer job
-  INDEX_SIZE needs to be at least the space required by the index and uses K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
-  INDEX_BUCKET_NAME is optional, it defaults to the INDEX_NAME
+  INDEX_SIZE needs to be at least the space required by the index and uses the K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+  INDEX_BUCKET_NAME is optional, it defaults to the INDEX_NAME. This is just here as an option if needed, stick with the INDEX_NAME default unless you really need to change it.
   
   When the copy job is finished, run the script to create the readonly volume claim:
   `./bin/create-readonly-volume-claim.sh <INDEX_NAME> <INDEX_SIZE> <Optional:DISK_NAME>`

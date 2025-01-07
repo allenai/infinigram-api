@@ -89,6 +89,8 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
   
   When the copy job is finished, run the script to create the readonly volume claim:
   `./bin/create-readonly-volume-claim.sh <INDEX_NAME> <INDEX_SIZE> <Optional:DISK_NAME>`
+  Example:
+  `/bin/create-readonly-volume-claim.sh v4-olmo-2-1124-13b-anneal-adapt 290Gi`
   
   INDEX_NAME should match what you used when starting the transfer job and making the disk
   INDEX_SIZE should match what you used when starting the transfer job and making the disk

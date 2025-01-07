@@ -1,0 +1,13 @@
+steps:
+- id: 'writer.build'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-t', 'gcr.io/ai2-reviz/infinigram-api-writer:latest',
+    '--cache-from', 'gcr.io/ai2-reviz/infinigram-api-writer:latest',
+    '--file', './bin/infini-gram-writer/infini-gram-writer.Dockerfile',
+    '.'
+  ]
+images: [
+  'gcr.io/ai2-reviz/infinigram-api-writer:latest'
+]

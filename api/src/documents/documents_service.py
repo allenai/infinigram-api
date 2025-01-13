@@ -1,6 +1,5 @@
-import asyncio
-from functools import partial
-from typing import Iterable
+from math import ceil
+from typing import Iterable, List
 
 from pydantic import BaseModel
 
@@ -20,6 +19,14 @@ class InfiniGramDocumentsResponse(BaseInfiniGramResponse):
     documents: Iterable[Document]
 
 
+class SearchResponse(BaseInfiniGramResponse):
+    documents: List[Document]
+    page: int
+    page_size: int
+    page_count: int
+    total_documents: int
+
+
 class GetDocumentByPointerRequest(BaseModel):
     shard: int
     pointer: int
@@ -30,6 +37,41 @@ class DocumentsService:
 
     def __init__(self, infini_gram_processor: InfiniGramProcessorDependency):
         self.infini_gram_processor = infini_gram_processor
+
+    def search_documents(
+        self,
+        search: str,
+        maximum_document_display_length: int,
+        page_size: int,
+        page: int,
+    ) -> SearchResponse:
+        search_documents_result = self.infini_gram_processor.search_documents(
+            search=search,
+            maximum_document_display_length=maximum_document_display_length,
+            page=page,
+            page_size=page_size,
+        )
+
+        mapped_documents = [
+            Document(
+                text=document.text,
+                document_index=document.document_index,
+                document_length=document.document_length,
+                display_length=document.display_length,
+                metadata=document.metadata,
+                token_ids=document.token_ids,
+            )
+            for document in search_documents_result.documents
+        ]
+
+        return SearchResponse(
+            index=self.infini_gram_processor.index,
+            documents=mapped_documents,
+            page=page,
+            page_size=page_size,
+            total_documents=search_documents_result.total_documents,
+            page_count=ceil(search_documents_result.total_documents / page_size),
+        )
 
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
@@ -50,30 +92,6 @@ class DocumentsService:
             token_ids=get_document_by_index_result.token_ids,
         )
 
-    def search_documents(
-        self, search: str, maximum_document_display_length: int
-    ) -> InfiniGramDocumentsResponse:
-        search_documents_result = self.infini_gram_processor.search_documents(
-            search=search,
-            maximum_document_display_length=maximum_document_display_length,
-        )
-
-        mapped_documents = [
-            Document(
-                text=document.text,
-                document_index=document.document_index,
-                document_length=document.document_length,
-                display_length=document.display_length,
-                metadata=document.metadata,
-                token_ids=document.token_ids,
-            )
-            for document in search_documents_result
-        ]
-
-        return InfiniGramDocumentsResponse(
-            index=self.infini_gram_processor.index, documents=mapped_documents
-        )
-
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -92,23 +110,13 @@ class DocumentsService:
             text=document.text,
         )
 
-    async def get_multiple_documents_by_index(
+    def get_multiple_documents_by_index(
         self, document_indexes: Iterable[int], maximum_document_display_length: int
     ) -> InfiniGramDocumentsResponse:
-        async with asyncio.TaskGroup() as tg:
-            document_tasks = [
-                tg.create_task(
-                    asyncio.to_thread(
-                        lambda: self.infini_gram_processor.get_document_by_index(
-                            document_index=document_index,
-                            maximum_document_display_length=maximum_document_display_length,
-                        )
-                    )
-                )
-                for document_index in document_indexes
-            ]
-
-        documents = [document_task.result() for document_task in document_tasks]
+        documents = self.infini_gram_processor.get_documents_by_indexes(
+            list_of_document_index=list(document_indexes),
+            maximum_document_display_length=maximum_document_display_length,
+        )
         mapped_documents = [
             Document(
                 document_index=document.document_index,
@@ -120,7 +128,6 @@ class DocumentsService:
             )
             for document in documents
         ]
-
         return InfiniGramDocumentsResponse(
             index=self.infini_gram_processor.index, documents=mapped_documents
         )
@@ -147,23 +154,28 @@ class DocumentsService:
             pointer=document_request.pointer,
         )
 
-    async def get_multiple_documents_by_pointer(
+    def get_multiple_documents_by_pointer(
         self,
         document_requests: Iterable[GetDocumentByPointerRequest],
         maximum_document_display_length: int,
-    ) -> list[DocumentWithPointer]:
-        async with asyncio.TaskGroup() as tg:
-            document_tasks = [
-                tg.create_task(
-                    asyncio.to_thread(
-                        partial(self.get_document_by_pointer,
-                                document_request=documentRequest,
-                                maximum_document_display_length=maximum_document_display_length)
-                    )
-                )
-                for documentRequest in document_requests
-            ]
-
-        documents = [document_task.result() for document_task in document_tasks]
-
-        return documents
+    ) -> List[DocumentWithPointer]:
+        documents = self.infini_gram_processor.get_documents_by_pointers(
+            list_of_shard_and_pointer=[
+                (document_request.shard, document_request.pointer) for document_request in document_requests
+            ],
+            maximum_document_display_length=maximum_document_display_length,
+        )
+        mapped_documents = [
+            DocumentWithPointer(
+                document_index=document.document_index,
+                document_length=document.document_length,
+                display_length=document.display_length,
+                metadata=document.metadata,
+                token_ids=document.token_ids,
+                text=document.text,
+                shard=document_request.shard,
+                pointer=document_request.pointer,
+            )
+            for (document, document_request) in zip(documents, document_requests)
+        ]
+        return mapped_documents

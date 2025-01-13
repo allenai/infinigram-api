@@ -6,6 +6,7 @@ from src.documents.documents_service import (
     DocumentsService,
     InfiniGramDocumentResponse,
     InfiniGramDocumentsResponse,
+    SearchResponse,
 )
 
 documents_router = APIRouter()
@@ -42,9 +43,25 @@ def search_documents(
     documents_service: DocumentsServiceDependency,
     search: str,
     maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
-) -> InfiniGramDocumentsResponse:
+    page: Annotated[
+        int,
+        Query(
+            title="The page of documents to retrieve from the search query. Uses the pageSize parameter as part of its calculations. Starts at 0.",
+        ),
+    ] = 0,
+    page_size: Annotated[
+        int,
+        Query(
+            title="The number of documents to return from the query. Defaults to 10. Changing this will affect the documents you get from a specific page.",
+            gt=0,
+        ),
+    ] = 10,
+) -> SearchResponse:
     result = documents_service.search_documents(
-        search, maximum_document_display_length=maximum_document_display_length
+        search,
+        maximum_document_display_length=maximum_document_display_length,
+        page=page,
+        page_size=page_size,
     )
 
     return result
@@ -65,12 +82,12 @@ def get_document_by_index(
 
 
 @documents_router.get("/{index}/documents", tags=["documents"])
-async def get_documents_by_index(
+def get_documents_by_index(
     documents_service: DocumentsServiceDependency,
     document_indexes: Annotated[list[int], Query()],
     maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
 ) -> InfiniGramDocumentsResponse:
-    result = await documents_service.get_multiple_documents_by_index(
+    result = documents_service.get_multiple_documents_by_index(
         document_indexes=document_indexes,
         maximum_document_display_length=maximum_document_display_length,
     )

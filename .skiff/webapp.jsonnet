@@ -327,9 +327,38 @@ function(
                         }
                     },
                     {
-                        name: "infinigram-array-olmoe-mix-0924",
+                        name: "infinigram-array-olmoe-mix-0924-dclm",
                         persistentVolumeClaim: {
+                            // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
                             claimName: "infinigram-olmoe-mix-0924",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-olmoe-mix-0924-nodclm",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-olmoe-mix-0924-nodclm",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-ultrafeedback",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-ultrafeedback",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-tulu-v3-1-mix",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-tulu-v3-1-mix",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
                             readOnly: true,
                         }
                     },
@@ -355,8 +384,28 @@ function(
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924",
-                                name: "infinigram-array-olmoe-mix-0924",
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
+                                name: "infinigram-array-olmoe-mix-0924-dclm",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
+                                name: "infinigram-array-olmoe-mix-0924-nodclm",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-ultrafeedback",
+                                name: "infinigram-array-v4-ultrafeedback",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
+                                name: "infinigram-array-v4-tulu-v3-1-mix",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
+                                name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine
@@ -404,8 +453,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 0.1,
-                                    memory: '500M'
+                                    cpu: 14,
+                                    memory: '99Gi'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied

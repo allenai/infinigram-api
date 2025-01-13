@@ -1,7 +1,8 @@
+from enum import Enum
 import json
-import numpy as np
-from typing import Annotated, Any, Iterable, List, Sequence, TypeGuard, TypeVar, cast
+from typing import Annotated, Any, Iterable, List, Sequence, Tuple, TypeGuard, TypeVar, cast
 
+import numpy as np
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import (
@@ -21,6 +22,11 @@ from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mapp
 from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
 
 from .tokenizers.tokenizer import Tokenizer
+
+
+class SpanRankingMethod(Enum):
+    LENGTH = "length"
+    UNIGRAM_LOGPROB_SUM = "unigram_logprob_sum"
 
 
 class BaseInfiniGramResponse(CamelCaseModel):
@@ -43,6 +49,7 @@ class Document(CamelCaseModel):
     metadata: dict[str, Any]
     token_ids: List[int]
     text: str
+    relevance_score: float | None = None
 
 
 class DocumentWithPointer(Document):
@@ -53,6 +60,11 @@ class DocumentWithPointer(Document):
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     spans: List[AttributionSpan]
     input_token_ids: List[int]
+
+
+class InfiniGramSearchResponse(CamelCaseModel):
+    documents: List[Document]
+    total_documents: int
 
 
 TInfiniGramResponse = TypeVar("TInfiniGramResponse")
@@ -79,6 +91,7 @@ class InfiniGramProcessor:
             index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
+            precompute_unigram_logprobs=True,
             # for the attribution feature, disabling prefetching on ds and sa can speed things up
             ds_prefetch_depth=0,
             sa_prefetch_depth=0,
@@ -135,6 +148,81 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
+    def get_documents_by_ranks(
+        self, list_of_shard_and_rank: List[Tuple[int, int]], maximum_document_display_length: int
+    ) -> List[Document]:
+        get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks(
+            list_of_s_and_rank=list_of_shard_and_rank, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_ranks_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
+
+    def get_document_by_pointer(
+        self, shard: int, pointer: int, maximum_document_display_length: int
+    ) -> Document:
+        document_response = self.infini_gram_engine.get_doc_by_ptr(
+            s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
+        )
+
+        document_result = self.__handle_error(result=document_response)
+
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
+
+        return Document(
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            metadata=parsed_metadata,
+            token_ids=document_result["token_ids"],
+            text=decoded_text,
+        )
+
+    def get_documents_by_pointers(
+        self, list_of_shard_and_pointer: List[Tuple[int, int]], maximum_document_display_length: int
+    ) -> List[Document]:
+        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs(
+            list_of_s_and_ptr=list_of_shard_and_pointer, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_pointers_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
+
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> Document:
@@ -156,37 +244,91 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
-    def search_documents(
-        self, search: str, maximum_document_display_length: int
+    def get_documents_by_indexes(
+        self, list_of_document_index: List[int], maximum_document_display_length: int
     ) -> List[Document]:
+        get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs(
+            list_of_doc_ix=list_of_document_index, max_disp_len=maximum_document_display_length
+        )
+
+        doc_results = self.__handle_error(get_docs_by_indexes_response)
+
+        documents = []
+        for doc_result in doc_results:
+            parsed_metadata = json.loads(doc_result["metadata"])
+            decoded_text = self.decode_tokens(doc_result["token_ids"])
+
+            documents.append(
+                Document(
+                    document_index=doc_result["doc_ix"],
+                    document_length=doc_result["doc_len"],
+                    display_length=doc_result["disp_len"],
+                    metadata=parsed_metadata,
+                    token_ids=doc_result["token_ids"],
+                    text=decoded_text,
+                )
+            )
+
+        return documents
+
+    def search_documents(
+        self,
+        search: str,
+        maximum_document_display_length: int,
+        page: int,
+        page_size: int,
+    ) -> InfiniGramSearchResponse:
         tokenized_query_ids = self.tokenize(search)
         matching_documents = self.infini_gram_engine.find(input_ids=tokenized_query_ids)
 
         matching_documents_result = self.__handle_error(matching_documents)
 
-        docs: List[Document] = []
-        for shard, (start, end) in enumerate(
-            matching_documents_result["segment_by_shard"]
-        ):
-            for rank in range(start, end):
-                doc = self.get_document_by_rank(
-                    shard=shard,
-                    rank=rank,
-                    maximum_document_display_length=maximum_document_display_length,
-                )
-                docs.append(doc)
+        if (page * page_size) >= matching_documents_result["cnt"]:
+            # Pagination standard is to return an empty array if we're out of bounds
+            return InfiniGramSearchResponse(
+                documents=[], total_documents=matching_documents_result["cnt"]
+            )
 
-        return docs
+        shard_and_rank_in_page = []
+        shard = 0
+        offset = page * page_size
+        for _ in range(page_size):
+            while offset >= matching_documents_result["segment_by_shard"][shard][1] - matching_documents_result["segment_by_shard"][shard][0]:
+                offset -= matching_documents_result["segment_by_shard"][shard][1] - matching_documents_result["segment_by_shard"][shard][0]
+                shard += 1
+                if shard >= len(matching_documents_result["segment_by_shard"]):
+                    break
+            if shard >= len(matching_documents_result["segment_by_shard"]):
+                # We have reached the end of results
+                break
+            shard_and_rank_in_page.append(
+                {"shard": shard, "rank": matching_documents_result["segment_by_shard"][shard][0] + offset}
+            )
+            offset += 1
+
+        docs = [
+            self.get_document_by_rank(
+                shard=shard_and_rank["shard"],
+                rank=shard_and_rank["rank"],
+                maximum_document_display_length=maximum_document_display_length,
+            )
+            for shard_and_rank in shard_and_rank_in_page
+        ]
+
+        return InfiniGramSearchResponse(
+            documents=docs, total_documents=matching_documents_result["cnt"]
+        )
 
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def attribute(
         self,
         input: str,
         delimiters: List[str],
-        maximum_span_density: float,
+        allow_spans_with_partial_words: bool,
         minimum_span_length: int,
         maximum_frequency: int,
-        allow_spans_with_partial_words: bool,
+        maximum_span_density: float,
+        span_ranking_method: SpanRankingMethod,
     ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
@@ -202,10 +344,16 @@ class InfiniGramProcessor:
 
         # Limit the density of spans, and keep the longest ones
         maximum_num_spans = int(np.ceil(len(input_ids) * maximum_span_density))
-        spans = attribute_response['spans']
-        spans = sorted(spans, key=lambda x: x["length"], reverse=True)[:maximum_num_spans]
+        spans = attribute_response["spans"]
+        if span_ranking_method == SpanRankingMethod.LENGTH:
+            spans = sorted(spans, key=lambda x: x["length"], reverse=True)
+        elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
+            spans = sorted(spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
+        else:
+            raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
+        spans = spans[:maximum_num_spans]
         spans = list(sorted(spans, key=lambda x: x["l"]))
-        attribute_response['spans'] = spans
+        attribute_response["spans"] = spans
 
         attribute_result = self.__handle_error(attribute_response)
 
@@ -213,27 +361,6 @@ class InfiniGramProcessor:
             **attribute_result,
             index=self.index,
             input_token_ids=input_ids,
-        )
-
-    def get_document_by_pointer(
-        self, shard: int, pointer: int, maximum_document_display_length: int
-    ) -> Document:
-        document_response = self.infini_gram_engine.get_doc_by_ptr(
-            s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
-        )
-
-        document_result = self.__handle_error(result=document_response)
-
-        parsed_metadata = json.loads(document_result["metadata"])
-        decoded_text = self.decode_tokens(document_result["token_ids"])
-
-        return Document(
-            document_index=document_result["doc_ix"],
-            document_length=document_result["doc_len"],
-            display_length=document_result["disp_len"],
-            metadata=parsed_metadata,
-            token_ids=document_result["token_ids"],
-            text=decoded_text,
         )
 
 

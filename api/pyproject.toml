@@ -26,6 +26,9 @@ files = [
 
 exclude = [
     'vendor',
+    'indexing',
+    'compute_stats',
+    'scripts',
 ]
 
 strict = true

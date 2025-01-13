@@ -10,3 +10,5 @@ infinigram-array
 .DS_Store
 
 api/performance-profiles
+data/
+

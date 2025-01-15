@@ -59,6 +59,12 @@ class AttributionRequest(CamelCaseModel):
         default=10,
         description="The maximum number of documents to retrieve for each span; should be no larger than maximum_frequency",
     )
+    maximum_document_display_length: int = Field(
+        gt=0,
+        default=100,
+        description="The maximum length in tokens of the returned document text",
+        deprecated=True,
+    )
     maximum_document_context_length_retrieved: int = Field(
         gt=0,
         default=250,

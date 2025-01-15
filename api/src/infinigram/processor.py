@@ -145,18 +145,18 @@ class InfiniGramProcessor:
             s=shard, rank=rank, max_disp_len=maximum_document_display_length
         )
 
-        doc_result = self.__handle_error(get_doc_by_rank_response)
+        document_result = self.__handle_error(get_doc_by_rank_response)
 
-        parsed_metadata = json.loads(doc_result["metadata"])
-        decoded_text = self.decode_tokens(doc_result["token_ids"])
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
 
         return Document(
-            document_index=doc_result["doc_ix"],
-            document_length=doc_result["doc_len"],
-            display_length=doc_result["disp_len"],
-            needle_offset=doc_result["needle_offset"],
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            needle_offset=document_result["needle_offset"],
             metadata=parsed_metadata,
-            token_ids=doc_result["token_ids"],
+            token_ids=document_result["token_ids"],
             text=decoded_text,
         )
 
@@ -170,21 +170,21 @@ class InfiniGramProcessor:
             max_disp_len=maximum_document_display_length,
         )
 
-        doc_results = self.__handle_error(get_docs_by_ranks_response)
+        document_results = self.__handle_error(get_docs_by_ranks_response)
 
         documents = []
-        for doc_result in doc_results:
-            parsed_metadata = json.loads(doc_result["metadata"])
-            decoded_text = self.decode_tokens(doc_result["token_ids"])
+        for document_result in document_results:
+            parsed_metadata = json.loads(document_result["metadata"])
+            decoded_text = self.decode_tokens(document_result["token_ids"])
 
             documents.append(
                 Document(
-                    document_index=doc_result["doc_ix"],
-                    document_length=doc_result["doc_len"],
-                    display_length=doc_result["disp_len"],
-                    needle_offset=doc_result["needle_offset"],
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
                     metadata=parsed_metadata,
-                    token_ids=doc_result["token_ids"],
+                    token_ids=document_result["token_ids"],
                     text=decoded_text,
                 )
             )
@@ -198,18 +198,18 @@ class InfiniGramProcessor:
             s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
         )
 
-        doc_result = self.__handle_error(result=document_response)
+        document_result = self.__handle_error(result=document_response)
 
-        parsed_metadata = json.loads(doc_result["metadata"])
-        decoded_text = self.decode_tokens(doc_result["token_ids"])
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
 
         return Document(
-            document_index=doc_result["doc_ix"],
-            document_length=doc_result["doc_len"],
-            display_length=doc_result["disp_len"],
-            needle_offset=doc_result["needle_offset"],
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            needle_offset=document_result["needle_offset"],
             metadata=parsed_metadata,
-            token_ids=doc_result["token_ids"],
+            token_ids=document_result["token_ids"],
             text=decoded_text,
         )
 
@@ -223,21 +223,21 @@ class InfiniGramProcessor:
             max_disp_len=maximum_document_display_length,
         )
 
-        doc_results = self.__handle_error(get_docs_by_pointers_response)
+        document_results = self.__handle_error(get_docs_by_pointers_response)
 
         documents = []
-        for doc_result in doc_results:
-            parsed_metadata = json.loads(doc_result["metadata"])
-            decoded_text = self.decode_tokens(doc_result["token_ids"])
+        for document_result in document_results:
+            parsed_metadata = json.loads(document_result["metadata"])
+            decoded_text = self.decode_tokens(document_result["token_ids"])
 
             documents.append(
                 Document(
-                    document_index=doc_result["doc_ix"],
-                    document_length=doc_result["doc_len"],
-                    display_length=doc_result["disp_len"],
-                    needle_offset=doc_result["needle_offset"],
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
                     metadata=parsed_metadata,
-                    token_ids=doc_result["token_ids"],
+                    token_ids=document_result["token_ids"],
                     text=decoded_text,
                 )
             )
@@ -251,18 +251,18 @@ class InfiniGramProcessor:
             doc_ix=document_index, max_disp_len=maximum_document_display_length
         )
 
-        doc_result = self.__handle_error(get_doc_by_index_response)
+        document_result = self.__handle_error(get_doc_by_index_response)
 
-        parsed_metadata = json.loads(doc_result["metadata"])
-        decoded_text = self.decode_tokens(doc_result["token_ids"])
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
 
         return Document(
-            document_index=doc_result["doc_ix"],
-            document_length=doc_result["doc_len"],
-            display_length=doc_result["disp_len"],
-            needle_offset=doc_result["needle_offset"],
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            needle_offset=document_result["needle_offset"],
             metadata=parsed_metadata,
-            token_ids=doc_result["token_ids"],
+            token_ids=document_result["token_ids"],
             text=decoded_text,
         )
 
@@ -274,21 +274,21 @@ class InfiniGramProcessor:
             max_disp_len=maximum_document_display_length,
         )
 
-        doc_results = self.__handle_error(get_docs_by_indexes_response)
+        document_results = self.__handle_error(get_docs_by_indexes_response)
 
         documents = []
-        for doc_result in doc_results:
-            parsed_metadata = json.loads(doc_result["metadata"])
-            decoded_text = self.decode_tokens(doc_result["token_ids"])
+        for document_result in document_results:
+            parsed_metadata = json.loads(document_result["metadata"])
+            decoded_text = self.decode_tokens(document_result["token_ids"])
 
             documents.append(
                 Document(
-                    document_index=doc_result["doc_ix"],
-                    document_length=doc_result["doc_len"],
-                    display_length=doc_result["disp_len"],
-                    needle_offset=doc_result["needle_offset"],
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
                     metadata=parsed_metadata,
-                    token_ids=doc_result["token_ids"],
+                    token_ids=document_result["token_ids"],
                     text=decoded_text,
                 )
             )
@@ -305,18 +305,18 @@ class InfiniGramProcessor:
             max_ctx_len=maximum_context_length,
         )
 
-        doc_result = self.__handle_error(get_doc_by_rank_response)
+        document_result = self.__handle_error(get_doc_by_rank_response)
 
-        parsed_metadata = json.loads(doc_result["metadata"])
-        decoded_text = self.decode_tokens(doc_result["token_ids"])
+        parsed_metadata = json.loads(document_result["metadata"])
+        decoded_text = self.decode_tokens(document_result["token_ids"])
 
         return Document(
-            document_index=doc_result["doc_ix"],
-            document_length=doc_result["doc_len"],
-            display_length=doc_result["disp_len"],
-            needle_offset=doc_result["needle_offset"],
+            document_index=document_result["doc_ix"],
+            document_length=document_result["doc_len"],
+            display_length=document_result["disp_len"],
+            needle_offset=document_result["needle_offset"],
             metadata=parsed_metadata,
-            token_ids=doc_result["token_ids"],
+            token_ids=document_result["token_ids"],
             text=decoded_text,
         )
 
@@ -332,21 +332,21 @@ class InfiniGramProcessor:
             max_ctx_len=maximum_context_length,
         )
 
-        doc_results = self.__handle_error(get_docs_by_ranks_response)
+        document_results = self.__handle_error(get_docs_by_ranks_response)
 
         documents = []
-        for doc_result in doc_results:
-            parsed_metadata = json.loads(doc_result["metadata"])
-            decoded_text = self.decode_tokens(doc_result["token_ids"])
+        for document_result in document_results:
+            parsed_metadata = json.loads(document_result["metadata"])
+            decoded_text = self.decode_tokens(document_result["token_ids"])
 
             documents.append(
                 Document(
-                    document_index=doc_result["doc_ix"],
-                    document_length=doc_result["doc_len"],
-                    display_length=doc_result["disp_len"],
-                    needle_offset=doc_result["needle_offset"],
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
                     metadata=parsed_metadata,
-                    token_ids=doc_result["token_ids"],
+                    token_ids=document_result["token_ids"],
                     text=decoded_text,
                 )
             )
@@ -390,21 +390,21 @@ class InfiniGramProcessor:
             max_ctx_len=maximum_context_length,
         )
 
-        doc_results = self.__handle_error(get_docs_by_pointers_response)
+        document_results = self.__handle_error(get_docs_by_pointers_response)
 
         documents = []
-        for doc_result in doc_results:
-            parsed_metadata = json.loads(doc_result["metadata"])
-            decoded_text = self.decode_tokens(doc_result["token_ids"])
+        for document_result in document_results:
+            parsed_metadata = json.loads(document_result["metadata"])
+            decoded_text = self.decode_tokens(document_result["token_ids"])
 
             documents.append(
                 Document(
-                    document_index=doc_result["doc_ix"],
-                    document_length=doc_result["doc_len"],
-                    display_length=doc_result["disp_len"],
-                    needle_offset=doc_result["needle_offset"],
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
                     metadata=parsed_metadata,
-                    token_ids=doc_result["token_ids"],
+                    token_ids=document_result["token_ids"],
                     text=decoded_text,
                 )
             )

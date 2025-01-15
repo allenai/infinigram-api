@@ -74,7 +74,6 @@ class DocumentsService:
             page_count=ceil(search_documents_result.total_documents / page_size),
         )
 
-    # NOTE: This function is not used anywhere
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -95,7 +94,6 @@ class DocumentsService:
             token_ids=get_document_by_index_result.token_ids,
         )
 
-    # NOTE: This function is used by document search
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -115,7 +113,6 @@ class DocumentsService:
             text=document.text,
         )
 
-    # NOTE: This function is used by document search
     def get_multiple_documents_by_index(
         self, document_indexes: Iterable[int], maximum_document_display_length: int
     ) -> InfiniGramDocumentsResponse:
@@ -139,7 +136,6 @@ class DocumentsService:
             index=self.infini_gram_processor.index, documents=mapped_documents
         )
 
-    # NOTE: This function is not used anywhere
     def get_document_by_pointer(
         self,
         document_request: GetDocumentByPointerRequest,
@@ -163,7 +159,6 @@ class DocumentsService:
             pointer=document_request.pointer,
         )
 
-    # NOTE: This function is used by attribution
     def get_multiple_documents_by_pointer(
         self,
         document_requests: Iterable[GetDocumentByPointerRequest],

@@ -184,10 +184,14 @@ class AttributionService:
                     tokenized_corpus = [doc.split(" ") for doc in docs]
                     bm25 = BM25Okapi(tokenized_corpus)
 
-                    if filter_bm25_fields_considered == FieldsConsideredForRanking.PROMPT:
+                    if (
+                        filter_bm25_fields_considered
+                        == FieldsConsideredForRanking.PROMPT
+                    ):
                         doc_scores = bm25.get_scores(prompt.split(" "))
                     elif (
-                        filter_bm25_fields_considered == FieldsConsideredForRanking.RESPONSE
+                        filter_bm25_fields_considered
+                        == FieldsConsideredForRanking.RESPONSE
                     ):
                         doc_scores = bm25.get_scores(response.split(" "))
                     elif (
@@ -200,9 +204,9 @@ class AttributionService:
                         filter_bm25_fields_considered
                         == FieldsConsideredForRanking.ADD_PROMPT_AND_RESPONSE_SCORES
                     ):
-                        doc_scores = bm25.get_scores(prompt.split(" ")) + bm25.get_scores(
-                            response.split(" ")
-                        )
+                        doc_scores = bm25.get_scores(
+                            prompt.split(" ")
+                        ) + bm25.get_scores(response.split(" "))
                     else:
                         raise ValueError("Invalid filter_bm25_fields_considered value")
 

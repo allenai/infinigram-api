@@ -112,7 +112,8 @@ class AttributionService:
         maximum_span_density: float,
         span_ranking_method: SpanRankingMethod,
         include_documents: bool,
-        maximum_document_display_length: int,
+        maximum_document_context_length_retrieved: int,
+        maximum_document_context_length_displayed: int,
         maximum_documents_per_span: int,
         filter_method: FilterMethod,
         filter_bm25_fields_considered: FieldsConsideredForRanking,
@@ -132,6 +133,7 @@ class AttributionService:
         if include_documents:
             spans_with_documents: List[AttributionSpanWithDocuments] = []
 
+            # Populate the spans with documents
             for span in attribute_result.spans:
                 document_requests: List[GetDocumentByPointerRequest] = [
                     GetDocumentByPointerRequest(
@@ -148,7 +150,8 @@ class AttributionService:
 
                 documents = self.documents_service.get_multiple_documents_by_pointer(
                     document_requests=document_requests,
-                    maximum_document_display_length=maximum_document_display_length,
+                    needle_length=span["length"],
+                    maximum_context_length=maximum_document_context_length_retrieved,
                 )
 
                 (span_text_tokens, span_text) = self.__get_span_text(
@@ -177,61 +180,91 @@ class AttributionService:
                     for span_with_document in spans_with_documents
                     for doc in span_with_document.documents
                 ]
-                tokenized_corpus = [doc.split(" ") for doc in docs]
-                bm25 = BM25Okapi(tokenized_corpus)
+                if len(docs) > 0:  # if there are no docs, we don't do anything
+                    tokenized_corpus = [doc.split(" ") for doc in docs]
+                    bm25 = BM25Okapi(tokenized_corpus)
 
-                if filter_bm25_fields_considered == FieldsConsideredForRanking.PROMPT:
-                    doc_scores = bm25.get_scores(prompt.split(" "))
-                elif (
-                    filter_bm25_fields_considered == FieldsConsideredForRanking.RESPONSE
-                ):
-                    doc_scores = bm25.get_scores(response.split(" "))
-                elif (
-                    filter_bm25_fields_considered
-                    == FieldsConsideredForRanking.CONCATENATE_PROMPT_AND_RESPONSE
-                ):
-                    combined_input = prompt + " " + response
-                    doc_scores = bm25.get_scores(combined_input.split(" "))
-                elif (
-                    filter_bm25_fields_considered
-                    == FieldsConsideredForRanking.ADD_PROMPT_AND_RESPONSE_SCORES
-                ):
-                    doc_scores = bm25.get_scores(prompt.split(" ")) + bm25.get_scores(
-                        response.split(" ")
-                    )
-                else:
-                    raise ValueError("Invalid filter_bm25_fields_considered value")
-
-                # keep the top ratio_to_keep documents
-                ratio_to_keep = filter_bm25_ratio_to_keep
-                num_docs_to_keep = int(np.ceil(len(docs) * ratio_to_keep))
-                indices_to_keep = np.argsort(doc_scores)[-num_docs_to_keep:]
-
-                new_spans_with_documents = []
-                i = 0
-                for span_with_document in spans_with_documents:
-                    new_documents = []
-                    for j in range(len(span_with_document.documents)):
-                        if i in indices_to_keep:
-                            span_with_document.documents[
-                                j
-                            ].relevance_score = doc_scores[i]
-                            new_documents.append(span_with_document.documents[j])
-                        i += 1
-                    if len(new_documents) > 0:
-                        new_spans_with_documents.append(
-                            AttributionSpanWithDocuments(
-                                left=span_with_document.left,
-                                right=span_with_document.right,
-                                length=span_with_document.length,
-                                count=span_with_document.count,
-                                unigram_logprob_sum=span_with_document.unigram_logprob_sum,
-                                documents=new_documents,
-                                text=span_with_document.text,
-                                token_ids=span_with_document.token_ids,
-                            )
+                    if filter_bm25_fields_considered == FieldsConsideredForRanking.PROMPT:
+                        doc_scores = bm25.get_scores(prompt.split(" "))
+                    elif (
+                        filter_bm25_fields_considered == FieldsConsideredForRanking.RESPONSE
+                    ):
+                        doc_scores = bm25.get_scores(response.split(" "))
+                    elif (
+                        filter_bm25_fields_considered
+                        == FieldsConsideredForRanking.CONCATENATE_PROMPT_AND_RESPONSE
+                    ):
+                        combined_input = prompt + " " + response
+                        doc_scores = bm25.get_scores(combined_input.split(" "))
+                    elif (
+                        filter_bm25_fields_considered
+                        == FieldsConsideredForRanking.ADD_PROMPT_AND_RESPONSE_SCORES
+                    ):
+                        doc_scores = bm25.get_scores(prompt.split(" ")) + bm25.get_scores(
+                            response.split(" ")
                         )
-                spans_with_documents = new_spans_with_documents
+                    else:
+                        raise ValueError("Invalid filter_bm25_fields_considered value")
+
+                    # keep the top ratio_to_keep documents
+                    ratio_to_keep = filter_bm25_ratio_to_keep
+                    num_docs_to_keep = int(np.ceil(len(docs) * ratio_to_keep))
+                    indices_to_keep = np.argsort(doc_scores)[-num_docs_to_keep:]
+
+                    new_spans_with_documents = []
+                    i = 0
+                    for span_with_document in spans_with_documents:
+                        new_documents = []
+                        for j in range(len(span_with_document.documents)):
+                            if i in indices_to_keep:
+                                span_with_document.documents[
+                                    j
+                                ].relevance_score = doc_scores[i]
+                                new_documents.append(span_with_document.documents[j])
+                            i += 1
+                        if len(new_documents) > 0:
+                            new_spans_with_documents.append(
+                                AttributionSpanWithDocuments(
+                                    left=span_with_document.left,
+                                    right=span_with_document.right,
+                                    length=span_with_document.length,
+                                    count=span_with_document.count,
+                                    unigram_logprob_sum=span_with_document.unigram_logprob_sum,
+                                    documents=new_documents,
+                                    text=span_with_document.text,
+                                    token_ids=span_with_document.token_ids,
+                                )
+                            )
+                    spans_with_documents = new_spans_with_documents
+
+            # For each document, truncate the excess context from retrieved_length to displayed_length
+            for span_with_documents in spans_with_documents:
+                for doc in span_with_documents.documents:
+                    # cut the left context if necessary
+                    if doc.needle_offset > maximum_document_context_length_displayed:
+                        doc.token_ids = doc.token_ids[
+                            (
+                                doc.needle_offset
+                                - maximum_document_context_length_displayed
+                            ) :
+                        ]
+                        doc.needle_offset = maximum_document_context_length_displayed
+                    # cut the right context if necessary
+                    if (
+                        len(doc.token_ids)
+                        - doc.needle_offset
+                        - span_with_documents.length
+                        > maximum_document_context_length_displayed
+                    ):
+                        doc.token_ids = doc.token_ids[
+                            : (
+                                doc.needle_offset
+                                + span_with_documents.length
+                                + maximum_document_context_length_displayed
+                            )
+                        ]
+                    doc.display_length = len(doc.token_ids)
+                    doc.text = self.infini_gram_processor.decode_tokens(doc.token_ids)
 
             return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,

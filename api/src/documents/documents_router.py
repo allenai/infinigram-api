@@ -22,22 +22,6 @@ MaximumDocumentDisplayLengthType: TypeAlias = Annotated[
 DocumentsServiceDependency: TypeAlias = Annotated[DocumentsService, Depends()]
 
 
-@documents_router.get("/{index}/documents/{shard}/{rank}", tags=["documents"])
-def get_document_by_rank(
-    shard: int,
-    rank: int,
-    documents_service: DocumentsServiceDependency,
-    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
-) -> InfiniGramDocumentResponse:
-    result = documents_service.get_document_by_rank(
-        shard=shard,
-        rank=rank,
-        maximum_document_display_length=maximum_document_display_length,
-    )
-
-    return result
-
-
 @documents_router.get("/{index}/documents/", tags=["documents"])
 def search_documents(
     documents_service: DocumentsServiceDependency,

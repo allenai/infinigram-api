@@ -12,9 +12,6 @@ In 2008, Obama ran for President of the United States, winning the election in a
 
 Obama left office in January 2017, after serving two terms as President. He is the author of several books, including "Dreams from My Father" and "A Promised Land." He currently lives in Chicago with his family.'''
 
-response = '''1+1=2'''
-response = '''1+1 equals 2.'''
-
 payload = {
     'prompt': prompt,
     'response': response,
@@ -26,7 +23,8 @@ payload = {
     'spanRankingMethod': 'unigram_logprob_sum',
     'includeDocuments': True,
     'maximumDocumentsPerSpan': 10,
-    'maximumDocumentDisplayLength': 100,
+    'maximumDocumentContextLengthRetrieved': 250,
+    'maximumDocumentContextLengthDisplayed': 50,
     'filterMethod': 'bm25',
     'filterBm25FieldsConsidered': 'prompt|response',
     'filterBm25RatioToKeep': 1.0,

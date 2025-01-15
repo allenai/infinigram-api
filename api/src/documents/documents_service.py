@@ -58,6 +58,7 @@ class DocumentsService:
                 document_index=document.document_index,
                 document_length=document.document_length,
                 display_length=document.display_length,
+                needle_offset=document.needle_offset,
                 metadata=document.metadata,
                 token_ids=document.token_ids,
             )
@@ -73,6 +74,7 @@ class DocumentsService:
             page_count=ceil(search_documents_result.total_documents / page_size),
         )
 
+    # NOTE: This function is not used anywhere
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -88,10 +90,12 @@ class DocumentsService:
             document_index=get_document_by_index_result.document_index,
             document_length=get_document_by_index_result.document_length,
             display_length=get_document_by_index_result.display_length,
+            needle_offset=get_document_by_index_result.needle_offset,
             metadata=get_document_by_index_result.metadata,
             token_ids=get_document_by_index_result.token_ids,
         )
 
+    # NOTE: This function is used by document search
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -105,11 +109,13 @@ class DocumentsService:
             document_index=document.document_index,
             document_length=document.document_length,
             display_length=document.display_length,
+            needle_offset=document.needle_offset,
             metadata=document.metadata,
             token_ids=document.token_ids,
             text=document.text,
         )
 
+    # NOTE: This function is used by document search
     def get_multiple_documents_by_index(
         self, document_indexes: Iterable[int], maximum_document_display_length: int
     ) -> InfiniGramDocumentsResponse:
@@ -122,6 +128,7 @@ class DocumentsService:
                 document_index=document.document_index,
                 document_length=document.document_length,
                 display_length=document.display_length,
+                needle_offset=document.needle_offset,
                 metadata=document.metadata,
                 token_ids=document.token_ids,
                 text=document.text,
@@ -132,6 +139,7 @@ class DocumentsService:
             index=self.infini_gram_processor.index, documents=mapped_documents
         )
 
+    # NOTE: This function is not used anywhere
     def get_document_by_pointer(
         self,
         document_request: GetDocumentByPointerRequest,
@@ -147,6 +155,7 @@ class DocumentsService:
             document_index=document.document_index,
             document_length=document.document_length,
             display_length=document.display_length,
+            needle_offset=document.needle_offset,
             metadata=document.metadata,
             token_ids=document.token_ids,
             text=document.text,
@@ -154,22 +163,27 @@ class DocumentsService:
             pointer=document_request.pointer,
         )
 
+    # NOTE: This function is used by attribution
     def get_multiple_documents_by_pointer(
         self,
         document_requests: Iterable[GetDocumentByPointerRequest],
-        maximum_document_display_length: int,
+        needle_length: int,
+        maximum_context_length: int,
     ) -> List[DocumentWithPointer]:
-        documents = self.infini_gram_processor.get_documents_by_pointers(
+        documents = self.infini_gram_processor.get_documents_by_pointers_2(
             list_of_shard_and_pointer=[
-                (document_request.shard, document_request.pointer) for document_request in document_requests
+                (document_request.shard, document_request.pointer)
+                for document_request in document_requests
             ],
-            maximum_document_display_length=maximum_document_display_length,
+            needle_length=needle_length,
+            maximum_context_length=maximum_context_length,
         )
         mapped_documents = [
             DocumentWithPointer(
                 document_index=document.document_index,
                 document_length=document.document_length,
                 display_length=document.display_length,
+                needle_offset=document.needle_offset,
                 metadata=document.metadata,
                 token_ids=document.token_ids,
                 text=document.text,

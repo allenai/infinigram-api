@@ -16,7 +16,8 @@ parser.add_argument('--output_path', type=str, required=True)
 parser.add_argument('--overwrite_docs', default=False, action='store_true')
 args = parser.parse_args()
 
-api_url = 'https://infinigram-api.allen.ai/olmoe/attribution'
+# api_url = 'https://infinigram-api.allen.ai/olmoe/attribution'
+api_url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
 params = {
     'delimiters': ['\n', '.'],
     'allowSpansWithPartialWords': False,
@@ -26,7 +27,8 @@ params = {
     'spanRankingMethod': 'unigram_logprob_sum',
     'includeDocuments': True,
     'maximumDocumentsPerSpan': 10,
-    'maximumDocumentDisplayLength': 100,
+    'maximumDocumentContextLengthRetrieved': 250,
+    'maximumDocumentContextLengthDisplayed': 50,
     'filterMethod': 'bm25',
     'filterBm25FieldsConsidered': 'prompt|response',
     'filterBm25RatioToKeep': 1.0,
@@ -95,7 +97,7 @@ plt.scatter([r['response_len_chars'] for r in results], [r['min_doc_score'] for 
 plt.xlabel('Response length (characters)')
 plt.ylabel('Document score')
 plt.legend()
-plt.savefig('distrib_of_score_doc.png', dpi=300)
+plt.savefig(args.output_path.replace('.png', '_doc.png'), dpi=300)
 
 plt.figure(figsize=(12, 8))
 plt.scatter([r['response_len_chars'] for r in results], [r['max_span_score'] for r in results], label='max span score')
@@ -103,5 +105,4 @@ plt.scatter([r['response_len_chars'] for r in results], [r['min_span_score'] for
 plt.xlabel('Response length (characters)')
 plt.ylabel('Span score')
 plt.legend()
-plt.savefig('distrib_of_score_span.png', dpi=300)
-
+plt.savefig(args.output_path.replace('.png', '_span.png'), dpi=300)

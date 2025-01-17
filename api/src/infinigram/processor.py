@@ -295,7 +295,7 @@ class InfiniGramProcessor:
 
         return documents
 
-    def get_document_by_rank_2(
+    def get_document_by_rank_v2(
         self, shard: int, rank: int, needle_length: int, maximum_context_length: int
     ) -> Document:
         get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank_2(
@@ -320,7 +320,7 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
-    def get_documents_by_ranks_2(
+    def get_documents_by_ranks_v2(
         self,
         list_of_shard_and_rank: List[Tuple[int, int]],
         needle_length: int,
@@ -353,7 +353,7 @@ class InfiniGramProcessor:
 
         return documents
 
-    def get_document_by_pointer_2(
+    def get_document_by_pointer_v2(
         self, shard: int, pointer: int, needle_length: int, maximum_context_length: int
     ) -> Document:
         document_response = self.infini_gram_engine.get_doc_by_ptr_2(
@@ -378,7 +378,7 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
-    def get_documents_by_pointers_2(
+    def get_documents_by_pointers_v2(
         self,
         list_of_shard_and_pointer: List[Tuple[int, int]],
         needle_length: int,

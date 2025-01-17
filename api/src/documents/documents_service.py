@@ -165,7 +165,7 @@ class DocumentsService:
         needle_length: int,
         maximum_context_length: int,
     ) -> List[DocumentWithPointer]:
-        documents = self.infini_gram_processor.get_documents_by_pointers_2(
+        documents = self.infini_gram_processor.get_documents_by_pointers_v2(
             list_of_shard_and_pointer=[
                 (document_request.shard, document_request.pointer)
                 for document_request in document_requests

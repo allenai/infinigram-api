@@ -26,4 +26,4 @@ CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", 
 
 FROM builder as prod
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "5"]
+CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]

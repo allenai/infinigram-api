@@ -33,6 +33,10 @@ register_profiling_middleware(app)
 def infini_gram_engine_exception_handler(
     request: Request, exception: InfiniGramEngineException
 ) -> JSONResponse:
+    logger = logging.getLogger(__name__)
+
+    logger.error(f"infini-gram engine exception: {exception}")
+
     response = RFC9457Error(
         title="infini-gram error",
         status=500,

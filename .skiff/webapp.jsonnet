@@ -160,7 +160,8 @@ function(
             namespace: namespaceName,
             labels: labels,
             annotations: annotations + tls.ingressAnnotations + util.getAuthAnnotations(config, '.apps.allenai.org') + {
-                'nginx.ingress.kubernetes.io/ssl-redirect': 'true'
+                'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
+                'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }
         },
         spec: {
@@ -198,7 +199,8 @@ function(
             namespace: namespaceName,
             labels: labels,
             annotations: annotations + allenAITLS.ingressAnnotations + util.getAuthAnnotations(config, '.allen.ai') + {
-                'nginx.ingress.kubernetes.io/ssl-redirect': 'true'
+                'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
+                'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }
         },
         spec: {
@@ -236,7 +238,8 @@ function(
             namespace: namespaceName,
             labels: labels,
             annotations: annotations + scholarTLS.ingressAnnotations + util.getAuthAnnotations(config, 'apps.semanticscholar.org') + {
-                'nginx.ingress.kubernetes.io/ssl-redirect': 'true'
+                'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
+                'nginx.ingress.kubernetes.io/proxy-read-timeout': '120
             }
         },
         spec: {

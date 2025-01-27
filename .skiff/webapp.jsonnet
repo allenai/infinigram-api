@@ -239,7 +239,7 @@ function(
             labels: labels,
             annotations: annotations + scholarTLS.ingressAnnotations + util.getAuthAnnotations(config, 'apps.semanticscholar.org') + {
                 'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
-                'nginx.ingress.kubernetes.io/proxy-read-timeout': '120
+                'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }
         },
         spec: {

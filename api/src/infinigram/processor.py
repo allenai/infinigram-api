@@ -102,7 +102,7 @@ class InfiniGramProcessor:
             index_dir=index_mapping["index_dir"],
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
-            precompute_unigram_logprobs=True,
+            precompute_unigram_logprobs=False,
             # for the attribution feature, disabling prefetching on ds and sa can speed things up
             ds_prefetch_depth=0,
             sa_prefetch_depth=0,

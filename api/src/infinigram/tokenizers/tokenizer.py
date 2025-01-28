@@ -53,12 +53,15 @@ class Tokenizer:
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         tokenized_input = self.hf_tokenizer(input, return_offsets_mapping=True)
 
+        offset_mapping = tokenized_input.data.get("offset_mapping", [])  # pyright: ignore [reportUnknownMemberType]
+        # This is to fix a corner case: when input begins with a number, the token ids will begin with [29871 (whitespace), 29896, ...] with offset_mapping being [(0, 1), (0, 1), ...]
+        if len(offset_mapping) > 1:
+            if offset_mapping[0][1] > offset_mapping[1][0]:
+                offset_mapping[0] = (offset_mapping[0][0], offset_mapping[1][0])
+
         return [
             input[offset[0] : offset[1]]
-            for offset in cast(
-                List[Tuple[(int, int)]],
-                tokenized_input.data.get("offset_mapping", []),  # pyright: ignore [reportUnknownMemberType]
-            )
+            for offset in cast(List[Tuple[(int, int)]], offset_mapping)
         ]
 
     def tokenize_attribution_delimiters(self, delimiters: Iterable[str]) -> List[int]:

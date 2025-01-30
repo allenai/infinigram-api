@@ -364,13 +364,6 @@ function(
                             claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
                             readOnly: true,
                         }
-                    },
-                    {
-                        name: "infinigram-array-dolma-1-7-llama",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-dolma-1.7-llama",
-                            readOnly: true,
-                        }
                     }],
                     containers: [
                         {
@@ -379,11 +372,6 @@ function(
                             volumeMounts: [{
                                 mountPath: "/mnt/infinigram-array/v4_pileval_llama",
                                 name: "infinigram-array-pileval-gpt2",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/dolma_1_7",
-                                name: "infinigram-array-dolma-1-7-llama",
                                 readOnly: true,
                             },
                             {

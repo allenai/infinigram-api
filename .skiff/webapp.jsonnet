@@ -445,7 +445,7 @@ function(
                             resources: {
                                 requests: {
                                     cpu: 30,
-                                    memory: '200Gi'
+                                    memory: '200G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied

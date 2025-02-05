@@ -61,6 +61,8 @@ class Document(CamelCaseModel):
     token_ids: List[int]
     text: str
     relevance_score: float | None = None
+    display_length_long: int | None = None
+    text_long: str | None = None
 
 
 class DocumentWithPointer(Document):

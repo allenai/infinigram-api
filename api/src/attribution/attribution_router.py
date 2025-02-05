@@ -75,6 +75,11 @@ class AttributionRequest(CamelCaseModel):
         default=50,
         description="The maximum number of tokens of the context (on each side) to display from the document",
     )
+    maximum_document_context_length_displayed_long: int = Field(
+        gt=0,
+        default=250,
+        description="The maximum number of tokens of the context (on each side) to display from the document, in the long version",
+    )
     filter_method: FilterMethod = Field(
         default=FilterMethod.NONE,
         description="Filtering method for post-processing the retrieved documents, options are 'none', 'bm25'",
@@ -111,6 +116,7 @@ def get_document_attributions(
         maximum_documents_per_span=body.maximum_documents_per_span,
         maximum_document_context_length_retrieved=body.maximum_document_context_length_retrieved,
         maximum_document_context_length_displayed=body.maximum_document_context_length_displayed,
+        maximum_document_context_length_displayed_long=body.maximum_document_context_length_displayed_long,
         filter_method=body.filter_method,
         filter_bm25_fields_considered=body.filter_bm25_fields_considered,
         filter_bm25_ratio_to_keep=body.filter_bm25_ratio_to_keep,

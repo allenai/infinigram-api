@@ -1,17 +1,18 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
+from fastapi.concurrency import run_in_threadpool
 from pydantic import Field
 
-from src.infinigram.processor import SpanRankingMethod
 from src.attribution.attribution_service import (
     AttributionService,
-    FilterMethod,
     FieldsConsideredForRanking,
+    FilterMethod,
     InfiniGramAttributionResponse,
     InfiniGramAttributionResponseWithDocuments,
 )
 from src.camel_case_model import CamelCaseModel
+from src.infinigram.processor import SpanRankingMethod
 
 attribution_router = APIRouter()
 
@@ -94,27 +95,29 @@ class AttributionRequest(CamelCaseModel):
 
 
 @attribution_router.post(path="/{index}/attribution")
-def get_document_attributions(
+async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
-    result = attribution_service.get_attribution_for_response(
-        prompt=body.prompt,
-        response=body.response,
-        delimiters=body.delimiters,
-        allow_spans_with_partial_words=body.allow_spans_with_partial_words,
-        minimum_span_length=body.minimum_span_length,
-        maximum_frequency=body.maximum_frequency,
-        maximum_span_density=body.maximum_span_density,
-        span_ranking_method=body.span_ranking_method,
-        include_documents=body.include_documents,
-        maximum_documents_per_span=body.maximum_documents_per_span,
-        maximum_document_context_length_retrieved=body.maximum_document_context_length_retrieved,
-        maximum_document_context_length_displayed=body.maximum_document_context_length_displayed,
-        filter_method=body.filter_method,
-        filter_bm25_fields_considered=body.filter_bm25_fields_considered,
-        filter_bm25_ratio_to_keep=body.filter_bm25_ratio_to_keep,
-        include_input_as_tokens=body.include_input_as_tokens,
+    result = await run_in_threadpool(
+        lambda: attribution_service.get_attribution_for_response(
+            prompt=body.prompt,
+            response=body.response,
+            delimiters=body.delimiters,
+            allow_spans_with_partial_words=body.allow_spans_with_partial_words,
+            minimum_span_length=body.minimum_span_length,
+            maximum_frequency=body.maximum_frequency,
+            maximum_span_density=body.maximum_span_density,
+            span_ranking_method=body.span_ranking_method,
+            include_documents=body.include_documents,
+            maximum_documents_per_span=body.maximum_documents_per_span,
+            maximum_document_context_length_retrieved=body.maximum_document_context_length_retrieved,
+            maximum_document_context_length_displayed=body.maximum_document_context_length_displayed,
+            filter_method=body.filter_method,
+            filter_bm25_fields_considered=body.filter_bm25_fields_considered,
+            filter_bm25_ratio_to_keep=body.filter_bm25_ratio_to_keep,
+            include_input_as_tokens=body.include_input_as_tokens,
+        )
     )
 
     return result

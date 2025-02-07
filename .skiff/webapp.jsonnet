@@ -444,8 +444,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 63,
-                                    memory: '132G'
+                                    cpu: 62,
+                                    memory: '130G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
@@ -472,7 +472,10 @@ function(
                                 }
                             }
                         }
-                    ]
+                    ],
+                    nodeSelector: {
+                        cloud.google.com/gke-nodepool: cpu64
+                    }
                 }
             }
         }

@@ -21,9 +21,15 @@ RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt
 COPY . .
 
 FROM builder as dev
+ENV OTEL_SERVICE_NAME=infinigram-api-dev
+ENV OTEL_TRACES_EXPORTER=console
+ENV OTEL_METRICS_EXPORTER=console
 
-CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
+CMD ["opentelemetry-instrument", "fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
 
 FROM builder as prod
+ENV OTEL_SERVICE_NAME=infinigram-api
+ENV OTEL_TRACES_EXPORTER=console
+ENV OTEL_METRICS_EXPORTER=console
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]
+CMD ["opentelemetry-instrument", "fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]

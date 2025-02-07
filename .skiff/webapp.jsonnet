@@ -322,7 +322,7 @@ function(
                         },
                     },
                     nodeSelector: {
-                        cloud.google.com/gke-nodepool: "cpu64"
+                        "cloud.google.com/gke-nodepool": "cpu64"
                     },
                     volumes: [{
                         name: "infinigram-array-pileval-gpt2",

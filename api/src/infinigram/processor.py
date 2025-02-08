@@ -20,6 +20,7 @@ from infini_gram.models import (
     ErrorResponse,
     InfiniGramEngineResponse,
 )
+from opentelemetry import trace
 from pydantic import Field
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
@@ -90,6 +91,9 @@ def is_infini_gram_error_response(
     return isinstance(val, dict) and "error" in val
 
 
+tracer = trace.get_tracer(__name__)
+
+
 class InfiniGramProcessor:
     index: str
     tokenizer: Tokenizer
@@ -112,14 +116,17 @@ class InfiniGramProcessor:
             od_prefetch_depth=3,
         )
 
+    @tracer.start_as_current_span("tokenize")
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
     ) -> List[int]:
         return self.tokenizer.tokenize(input)
 
+    @tracer.start_as_current_span("decode_tokens")
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
 
+    @tracer.start_as_current_span("tokenize_to_list")
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         return self.tokenizer.tokenize_to_list(input)
 
@@ -132,6 +139,7 @@ class InfiniGramProcessor:
 
         return cast(TInfiniGramResponse, result)
 
+    @tracer.start_as_current_span("count_n_gram")
     def count_n_gram(self, query: str) -> InfiniGramCountResponse:
         tokenized_query_ids = self.tokenize(query)
 
@@ -141,6 +149,7 @@ class InfiniGramProcessor:
 
         return InfiniGramCountResponse(index=self.index, **count_result)
 
+    @tracer.start_as_current_span("get_document_by_rank")
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
     ) -> Document:
@@ -163,6 +172,7 @@ class InfiniGramProcessor:
             text=decoded_text,
         )
 
+    @tracer.start_as_current_span("get_documents_by_ranks")
     def get_documents_by_ranks(
         self,
         list_of_shard_and_rank: List[Tuple[int, int]],
@@ -473,6 +483,7 @@ class InfiniGramProcessor:
             documents=docs, total_documents=matching_documents_result["cnt"]
         )
 
+    @tracer.start_as_current_span("attribute")
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     def attribute(
         self,

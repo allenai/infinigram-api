@@ -4,9 +4,10 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from opentelemetry import trace
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter  # type: ignore
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor  # type: ignore
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
 from src import glog
 from src.attribution import attribution_router
@@ -19,7 +20,7 @@ from src.RFC9457Error import RFC9457Error
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")
-handlers = [glog.Handler()] if fmt == "google:json" else []
+handlers = [glog.create_stream_handler()] if fmt == "google:json" else []
 level = os.environ.get("LOG_LEVEL", default=logging.INFO)
 logging.basicConfig(level=level, handlers=handlers)
 
@@ -32,7 +33,9 @@ app.include_router(router=attribution_router)
 
 register_profiling_middleware(app)
 tracer_provider = TracerProvider()
-tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+tracer_provider.add_span_processor(
+    BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))
+)
 
 trace.set_tracer_provider(tracer_provider)
 
@@ -41,7 +44,7 @@ trace.set_tracer_provider(tracer_provider)
 def infini_gram_engine_exception_handler(
     request: Request, exception: InfiniGramEngineException
 ) -> JSONResponse:
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("uvicorn.error")
 
     logger.error(f"infini-gram engine exception: {exception}")
 

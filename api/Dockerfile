@@ -24,12 +24,24 @@ FROM builder as dev
 ENV OTEL_SERVICE_NAME=infinigram-api-dev
 ENV OTEL_TRACES_EXPORTER=console
 ENV OTEL_METRICS_EXPORTER=console
+ENV OTEL_RESOURCE_ATTRIBUTE="gcp.project_id=ai2-reviz"
+ENV OTEL_SERVICE_NAME=infinigram-api
+ENV OTEL_TRACES_EXPORTER=otlp
+ENV OTEL_METRICS_EXPORTER=otlp
+ENV OTEL_RESOURCE_ATTRIBUTE="gcp.project_id=ai2-reviz"
+ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://otelcol:4318"
+ENV GRPC_VERBOSITY=debug
+ENV GRPC_TRACE=http,call_error,connectivity_state
 
-CMD ["opentelemetry-instrument", "fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
+CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
 
 FROM builder as prod
 ENV OTEL_SERVICE_NAME=infinigram-api
-ENV OTEL_TRACES_EXPORTER=console
-ENV OTEL_METRICS_EXPORTER=console
+ENV OTEL_TRACES_EXPORTER=otlp
+ENV OTEL_METRICS_EXPORTER=otlp
+ENV OTEL_RESOURCE_ATTRIBUTE="gcp.project_id=ai2-reviz"
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=https://cloudtrace.googleapis.com
+ENV GRPC_VERBOSITY=debug
+ENV GRPC_TRACE=http,call_error,connectivity_state
 
-CMD ["opentelemetry-instrument", "fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "4"]
+CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "4"]

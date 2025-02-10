@@ -1,26 +1,27 @@
 import logging
-from typing import Any
+from typing import TextIO
 
 from pythonjsonlogger import jsonlogger
 
 
-class Formatter(jsonlogger.JsonFormatter):
+def create_stream_handler() -> logging.StreamHandler[TextIO]:
+    handler = logging.StreamHandler()
     """
     Custom log formatter that emits log messages as JSON, with the "severity" field
-    which Google Cloud uses to differentiate message levels.
+    which Google Cloud uses to differentiate message levels and various opentelemetry mappings.
     """
+    formatter = jsonlogger.JsonFormatter(
+        # taken from https://cloud.google.com/trace/docs/setup/python-ot#config-structured-logging
+        rename_fields={
+            "levelname": "severity",
+            "asctime": "timestamp",
+            "otelTraceID": "logging.googleapis.com/trace",
+            "otelSpanID": "logging.googleapis.com/spanId",
+            "otelTraceSampled": "logging.googleapis.com/trace_sampled",
+        },
+        timestamp=True,
+        datefmt="%Y-%m-%dT%H:%M:%SZ",
+    )
+    handler.setFormatter(formatter)
 
-    def add_fields(
-        self,
-        log_record: dict[str, Any],
-        record: logging.LogRecord,
-        message_dict: dict[str, Any],
-    ) -> None:
-        super().add_fields(log_record, record, message_dict)
-        log_record["severity"] = record.levelname
-
-
-class Handler(logging.StreamHandler):
-    def __init__(self, stream=None) -> None:
-        super().__init__(stream)
-        self.setFormatter(Formatter())
+    return handler

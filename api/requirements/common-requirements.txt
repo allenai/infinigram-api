@@ -8,6 +8,7 @@ pyinstrument==4.7.2
 requests==2.32.3
 types-requests==2.32.0.20240914
 rank_bm25==0.2.2
+opentelemetry-exporter-gcp-trace==1.9.0
 
 # auto-installed by opentelemetry-bootstrap
 opentelemetry-api==1.30.0

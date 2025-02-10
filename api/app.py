@@ -63,7 +63,7 @@ if os.getenv("ENV") == "development":
     )
 else:
     tracer_provider.add_span_processor(
-        BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))
+        BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore
     )
 
 trace.set_tracer_provider(tracer_provider)

@@ -3,7 +3,10 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from pydantic import Field
 
-from src.infinigram.processor import SpanRankingMethod
+from src.infinigram.processor import (
+    InfiniGramErrorResponse,
+    SpanRankingMethod,
+)
 from src.attribution.attribution_service import (
     AttributionService,
     FilterMethod,
@@ -102,7 +105,7 @@ class AttributionRequest(CamelCaseModel):
 def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
-) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
+) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments | InfiniGramErrorResponse:
     result = attribution_service.get_attribution_for_response(
         prompt=body.prompt,
         response=body.response,

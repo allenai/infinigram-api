@@ -17,12 +17,26 @@ services:
     environment:
       # This ensures that errors are printed as they occur, which
       # makes debugging easier.
-      - INDEX_BASE_PATH=/mnt/infinigram-array
       - PYTHONUNBUFFERED=1
+      - INDEX_BASE_PATH=/mnt/infinigram-array
       - LOG_LEVEL=DEBUG
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
   proxy:
     build: ./proxy
     ports:
       - 8080:8080
     depends_on:
       - api
+  otelcol:
+    image: otel/opentelemetry-collector-contrib:0.115.1
+    volumes:
+      - ./otel-collector/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - logs:/var/log:ro
+    environment:
+      - GOOGLE_CLOUD_PROJECT
+      - GOOGLE_CLOUD_QUOTA_PROJECT
+    ports:
+      # Collector prometheus port. The metrics are checked in tests
+      - 8888
+volumes:
+  logs:

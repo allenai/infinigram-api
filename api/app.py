@@ -4,10 +4,11 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from opentelemetry import trace
-from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter  # type: ignore
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor  # type: ignore
+from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
 
 from src import glog
 from src.attribution import attribution_router
@@ -31,14 +32,6 @@ app.include_router(router=infinigram_router)
 app.include_router(router=documents_router)
 app.include_router(router=attribution_router)
 
-register_profiling_middleware(app)
-tracer_provider = TracerProvider()
-tracer_provider.add_span_processor(
-    BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))
-)
-
-trace.set_tracer_provider(tracer_provider)
-
 
 @app.exception_handler(InfiniGramEngineException)
 def infini_gram_engine_exception_handler(
@@ -60,5 +53,19 @@ def infini_gram_engine_exception_handler(
         content=response.model_dump(),
     )
 
+
+register_profiling_middleware(app)
+tracer_provider = TracerProvider()
+
+if os.getenv("ENV") == "development":
+    tracer_provider.add_span_processor(
+        span_processor=SimpleSpanProcessor(OTLPSpanExporter())
+    )
+else:
+    tracer_provider.add_span_processor(
+        BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))
+    )
+
+trace.set_tracer_provider(tracer_provider)
 
 FastAPIInstrumentor.instrument_app(app, excluded_urls="health")

@@ -17,7 +17,6 @@ from src.infinigram.processor import (
     SpanRankingMethod,
     BaseInfiniGramResponse,
     DocumentWithPointer,
-    InfiniGramErrorResponse,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
@@ -82,6 +81,10 @@ class InfiniGramAttributionResponseWithDocuments(
 ): ...
 
 
+class InfiniGramAttributionErrorResponse(BaseInfiniGramResponse):
+    error: str
+
+
 class AttributionService:
     infini_gram_processor: InfiniGramProcessor
     documents_service: DocumentsService
@@ -142,10 +145,11 @@ class AttributionService:
         filter_bm25_fields_considered: FieldsConsideredForRanking,
         filter_bm25_ratio_to_keep: float,
         include_input_as_tokens: bool,
-    ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments | InfiniGramErrorResponse:
+    ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments | InfiniGramAttributionErrorResponse:
 
         if self.request_should_be_blocked(prompt=prompt):
-            return InfiniGramErrorResponse(
+            return InfiniGramAttributionErrorResponse(
+                index=self.infini_gram_processor.index,
                 error="This request is blocked due to legal compliance.",
             )
 

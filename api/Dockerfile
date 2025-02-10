@@ -32,4 +32,4 @@ CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", 
 FROM builder as prod
 ENV ENV=production
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "4"]
+CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]

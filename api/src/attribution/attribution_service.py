@@ -101,6 +101,11 @@ class AttributionService:
 
         return (span_text_tokens, span_text)
 
+    def request_should_be_blocked(self, prompt: str) -> bool:
+        if "lyric" in prompt.lower():
+            return True
+        return False
+
     def cut_document(
         self, token_ids: List[int], needle_offset: int, span_length: int, maximum_context_length: int
     ) -> tuple[str, int, int]:
@@ -137,6 +142,16 @@ class AttributionService:
         filter_bm25_ratio_to_keep: float,
         include_input_as_tokens: bool,
     ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
+
+        if self.request_should_be_blocked(prompt=prompt):
+            return InfiniGramAttributionResponse(
+                index=self.infini_gram_processor.index,
+                spans=[],
+                input_tokens=self.infini_gram_processor.tokenize_to_list(response)
+                if include_input_as_tokens
+                else None,
+            )
+
         attribute_result = self.infini_gram_processor.attribute(
             input=response,
             delimiters=delimiters,

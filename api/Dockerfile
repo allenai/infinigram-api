@@ -32,4 +32,4 @@ ENV OTEL_SERVICE_NAME=infinigram-api
 ENV OTEL_TRACES_EXPORTER=console
 ENV OTEL_METRICS_EXPORTER=console
 
-CMD ["opentelemetry-instrument", "fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]
+CMD ["opentelemetry-instrument", "fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "4"]

@@ -4,22 +4,26 @@ from itertools import islice
 from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 import numpy as np
+from opentelemetry import trace
 from pydantic import Field
 from rank_bm25 import BM25Okapi  # type: ignore
 
 from src.camel_case_model import CamelCaseModel
+from src.config import get_config
 from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
     DocumentsService,
     GetDocumentByPointerRequest,
 )
 from src.infinigram.processor import (
-    SpanRankingMethod,
     BaseInfiniGramResponse,
     DocumentWithPointer,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
+    SpanRankingMethod,
 )
+
+tracer = trace.get_tracer(get_config().application_name)
 
 
 class FilterMethod(Enum):
@@ -101,22 +105,28 @@ class AttributionService:
 
         return (span_text_tokens, span_text)
 
+    @tracer.start_as_current_span("attribution_service/cut_document")
     def cut_document(
-        self, token_ids: List[int], needle_offset: int, span_length: int, maximum_context_length: int
+        self,
+        token_ids: List[int],
+        needle_offset: int,
+        span_length: int,
+        maximum_context_length: int,
     ) -> tuple[str, int, int]:
         # cut the left context if necessary
         if needle_offset > maximum_context_length:
-            token_ids = token_ids[
-                (needle_offset - maximum_context_length):
-            ]
+            token_ids = token_ids[(needle_offset - maximum_context_length) :]
             needle_offset = maximum_context_length
         # cut the right context if necessary
         if len(token_ids) - needle_offset - span_length > maximum_context_length:
-            token_ids = token_ids[:(needle_offset + span_length + maximum_context_length)]
+            token_ids = token_ids[
+                : (needle_offset + span_length + maximum_context_length)
+            ]
         display_length = len(token_ids)
         text = self.infini_gram_processor.decode_tokens(token_ids)
         return text, display_length, needle_offset
 
+    @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     def get_attribution_for_response(
         self,
         prompt: str,
@@ -262,11 +272,13 @@ class AttributionService:
             for span_with_documents in spans_with_documents:
                 for doc in span_with_documents.documents:
                     # prepare the long version
-                    doc.text_long, doc.display_length_long, doc.needle_offset_long = self.cut_document(
-                        doc.token_ids,
-                        doc.needle_offset,
-                        span_with_documents.length,
-                        maximum_document_context_length_displayed_long,
+                    doc.text_long, doc.display_length_long, doc.needle_offset_long = (
+                        self.cut_document(
+                            doc.token_ids,
+                            doc.needle_offset,
+                            span_with_documents.length,
+                            maximum_document_context_length_displayed_long,
+                        )
                     )
                     # prepare the short version
                     # this will overwrite doc.needle_offset, so make sure to prepare the short version last!

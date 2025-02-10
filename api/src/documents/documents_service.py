@@ -1,8 +1,10 @@
 from math import ceil
 from typing import Iterable, List
 
+from opentelemetry import trace
 from pydantic import BaseModel
 
+from src.config import get_config
 from src.infinigram.processor import (
     BaseInfiniGramResponse,
     Document,
@@ -10,6 +12,8 @@ from src.infinigram.processor import (
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
+
+tracer = trace.get_tracer(get_config().application_name)
 
 
 class InfiniGramDocumentResponse(Document, BaseInfiniGramResponse): ...
@@ -74,6 +78,7 @@ class DocumentsService:
             page_count=ceil(search_documents_result.total_documents / page_size),
         )
 
+    @tracer.start_as_current_span("documents_service/get_document_by_rank")
     def get_document_by_rank(
         self, shard: int, rank: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -94,6 +99,7 @@ class DocumentsService:
             token_ids=get_document_by_index_result.token_ids,
         )
 
+    @tracer.start_as_current_span("documents_service/get_document_by_index")
     def get_document_by_index(
         self, document_index: int, maximum_document_display_length: int
     ) -> InfiniGramDocumentResponse:
@@ -113,6 +119,7 @@ class DocumentsService:
             text=document.text,
         )
 
+    @tracer.start_as_current_span("documents_service/get_multiple_documents_by_index")
     def get_multiple_documents_by_index(
         self, document_indexes: Iterable[int], maximum_document_display_length: int
     ) -> InfiniGramDocumentsResponse:
@@ -136,6 +143,7 @@ class DocumentsService:
             index=self.infini_gram_processor.index, documents=mapped_documents
         )
 
+    @tracer.start_as_current_span("documents_service/get_document_by_pointer")
     def get_document_by_pointer(
         self,
         document_request: GetDocumentByPointerRequest,
@@ -159,6 +167,7 @@ class DocumentsService:
             pointer=document_request.pointer,
         )
 
+    @tracer.start_as_current_span("documents_service/get_multiple_documents_by_pointer")
     def get_multiple_documents_by_pointer(
         self,
         document_requests: Iterable[GetDocumentByPointerRequest],

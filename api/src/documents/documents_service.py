@@ -42,6 +42,7 @@ class DocumentsService:
     def __init__(self, infini_gram_processor: InfiniGramProcessorDependency):
         self.infini_gram_processor = infini_gram_processor
 
+    @tracer.start_as_current_span("documents_service/search_documents")
     def search_documents(
         self,
         search: str,

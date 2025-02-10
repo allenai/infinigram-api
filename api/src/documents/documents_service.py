@@ -2,13 +2,14 @@ from math import ceil
 from typing import Iterable, List
 
 from opentelemetry import trace
-from pydantic import BaseModel
 
 from src.config import get_config
 from src.infinigram.processor import (
     BaseInfiniGramResponse,
     Document,
     DocumentWithPointer,
+    GetDocumentByIndexRequest,
+    GetDocumentByPointerRequest,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
@@ -31,11 +32,6 @@ class SearchResponse(BaseInfiniGramResponse):
     total_documents: int
 
 
-class GetDocumentByPointerRequest(BaseModel):
-    shard: int
-    pointer: int
-
-
 class DocumentsService:
     infini_gram_processor: InfiniGramProcessor
 
@@ -46,13 +42,13 @@ class DocumentsService:
     def search_documents(
         self,
         search: str,
-        maximum_document_display_length: int,
+        maximum_context_length: int,
         page_size: int,
         page: int,
     ) -> SearchResponse:
         search_documents_result = self.infini_gram_processor.search_documents(
             search=search,
-            maximum_document_display_length=maximum_document_display_length,
+            maximum_context_length=maximum_context_length,
             page=page,
             page_size=page_size,
         )
@@ -79,34 +75,13 @@ class DocumentsService:
             page_count=ceil(search_documents_result.total_documents / page_size),
         )
 
-    @tracer.start_as_current_span("documents_service/get_document_by_rank")
-    def get_document_by_rank(
-        self, shard: int, rank: int, maximum_document_display_length: int
-    ) -> InfiniGramDocumentResponse:
-        get_document_by_index_result = self.infini_gram_processor.get_document_by_rank(
-            shard=shard,
-            rank=rank,
-            maximum_document_display_length=maximum_document_display_length,
-        )
-
-        return InfiniGramDocumentResponse(
-            index=self.infini_gram_processor.index,
-            text=get_document_by_index_result.text,
-            document_index=get_document_by_index_result.document_index,
-            document_length=get_document_by_index_result.document_length,
-            display_length=get_document_by_index_result.display_length,
-            needle_offset=get_document_by_index_result.needle_offset,
-            metadata=get_document_by_index_result.metadata,
-            token_ids=get_document_by_index_result.token_ids,
-        )
-
     @tracer.start_as_current_span("documents_service/get_document_by_index")
     def get_document_by_index(
-        self, document_index: int, maximum_document_display_length: int
+        self, document_index: int, maximum_context_length: int
     ) -> InfiniGramDocumentResponse:
         document = self.infini_gram_processor.get_document_by_index(
             document_index=document_index,
-            maximum_document_display_length=maximum_document_display_length,
+            maximum_context_length=maximum_context_length,
         )
 
         return InfiniGramDocumentResponse(
@@ -122,11 +97,10 @@ class DocumentsService:
 
     @tracer.start_as_current_span("documents_service/get_multiple_documents_by_index")
     def get_multiple_documents_by_index(
-        self, document_indexes: Iterable[int], maximum_document_display_length: int
+        self, document_requests: Iterable[GetDocumentByIndexRequest],
     ) -> InfiniGramDocumentsResponse:
         documents = self.infini_gram_processor.get_documents_by_indexes(
-            list_of_document_index=list(document_indexes),
-            maximum_document_display_length=maximum_document_display_length,
+            document_requests=document_requests,
         )
         mapped_documents = [
             Document(
@@ -147,13 +121,16 @@ class DocumentsService:
     @tracer.start_as_current_span("documents_service/get_document_by_pointer")
     def get_document_by_pointer(
         self,
-        document_request: GetDocumentByPointerRequest,
-        maximum_document_display_length: int,
+        shard: int,
+        pointer: int,
+        needle_length: int,
+        maximum_context_length: int,
     ) -> DocumentWithPointer:
         document = self.infini_gram_processor.get_document_by_pointer(
-            shard=document_request.shard,
-            pointer=document_request.pointer,
-            maximum_document_display_length=maximum_document_display_length,
+            shard=shard,
+            pointer=pointer,
+            needle_length=needle_length,
+            maximum_context_length=maximum_context_length,
         )
 
         return DocumentWithPointer(
@@ -164,24 +141,16 @@ class DocumentsService:
             metadata=document.metadata,
             token_ids=document.token_ids,
             text=document.text,
-            shard=document_request.shard,
-            pointer=document_request.pointer,
+            shard=shard,
+            pointer=pointer,
         )
 
     @tracer.start_as_current_span("documents_service/get_multiple_documents_by_pointer")
     def get_multiple_documents_by_pointer(
-        self,
-        document_requests: Iterable[GetDocumentByPointerRequest],
-        needle_length: int,
-        maximum_context_length: int,
+        self, document_requests: Iterable[GetDocumentByPointerRequest],
     ) -> List[DocumentWithPointer]:
-        documents = self.infini_gram_processor.get_documents_by_pointers_v2(
-            list_of_shard_and_pointer=[
-                (document_request.shard, document_request.pointer)
-                for document_request in document_requests
-            ],
-            needle_length=needle_length,
-            maximum_context_length=maximum_context_length,
+        documents = self.infini_gram_processor.get_documents_by_pointers(
+            document_requests=document_requests,
         )
         mapped_documents = [
             DocumentWithPointer(

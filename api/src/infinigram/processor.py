@@ -6,13 +6,11 @@ from typing import (
     Iterable,
     List,
     Sequence,
-    Tuple,
     TypeGuard,
     TypeVar,
     cast,
 )
 
-import numpy as np
 from fastapi import Depends
 from infini_gram.engine import InfiniGramEngine
 from infini_gram.models import (
@@ -21,7 +19,10 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from opentelemetry import trace
-from pydantic import Field
+from pydantic import (
+    BaseModel,
+    Field,
+)
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
@@ -34,6 +35,25 @@ from src.infinigram.index_mappings import AvailableInfiniGramIndexId, index_mapp
 from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
 
 from .tokenizers.tokenizer import Tokenizer
+
+
+class GetDocumentByRankRequest(BaseModel):
+    shard: int
+    rank: int
+    needle_length: int
+    maximum_context_length: int
+
+
+class GetDocumentByPointerRequest(BaseModel):
+    shard: int
+    pointer: int
+    needle_length: int
+    maximum_context_length: int
+
+
+class GetDocumentByIndexRequest(BaseModel):
+    document_index: int
+    maximum_context_length: int
 
 
 class SpanRankingMethod(Enum):
@@ -62,10 +82,6 @@ class Document(CamelCaseModel):
     metadata: dict[str, Any]
     token_ids: List[int]
     text: str
-    relevance_score: float | None = None
-    display_length_long: int | None = None
-    needle_offset_long: int | None = None
-    text_long: str | None = None
 
 
 class DocumentWithPointer(Document):
@@ -111,10 +127,10 @@ class InfiniGramProcessor:
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
             precompute_unigram_logprobs=True,
-            # for the attribution feature, disabling prefetching on ds and sa can speed things up
+            # for the attribution feature, disabling prefetching can speed things up
             ds_prefetch_depth=0,
             sa_prefetch_depth=0,
-            od_prefetch_depth=3,
+            od_prefetch_depth=0,
         )
 
     @tracer.start_as_current_span("infini_gram_processor/tokenize")
@@ -152,10 +168,13 @@ class InfiniGramProcessor:
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_rank")
     def get_document_by_rank(
-        self, shard: int, rank: int, maximum_document_display_length: int
+        self, shard: int, rank: int, needle_length: int, maximum_context_length: int
     ) -> Document:
-        get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank(
-            s=shard, rank=rank, max_disp_len=maximum_document_display_length
+        get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank_2(
+            s=shard,
+            rank=rank,
+            needle_len=needle_length,
+            max_ctx_len=maximum_context_length,
         )
 
         document_result = self.__handle_error(get_doc_by_rank_response)
@@ -176,12 +195,18 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/get_documents_by_ranks")
     def get_documents_by_ranks(
         self,
-        list_of_shard_and_rank: List[Tuple[int, int]],
-        maximum_document_display_length: int,
+        document_requests: Iterable[GetDocumentByRankRequest],
     ) -> List[Document]:
-        get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks(
-            list_of_s_and_rank=list_of_shard_and_rank,
-            max_disp_len=maximum_document_display_length,
+        get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks_2(
+            requests=[
+                (
+                    document_request.shard,
+                    document_request.rank,
+                    document_request.needle_length,
+                    document_request.maximum_context_length,
+                )
+                for document_request in document_requests
+            ],
         )
 
         document_results = self.__handle_error(get_docs_by_ranks_response)
@@ -207,10 +232,13 @@ class InfiniGramProcessor:
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_pointer")
     def get_document_by_pointer(
-        self, shard: int, pointer: int, maximum_document_display_length: int
+        self, shard: int, pointer: int, needle_length: int, maximum_context_length: int
     ) -> Document:
-        document_response = self.infini_gram_engine.get_doc_by_ptr(
-            s=shard, ptr=pointer, max_disp_len=maximum_document_display_length
+        document_response = self.infini_gram_engine.get_doc_by_ptr_2(
+            s=shard,
+            ptr=pointer,
+            needle_len=needle_length,
+            max_ctx_len=maximum_context_length,
         )
 
         document_result = self.__handle_error(result=document_response)
@@ -231,12 +259,18 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/get_documents_by_pointers")
     def get_documents_by_pointers(
         self,
-        list_of_shard_and_pointer: List[Tuple[int, int]],
-        maximum_document_display_length: int,
+        document_requests: Iterable[GetDocumentByPointerRequest],
     ) -> List[Document]:
-        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs(
-            list_of_s_and_ptr=list_of_shard_and_pointer,
-            max_disp_len=maximum_document_display_length,
+        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
+            requests=[
+                (
+                    document_request.shard,
+                    document_request.pointer,
+                    document_request.needle_length,
+                    document_request.maximum_context_length
+                )
+                for document_request in document_requests
+            ],
         )
 
         document_results = self.__handle_error(get_docs_by_pointers_response)
@@ -262,10 +296,10 @@ class InfiniGramProcessor:
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_index")
     def get_document_by_index(
-        self, document_index: int, maximum_document_display_length: int
+        self, document_index: int, maximum_context_length: int
     ) -> Document:
-        get_doc_by_index_response = self.infini_gram_engine.get_doc_by_ix(
-            doc_ix=document_index, max_disp_len=maximum_document_display_length
+        get_doc_by_index_response = self.infini_gram_engine.get_doc_by_ix_2(
+            doc_ix=document_index, max_ctx_len=maximum_context_length,
         )
 
         document_result = self.__handle_error(get_doc_by_index_response)
@@ -285,134 +319,16 @@ class InfiniGramProcessor:
 
     @tracer.start_as_current_span("infini_gram_processor/get_documents_by_indexes")
     def get_documents_by_indexes(
-        self, list_of_document_index: List[int], maximum_document_display_length: int
+        self, document_requests: Iterable[GetDocumentByIndexRequest]
     ) -> List[Document]:
-        get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs(
-            list_of_doc_ix=list_of_document_index,
-            max_disp_len=maximum_document_display_length,
+        get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs_2(
+            requests=[
+                (document_request.document_index, document_request.maximum_context_length)
+                for document_request in document_requests
+            ],
         )
 
         document_results = self.__handle_error(get_docs_by_indexes_response)
-
-        documents = []
-        for document_result in document_results:
-            parsed_metadata = json.loads(document_result["metadata"])
-            decoded_text = self.decode_tokens(document_result["token_ids"])
-
-            documents.append(
-                Document(
-                    document_index=document_result["doc_ix"],
-                    document_length=document_result["doc_len"],
-                    display_length=document_result["disp_len"],
-                    needle_offset=document_result["needle_offset"],
-                    metadata=parsed_metadata,
-                    token_ids=document_result["token_ids"],
-                    text=decoded_text,
-                )
-            )
-
-        return documents
-
-    @tracer.start_as_current_span("infini_gram_processor/get_documents_by_rank_v2")
-    def get_document_by_rank_v2(
-        self, shard: int, rank: int, needle_length: int, maximum_context_length: int
-    ) -> Document:
-        get_doc_by_rank_response = self.infini_gram_engine.get_doc_by_rank_2(
-            s=shard,
-            rank=rank,
-            needle_len=needle_length,
-            max_ctx_len=maximum_context_length,
-        )
-
-        document_result = self.__handle_error(get_doc_by_rank_response)
-
-        parsed_metadata = json.loads(document_result["metadata"])
-        decoded_text = self.decode_tokens(document_result["token_ids"])
-
-        return Document(
-            document_index=document_result["doc_ix"],
-            document_length=document_result["doc_len"],
-            display_length=document_result["disp_len"],
-            needle_offset=document_result["needle_offset"],
-            metadata=parsed_metadata,
-            token_ids=document_result["token_ids"],
-            text=decoded_text,
-        )
-
-    @tracer.start_as_current_span("infini_gram_processor/get_documents_by_ranks_v2")
-    def get_documents_by_ranks_v2(
-        self,
-        list_of_shard_and_rank: List[Tuple[int, int]],
-        needle_length: int,
-        maximum_context_length: int,
-    ) -> List[Document]:
-        get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks_2(
-            list_of_s_and_rank=list_of_shard_and_rank,
-            needle_len=needle_length,
-            max_ctx_len=maximum_context_length,
-        )
-
-        document_results = self.__handle_error(get_docs_by_ranks_response)
-
-        documents = []
-        for document_result in document_results:
-            parsed_metadata = json.loads(document_result["metadata"])
-            decoded_text = self.decode_tokens(document_result["token_ids"])
-
-            documents.append(
-                Document(
-                    document_index=document_result["doc_ix"],
-                    document_length=document_result["doc_len"],
-                    display_length=document_result["disp_len"],
-                    needle_offset=document_result["needle_offset"],
-                    metadata=parsed_metadata,
-                    token_ids=document_result["token_ids"],
-                    text=decoded_text,
-                )
-            )
-
-        return documents
-
-    @tracer.start_as_current_span("infini_gram_processor/get_document_by_pointer_v2")
-    def get_document_by_pointer_v2(
-        self, shard: int, pointer: int, needle_length: int, maximum_context_length: int
-    ) -> Document:
-        document_response = self.infini_gram_engine.get_doc_by_ptr_2(
-            s=shard,
-            ptr=pointer,
-            needle_len=needle_length,
-            max_ctx_len=maximum_context_length,
-        )
-
-        document_result = self.__handle_error(result=document_response)
-
-        parsed_metadata = json.loads(document_result["metadata"])
-        decoded_text = self.decode_tokens(document_result["token_ids"])
-
-        return Document(
-            document_index=document_result["doc_ix"],
-            document_length=document_result["doc_len"],
-            display_length=document_result["disp_len"],
-            needle_offset=document_result["needle_offset"],
-            metadata=parsed_metadata,
-            token_ids=document_result["token_ids"],
-            text=decoded_text,
-        )
-
-    @tracer.start_as_current_span("infini_gram_processor/get_documents_by_pointers_v2")
-    def get_documents_by_pointers_v2(
-        self,
-        list_of_shard_and_pointer: List[Tuple[int, int]],
-        needle_length: int,
-        maximum_context_length: int,
-    ) -> List[Document]:
-        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
-            list_of_s_and_ptr=list_of_shard_and_pointer,
-            needle_len=needle_length,
-            max_ctx_len=maximum_context_length,
-        )
-
-        document_results = self.__handle_error(get_docs_by_pointers_response)
 
         documents = []
         for document_result in document_results:
@@ -437,7 +353,7 @@ class InfiniGramProcessor:
     def search_documents(
         self,
         search: str,
-        maximum_document_display_length: int,
+        maximum_context_length: int,
         page: int,
         page_size: int,
     ) -> InfiniGramSearchResponse:
@@ -452,7 +368,7 @@ class InfiniGramProcessor:
                 documents=[], total_documents=matching_documents_result["cnt"]
             )
 
-        shard_and_rank_in_page = []
+        document_requests = []
         shard = 0
         offset = page * page_size
         for _ in range(page_size):
@@ -471,23 +387,19 @@ class InfiniGramProcessor:
             if shard >= len(matching_documents_result["segment_by_shard"]):
                 # We have reached the end of results
                 break
-            shard_and_rank_in_page.append(
-                {
-                    "shard": shard,
-                    "rank": matching_documents_result["segment_by_shard"][shard][0]
-                    + offset,
-                }
+            document_requests.append(
+                GetDocumentByRankRequest(
+                    shard=shard,
+                    rank=matching_documents_result["segment_by_shard"][shard][0] + offset,
+                    needle_length=len(tokenized_query_ids),
+                    maximum_context_length=maximum_context_length,
+                )
             )
             offset += 1
 
-        docs = [
-            self.get_document_by_rank(
-                shard=shard_and_rank["shard"],
-                rank=shard_and_rank["rank"],
-                maximum_document_display_length=maximum_document_display_length,
-            )
-            for shard_and_rank in shard_and_rank_in_page
-        ]
+        docs = self.get_documents_by_ranks(
+            document_requests=document_requests,
+        )
 
         return InfiniGramSearchResponse(
             documents=docs, total_documents=matching_documents_result["cnt"]
@@ -502,8 +414,6 @@ class InfiniGramProcessor:
         allow_spans_with_partial_words: bool,
         minimum_span_length: int,
         maximum_frequency: int,
-        maximum_span_density: float,
-        span_ranking_method: SpanRankingMethod,
     ) -> InfiniGramAttributionResponse:
         input_ids = self.tokenize(input)
 
@@ -516,19 +426,6 @@ class InfiniGramProcessor:
             max_cnt=maximum_frequency,
             enforce_bow=not allow_spans_with_partial_words,
         )
-
-        # Limit the density of spans, and keep the longest ones
-        maximum_num_spans = int(np.ceil(len(input_ids) * maximum_span_density))
-        spans = attribute_response["spans"]
-        if span_ranking_method == SpanRankingMethod.LENGTH:
-            spans = sorted(spans, key=lambda x: x["length"], reverse=True)
-        elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
-            spans = sorted(spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
-        else:
-            raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
-        spans = spans[:maximum_num_spans]
-        spans = list(sorted(spans, key=lambda x: x["l"]))
-        attribute_response["spans"] = spans
 
         attribute_result = self.__handle_error(attribute_response)
 

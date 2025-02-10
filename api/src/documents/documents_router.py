@@ -8,6 +8,7 @@ from src.documents.documents_service import (
     InfiniGramDocumentsResponse,
     SearchResponse,
 )
+from src.infinigram.processor import GetDocumentByIndexRequest
 
 documents_router = APIRouter()
 
@@ -43,7 +44,7 @@ def search_documents(
 ) -> SearchResponse:
     result = documents_service.search_documents(
         search,
-        maximum_document_display_length=maximum_document_display_length,
+        maximum_context_length=maximum_document_display_length,
         page=page,
         page_size=page_size,
     )
@@ -59,7 +60,7 @@ def get_document_by_index(
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_index(
         document_index=int(document_index),
-        maximum_document_display_length=maximum_document_display_length,
+        maximum_context_length=maximum_document_display_length,
     )
 
     return result
@@ -72,8 +73,13 @@ def get_documents_by_index(
     maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
 ) -> InfiniGramDocumentsResponse:
     result = documents_service.get_multiple_documents_by_index(
-        document_indexes=document_indexes,
-        maximum_document_display_length=maximum_document_display_length,
+        document_requests=[
+            GetDocumentByIndexRequest(
+                document_index=document_index,
+                maximum_context_length=maximum_document_display_length,
+            )
+            for document_index in document_indexes
+        ],
     )
 
     return result

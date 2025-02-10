@@ -1,41 +1,27 @@
 import random
-from enum import Enum
 from itertools import islice
 from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
 
 import numpy as np
 from opentelemetry import trace
 from pydantic import Field
-from rank_bm25 import BM25Okapi  # type: ignore
 
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
 from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
     DocumentsService,
-    GetDocumentByPointerRequest,
 )
 from src.infinigram.processor import (
     BaseInfiniGramResponse,
     DocumentWithPointer,
+    GetDocumentByPointerRequest,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
     SpanRankingMethod,
 )
 
 tracer = trace.get_tracer(get_config().application_name)
-
-
-class FilterMethod(Enum):
-    NONE = "none"
-    BM25 = "bm25"
-
-
-class FieldsConsideredForRanking(Enum):
-    PROMPT = "prompt"
-    RESPONSE = "response"
-    CONCATENATE_PROMPT_AND_RESPONSE = "prompt|response"
-    ADD_PROMPT_AND_RESPONSE_SCORES = "prompt+response"
 
 
 class AttributionDocument(CamelCaseModel):
@@ -54,7 +40,7 @@ class BaseAttributionSpan(CamelCaseModel, Generic[TAttributionDocument]):
     unigram_logprob_sum: float
     text: str
     token_ids: Sequence[int]
-    documents: Sequence[TAttributionDocument]
+    documents: List[TAttributionDocument]
 
 
 class AttributionSpan(BaseAttributionSpan[AttributionDocument]): ...
@@ -105,31 +91,9 @@ class AttributionService:
 
         return (span_text_tokens, span_text)
 
-    @tracer.start_as_current_span("attribution_service/cut_document")
-    def cut_document(
-        self,
-        token_ids: List[int],
-        needle_offset: int,
-        span_length: int,
-        maximum_context_length: int,
-    ) -> tuple[str, int, int]:
-        # cut the left context if necessary
-        if needle_offset > maximum_context_length:
-            token_ids = token_ids[(needle_offset - maximum_context_length) :]
-            needle_offset = maximum_context_length
-        # cut the right context if necessary
-        if len(token_ids) - needle_offset - span_length > maximum_context_length:
-            token_ids = token_ids[
-                : (needle_offset + span_length + maximum_context_length)
-            ]
-        display_length = len(token_ids)
-        text = self.infini_gram_processor.decode_tokens(token_ids)
-        return text, display_length, needle_offset
-
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     def get_attribution_for_response(
         self,
-        prompt: str,
         response: str,
         delimiters: List[str],
         allow_spans_with_partial_words: bool,
@@ -137,208 +101,83 @@ class AttributionService:
         maximum_frequency: int,
         maximum_span_density: float,
         span_ranking_method: SpanRankingMethod,
-        include_documents: bool,
-        maximum_document_context_length_retrieved: int,
-        maximum_document_context_length_displayed: int,
-        maximum_document_context_length_displayed_long: int,
+        maximum_context_length: int,
         maximum_documents_per_span: int,
-        filter_method: FilterMethod,
-        filter_bm25_fields_considered: FieldsConsideredForRanking,
-        filter_bm25_ratio_to_keep: float,
-        include_input_as_tokens: bool,
-    ) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
+    ) -> InfiniGramAttributionResponseWithDocuments:
+
         attribute_result = self.infini_gram_processor.attribute(
             input=response,
             delimiters=delimiters,
             allow_spans_with_partial_words=allow_spans_with_partial_words,
             minimum_span_length=minimum_span_length,
             maximum_frequency=maximum_frequency,
-            maximum_span_density=maximum_span_density,
-            span_ranking_method=span_ranking_method,
         )
 
-        if include_documents:
-            with tracer.start_as_current_span(
-                "attribution_service/get_documents_for_spans"
-            ):
-                spans_with_documents: List[AttributionSpanWithDocuments] = []
-
-                # Populate the spans with documents
-                for span in attribute_result.spans:
-                    document_requests: List[GetDocumentByPointerRequest] = [
-                        GetDocumentByPointerRequest(
-                            shard=document["s"], pointer=document["ptr"]
-                        )
-                        for document in span["docs"]
-                    ]
-
-                    if len(document_requests) > maximum_documents_per_span:
-                        random.seed(42)  # For reproducibility
-                        document_requests = random.sample(
-                            document_requests, maximum_documents_per_span
-                        )
-
-                    documents = self.documents_service.get_multiple_documents_by_pointer(
-                        document_requests=document_requests,
-                        needle_length=span["length"],
-                        maximum_context_length=maximum_document_context_length_retrieved,
-                    )
-
-                    (span_text_tokens, span_text) = self.__get_span_text(
-                        input_token_ids=attribute_result.input_token_ids,
-                        start=span["l"],
-                        stop=span["r"],
-                    )
-
-                    span_with_document = AttributionSpanWithDocuments(
-                        left=span["l"],
-                        right=span["r"],
-                        length=span["length"],
-                        count=span["count"],
-                        unigram_logprob_sum=span["unigram_logprob_sum"],
-                        documents=documents,
-                        text=span_text,
-                        token_ids=span_text_tokens,
-                    )
-
-                    spans_with_documents.append(span_with_document)
-
-                # Filter documents using BM25
-                if filter_method == FilterMethod.BM25:
-                    docs = [
-                        doc.text
-                        for span_with_document in spans_with_documents
-                        for doc in span_with_document.documents
-                    ]
-                    if len(docs) > 0:  # if there are no docs, we don't do anything
-                        tokenized_corpus = [doc.split(" ") for doc in docs]
-                        bm25 = BM25Okapi(tokenized_corpus)
-
-                        if (
-                            filter_bm25_fields_considered
-                            == FieldsConsideredForRanking.PROMPT
-                        ):
-                            doc_scores = bm25.get_scores(prompt.split(" "))
-                        elif (
-                            filter_bm25_fields_considered
-                            == FieldsConsideredForRanking.RESPONSE
-                        ):
-                            doc_scores = bm25.get_scores(response.split(" "))
-                        elif (
-                            filter_bm25_fields_considered
-                            == FieldsConsideredForRanking.CONCATENATE_PROMPT_AND_RESPONSE
-                        ):
-                            combined_input = prompt + " " + response
-                            doc_scores = bm25.get_scores(combined_input.split(" "))
-                        elif (
-                            filter_bm25_fields_considered
-                            == FieldsConsideredForRanking.ADD_PROMPT_AND_RESPONSE_SCORES
-                        ):
-                            doc_scores = bm25.get_scores(
-                                prompt.split(" ")
-                            ) + bm25.get_scores(response.split(" "))
-                        else:
-                            raise ValueError(
-                                "Invalid filter_bm25_fields_considered value"
-                            )
-
-                        # keep the top ratio_to_keep documents
-                        ratio_to_keep = filter_bm25_ratio_to_keep
-                        num_docs_to_keep = int(np.ceil(len(docs) * ratio_to_keep))
-                        indices_to_keep = np.argsort(doc_scores)[-num_docs_to_keep:]
-
-                        new_spans_with_documents = []
-                        i = 0
-                        for span_with_document in spans_with_documents:
-                            new_documents = []
-                            for j in range(len(span_with_document.documents)):
-                                if i in indices_to_keep:
-                                    span_with_document.documents[
-                                        j
-                                    ].relevance_score = doc_scores[i]
-                                    new_documents.append(
-                                        span_with_document.documents[j]
-                                    )
-                                i += 1
-                            if len(new_documents) > 0:
-                                new_spans_with_documents.append(
-                                    AttributionSpanWithDocuments(
-                                        left=span_with_document.left,
-                                        right=span_with_document.right,
-                                        length=span_with_document.length,
-                                        count=span_with_document.count,
-                                        unigram_logprob_sum=span_with_document.unigram_logprob_sum,
-                                        documents=new_documents,
-                                        text=span_with_document.text,
-                                        token_ids=span_with_document.token_ids,
-                                    )
-                                )
-                        spans_with_documents = new_spans_with_documents
-
-                # For each document, truncate the excess context from retrieved_length to displayed_length
-                for span_with_documents in spans_with_documents:
-                    for doc in span_with_documents.documents:
-                        # prepare the long version
-                        (
-                            doc.text_long,
-                            doc.display_length_long,
-                            doc.needle_offset_long,
-                        ) = self.cut_document(
-                            doc.token_ids,
-                            doc.needle_offset,
-                            span_with_documents.length,
-                            maximum_document_context_length_displayed_long,
-                        )
-                        # prepare the short version
-                        # this will overwrite doc.needle_offset, so make sure to prepare the short version last!
-                        doc.text, doc.display_length, doc.needle_offset = (
-                            self.cut_document(
-                                doc.token_ids,
-                                doc.needle_offset,
-                                span_with_documents.length,
-                                maximum_document_context_length_displayed,
-                            )
-                        )
-                return InfiniGramAttributionResponseWithDocuments(
-                    index=self.infini_gram_processor.index,
-                    spans=spans_with_documents,
-                    input_tokens=self.infini_gram_processor.tokenize_to_list(response)
-                    if include_input_as_tokens
-                    else None,
-                )
-
+        # Limit the density of spans, and keep the longest ones
+        maximum_num_spans = int(np.ceil(len(attribute_result.input_token_ids) * maximum_span_density))
+        spans = attribute_result.spans
+        if span_ranking_method == SpanRankingMethod.LENGTH:
+            spans = sorted(spans, key=lambda x: x["length"], reverse=True)
+        elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
+            spans = sorted(spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
         else:
-            spans: List[AttributionSpan] = []
+            raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
+        spans = spans[:maximum_num_spans]
+        spans = list(sorted(spans, key=lambda x: x["l"]))
+        attribute_result.spans = spans
+
+        # Populate the spans with documents
+        with tracer.start_as_current_span(
+            "attribution_service/get_documents_for_spans"
+        ):
+            spans_with_documents: List[AttributionSpanWithDocuments] = []
             for span in attribute_result.spans:
                 (span_text_tokens, span_text) = self.__get_span_text(
                     input_token_ids=attribute_result.input_token_ids,
                     start=span["l"],
                     stop=span["r"],
                 )
-
-                spans.append(
-                    AttributionSpan(
-                        left=span["l"],
-                        right=span["r"],
-                        length=span["length"],
-                        count=span["count"],
-                        unigram_logprob_sum=span["unigram_logprob_sum"],
-                        text=span_text,
-                        token_ids=span_text_tokens,
-                        documents=[
-                            AttributionDocument(
-                                shard=document["s"],
-                                pointer=document["ptr"],
-                            )
-                            for document in span["docs"]
-                        ],
-                    )
+                span_with_document = AttributionSpanWithDocuments(
+                    left=span["l"],
+                    right=span["r"],
+                    length=span["length"],
+                    count=span["count"],
+                    unigram_logprob_sum=span["unigram_logprob_sum"],
+                    documents=[],
+                    text=span_text,
+                    token_ids=span_text_tokens,
                 )
+                spans_with_documents.append(span_with_document)
 
-            return InfiniGramAttributionResponse(
+            all_document_requests = []
+            span_ix_of_document_requests = []
+            for span_ix, span in enumerate(attribute_result.spans):
+                document_requests: List[GetDocumentByPointerRequest] = [
+                    GetDocumentByPointerRequest(
+                        shard=document["s"],
+                        pointer=document["ptr"],
+                        needle_length=span["length"],
+                        maximum_context_length=maximum_context_length,
+                    )
+                    for document in span["docs"]
+                ]
+                if len(document_requests) > maximum_documents_per_span:
+                    random.seed(42)  # For reproducibility
+                    document_requests = random.sample(
+                        document_requests, maximum_documents_per_span
+                    )
+                all_document_requests.extend(document_requests)
+                span_ix_of_document_requests.extend([span_ix] * len(document_requests))
+
+            all_documents = self.documents_service.get_multiple_documents_by_pointer(
+                document_requests=all_document_requests,
+            )
+
+            for (span_ix, document) in zip(span_ix_of_document_requests, all_documents):
+                spans_with_documents[span_ix].documents.append(document)
+
+            return InfiniGramAttributionResponseWithDocuments(
                 index=self.infini_gram_processor.index,
-                spans=spans,
-                input_tokens=self.infini_gram_processor.tokenize_to_list(response)
-                if include_input_as_tokens
-                else None,
+                spans=spans_with_documents,
+                input_tokens=self.infini_gram_processor.tokenize_to_list(response),
             )

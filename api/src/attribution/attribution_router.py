@@ -55,6 +55,16 @@ class AttributionRequest(CamelCaseModel):
         default=250,
         description="The maximum number of tokens of the context (on each side) to retrieve from the document",
     )
+    maximum_context_length_long: int = Field(
+        gt=0,
+        default=100,
+        description="The maximum number of tokens of the context (on each side) for the document modal",
+    )
+    maximum_context_length_snippet: int = Field(
+        gt=0,
+        default=40,
+        description="The maximum number of tokens of the context (on each side) for the snippet in document cards",
+    )
 
 
 @attribution_router.post(path="/{index}/attribution")
@@ -71,6 +81,8 @@ def get_document_attributions(
         maximum_span_density=body.maximum_span_density,
         span_ranking_method=body.span_ranking_method,
         maximum_context_length=body.maximum_context_length,
+        maximum_context_length_long=body.maximum_context_length_long,
+        maximum_context_length_snippet=body.maximum_context_length_snippet,
         maximum_documents_per_span=body.maximum_documents_per_span,
     )
 

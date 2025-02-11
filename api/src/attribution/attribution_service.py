@@ -24,6 +24,15 @@ from src.infinigram.processor import (
 tracer = trace.get_tracer(get_config().application_name)
 
 
+class AttributionDocument(Document):
+    display_length_long: int
+    needle_offset_long: int
+    text_long: str
+    display_offset_snippet: int
+    needle_offset_snippet: int
+    text_snippet: str
+
+
 class AttributionSpan(CamelCaseModel):
     left: int
     right: int
@@ -32,7 +41,7 @@ class AttributionSpan(CamelCaseModel):
     unigram_logprob_sum: float
     text: str
     token_ids: Sequence[int]
-    documents: List[Document]
+    documents: List[AttributionDocument]
 
 
 class AttributionResponse(BaseInfiniGramResponse):
@@ -62,6 +71,27 @@ class AttributionService:
 
         return (span_text_tokens, span_text)
 
+    @tracer.start_as_current_span("attribution_service/cut_document")
+    def cut_document(
+        self,
+        token_ids: List[int],
+        needle_offset: int,
+        span_length: int,
+        maximum_context_length: int,
+    ) -> tuple[int, int, str]:
+        # cut the left context if necessary
+        if needle_offset > maximum_context_length:
+            token_ids = token_ids[(needle_offset - maximum_context_length) :]
+            needle_offset = maximum_context_length
+        # cut the right context if necessary
+        if len(token_ids) - needle_offset - span_length > maximum_context_length:
+            token_ids = token_ids[
+                : (needle_offset + span_length + maximum_context_length)
+            ]
+        display_length = len(token_ids)
+        text = self.infini_gram_processor.decode_tokens(token_ids)
+        return display_length, needle_offset, text
+
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     def get_attribution_for_response(
         self,
@@ -73,6 +103,8 @@ class AttributionService:
         maximum_span_density: float,
         span_ranking_method: SpanRankingMethod,
         maximum_context_length: int,
+        maximum_context_length_long: int,
+        maximum_context_length_snippet: int,
         maximum_documents_per_span: int,
     ) -> AttributionResponse:
 
@@ -143,7 +175,29 @@ class AttributionService:
             )
 
             for (span_ix, document) in zip(span_ix_of_document_requests, all_documents):
-                spans[span_ix].documents.append(document)
+                display_length_long, needle_offset_long, text_long = self.cut_document(
+                    token_ids=document.token_ids,
+                    needle_offset=document.needle_offset,
+                    span_length=spans[span_ix].length,
+                    maximum_context_length=maximum_context_length_long,
+                )
+                display_length_snippet, needle_offset_snippet, text_snippet = self.cut_document(
+                    token_ids=document.token_ids,
+                    needle_offset=document.needle_offset,
+                    span_length=spans[span_ix].length,
+                    maximum_context_length=maximum_context_length_snippet,
+                )
+                spans[span_ix].documents.append(
+                    AttributionDocument(
+                        **vars(document),
+                        display_length_long=display_length_long,
+                        needle_offset_long=needle_offset_long,
+                        text_long=text_long,
+                        display_offset_snippet=display_length_snippet,
+                        needle_offset_snippet=needle_offset_snippet,
+                        text_snippet=text_snippet,
+                    )
+                )
 
             return AttributionResponse(
                 index=self.infini_gram_processor.index,

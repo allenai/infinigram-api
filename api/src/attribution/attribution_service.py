@@ -24,11 +24,6 @@ from src.infinigram.processor import (
 tracer = trace.get_tracer(get_config().application_name)
 
 
-class AttributionDocument(Document):
-    shard: int
-    pointer: int
-
-
 class AttributionSpan(CamelCaseModel):
     left: int
     right: int
@@ -37,7 +32,7 @@ class AttributionSpan(CamelCaseModel):
     unigram_logprob_sum: float
     text: str
     token_ids: Sequence[int]
-    documents: List[AttributionDocument]
+    documents: List[Document]
 
 
 class AttributionResponse(BaseInfiniGramResponse):
@@ -147,20 +142,8 @@ class AttributionService:
                 document_requests=all_document_requests,
             )
 
-            for (span_ix, document, document_request) in zip(span_ix_of_document_requests, all_documents, all_document_requests):
-                spans[span_ix].documents.append(
-                    AttributionDocument(
-                        shard=document_request.shard,
-                        pointer=document_request.pointer,
-                        document_index=document.document_index,
-                        document_length=document.document_length,
-                        display_length=document.display_length,
-                        needle_offset=document.needle_offset,
-                        metadata=document.metadata,
-                        token_ids=document.token_ids,
-                        text=document.text,
-                    )
-                )
+            for (span_ix, document) in zip(span_ix_of_document_requests, all_documents):
+                spans[span_ix].documents.append(document)
 
             return AttributionResponse(
                 index=self.infini_gram_processor.index,

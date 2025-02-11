@@ -7,9 +7,7 @@ from src.config import get_config
 from src.infinigram.processor import (
     BaseInfiniGramResponse,
     Document,
-    DocumentWithPointer,
     GetDocumentByIndexRequest,
-    GetDocumentByPointerRequest,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
 )
@@ -117,53 +115,3 @@ class DocumentsService:
         return InfiniGramDocumentsResponse(
             index=self.infini_gram_processor.index, documents=mapped_documents
         )
-
-    @tracer.start_as_current_span("documents_service/get_document_by_pointer")
-    def get_document_by_pointer(
-        self,
-        shard: int,
-        pointer: int,
-        needle_length: int,
-        maximum_context_length: int,
-    ) -> DocumentWithPointer:
-        document = self.infini_gram_processor.get_document_by_pointer(
-            shard=shard,
-            pointer=pointer,
-            needle_length=needle_length,
-            maximum_context_length=maximum_context_length,
-        )
-
-        return DocumentWithPointer(
-            document_index=document.document_index,
-            document_length=document.document_length,
-            display_length=document.display_length,
-            needle_offset=document.needle_offset,
-            metadata=document.metadata,
-            token_ids=document.token_ids,
-            text=document.text,
-            shard=shard,
-            pointer=pointer,
-        )
-
-    @tracer.start_as_current_span("documents_service/get_multiple_documents_by_pointer")
-    def get_multiple_documents_by_pointer(
-        self, document_requests: Iterable[GetDocumentByPointerRequest],
-    ) -> List[DocumentWithPointer]:
-        documents = self.infini_gram_processor.get_documents_by_pointers(
-            document_requests=document_requests,
-        )
-        mapped_documents = [
-            DocumentWithPointer(
-                document_index=document.document_index,
-                document_length=document.document_length,
-                display_length=document.display_length,
-                needle_offset=document.needle_offset,
-                metadata=document.metadata,
-                token_ids=document.token_ids,
-                text=document.text,
-                shard=document_request.shard,
-                pointer=document_request.pointer,
-            )
-            for (document, document_request) in zip(documents, document_requests)
-        ]
-        return mapped_documents

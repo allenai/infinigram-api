@@ -84,11 +84,6 @@ class Document(CamelCaseModel):
     text: str
 
 
-class DocumentWithPointer(Document):
-    shard: int
-    pointer: int
-
-
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
     spans: List[AttributionSpan]
     input_token_ids: List[int]

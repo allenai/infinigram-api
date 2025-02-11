@@ -6,8 +6,7 @@ from pydantic import Field
 from src.infinigram.processor import SpanRankingMethod
 from src.attribution.attribution_service import (
     AttributionService,
-    InfiniGramAttributionResponse,
-    InfiniGramAttributionResponseWithDocuments,
+    AttributionResponse,
 )
 from src.camel_case_model import CamelCaseModel
 
@@ -62,7 +61,7 @@ class AttributionRequest(CamelCaseModel):
 def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
-) -> InfiniGramAttributionResponse | InfiniGramAttributionResponseWithDocuments:
+) -> AttributionResponse:
     result = attribution_service.get_attribution_for_response(
         response=body.response,
         delimiters=body.delimiters,

@@ -1,6 +1,6 @@
 import random
 from itertools import islice
-from typing import Generic, Iterable, List, Optional, Sequence, TypeVar
+from typing import Iterable, List, Optional, Sequence
 
 import numpy as np
 from opentelemetry import trace
@@ -14,7 +14,7 @@ from src.documents.documents_service import (
 )
 from src.infinigram.processor import (
     BaseInfiniGramResponse,
-    DocumentWithPointer,
+    Document,
     GetDocumentByPointerRequest,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
@@ -24,15 +24,12 @@ from src.infinigram.processor import (
 tracer = trace.get_tracer(get_config().application_name)
 
 
-class AttributionDocument(CamelCaseModel):
+class AttributionDocument(Document):
     shard: int
     pointer: int
 
 
-TAttributionDocument = TypeVar("TAttributionDocument")
-
-
-class BaseAttributionSpan(CamelCaseModel, Generic[TAttributionDocument]):
+class AttributionSpan(CamelCaseModel):
     left: int
     right: int
     length: int
@@ -40,35 +37,14 @@ class BaseAttributionSpan(CamelCaseModel, Generic[TAttributionDocument]):
     unigram_logprob_sum: float
     text: str
     token_ids: Sequence[int]
-    documents: List[TAttributionDocument]
+    documents: List[AttributionDocument]
 
 
-class AttributionSpan(BaseAttributionSpan[AttributionDocument]): ...
-
-
-class AttributionSpanWithDocuments(BaseAttributionSpan[DocumentWithPointer]): ...
-
-
-TAttributionSpan = TypeVar("TAttributionSpan")
-
-
-class BaseInfinigramAttributionResponse(
-    BaseInfiniGramResponse, Generic[TAttributionSpan]
-):
-    spans: Sequence[TAttributionSpan]
+class AttributionResponse(BaseInfiniGramResponse):
+    spans: Sequence[AttributionSpan]
     input_tokens: Optional[Sequence[str]] = Field(
         examples=[["busy", " medieval", " streets", "."]]
     )
-
-
-class InfiniGramAttributionResponse(
-    BaseInfinigramAttributionResponse[AttributionSpan]
-): ...
-
-
-class InfiniGramAttributionResponseWithDocuments(
-    BaseInfinigramAttributionResponse[AttributionSpanWithDocuments]
-): ...
 
 
 class AttributionService:
@@ -103,7 +79,7 @@ class AttributionService:
         span_ranking_method: SpanRankingMethod,
         maximum_context_length: int,
         maximum_documents_per_span: int,
-    ) -> InfiniGramAttributionResponseWithDocuments:
+    ) -> AttributionResponse:
 
         attribute_result = self.infini_gram_processor.attribute(
             input=response,
@@ -115,29 +91,27 @@ class AttributionService:
 
         # Limit the density of spans, and keep the longest ones
         maximum_num_spans = int(np.ceil(len(attribute_result.input_token_ids) * maximum_span_density))
-        spans = attribute_result.spans
         if span_ranking_method == SpanRankingMethod.LENGTH:
-            spans = sorted(spans, key=lambda x: x["length"], reverse=True)
+            attribute_result.spans = sorted(attribute_result.spans, key=lambda x: x["length"], reverse=True)
         elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
-            spans = sorted(spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
+            attribute_result.spans = sorted(attribute_result.spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
         else:
             raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
-        spans = spans[:maximum_num_spans]
-        spans = list(sorted(spans, key=lambda x: x["l"]))
-        attribute_result.spans = spans
+        attribute_result.spans = attribute_result.spans[:maximum_num_spans]
+        attribute_result.spans = list(sorted(attribute_result.spans, key=lambda x: x["l"]))
 
         # Populate the spans with documents
         with tracer.start_as_current_span(
             "attribution_service/get_documents_for_spans"
         ):
-            spans_with_documents: List[AttributionSpanWithDocuments] = []
+            spans: List[AttributionSpan] = []
             for span in attribute_result.spans:
                 (span_text_tokens, span_text) = self.__get_span_text(
                     input_token_ids=attribute_result.input_token_ids,
                     start=span["l"],
                     stop=span["r"],
                 )
-                span_with_document = AttributionSpanWithDocuments(
+                span_with_document = AttributionSpan(
                     left=span["l"],
                     right=span["r"],
                     length=span["length"],
@@ -147,7 +121,7 @@ class AttributionService:
                     text=span_text,
                     token_ids=span_text_tokens,
                 )
-                spans_with_documents.append(span_with_document)
+                spans.append(span_with_document)
 
             all_document_requests = []
             span_ix_of_document_requests = []
@@ -169,15 +143,27 @@ class AttributionService:
                 all_document_requests.extend(document_requests)
                 span_ix_of_document_requests.extend([span_ix] * len(document_requests))
 
-            all_documents = self.documents_service.get_multiple_documents_by_pointer(
+            all_documents = self.infini_gram_processor.get_documents_by_pointers(
                 document_requests=all_document_requests,
             )
 
-            for (span_ix, document) in zip(span_ix_of_document_requests, all_documents):
-                spans_with_documents[span_ix].documents.append(document)
+            for (span_ix, document, document_request) in zip(span_ix_of_document_requests, all_documents, all_document_requests):
+                spans[span_ix].documents.append(
+                    AttributionDocument(
+                        shard=document_request.shard,
+                        pointer=document_request.pointer,
+                        document_index=document.document_index,
+                        document_length=document.document_length,
+                        display_length=document.display_length,
+                        needle_offset=document.needle_offset,
+                        metadata=document.metadata,
+                        token_ids=document.token_ids,
+                        text=document.text,
+                    )
+                )
 
-            return InfiniGramAttributionResponseWithDocuments(
+            return AttributionResponse(
                 index=self.infini_gram_processor.index,
-                spans=spans_with_documents,
+                spans=spans,
                 input_tokens=self.infini_gram_processor.tokenize_to_list(response),
             )

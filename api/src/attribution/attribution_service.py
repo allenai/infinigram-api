@@ -131,7 +131,7 @@ class AttributionService:
         with tracer.start_as_current_span(
             "attribution_service/get_documents_for_spans"
         ):
-            spans: List[AttributionSpan] = []
+            spans_with_document: List[AttributionSpan] = []
             for span in attribute_result.spans:
                 (span_text_tokens, span_text) = self.__get_span_text(
                     input_token_ids=attribute_result.input_token_ids,
@@ -148,7 +148,7 @@ class AttributionService:
                     text=span_text,
                     token_ids=span_text_tokens,
                 )
-                spans.append(span_with_document)
+                spans_with_document.append(span_with_document)
 
             document_request_by_span = []
             for span_ix, span in enumerate(attribute_result.spans):
@@ -159,7 +159,7 @@ class AttributionService:
                 document_request_by_span.append(
                     GetDocumentByPointerRequest(
                         docs=docs,
-                        docs_takedown=span.get("docs_takedown", []),
+                        docs_takedown=span["docs_takedown"],
                         needle_length=span["length"],
                         maximum_context_length=maximum_context_length,
                     )
@@ -169,21 +169,21 @@ class AttributionService:
                 document_request_by_span=document_request_by_span,
             )
 
-            for (span, documents) in zip(spans, documents_by_span):
+            for (span_with_document, documents) in zip(spans_with_document, documents_by_span):
                 for document in documents:
                     display_length_long, needle_offset_long, text_long = self.cut_document(
                         token_ids=document.token_ids,
                         needle_offset=document.needle_offset,
-                        span_length=span.length,
+                        span_length=span_with_document.length,
                         maximum_context_length=maximum_context_length_long,
                     )
                     display_length_snippet, needle_offset_snippet, text_snippet = self.cut_document(
                         token_ids=document.token_ids,
                         needle_offset=document.needle_offset,
-                        span_length=span.length,
+                        span_length=span_with_document.length,
                         maximum_context_length=maximum_context_length_snippet,
                     )
-                    span.documents.append(
+                    span_with_document.documents.append(
                         AttributionDocument(
                             **vars(document),
                             display_length_long=display_length_long,
@@ -197,6 +197,6 @@ class AttributionService:
 
             return AttributionResponse(
                 index=self.infini_gram_processor.index,
-                spans=spans,
+                spans=spans_with_document,
                 input_tokens=self.infini_gram_processor.tokenize_to_list(response),
             )

@@ -15,7 +15,7 @@ from fastapi import Depends
 from infini_gram.engine import InfiniGramEngineWithTakedown
 from infini_gram.models import (
     AttributionDoc,
-    AttributionSpan,
+    AttributionSpanWithTakedown,
     ErrorResponse,
     InfiniGramEngineResponse,
 )
@@ -86,7 +86,7 @@ class Document(CamelCaseModel):
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: List[AttributionSpan]
+    spans: List[AttributionSpanWithTakedown]
     input_token_ids: List[int]
 
 
@@ -257,7 +257,7 @@ class InfiniGramProcessor:
     def get_documents_by_pointers(
         self,
         document_request_by_span: Iterable[GetDocumentByPointerRequest],
-    ) -> List[Document]:
+    ) -> List[List[Document]]:
         get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
             requests=[
                 {

@@ -15,6 +15,7 @@ class AvailableInfiniGramIndexId(Enum):
 class IndexMapping(TypedDict):
     tokenizer: Tokenizer
     index_dir: str | Iterable[str]
+    index_dir_diff: str | Iterable[str] = []
 
 
 IndexMappings = TypedDict(
@@ -29,6 +30,7 @@ index_mappings: IndexMappings = {
     AvailableInfiniGramIndexId.PILEVAL_LLAMA.value: {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": f"{config.index_base_path}/v4_pileval_llama",
+        "index_dir_diff": [],
     },
     AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -37,5 +39,6 @@ index_mappings: IndexMappings = {
             f"{config.index_base_path}/olmoe-mix-0924-nodclm",
             f"{config.index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
         ],
+        "index_dir_diff": [],
     },
 }

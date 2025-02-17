@@ -150,54 +150,50 @@ class AttributionService:
                 )
                 spans.append(span_with_document)
 
-            all_document_requests = []
-            span_ix_of_document_requests = []
+            document_request_by_span = []
             for span_ix, span in enumerate(attribute_result.spans):
-                document_requests: List[GetDocumentByPointerRequest] = [
+                docs = span["docs"]
+                if len(docs) > maximum_documents_per_span:
+                    random.seed(42)  # For reproducibility
+                    docs = random.sample(docs, maximum_documents_per_span)
+                document_request_by_span.append(
                     GetDocumentByPointerRequest(
-                        shard=document["s"],
-                        pointer=document["ptr"],
+                        docs=docs,
+                        docs_takedown=span.get("docs_takedown", []),
                         needle_length=span["length"],
                         maximum_context_length=maximum_context_length,
                     )
-                    for document in span["docs"]
-                ]
-                if len(document_requests) > maximum_documents_per_span:
-                    random.seed(42)  # For reproducibility
-                    document_requests = random.sample(
-                        document_requests, maximum_documents_per_span
-                    )
-                all_document_requests.extend(document_requests)
-                span_ix_of_document_requests.extend([span_ix] * len(document_requests))
+                )
 
-            all_documents = self.infini_gram_processor.get_documents_by_pointers(
-                document_requests=all_document_requests,
+            documents_by_span = self.infini_gram_processor.get_documents_by_pointers(
+                document_request_by_span=document_request_by_span,
             )
 
-            for (span_ix, document) in zip(span_ix_of_document_requests, all_documents):
-                display_length_long, needle_offset_long, text_long = self.cut_document(
-                    token_ids=document.token_ids,
-                    needle_offset=document.needle_offset,
-                    span_length=spans[span_ix].length,
-                    maximum_context_length=maximum_context_length_long,
-                )
-                display_length_snippet, needle_offset_snippet, text_snippet = self.cut_document(
-                    token_ids=document.token_ids,
-                    needle_offset=document.needle_offset,
-                    span_length=spans[span_ix].length,
-                    maximum_context_length=maximum_context_length_snippet,
-                )
-                spans[span_ix].documents.append(
-                    AttributionDocument(
-                        **vars(document),
-                        display_length_long=display_length_long,
-                        needle_offset_long=needle_offset_long,
-                        text_long=text_long,
-                        display_offset_snippet=display_length_snippet,
-                        needle_offset_snippet=needle_offset_snippet,
-                        text_snippet=text_snippet,
+            for (span, documents) in zip(spans, documents_by_span):
+                for document in documents:
+                    display_length_long, needle_offset_long, text_long = self.cut_document(
+                        token_ids=document.token_ids,
+                        needle_offset=document.needle_offset,
+                        span_length=span.length,
+                        maximum_context_length=maximum_context_length_long,
                     )
-                )
+                    display_length_snippet, needle_offset_snippet, text_snippet = self.cut_document(
+                        token_ids=document.token_ids,
+                        needle_offset=document.needle_offset,
+                        span_length=span.length,
+                        maximum_context_length=maximum_context_length_snippet,
+                    )
+                    span.documents.append(
+                        AttributionDocument(
+                            **vars(document),
+                            display_length_long=display_length_long,
+                            needle_offset_long=needle_offset_long,
+                            text_long=text_long,
+                            display_offset_snippet=display_length_snippet,
+                            needle_offset_snippet=needle_offset_snippet,
+                            text_snippet=text_snippet,
+                        )
+                    )
 
             return AttributionResponse(
                 index=self.infini_gram_processor.index,

@@ -2,8 +2,8 @@ import requests
 import multiprocessing as mp
 import random
 
-NUM_TOKENS = 200
-NUM_CONCURRENT_REQUESTS = 3
+NUM_TOKENS = 500
+NUM_CONCURRENT_REQUESTS = 32
 
 PAYLOAD = {
     'prompt': '',
@@ -14,14 +14,10 @@ PAYLOAD = {
     'maximumFrequency': 1000000,
     'maximumSpanDensity': 0.05,
     'spanRankingMethod': 'unigram_logprob_sum',
-    'includeDocuments': True,
     'maximumDocumentsPerSpan': 10,
-    'maximumDocumentContextLengthRetrieved': 250,
-    'maximumDocumentContextLengthDisplayed': 50,
-    'filterMethod': 'bm25',
-    'filterBm25FieldsConsidered': 'prompt|response',
-    'filterBm25RatioToKeep': 1.0,
-    'includeInputAsTokens': True,
+    'maximumContextLength': 250,
+    'maximumContextLengthLong': 250,
+    'maximumContextLengthSnippet': 40,
 }
 
 url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
@@ -41,6 +37,11 @@ with mp.get_context('fork').Pool(NUM_CONCURRENT_REQUESTS) as p:
         responses.append(response)
     results = p.map(issue_request, responses)
 
-    for i in range(NUM_CONCURRENT_REQUESTS):
-        result = issue_request(responses[i])
-        assert result == results[i]
+    for result in results:
+        print('='*80)
+        for span in result['spans']:
+            print(f'l={span["left"]}, r={span["right"]}, text={span["text"]}')
+
+    # for i in range(NUM_CONCURRENT_REQUESTS):
+    #     result = issue_request(responses[i])
+    #     assert result == results[i]

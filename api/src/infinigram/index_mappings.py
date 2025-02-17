@@ -15,7 +15,7 @@ class AvailableInfiniGramIndexId(Enum):
 class IndexMapping(TypedDict):
     tokenizer: Tokenizer
     index_dir: str | Iterable[str]
-    index_dir_diff: str | Iterable[str] = []
+    index_dir_diff: str | Iterable[str]
 
 
 IndexMappings = TypedDict(

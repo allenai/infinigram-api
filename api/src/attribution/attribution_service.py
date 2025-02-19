@@ -151,7 +151,7 @@ class AttributionService:
                 spans_with_document.append(span_with_document)
 
             document_request_by_span = []
-            for span_ix, span in enumerate(attribute_result.spans):
+            for span in attribute_result.spans:
                 docs = span["docs"]
                 if len(docs) > maximum_documents_per_span:
                     random.seed(42)  # For reproducibility
@@ -159,7 +159,7 @@ class AttributionService:
                 document_request_by_span.append(
                     GetDocumentByPointerRequest(
                         docs=docs,
-                        docs_takedown=span["docs_takedown"],
+                        span_ids=attribute_result.input_token_ids[span["l"]:span["r"]],
                         needle_length=span["length"],
                         maximum_context_length=maximum_context_length,
                     )

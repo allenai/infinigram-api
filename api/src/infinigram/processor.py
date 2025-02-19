@@ -12,10 +12,10 @@ from typing import (
 )
 
 from fastapi import Depends
-from infini_gram.engine import InfiniGramEngineWithTakedown
+from infini_gram.engine import InfiniGramEngineDiff
 from infini_gram.models import (
     AttributionDoc,
-    AttributionSpanWithTakedown,
+    AttributionSpan,
     ErrorResponse,
     InfiniGramEngineResponse,
 )
@@ -47,7 +47,7 @@ class GetDocumentByRankRequest(BaseModel):
 
 class GetDocumentByPointerRequest(BaseModel):
     docs: List[AttributionDoc]
-    docs_takedown: List[AttributionDoc]
+    span_ids: List[int]
     needle_length: int
     maximum_context_length: int
 
@@ -83,10 +83,11 @@ class Document(CamelCaseModel):
     metadata: dict[str, Any]
     token_ids: List[int]
     text: str
+    blocked: bool = False
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: List[AttributionSpanWithTakedown]
+    spans: List[AttributionSpan]
     input_token_ids: List[int]
 
 
@@ -110,7 +111,7 @@ tracer = trace.get_tracer(get_config().application_name)
 class InfiniGramProcessor:
     index: str
     tokenizer: Tokenizer
-    infini_gram_engine: InfiniGramEngineWithTakedown
+    infini_gram_engine: InfiniGramEngineDiff
 
     def __init__(self, index: AvailableInfiniGramIndexId):
         self.index = index.value
@@ -118,7 +119,7 @@ class InfiniGramProcessor:
 
         self.tokenizer = index_mapping["tokenizer"]
 
-        self.infini_gram_engine = InfiniGramEngineWithTakedown(
+        self.infini_gram_engine = InfiniGramEngineDiff(
             index_dir=index_mapping["index_dir"],
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
@@ -262,7 +263,7 @@ class InfiniGramProcessor:
             requests=[
                 {
                     'docs': document_request.docs,
-                    'docs_takedown': document_request.docs_takedown,
+                    'span_ids': document_request.span_ids,
                     'needle_len': document_request.needle_length,
                     'max_ctx_len': document_request.maximum_context_length,
                 }
@@ -282,6 +283,7 @@ class InfiniGramProcessor:
                     metadata=json.loads(document_result["metadata"]),
                     token_ids=document_result["token_ids"],
                     text=self.decode_tokens(document_result["token_ids"]),
+                    blocked=document_result["blocked"],
                 )
                 for document_result in documents_result
             ]

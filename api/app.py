@@ -16,7 +16,6 @@ from src.documents import documents_router
 from src.health import health_router
 from src.infinigram import infinigram_router
 from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
-from src.performance_profiling import register_profiling_middleware
 from src.RFC9457Error import RFC9457Error
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
@@ -54,7 +53,6 @@ def infini_gram_engine_exception_handler(
     )
 
 
-register_profiling_middleware(app)
 tracer_provider = TracerProvider()
 
 if os.getenv("ENV") == "development":

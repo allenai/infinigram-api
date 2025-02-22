@@ -21,7 +21,6 @@ PAYLOAD = {
 }
 
 url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
-# url = 'https://infinigram-api.allen.ai/olmo-2-1124-13b/attribution'
 
 def issue_request(response):
     payload = PAYLOAD.copy()

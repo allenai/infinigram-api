@@ -18,7 +18,7 @@ parser.add_argument('--overwrite_eval', default=False, action='store_true')
 parser.add_argument('--num_docs_per_thread', type=int, default=5)
 args = parser.parse_args()
 
-api_url = 'https://infinigram-api.allen.ai/olmoe/attribution'
+api_url = 'http://0.0.0.0:8008/olmoe/attribution'
 params = {
     'delimiters': ['\n', '.'],
     'allowSpansWithPartialWords': False,

@@ -156,7 +156,7 @@ payload = {
     'includeInputAsTokens': True,
 }
 
-url = 'https://infinigram-api.allen.ai/olmoe/attribution'
+url = 'http://0.0.0.0:8008/olmoe/attribution'
 
 result = requests.post(url, json=payload).json()
 

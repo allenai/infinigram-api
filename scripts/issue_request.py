@@ -47,6 +47,9 @@ Obama left office in January 2017, after serving two terms as President. He is t
 # prompt = '''Give me the lyrics of the song "Yesterday" by The Beatles'''
 # response = '''Yesterday, all my troubles seemed so far away'''
 
+# prompt = ''
+# response = '''Puigdemont calls for talks with Spain Published duration 22 December 2017 Related Topics Catalonia independence protests'''
+
 payload = {
     'response': response,
     'delimiters': ['\n', '.'],
@@ -61,19 +64,19 @@ payload = {
     'maximumContextLengthSnippet': 40,
 }
 
+# url = 'http://0.0.0.0:8008/pileval-llama/attribution'
 url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
-# url = 'https://infinigram-api.allen.ai/olmo-2-1124-13b/attribution'
 
 start_time = time.time()
 result = requests.post(url, json=payload).json()
 # print(result)
-print(result.keys())
-for span in result['spans']:
-    print(span['length'], span['unigramLogprobSum'])
-print('inputTokens:', result['inputTokens'])
-print(result['spans'][0])
+# print(result.keys())
 # for span in result['spans']:
-#     print(f'l={span["left"]}, r={span["right"]}, text={span["text"]}')
+#     print(span['length'], span['unigramLogprobSum'])
+# print('inputTokens:', result['inputTokens'])
+# print(result['spans'][0])
+for span in result['spans']:
+    print(f'l={span["left"]}, r={span["right"]}, count={span["count"]}, text={span["text"]}')
 # for span in result['spans']:
 #     print('Span text:', span['text'])
 #     for doc in span['documents']:

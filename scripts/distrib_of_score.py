@@ -16,7 +16,6 @@ parser.add_argument('--output_path', type=str, required=True)
 parser.add_argument('--overwrite_docs', default=False, action='store_true')
 args = parser.parse_args()
 
-# api_url = 'https://infinigram-api.allen.ai/olmoe/attribution'
 api_url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
 params = {
     'delimiters': ['\n', '.'],

@@ -6,4 +6,4 @@ To run this, install `locust`
 
 Then run the locustfile you want to test with:
 
-`locust -f locustfile-short.py`
+`locust -f load-test/locustfile-short.py`

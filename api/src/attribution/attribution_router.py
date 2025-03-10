@@ -3,12 +3,12 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from pydantic import Field
 
-from src.infinigram.processor import SpanRankingMethod
 from src.attribution.attribution_service import (
-    AttributionService,
     AttributionResponse,
+    AttributionService,
 )
 from src.camel_case_model import CamelCaseModel
+from src.infinigram.processor import SpanRankingMethod
 
 attribution_router = APIRouter()
 
@@ -68,11 +68,11 @@ class AttributionRequest(CamelCaseModel):
 
 
 @attribution_router.post(path="/{index}/attribution")
-def get_document_attributions(
+async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
-    result = attribution_service.get_attribution_for_response(
+    result = await attribution_service.get_attribution_for_response(
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

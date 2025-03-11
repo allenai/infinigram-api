@@ -161,7 +161,7 @@ class AttributionService:
                 )
                 spans_with_document.append(span_with_document)
 
-            document_request_by_span = []
+            document_request_by_span: list[GetDocumentByPointerRequest] = []
             for span in attribute_result.spans:
                 docs = span["docs"]
                 if len(docs) > maximum_documents_per_span:
@@ -178,8 +178,10 @@ class AttributionService:
                     )
                 )
 
-            documents_by_span = self.infini_gram_processor.get_documents_by_pointers(
-                document_request_by_span=document_request_by_span,
+            documents_by_span = (
+                await self.infini_gram_processor.get_documents_by_pointers_async(
+                    document_request_by_span=document_request_by_span,
+                )
             )
 
             for span_with_document, documents in zip(
@@ -287,7 +289,7 @@ class AttributionService:
                 )
                 spans_with_document.append(span_with_document)
 
-            document_request_by_span = []
+            document_request_by_span: list[GetDocumentByPointerRequest] = []
             for span in attribute_result.spans:
                 docs = span["docs"]
                 if len(docs) > maximum_documents_per_span:

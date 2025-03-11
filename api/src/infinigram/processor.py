@@ -291,6 +291,45 @@ class InfiniGramProcessor:
             for documents_result in documents_by_span_result
         ]
 
+    @tracer.start_as_current_span(
+        "infini_gram_processor/get_documents_by_pointers_async"
+    )
+    async def get_documents_by_pointers_async(
+        self,
+        document_request_by_span: Iterable[GetDocumentByPointerRequest],
+    ) -> List[List[Document]]:
+        get_docs_by_pointers_response = await asyncio.to_thread(
+            self.infini_gram_engine.get_docs_by_ptrs_2,
+            requests=[
+                {
+                    "docs": document_request.docs,
+                    "span_ids": document_request.span_ids,
+                    "needle_len": document_request.needle_length,
+                    "max_ctx_len": document_request.maximum_context_length,
+                }
+                for document_request in document_request_by_span
+            ],
+        )
+
+        documents_by_span_result = self.__handle_error(get_docs_by_pointers_response)
+
+        return [
+            [
+                Document(
+                    document_index=document_result["doc_ix"],
+                    document_length=document_result["doc_len"],
+                    display_length=document_result["disp_len"],
+                    needle_offset=document_result["needle_offset"],
+                    metadata=json.loads(document_result["metadata"]),
+                    token_ids=document_result["token_ids"],
+                    text=self.decode_tokens(document_result["token_ids"]),
+                    blocked=document_result["blocked"],
+                )
+                for document_result in documents_result
+            ]
+            for documents_result in documents_by_span_result
+        ]
+
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_index")
     def get_document_by_index(
         self, document_index: int, maximum_context_length: int

@@ -67,12 +67,34 @@ class AttributionRequest(CamelCaseModel):
     )
 
 
-@attribution_router.post(path="/{index}/attribution")
-async def get_document_attributions(
+@attribution_router.post(path="/{index}/attribution_async")
+async def get_document_attributions_async(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
     result = await attribution_service.get_attribution_for_response(
+        response=body.response,
+        delimiters=body.delimiters,
+        allow_spans_with_partial_words=body.allow_spans_with_partial_words,
+        minimum_span_length=body.minimum_span_length,
+        maximum_frequency=body.maximum_frequency,
+        maximum_span_density=body.maximum_span_density,
+        span_ranking_method=body.span_ranking_method,
+        maximum_context_length=body.maximum_context_length,
+        maximum_context_length_long=body.maximum_context_length_long,
+        maximum_context_length_snippet=body.maximum_context_length_snippet,
+        maximum_documents_per_span=body.maximum_documents_per_span,
+    )
+
+    return result
+
+
+@attribution_router.post(path="/{index}/attribution")
+def get_document_attributions(
+    body: AttributionRequest,
+    attribution_service: Annotated[AttributionService, Depends()],
+) -> AttributionResponse:
+    result = attribution_service.get_attribution_for_response(
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

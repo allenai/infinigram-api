@@ -139,88 +139,81 @@ class AttributionService:
         )
 
         # Populate the spans with documents
-        with tracer.start_as_current_span(
-            "attribution_service/get_documents_for_spans"
+        spans_with_document: List[AttributionSpan] = []
+        for span in attribute_result.spans:
+            (span_text_tokens, span_text) = self.__get_span_text(
+                input_token_ids=attribute_result.input_token_ids,
+                start=span["l"],
+                stop=span["r"],
+            )
+            span_with_document = AttributionSpan(
+                left=span["l"],
+                right=span["r"],
+                length=span["length"],
+                count=span["count"],
+                unigram_logprob_sum=span["unigram_logprob_sum"],
+                documents=[],
+                text=span_text,
+                token_ids=span_text_tokens,
+            )
+            spans_with_document.append(span_with_document)
+
+        document_request_by_span: list[GetDocumentByPointerRequest] = []
+        for span in attribute_result.spans:
+            docs = span["docs"]
+            if len(docs) > maximum_documents_per_span:
+                random.seed(42)  # For reproducibility
+                docs = random.sample(docs, maximum_documents_per_span)
+            document_request_by_span.append(
+                GetDocumentByPointerRequest(
+                    docs=docs,
+                    span_ids=attribute_result.input_token_ids[span["l"] : span["r"]],
+                    needle_length=span["length"],
+                    maximum_context_length=maximum_context_length,
+                )
+            )
+
+        documents_by_span = (
+            await self.infini_gram_processor.get_documents_by_pointers_async(
+                document_request_by_span=document_request_by_span,
+            )
+        )
+
+        for span_with_document, documents in zip(
+            spans_with_document, documents_by_span
         ):
-            spans_with_document: List[AttributionSpan] = []
-            for span in attribute_result.spans:
-                (span_text_tokens, span_text) = self.__get_span_text(
-                    input_token_ids=attribute_result.input_token_ids,
-                    start=span["l"],
-                    stop=span["r"],
+            for document in documents:
+                display_length_long, needle_offset_long, text_long = self.cut_document(
+                    token_ids=document.token_ids,
+                    needle_offset=document.needle_offset,
+                    span_length=span_with_document.length,
+                    maximum_context_length=maximum_context_length_long,
                 )
-                span_with_document = AttributionSpan(
-                    left=span["l"],
-                    right=span["r"],
-                    length=span["length"],
-                    count=span["count"],
-                    unigram_logprob_sum=span["unigram_logprob_sum"],
-                    documents=[],
-                    text=span_text,
-                    token_ids=span_text_tokens,
+                display_length_snippet, needle_offset_snippet, text_snippet = (
+                    self.cut_document(
+                        token_ids=document.token_ids,
+                        needle_offset=document.needle_offset,
+                        span_length=span_with_document.length,
+                        maximum_context_length=maximum_context_length_snippet,
+                    )
                 )
-                spans_with_document.append(span_with_document)
-
-            document_request_by_span: list[GetDocumentByPointerRequest] = []
-            for span in attribute_result.spans:
-                docs = span["docs"]
-                if len(docs) > maximum_documents_per_span:
-                    random.seed(42)  # For reproducibility
-                    docs = random.sample(docs, maximum_documents_per_span)
-                document_request_by_span.append(
-                    GetDocumentByPointerRequest(
-                        docs=docs,
-                        span_ids=attribute_result.input_token_ids[
-                            span["l"] : span["r"]
-                        ],
-                        needle_length=span["length"],
-                        maximum_context_length=maximum_context_length,
+                span_with_document.documents.append(
+                    AttributionDocument(
+                        **vars(document),
+                        display_length_long=display_length_long,
+                        needle_offset_long=needle_offset_long,
+                        text_long=text_long,
+                        display_offset_snippet=display_length_snippet,
+                        needle_offset_snippet=needle_offset_snippet,
+                        text_snippet=text_snippet,
                     )
                 )
 
-            documents_by_span = (
-                await self.infini_gram_processor.get_documents_by_pointers_async(
-                    document_request_by_span=document_request_by_span,
-                )
-            )
-
-            for span_with_document, documents in zip(
-                spans_with_document, documents_by_span
-            ):
-                for document in documents:
-                    display_length_long, needle_offset_long, text_long = (
-                        self.cut_document(
-                            token_ids=document.token_ids,
-                            needle_offset=document.needle_offset,
-                            span_length=span_with_document.length,
-                            maximum_context_length=maximum_context_length_long,
-                        )
-                    )
-                    display_length_snippet, needle_offset_snippet, text_snippet = (
-                        self.cut_document(
-                            token_ids=document.token_ids,
-                            needle_offset=document.needle_offset,
-                            span_length=span_with_document.length,
-                            maximum_context_length=maximum_context_length_snippet,
-                        )
-                    )
-                    span_with_document.documents.append(
-                        AttributionDocument(
-                            **vars(document),
-                            display_length_long=display_length_long,
-                            needle_offset_long=needle_offset_long,
-                            text_long=text_long,
-                            display_offset_snippet=display_length_snippet,
-                            needle_offset_snippet=needle_offset_snippet,
-                            text_snippet=text_snippet,
-                        )
-                    )
-
-            return AttributionResponse(
-                index=self.infini_gram_processor.index,
-                spans=spans_with_document,
-                input_tokens=self.infini_gram_processor.tokenize_to_list(response),
-            )
+        return AttributionResponse(
+            index=self.infini_gram_processor.index,
+            spans=spans_with_document,
+            input_tokens=self.infini_gram_processor.tokenize_to_list(response),
+        )
 
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     def get_attribution_for_response_sync(

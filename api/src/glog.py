@@ -12,8 +12,9 @@ def create_stream_handler() -> logging.StreamHandler[TextIO]:
     """
     formatter = jsonlogger.JsonFormatter(
         # taken from https://cloud.google.com/trace/docs/setup/python-ot#config-structured-logging
+        "%(asctime)s %(levelname)s %(message)s %(otelTraceID)s %(otelSpanID)s %(otelTraceSampled)s",
         rename_fields={
-            # "levelname": "severity",
+            "levelname": "severity",
             "asctime": "timestamp",
             "otelTraceID": "logging.googleapis.com/trace",
             "otelSpanID": "logging.googleapis.com/spanId",

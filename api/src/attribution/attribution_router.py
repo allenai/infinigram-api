@@ -94,7 +94,7 @@ def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
-    result = attribution_service.get_attribution_for_response(
+    result = attribution_service.get_attribution_for_response_sync(
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

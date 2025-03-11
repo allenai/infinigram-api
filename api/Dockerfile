@@ -25,12 +25,12 @@ ENV OTEL_SERVICE_NAME=infinigram-api-dev
 ENV OTEL_TRACES_EXPORTER=otlp
 ENV OTEL_METRICS_EXPORTER=otlp
 ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://otelcol:4318"
-ENV OTEL_SERVICE_NAME="infinigram-api"
 ENV ENV=development
 
 CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
 
 FROM builder as prod
 ENV ENV=production
+ENV OTEL_SERVICE_NAME="infinigram-api"
 
 CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]

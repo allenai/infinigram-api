@@ -407,7 +407,7 @@ class InfiniGramProcessor:
             documents=docs, total_documents=matching_documents_result["cnt"]
         )
 
-    @tracer.start_as_current_span("infini_gram_processor/attribute")
+    @tracer.start_as_current_span("infini_gram_processor/attribute_async")
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
     async def attribute(
         self,
@@ -423,6 +423,38 @@ class InfiniGramProcessor:
 
         attribute_response = await asyncio.to_thread(
             self.infini_gram_engine.attribute,
+            input_ids=input_ids,
+            delim_ids=delimiter_token_ids,
+            min_len=minimum_span_length,
+            max_cnt=maximum_frequency,
+            enforce_bow=not allow_spans_with_partial_words,
+        )
+
+        # attribute_response = self.infini_gram_engine.attribute()
+
+        attribute_result = self.__handle_error(attribute_response)
+
+        return InfiniGramAttributionResponse(
+            **attribute_result,
+            index=self.index,
+            input_token_ids=input_ids,
+        )
+
+    @tracer.start_as_current_span("infini_gram_processor/attribute")
+    # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
+    def attribute_sync(
+        self,
+        input: str,
+        delimiters: List[str],
+        allow_spans_with_partial_words: bool,
+        minimum_span_length: int,
+        maximum_frequency: int,
+    ) -> InfiniGramAttributionResponse:
+        input_ids = self.tokenize(input)
+
+        delimiter_token_ids = self.tokenizer.tokenize_attribution_delimiters(delimiters)
+
+        attribute_response = self.infini_gram_engine.attribute(
             input_ids=input_ids,
             delim_ids=delimiter_token_ids,
             min_len=minimum_span_length,

@@ -1,15 +1,14 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
-from fastapi.concurrency import run_in_threadpool
 from pydantic import Field
 
+from src.infinigram.processor import SpanRankingMethod
 from src.attribution.attribution_service import (
-    AttributionResponse,
     AttributionService,
+    AttributionResponse,
 )
 from src.camel_case_model import CamelCaseModel
-from src.infinigram.processor import SpanRankingMethod
 
 attribution_router = APIRouter()
 
@@ -68,35 +67,12 @@ class AttributionRequest(CamelCaseModel):
     )
 
 
-@attribution_router.post(path="/{index}/attribution_async")
-async def get_document_attributions_async(
-    body: AttributionRequest,
-    attribution_service: Annotated[AttributionService, Depends()],
-) -> AttributionResponse:
-    result = await run_in_threadpool(
-        attribution_service.get_attribution_for_response_sync,
-        response=body.response,
-        delimiters=body.delimiters,
-        allow_spans_with_partial_words=body.allow_spans_with_partial_words,
-        minimum_span_length=body.minimum_span_length,
-        maximum_frequency=body.maximum_frequency,
-        maximum_span_density=body.maximum_span_density,
-        span_ranking_method=body.span_ranking_method,
-        maximum_context_length=body.maximum_context_length,
-        maximum_context_length_long=body.maximum_context_length_long,
-        maximum_context_length_snippet=body.maximum_context_length_snippet,
-        maximum_documents_per_span=body.maximum_documents_per_span,
-    )
-
-    return result
-
-
 @attribution_router.post(path="/{index}/attribution")
 def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
-    result = attribution_service.get_attribution_for_response_sync(
+    result = attribution_service.get_attribution_for_response(
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

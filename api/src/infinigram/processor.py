@@ -1,4 +1,3 @@
-import asyncio
 import json
 from enum import Enum
 from typing import (
@@ -263,49 +262,10 @@ class InfiniGramProcessor:
         get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
             requests=[
                 {
-                    "docs": document_request.docs,
-                    "span_ids": document_request.span_ids,
-                    "needle_len": document_request.needle_length,
-                    "max_ctx_len": document_request.maximum_context_length,
-                }
-                for document_request in document_request_by_span
-            ],
-        )
-
-        documents_by_span_result = self.__handle_error(get_docs_by_pointers_response)
-
-        return [
-            [
-                Document(
-                    document_index=document_result["doc_ix"],
-                    document_length=document_result["doc_len"],
-                    display_length=document_result["disp_len"],
-                    needle_offset=document_result["needle_offset"],
-                    metadata=json.loads(document_result["metadata"]),
-                    token_ids=document_result["token_ids"],
-                    text=self.decode_tokens(document_result["token_ids"]),
-                    blocked=document_result["blocked"],
-                )
-                for document_result in documents_result
-            ]
-            for documents_result in documents_by_span_result
-        ]
-
-    @tracer.start_as_current_span(
-        "infini_gram_processor/get_documents_by_pointers_async"
-    )
-    async def get_documents_by_pointers_async(
-        self,
-        document_request_by_span: Iterable[GetDocumentByPointerRequest],
-    ) -> List[List[Document]]:
-        get_docs_by_pointers_response = await asyncio.to_thread(
-            self.infini_gram_engine.get_docs_by_ptrs_2,
-            requests=[
-                {
-                    "docs": document_request.docs,
-                    "span_ids": document_request.span_ids,
-                    "needle_len": document_request.needle_length,
-                    "max_ctx_len": document_request.maximum_context_length,
+                    'docs': document_request.docs,
+                    'span_ids': document_request.span_ids,
+                    'needle_len': document_request.needle_length,
+                    'max_ctx_len': document_request.maximum_context_length,
                 }
                 for document_request in document_request_by_span
             ],
@@ -335,8 +295,7 @@ class InfiniGramProcessor:
         self, document_index: int, maximum_context_length: int
     ) -> Document:
         get_doc_by_index_response = self.infini_gram_engine.get_doc_by_ix_2(
-            doc_ix=document_index,
-            max_ctx_len=maximum_context_length,
+            doc_ix=document_index, max_ctx_len=maximum_context_length,
         )
 
         document_result = self.__handle_error(get_doc_by_index_response)
@@ -360,10 +319,7 @@ class InfiniGramProcessor:
     ) -> List[Document]:
         get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs_2(
             requests=[
-                (
-                    document_request.document_index,
-                    document_request.maximum_context_length,
-                )
+                (document_request.document_index, document_request.maximum_context_length)
                 for document_request in document_requests
             ],
         )
@@ -430,8 +386,7 @@ class InfiniGramProcessor:
             document_requests.append(
                 GetDocumentByRankRequest(
                     shard=shard,
-                    rank=matching_documents_result["segment_by_shard"][shard][0]
-                    + offset,
+                    rank=matching_documents_result["segment_by_shard"][shard][0] + offset,
                     needle_length=len(tokenized_query_ids),
                     maximum_context_length=maximum_context_length,
                 )
@@ -446,42 +401,9 @@ class InfiniGramProcessor:
             documents=docs, total_documents=matching_documents_result["cnt"]
         )
 
-    @tracer.start_as_current_span("infini_gram_processor/attribute_async")
-    # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
-    async def attribute(
-        self,
-        input: str,
-        delimiters: List[str],
-        allow_spans_with_partial_words: bool,
-        minimum_span_length: int,
-        maximum_frequency: int,
-    ) -> InfiniGramAttributionResponse:
-        input_ids = self.tokenize(input)
-
-        delimiter_token_ids = self.tokenizer.tokenize_attribution_delimiters(delimiters)
-
-        attribute_response = await asyncio.to_thread(
-            self.infini_gram_engine.attribute,
-            input_ids=input_ids,
-            delim_ids=delimiter_token_ids,
-            min_len=minimum_span_length,
-            max_cnt=maximum_frequency,
-            enforce_bow=not allow_spans_with_partial_words,
-        )
-
-        # attribute_response = self.infini_gram_engine.attribute()
-
-        attribute_result = self.__handle_error(attribute_response)
-
-        return InfiniGramAttributionResponse(
-            **attribute_result,
-            index=self.index,
-            input_token_ids=input_ids,
-        )
-
     @tracer.start_as_current_span("infini_gram_processor/attribute")
     # Attribute doesn't return a high-level response, it just returns stuff from the engine. Use this inside a service instead of returning it directly
-    def attribute_sync(
+    def attribute(
         self,
         input: str,
         delimiters: List[str],
@@ -500,8 +422,6 @@ class InfiniGramProcessor:
             max_cnt=maximum_frequency,
             enforce_bow=not allow_spans_with_partial_words,
         )
-
-        # attribute_response = self.infini_gram_engine.attribute()
 
         attribute_result = self.__handle_error(attribute_response)
 

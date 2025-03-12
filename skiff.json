@@ -4,6 +4,6 @@
     "team": "reviz",
     "replicas": {
         "prod": 2,
-        "test": 2
+        "test": 1
     }
 }

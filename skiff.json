@@ -2,5 +2,8 @@
     "appName": "infinigram-api",
     "contact": "reviz",
     "team": "reviz",
-    "replicas": { "prod": 2 }
+    "replicas": {
+        "prod": 2,
+        "test": 2
+    }
 }

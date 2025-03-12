@@ -49,7 +49,7 @@ function(
     //
     // In all other environments (e.g., adhocs) we run a single instance to
     // save money.
-    local numReplicas = if env == 'prod' then config.replicas.prod else 1;
+    local numReplicas = if env == 'prod' then config.replicas.prod else config.replicas.test;
 
     // Each app gets it's own namespace.
     local namespaceName = config.appName;
@@ -446,7 +446,7 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 62,
+                                    cpu: 20,
                                     memory: '130G'
                                 },
                                 limits: { }

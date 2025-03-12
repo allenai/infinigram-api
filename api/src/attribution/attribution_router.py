@@ -1,6 +1,7 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
+from fastapi.concurrency import run_in_threadpool
 from pydantic import Field
 
 from src.attribution.attribution_service import (
@@ -72,7 +73,8 @@ async def get_document_attributions_async(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
-    result = await attribution_service.get_attribution_for_response(
+    result = await run_in_threadpool(
+        attribution_service.get_attribution_for_response_sync,
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

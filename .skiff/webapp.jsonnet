@@ -347,16 +347,9 @@ function(
                         }
                     },
                     {
-                        name: "infinigram-array-v4-ultrafeedback",
+                        name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
                         persistentVolumeClaim: {
-                            claimName: "infinigram-v4-ultrafeedback",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-tulu-v3-1-mix",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-tulu-v3-1-mix",
+                            claimName: "infinigram-v4-olmoe-0125-1b-7b-anneal-adapt",
                             readOnly: true,
                         }
                     },
@@ -364,6 +357,13 @@ function(
                         name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
                         persistentVolumeClaim: {
                             claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-olmo-2-0325-32b-anneal-adapt",
                             readOnly: true,
                         }
                     }],
@@ -387,18 +387,18 @@ function(
                                 readOnly: true,
                             },
                             {
-                                mountPath: "/mnt/infinigram-array/v4-ultrafeedback",
-                                name: "infinigram-array-v4-ultrafeedback",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
-                                name: "infinigram-array-v4-tulu-v3-1-mix",
+                                mountPath: "/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt",
+                                name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
                                 readOnly: true,
                             },
                             {
                                 mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
                                 name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt",
+                                name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
                                 readOnly: true,
                             }],
                             # The "probes" below allow Kubernetes to determine

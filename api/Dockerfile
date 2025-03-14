@@ -33,4 +33,4 @@ FROM builder as prod
 ENV ENV=production
 ENV OTEL_SERVICE_NAME="infinigram-api"
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers", "--workers", "4"]
+CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]

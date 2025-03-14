@@ -56,7 +56,7 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
     ```
 2. Upload your SSH key to the VMs
 3. Copy the infini-gram service account json to the vm: `scp -i <your private ssh key location> ./infini-gram-transfer-account.json taylorb@10.115.0.81:~`
-4. SSH into the VM: `ssh <VM IP>`
+4. SSH into the VM: `ssh <VM IP>` (this will be the internal IP. Make sure you're connected to Tailscale!)
 5. Set up the agent and attach it to the agent pool
   *  Run these commands, replacing values where needed:
       ```

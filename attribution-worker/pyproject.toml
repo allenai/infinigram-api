@@ -1,0 +1,40 @@
+[tool.pyright]
+pythonVersion = "3.11.3"
+
+[tool.ruff]
+
+exclude = [
+    ".venv",
+    ".vscode",
+    ".github",
+    "venv",
+    "vendor"
+]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.mypy]
+
+files = [
+    '.'
+]
+
+exclude = [
+    'vendor',
+    'indexing',
+    'compute_stats',
+    'scripts',
+]
+
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+    "src.glog"
+]
+disable_error_code = ['type-arg', 'no-untyped-def', 'no-untyped-call']

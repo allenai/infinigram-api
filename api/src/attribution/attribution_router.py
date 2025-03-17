@@ -2,13 +2,12 @@ from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
 from pydantic import Field
-from saq import Queue
 
+from src.attribution.attribution_queue_service import AttributionQueueDependency
 from src.attribution.attribution_service import (
     AttributionService,
 )
 from src.camel_case_model import CamelCaseModel
-from src.config import get_config
 from src.infinigram.processor import InfiniGramAttributionResponse, SpanRankingMethod
 
 attribution_router = APIRouter()
@@ -68,16 +67,13 @@ class AttributionRequest(CamelCaseModel):
     )
 
 
-queue = Queue.from_url(get_config().postgres_url, name="infini-gram-attribution")
-
-
 @attribution_router.post(path="/{index}/attribution")
 async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
+    queue: AttributionQueueDependency,
 ):
     # ) -> AttributionResponse:
-    await queue.connect()
     result = await queue.apply(
         "attribute",
         input=body.response,

@@ -81,7 +81,7 @@ The `infinigram-array` folder is mounted to the Docker container for the API thr
 
 #### Making a Persistent Disk
   Run this from infinigram-api root folder:
-  `./bin/copy-files-to-disk.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME> <Optional:DISK_NAME>`
+  `./bin/copy-files-to-disk.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME>`
 
   INDEX_NAME should match what you used when starting the transfer job
   INDEX_SIZE needs to be at least the space required by the index and uses the K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/

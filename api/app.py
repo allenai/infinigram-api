@@ -1,5 +1,6 @@
 import logging
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -12,6 +13,10 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcess
 
 from src import glog
 from src.attribution import attribution_router
+from src.attribution.attribution_queue_service import (
+    connect_to_attribution_queue,
+    disconnect_from_attribution_queue,
+)
 from src.documents import documents_router
 from src.health import health_router
 from src.infinigram import infinigram_router
@@ -24,7 +29,18 @@ handlers = [glog.create_stream_handler()] if fmt == "google:json" else []
 level = os.environ.get("LOG_LEVEL", default=logging.INFO)
 logging.basicConfig(level=level, handlers=handlers)
 
-app = FastAPI(title="infini-gram API", version="0.0.1")
+
+# https://fastapi.tiangolo.com/advanced/events/
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Things before yield on on startup
+    await connect_to_attribution_queue()
+    yield
+    # Things after yield run on shutdown
+    await disconnect_from_attribution_queue()
+
+
+app = FastAPI(title="infini-gram API", version="0.0.1", lifespan=lifespan)
 
 app.include_router(health_router)
 app.include_router(router=infinigram_router)

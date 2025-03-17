@@ -139,6 +139,10 @@ config = get_config()
 queue = Queue.from_url(config.postgres_url, name="infini-gram-attribution")
 
 
+async def start_worker():
+    await queue.connect()
+
+
 async def attribution_job(
     ctx: Any,
     *,
@@ -148,7 +152,7 @@ async def attribution_job(
     minimum_span_length: int,
     maximum_frequency: int,
 ):
-    return asyncio.to_thread(
+    result = await asyncio.to_thread(
         index.attribute,
         input=input,
         delimiters=delimiters,
@@ -156,6 +160,8 @@ async def attribution_job(
         minimum_span_length=minimum_span_length,
         maximum_frequency=maximum_frequency,
     )
+
+    return result.model_dump_json()
 
 
 settings = SettingsDict(

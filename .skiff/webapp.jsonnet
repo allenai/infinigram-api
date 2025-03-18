@@ -601,7 +601,7 @@ function(
                     containers: [
                         {
                             name: attributionWorkerFullyQualifiedName,
-                            image: apiImage,
+                            image: workerImage,
                             volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.

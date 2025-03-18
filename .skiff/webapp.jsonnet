@@ -677,7 +677,8 @@ function(
         allenAIIngress,
         deployment,
         service,
-        pdb
+        pdb,
+        attributionWorkerDeployment
     ];
 
     if std.length(scholarHosts) > 0 then

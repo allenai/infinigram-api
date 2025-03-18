@@ -12,7 +12,7 @@ local config = import '../skiff.json';
 local util = import './util.libsonnet';
 
 function(
-    apiImage, proxyImage, cause, sha, env='staging', branch='', repo='',
+    apiImage, proxyImage, workerImage, cause, sha, env='staging', branch='', repo='',
     buildId=''
 )
     // Produce a list of hostnames served by your application.
@@ -136,7 +136,7 @@ function(
         scheme: 'HTTP'
     };
 
-    // This is used to verify that the API is funtional.
+    // This is used to verify that the API is functional.
     local apiHealthCheck = {
         port: apiPort,
         scheme: 'HTTP'
@@ -514,6 +514,205 @@ function(
                 matchLabels: selectorLabels,
             },
         },
+    };
+
+    local attributionWorkerReplicas = if env == 'prod' then config.attributionWorkerReplicas.prod else 1;
+    local attributionWorkerSelectorLabels = {
+        app: config.appName + 'attribution-worker',
+        env: env
+    };
+    local attributionWorkerPodLabels = podLabels + { app: config.appName + 'attribution-worker' };
+
+    local attributionWorkerDeployment = {
+        apiVersion: 'apps/v1',
+        kind: 'Deployment',
+        metadata: {
+            labels: labels,
+            name: fullyQualifiedName,
+            namespace: namespaceName,
+            annotations: annotations + {
+                'kubernetes.io/change-cause': cause
+            }
+        },
+        spec: {
+            strategy: {
+                type: 'RollingUpdate',
+                rollingUpdate: {
+                    maxSurge: numReplicas // This makes deployments faster.
+                }
+            },
+            revisionHistoryLimit: 3,
+            replicas: numReplicas,
+            selector: {
+                matchLabels: attributionWorkerSelectorLabels
+            },
+            template: {
+                metadata: {
+                    name: fullyQualifiedName,
+                    namespace: namespaceName,
+                    labels: podLabels,
+                    annotations: annotations
+                },
+                spec: {
+                    # This block tells the cluster that we'd like to make sure
+                    # each instance of your application is on a different node. This
+                    # way if a node goes down, your application doesn't:
+                    # See: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-isolation-restriction
+                    affinity: {
+                        podAntiAffinity: {
+                            requiredDuringSchedulingIgnoredDuringExecution: [
+                                {
+                                   labelSelector: {
+                                        matchExpressions: [
+                                            {
+                                                    key: labelName,
+                                                    operator: "In",
+                                                    values: [ antiAffinityLabels[labelName], ],
+                                            } for labelName in std.objectFields(antiAffinityLabels)
+                                       ],
+                                    },
+                                    topologyKey: "kubernetes.io/hostname"
+                                },
+                            ]
+                        },
+                    },
+                    nodeSelector: {
+                        "cloud.google.com/gke-nodepool": "cpu64"
+                    },
+                    volumes: [{
+                        name: "infinigram-array-pileval-gpt2",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-pileval-gpt2",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-olmoe-mix-0924-dclm",
+                        persistentVolumeClaim: {
+                            // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
+                            claimName: "infinigram-olmoe-mix-0924",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-olmoe-mix-0924-nodclm",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-olmoe-mix-0924-nodclm",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-ultrafeedback",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-ultrafeedback",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-tulu-v3-1-mix",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-tulu-v3-1-mix",
+                            readOnly: true,
+                        }
+                    },
+                    {
+                        name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+                        persistentVolumeClaim: {
+                            claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
+                            readOnly: true,
+                        }
+                    }],
+                    containers: [
+                        {
+                            name: fullyQualifiedName + '-attribution-worker',
+                            image: apiImage,
+                            volumeMounts: [{
+                                mountPath: "/mnt/infinigram-array/v4_pileval_llama",
+                                name: "infinigram-array-pileval-gpt2",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
+                                name: "infinigram-array-olmoe-mix-0924-dclm",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
+                                name: "infinigram-array-olmoe-mix-0924-nodclm",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-ultrafeedback",
+                                name: "infinigram-array-v4-ultrafeedback",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
+                                name: "infinigram-array-v4-tulu-v3-1-mix",
+                                readOnly: true,
+                            },
+                            {
+                                mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
+                                name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+                                readOnly: true,
+                            }],
+                            # The "probes" below allow Kubernetes to determine
+                            # if your application is working properly.
+                            #
+                            # The readinessProbe is used to determine if
+                            # an instance of your application can accept live
+                            # requests. The configuration below tells Kubernetes
+                            # to stop sending live requests to your application
+                            # if it returns 3 non 2XX responses over 30 seconds.
+                            # When this happens the application instance will
+                            # be taken out of rotation and given time to "catch-up".
+                            # Once it returns a single 2XX, Kubernetes will put
+                            # it back in rotation.
+                            #
+                            # Kubernetes also has a livenessProbe that can be used to restart
+                            # deadlocked processes. You can find out more about it here:
+                            # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-command
+                            #
+                            # We don't use a livenessProbe as it's easy to cause unnecessary
+                            # restarts, which can be really disruptive to a site's availability.
+                            # If you think your application is likely to be unstable after running
+                            # for long periods send a note to reviz@allenai.org so we can work
+                            # with you to craft the right livenessProbe.
+                            // readinessProbe: {
+                            //     httpGet: apiHealthCheck + {
+                            //         path: '/health?check=rdy'
+                            //     },
+                            //     periodSeconds: 10,
+                            //     failureThreshold: 3
+                            // },
+                            # This tells Kubernetes what CPU and memory resources your API needs.
+                            # We set these values low by default, as most applications receive
+                            # bursts of activity and accordingly don't need dedicated resources
+                            # at all times.
+                            #
+                            # Your application will be allowed to use more resources than what's
+                            # specified below. But your application might be killed if it uses
+                            # more than what's requested. If you know you need more memory
+                            # or that your workload is CPU intensive, consider increasing the
+                            # values below.
+                            #
+                            # For more information about these values, and the current maximums
+                            # that your application can request, see:
+                            # https://skiff.allenai.org/resources.html
+                            resources: {
+                                requests: {
+                                    cpu: 62,
+                                    memory: '130G'
+                                },
+                                limits: { }
+                                   + gpuLimits # only the first container should have gpuLimits applied
+                            },
+                            env: []
+                        }
+                    ]
+                }
+            }
+        }
     };
 
     local defaultObjects = [

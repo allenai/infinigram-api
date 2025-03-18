@@ -3,7 +3,6 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from pydantic import Field
 
-from src.attribution.attribution_queue_service import AttributionQueueDependency
 from src.attribution.attribution_service import (
     AttributionResponse,
     AttributionService,
@@ -72,7 +71,6 @@ class AttributionRequest(CamelCaseModel):
 async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
-    queue: AttributionQueueDependency,
 ) -> AttributionResponse:
     result = await attribution_service.get_attribution_for_response(
         response=body.response,

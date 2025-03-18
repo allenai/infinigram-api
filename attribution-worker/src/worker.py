@@ -20,12 +20,14 @@ from pydantic import (
     BaseModel,
 )
 from saq import Queue
+from saq.types import SettingsDict
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
     TextInput,
 )
 
+from src.config import get_config
 from src.index_mappings import AvailableInfiniGramIndexId, index_mappings
 from src.infini_gram_engine_exception import InfiniGramEngineException
 
@@ -130,9 +132,6 @@ class InfiniGramProcessor:
 
 index = InfiniGramProcessor(AvailableInfiniGramIndexId.PILEVAL_LLAMA)
 
-from saq.types import SettingsDict
-
-from src.config import get_config
 
 config = get_config()
 

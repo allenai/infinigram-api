@@ -1,8 +1,27 @@
+[project]
+name = "infini-gram-api"
+version = "0.1.0"
+requires-python = "~=3.12"
+dependencies = [
+    "fastapi==0.111.0",
+    "infini-gram",
+    "numpy<2.0.0",
+    "opentelemetry-api==1.30.0",
+    "opentelemetry-exporter-gcp-trace==1.9.0",
+    "opentelemetry-exporter-otlp-proto-http==1.30.0",
+    "opentelemetry-instrumentation-fastapi==0.51b0",
+    "opentelemetry-sdk==1.30.0",
+    "pydantic-settings==2.3.4",
+    "python-json-logger==2.0.7",
+    "requests==2.32.3",
+    "transformers==4.41.2",
+    "types-requests==2.32.0.20240914",
+]
+
 [tool.pyright]
-pythonVersion = "3.11.3"
+pythonVersion = "3.12"
 
 [tool.ruff]
-
 exclude = [
     ".venv",
     ".vscode",
@@ -38,3 +57,16 @@ module = [
     "src.glog"
 ]
 disable_error_code = ['type-arg', 'no-untyped-def', 'no-untyped-call']
+
+[tool.uv.sources]
+infini-gram = [
+    { path = "vendor/infini_gram-2.1.0-cp312-cp312-macosx_11_0_arm64.whl", marker = "sys_platform == 'darwin'" },
+    { path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", marker = "sys_platform == 'linux'" }
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.0",
+]

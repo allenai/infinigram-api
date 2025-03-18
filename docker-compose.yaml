@@ -20,7 +20,7 @@ services:
       - INDEX_BASE_PATH=/mnt/infinigram-array
       - LOG_LEVEL=DEBUG
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
-      - ATTRIBUTION_QUEUE_URL=redis://valkey:6379
+      - ATTRIBUTION_QUEUE_URL=postgres://postgres:llmz@db:5432/llmx?sslmode=disable&application_name=infini-gram-attribution-worker
 
   attribution-worker:
     platform: linux/amd64
@@ -40,13 +40,15 @@ services:
       # makes debugging easier.
       - PYTHONUNBUFFERED=1
       - INDEX_BASE_PATH=/mnt/infinigram-array
-      - ATTRIBUTION_QUEUE_URL=redis://valkey:6379
+      - ATTRIBUTION_QUEUE_URL=postgres://postgres:llmz@db:5432/llmx?sslmode=disable&application_name=infini-gram-attribution-worker
+
   proxy:
     build: ./proxy
     ports:
       - 8080:8080
     depends_on:
       - api
+
   otelcol:
     image: otel/opentelemetry-collector-contrib:0.115.1
     volumes:
@@ -58,9 +60,23 @@ services:
     ports:
       # Collector prometheus port. The metrics are checked in tests
       - 8888
-  valkey:
-    image: valkey/valkey:8.0.2
+
+  db:
+    image: postgres:15
     ports:
-      - 6379:6379
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: llmz
+      POSTGRES_DB: llmx
+    command:
+      - postgres
+      - -c
+      - log_statement=all
+      - -c
+      - log_destination=stderr
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema:/docker-entrypoint-initdb.d
 volumes:
   logs:
+  pgdata:

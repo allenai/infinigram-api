@@ -535,17 +535,18 @@ function(
 
     local attributionWorkerReplicas = if env == 'prod' then config.attributionWorkerReplicas.prod else 1;
     local attributionWorkerSelectorLabels = {
-        app: config.appName + 'attribution-worker',
+        app: config.appName + '-attribution-worker',
         env: env
     };
-    local attributionWorkerPodLabels = podLabels + { app: config.appName + 'attribution-worker' };
+    local attributionWorkerPodLabels = podLabels + { app: config.appName + '-attribution-worker' };
+    local attributionWorkerFullyQualifiedName = fullyQualifiedName + '-attribution-worker';
 
     local attributionWorkerDeployment = {
         apiVersion: 'apps/v1',
         kind: 'Deployment',
         metadata: {
             labels: labels,
-            name: fullyQualifiedName,
+            name: attributionWorkerFullyQualifiedName,
             namespace: namespaceName,
             annotations: annotations + {
                 'kubernetes.io/change-cause': cause
@@ -555,17 +556,17 @@ function(
             strategy: {
                 type: 'RollingUpdate',
                 rollingUpdate: {
-                    maxSurge: numReplicas // This makes deployments faster.
+                    maxSurge: attributionWorkerReplicas // This makes deployments faster.
                 }
             },
             revisionHistoryLimit: 3,
-            replicas: numReplicas,
+            replicas: attributionWorkerReplicas,
             selector: {
                 matchLabels: attributionWorkerSelectorLabels
             },
             template: {
                 metadata: {
-                    name: fullyQualifiedName,
+                    name: attributionWorkerFullyQualifiedName,
                     namespace: namespaceName,
                     labels: attributionWorkerPodLabels,
                     annotations: annotations
@@ -599,7 +600,7 @@ function(
                     volumes: indexVolumes,
                     containers: [
                         {
-                            name: fullyQualifiedName + '-attribution-worker',
+                            name: attributionWorkerFullyQualifiedName,
                             image: apiImage,
                             volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine

@@ -115,6 +115,7 @@ class AttributionService:
     ) -> AttributionResponse:
         attribute_result_json = await self.attribution_queue.apply(
             "attribute",
+            timeout=60,
             input=response,
             delimiters=delimiters,
             allow_spans_with_partial_words=allow_spans_with_partial_words,

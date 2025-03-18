@@ -130,7 +130,7 @@ class InfiniGramProcessor:
         )
 
 
-index = InfiniGramProcessor(AvailableInfiniGramIndexId.PILEVAL_LLAMA)
+index = InfiniGramProcessor(AvailableInfiniGramIndexId.OLMO_2_1124_13B)
 
 
 config = get_config()

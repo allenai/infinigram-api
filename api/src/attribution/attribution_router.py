@@ -5,10 +5,11 @@ from pydantic import Field
 
 from src.attribution.attribution_queue_service import AttributionQueueDependency
 from src.attribution.attribution_service import (
+    AttributionResponse,
     AttributionService,
 )
 from src.camel_case_model import CamelCaseModel
-from src.infinigram.processor import InfiniGramAttributionResponse, SpanRankingMethod
+from src.infinigram.processor import SpanRankingMethod
 
 attribution_router = APIRouter()
 
@@ -72,29 +73,19 @@ async def get_document_attributions(
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
     queue: AttributionQueueDependency,
-):
-    # ) -> AttributionResponse:
-    result = await queue.apply(
-        "attribute",
-        input=body.response,
+) -> AttributionResponse:
+    result = await attribution_service.get_attribution_for_response(
+        response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,
         minimum_span_length=body.minimum_span_length,
         maximum_frequency=body.maximum_frequency,
+        maximum_span_density=body.maximum_span_density,
+        span_ranking_method=body.span_ranking_method,
+        maximum_context_length=body.maximum_context_length,
+        maximum_context_length_long=body.maximum_context_length_long,
+        maximum_context_length_snippet=body.maximum_context_length_snippet,
+        maximum_documents_per_span=body.maximum_documents_per_span,
     )
 
-    # result = attribution_service.get_attribution_for_response(
-    #     response=body.response,
-    #     delimiters=body.delimiters,
-    #     allow_spans_with_partial_words=body.allow_spans_with_partial_words,
-    #     minimum_span_length=body.minimum_span_length,
-    #     maximum_frequency=body.maximum_frequency,
-    #     maximum_span_density=body.maximum_span_density,
-    #     span_ranking_method=body.span_ranking_method,
-    #     maximum_context_length=body.maximum_context_length,
-    #     maximum_context_length_long=body.maximum_context_length_long,
-    #     maximum_context_length_snippet=body.maximum_context_length_snippet,
-    #     maximum_documents_per_span=body.maximum_documents_per_span,
-    # )
-
-    return InfiniGramAttributionResponse.model_validate_json(result)
+    return result

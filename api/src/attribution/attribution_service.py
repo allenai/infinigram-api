@@ -5,7 +5,9 @@ from typing import Iterable, List, Optional, Sequence
 import numpy as np
 from opentelemetry import trace
 from pydantic import Field
+from saq import Queue
 
+from src.attribution.attribution_queue_service import AttributionQueueDependency
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
 from src.documents.documents_router import DocumentsServiceDependency
@@ -16,6 +18,7 @@ from src.infinigram.processor import (
     BaseInfiniGramResponse,
     Document,
     GetDocumentByPointerRequest,
+    InfiniGramAttributionResponse,
     InfiniGramProcessor,
     InfiniGramProcessorDependency,
     SpanRankingMethod,
@@ -54,14 +57,17 @@ class AttributionResponse(BaseInfiniGramResponse):
 class AttributionService:
     infini_gram_processor: InfiniGramProcessor
     documents_service: DocumentsService
+    attribution_queue: Queue
 
     def __init__(
         self,
         infini_gram_processor: InfiniGramProcessorDependency,
         documents_service: DocumentsServiceDependency,
+        attribution_queue: AttributionQueueDependency,
     ):
         self.infini_gram_processor = infini_gram_processor
         self.documents_service = documents_service
+        self.attribution_queue = attribution_queue
 
     def __get_span_text(
         self, input_token_ids: Iterable[int], start: int, stop: int
@@ -93,7 +99,7 @@ class AttributionService:
         return display_length, needle_offset, text
 
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
-    def get_attribution_for_response(
+    async def get_attribution_for_response(
         self,
         response: str,
         delimiters: List[str],
@@ -107,8 +113,8 @@ class AttributionService:
         maximum_context_length_snippet: int,
         maximum_documents_per_span: int,
     ) -> AttributionResponse:
-
-        attribute_result = self.infini_gram_processor.attribute(
+        attribute_result_json = await self.attribution_queue.apply(
+            "attribute",
             input=response,
             delimiters=delimiters,
             allow_spans_with_partial_words=allow_spans_with_partial_words,
@@ -116,16 +122,30 @@ class AttributionService:
             maximum_frequency=maximum_frequency,
         )
 
+        attribute_result = InfiniGramAttributionResponse.model_validate_json(
+            attribute_result_json
+        )
+
         # Limit the density of spans, and keep the longest ones
-        maximum_num_spans = int(np.ceil(len(attribute_result.input_token_ids) * maximum_span_density))
+        maximum_num_spans = int(
+            np.ceil(len(attribute_result.input_token_ids) * maximum_span_density)
+        )
         if span_ranking_method == SpanRankingMethod.LENGTH:
-            attribute_result.spans = sorted(attribute_result.spans, key=lambda x: x["length"], reverse=True)
+            attribute_result.spans = sorted(
+                attribute_result.spans, key=lambda x: x["length"], reverse=True
+            )
         elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
-            attribute_result.spans = sorted(attribute_result.spans, key=lambda x: x["unigram_logprob_sum"], reverse=False)
+            attribute_result.spans = sorted(
+                attribute_result.spans,
+                key=lambda x: x["unigram_logprob_sum"],
+                reverse=False,
+            )
         else:
             raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
         attribute_result.spans = attribute_result.spans[:maximum_num_spans]
-        attribute_result.spans = list(sorted(attribute_result.spans, key=lambda x: x["l"]))
+        attribute_result.spans = list(
+            sorted(attribute_result.spans, key=lambda x: x["l"])
+        )
 
         # Populate the spans with documents
         with tracer.start_as_current_span(
@@ -150,7 +170,7 @@ class AttributionService:
                 )
                 spans_with_document.append(span_with_document)
 
-            document_request_by_span = []
+            document_request_by_span: list[GetDocumentByPointerRequest] = []
             for span in attribute_result.spans:
                 docs = span["docs"]
                 if len(docs) > maximum_documents_per_span:
@@ -159,7 +179,9 @@ class AttributionService:
                 document_request_by_span.append(
                     GetDocumentByPointerRequest(
                         docs=docs,
-                        span_ids=attribute_result.input_token_ids[span["l"]:span["r"]],
+                        span_ids=attribute_result.input_token_ids[
+                            span["l"] : span["r"]
+                        ],
                         needle_length=span["length"],
                         maximum_context_length=maximum_context_length,
                     )
@@ -169,19 +191,25 @@ class AttributionService:
                 document_request_by_span=document_request_by_span,
             )
 
-            for (span_with_document, documents) in zip(spans_with_document, documents_by_span):
+            for span_with_document, documents in zip(
+                spans_with_document, documents_by_span
+            ):
                 for document in documents:
-                    display_length_long, needle_offset_long, text_long = self.cut_document(
-                        token_ids=document.token_ids,
-                        needle_offset=document.needle_offset,
-                        span_length=span_with_document.length,
-                        maximum_context_length=maximum_context_length_long,
+                    display_length_long, needle_offset_long, text_long = (
+                        self.cut_document(
+                            token_ids=document.token_ids,
+                            needle_offset=document.needle_offset,
+                            span_length=span_with_document.length,
+                            maximum_context_length=maximum_context_length_long,
+                        )
                     )
-                    display_length_snippet, needle_offset_snippet, text_snippet = self.cut_document(
-                        token_ids=document.token_ids,
-                        needle_offset=document.needle_offset,
-                        span_length=span_with_document.length,
-                        maximum_context_length=maximum_context_length_snippet,
+                    display_length_snippet, needle_offset_snippet, text_snippet = (
+                        self.cut_document(
+                            token_ids=document.token_ids,
+                            needle_offset=document.needle_offset,
+                            span_length=span_with_document.length,
+                            maximum_context_length=maximum_context_length_snippet,
+                        )
                     )
                     span_with_document.documents.append(
                         AttributionDocument(

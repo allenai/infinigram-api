@@ -10,4 +10,4 @@ opentelemetry-api==1.30.0
 opentelemetry-instrumentation-fastapi==0.51b0
 opentelemetry-sdk==1.30.0
 opentelemetry-exporter-otlp-proto-http==1.30.0
-saq[redis]==0.22.4
+saq[postgres]==0.22.4

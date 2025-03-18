@@ -268,6 +268,85 @@ function(
         }
     };
 
+    local indexVolumes = [
+        {
+            name: "infinigram-array-pileval-gpt2",
+            persistentVolumeClaim: {
+                claimName: "infinigram-pileval-gpt2",
+                readOnly: true,
+            }
+        },
+        {
+            name: "infinigram-array-olmoe-mix-0924-dclm",
+            persistentVolumeClaim: {
+                // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
+                claimName: "infinigram-olmoe-mix-0924",
+                readOnly: true,
+            }
+        },
+        {
+            name: "infinigram-array-olmoe-mix-0924-nodclm",
+            persistentVolumeClaim: {
+                claimName: "infinigram-olmoe-mix-0924-nodclm",
+                readOnly: true,
+            }
+        },
+        {
+            name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
+            persistentVolumeClaim: {
+                claimName: "infinigram-v4-olmoe-0125-1b-7b-anneal-adapt",
+                readOnly: true,
+            }
+        },
+        {
+            name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+            persistentVolumeClaim: {
+                claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
+                readOnly: true,
+            }
+        },
+        {
+            name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
+            persistentVolumeClaim: {
+                claimName: "infinigram-v4-olmo-2-0325-32b-anneal-adapt",
+                readOnly: true,
+            }
+        }
+    ];
+    
+    local indexVolumeMounts = [
+        {
+            mountPath: "/mnt/infinigram-array/v4_pileval_llama",
+            name: "infinigram-array-pileval-gpt2",
+            readOnly: true,
+        },
+        {
+            mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
+            name: "infinigram-array-olmoe-mix-0924-dclm",
+            readOnly: true,
+        },
+        {
+            mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
+            name: "infinigram-array-olmoe-mix-0924-nodclm",
+            readOnly: true,
+        },
+        {
+            mountPath: "/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt",
+            name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
+            readOnly: true,
+        },
+        {
+            mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
+            name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
+            readOnly: true,
+        },
+        {
+            mountPath: "/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt",
+            name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
+            readOnly: true,
+        }
+    ];
+
     local deployment = {
         apiVersion: 'apps/v1',
         kind: 'Deployment',
@@ -324,83 +403,12 @@ function(
                     nodeSelector: {
                         "cloud.google.com/gke-nodepool": "cpu64"
                     },
-                    volumes: [{
-                        name: "infinigram-array-pileval-gpt2",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-pileval-gpt2",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-olmoe-mix-0924-dclm",
-                        persistentVolumeClaim: {
-                            // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
-                            claimName: "infinigram-olmoe-mix-0924",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-olmoe-mix-0924-nodclm",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-olmoe-mix-0924-nodclm",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-olmoe-0125-1b-7b-anneal-adapt",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-olmo-2-0325-32b-anneal-adapt",
-                            readOnly: true,
-                        }
-                    }],
+                    volumes: indexVolumes,
                     containers: [
                         {
                             name: fullyQualifiedName + '-api',
                             image: apiImage,
-                            volumeMounts: [{
-                                mountPath: "/mnt/infinigram-array/v4_pileval_llama",
-                                name: "infinigram-array-pileval-gpt2",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
-                                name: "infinigram-array-olmoe-mix-0924-dclm",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
-                                name: "infinigram-array-olmoe-mix-0924-nodclm",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt",
-                                name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
-                                name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt",
-                                name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
-                                readOnly: true,
-                            }],
+                            volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.
                             #
@@ -456,6 +464,15 @@ function(
                                 {
                                     name: 'LOG_FORMAT',
                                     value: 'google:json'
+                                },
+                                {
+                                    name: "ATTRIBUTION_QUEUE_URL",
+                                    valueFrom: {
+                                        secretKeyRef: {
+                                            name: "attribution-worker",
+                                            key: "ATTRIBUTION_QUEUE_URL"
+                                        }
+                                    }
                                 }
                             ]
                         },
@@ -550,7 +567,7 @@ function(
                 metadata: {
                     name: fullyQualifiedName,
                     namespace: namespaceName,
-                    labels: podLabels,
+                    labels: attributionWorkerPodLabels,
                     annotations: annotations
                 },
                 spec: {
@@ -579,83 +596,12 @@ function(
                     nodeSelector: {
                         "cloud.google.com/gke-nodepool": "cpu64"
                     },
-                    volumes: [{
-                        name: "infinigram-array-pileval-gpt2",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-pileval-gpt2",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-olmoe-mix-0924-dclm",
-                        persistentVolumeClaim: {
-                            // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
-                            claimName: "infinigram-olmoe-mix-0924",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-olmoe-mix-0924-nodclm",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-olmoe-mix-0924-nodclm",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-ultrafeedback",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-ultrafeedback",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-tulu-v3-1-mix",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-tulu-v3-1-mix",
-                            readOnly: true,
-                        }
-                    },
-                    {
-                        name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-                        persistentVolumeClaim: {
-                            claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
-                            readOnly: true,
-                        }
-                    }],
+                    volumes: indexVolumes,
                     containers: [
                         {
                             name: fullyQualifiedName + '-attribution-worker',
                             image: apiImage,
-                            volumeMounts: [{
-                                mountPath: "/mnt/infinigram-array/v4_pileval_llama",
-                                name: "infinigram-array-pileval-gpt2",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
-                                name: "infinigram-array-olmoe-mix-0924-dclm",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
-                                name: "infinigram-array-olmoe-mix-0924-nodclm",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-ultrafeedback",
-                                name: "infinigram-array-v4-ultrafeedback",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-tulu-v3-1-mix",
-                                name: "infinigram-array-v4-tulu-v3-1-mix",
-                                readOnly: true,
-                            },
-                            {
-                                mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
-                                name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-                                readOnly: true,
-                            }],
+                            volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.
                             #
@@ -707,7 +653,17 @@ function(
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
                             },
-                            env: []
+                            env: [                                
+                                {
+                                    name: "ATTRIBUTION_QUEUE_URL",
+                                    valueFrom: {
+                                        secretKeyRef: {
+                                            name: "attribution-worker",
+                                            key: "ATTRIBUTION_QUEUE_URL"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }

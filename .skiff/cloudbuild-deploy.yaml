@@ -22,6 +22,7 @@ steps:
     'gcr.io/$PROJECT_ID/$REPO_NAME-proxy:$COMMIT_SHA'
   ]
   waitFor: [ 'proxy.build' ]
+
 - id: 'api.build'
   name: 'gcr.io/cloud-builders/docker'
   args: [
@@ -41,6 +42,27 @@ steps:
     'gcr.io/$PROJECT_ID/$REPO_NAME-api:$COMMIT_SHA',
   ]
   waitFor: [ 'api.build' ]
+
+- id: 'attribution-worker.build'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:latest',
+    '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
+    '--cache-from', 'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:latest',
+    '--build-arg', 'BUILDKIT_INLINE_CACHE=1',
+    '.'
+  ]
+  waitFor: [ '-' ]
+  dir: 'attribution-worker'
+- id: 'attribution-worker.push'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
+  ]
+  waitFor: [ 'attribution-worker.build' ]
+
 - id: 'config'
   name: 'gcr.io/ai2-reviz/jsonnet'
   args: [
@@ -50,6 +72,7 @@ steps:
     '--tla-str', 'env=$_ENV',
     '--tla-str', 'apiImage=gcr.io/$PROJECT_ID/$REPO_NAME-api:$COMMIT_SHA',
     '--tla-str', 'proxyImage=gcr.io/$PROJECT_ID/$REPO_NAME-proxy:$COMMIT_SHA',
+    '--tla-str', 'proxyImage=gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
     '--tla-str', 'sha=$COMMIT_SHA',
     '--tla-str', 'cause="Automated Skiff Deploy SHA:$COMMIT_SHA BUILD:$BUILD_ID"',
     '--tla-str', 'branch=$BRANCH_NAME',
@@ -58,6 +81,7 @@ steps:
     './webapp.jsonnet'
   ]
   dir: '.skiff'
+
 - id: 'deploy'
   name: 'gcr.io/ai2-reviz/rudder'
   args: [
@@ -72,7 +96,9 @@ images: [
   'gcr.io/$PROJECT_ID/$REPO_NAME-api:$COMMIT_SHA',
   'gcr.io/$PROJECT_ID/$REPO_NAME-api:latest',
   'gcr.io/$PROJECT_ID/$REPO_NAME-proxy:$COMMIT_SHA',
-  'gcr.io/$PROJECT_ID/$REPO_NAME-proxy:latest'
+  'gcr.io/$PROJECT_ID/$REPO_NAME-proxy:latest',
+  'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
+  'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:latest'
 ]
 artifacts:
   objects:

@@ -72,7 +72,7 @@ steps:
     '--tla-str', 'env=$_ENV',
     '--tla-str', 'apiImage=gcr.io/$PROJECT_ID/$REPO_NAME-api:$COMMIT_SHA',
     '--tla-str', 'proxyImage=gcr.io/$PROJECT_ID/$REPO_NAME-proxy:$COMMIT_SHA',
-    '--tla-str', 'proxyImage=gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
+    '--tla-str', 'workerImage=gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
     '--tla-str', 'sha=$COMMIT_SHA',
     '--tla-str', 'cause="Automated Skiff Deploy SHA:$COMMIT_SHA BUILD:$BUILD_ID"',
     '--tla-str', 'branch=$BRANCH_NAME',

@@ -135,7 +135,7 @@ index = InfiniGramProcessor(AvailableInfiniGramIndexId.PILEVAL_LLAMA)
 
 config = get_config()
 
-queue = Queue.from_url(config.postgres_url, name="infini-gram-attribution")
+queue = Queue.from_url(config.attribution_queue_url, name="infini-gram-attribution")
 
 
 async def start_worker():

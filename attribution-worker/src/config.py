@@ -7,7 +7,7 @@ class Config(BaseSettings):
     index_base_path: str = "/mnt/infinigram-array"
     profiling_enabled: bool = False
     application_name: str = "infini-gram-api"
-    attribution_queue_url: str = "redis://valkey:6379"
+    attribution_queue_url: str = "redis://localhost:6379"
 
 
 config = Config()

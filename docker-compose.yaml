@@ -20,6 +20,8 @@ services:
       - INDEX_BASE_PATH=/mnt/infinigram-array
       - LOG_LEVEL=DEBUG
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
+      - ATTRIBUTION_QUEUE_URL=redis://valkey:6379
+
   attribution-worker:
     platform: linux/amd64
     build:
@@ -38,7 +40,7 @@ services:
       # makes debugging easier.
       - PYTHONUNBUFFERED=1
       - INDEX_BASE_PATH=/mnt/infinigram-array
-      - POSTGRES_URL=postgres://postgres:llmz@host.docker.internal:5555/llmx?sslmode=disable&application_name=infini-gram-attribution-worker
+      - ATTRIBUTION_QUEUE_URL=redis://valkey:6379
   proxy:
     build: ./proxy
     ports:
@@ -56,5 +58,9 @@ services:
     ports:
       # Collector prometheus port. The metrics are checked in tests
       - 8888
+  valkey:
+    image: valkey/valkey:8.0.2
+    ports:
+      - 6379:6379
 volumes:
   logs:

@@ -5,7 +5,9 @@ from saq import Queue
 
 from src.config import get_config
 
-queue = Queue.from_url(get_config().postgres_url, name="infini-gram-attribution")
+queue = Queue.from_url(
+    get_config().attribution_queue_url, name="infini-gram-attribution"
+)
 
 
 async def connect_to_attribution_queue():

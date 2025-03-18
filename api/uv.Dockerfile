@@ -1,5 +1,4 @@
 # An example using multi-stage image builds to create a final image without uv.
-# Taken from https://github.com/astral-sh/uv-docker-example/blob/main/multistage.Dockerfile
 
 # First, build the application in the `/app` directory.
 # See `Dockerfile` for details.

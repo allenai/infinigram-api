@@ -4,6 +4,7 @@ services:
     platform: linux/amd64
     build:
       context: ./api
+      dockerfile: uv.Dockerfile
       target: dev
     volumes:
       - ./api:/api

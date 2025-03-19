@@ -44,6 +44,7 @@ COPY vendor/olmo-7b-hf/ vendor/olmo-7b-hf/
 COPY vendor/llama-2_bow_ids.txt vendor/llama-2_bow_ids.tx
 
 ENV PATH "/app/.venv/bin:$PATH"
+ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
 FROM runner as dev
 ENV OTEL_SERVICE_NAME=infinigram-api-dev

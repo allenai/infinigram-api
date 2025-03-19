@@ -43,7 +43,12 @@ WORKDIR /app/attribution-worker
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
+ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
-FROM base as runner
+FROM base as dev
+
+CMD ["saq", "--verbose", "src.worker.settings"]
+
+FROM base as prod
 
 CMD ["saq", "src.worker.settings"]

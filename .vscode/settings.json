@@ -16,5 +16,16 @@
     ],
     "mypy-type-checker.args": [
         "--config-file=./api/pyproject.toml"
+    ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "infini-gram",
+            "database": "infini-gram",
+            "username": "infini-gram"
+        }
     ]
 }

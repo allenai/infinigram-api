@@ -21,13 +21,14 @@ services:
       - INDEX_BASE_PATH=/mnt/infinigram-array
       - LOG_LEVEL=DEBUG
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
-      - ATTRIBUTION_QUEUE_URL=postgres://postgres:llmz@db:5432/llmx?sslmode=disable&application_name=infini-gram-attribution-worker
+      - ATTRIBUTION_QUEUE_URL=postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
 
   attribution-worker:
     platform: linux/amd64
     build:
       context: .
       dockerfile: ./attribution-worker/Dockerfile
+      target: dev
     volumes:
       - ./attribution-worker:/attribution-worker
       # If you add an volume here make sure you add it to /bin/download-infini-gram-array.sh too
@@ -42,7 +43,7 @@ services:
       # makes debugging easier.
       - PYTHONUNBUFFERED=1
       - INDEX_BASE_PATH=/mnt/infinigram-array
-      - ATTRIBUTION_QUEUE_URL=postgres://postgres:llmz@db:5432/llmx?sslmode=disable&application_name=infini-gram-attribution-worker
+      - ATTRIBUTION_QUEUE_URL=postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
 
   proxy:
     build: ./proxy
@@ -69,13 +70,7 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: llmz
-      POSTGRES_DB: llmx
-    command:
-      - postgres
-      - -c
-      - log_statement=all
-      - -c
-      - log_destination=stderr
+      POSTGRES_DB: infini-gram
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./schema:/docker-entrypoint-initdb.d

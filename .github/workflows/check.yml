@@ -27,7 +27,7 @@ jobs:
        python-version-file: "./api/pyproject.toml"
 
     - run: uv sync --all-extras --dev --all-packages
-    - run: uv run ruff check ./api
+    - run: uv run ruff check ./api ./attribution-worker
 
   type-check:
     runs-on: ubuntu-latest

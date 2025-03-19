@@ -45,4 +45,4 @@ jobs:
        python-version-file: "pyproject.toml"
 
     - run: uv sync --all-extras --dev --all-packages
-    - run: uv run mypy --config ./api/pyproject.toml
+    - run: uv run mypy --config ./pyproject.toml

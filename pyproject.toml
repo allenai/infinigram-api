@@ -38,7 +38,8 @@ line-ending = "auto"
 [tool.mypy]
 
 files = [
-    '.'
+    './api',
+    './attribution-worker'
 ]
 
 exclude = [

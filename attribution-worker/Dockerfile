@@ -1,16 +1,44 @@
-FROM --platform=amd64 python:3.12.4 as base
+# An example using multi-stage image builds to create a final image without uv.
+# Taken from https://github.com/astral-sh/uv-docker-example/blob/main/multistage.Dockerfile
 
-FROM base as builder
+# First, build the application in the `/app` directory.
+# See `Dockerfile` for details.
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
-WORKDIR /attribution-worker
+# Disable Python downloads, because we want to use the system interpreter
+# across both images. If using a managed Python version, it needs to be
+# copied from the build image into the final image; see `standalone.Dockerfile`
+# for an example.
+ENV UV_PYTHON_DOWNLOADS=0
 
-# Install Python dependencies
-COPY prod-requirements.txt .
+WORKDIR /app
 COPY vendor vendor
-RUN --mount=type=cache,target=/root/.cache pip install -r prod-requirements.txt
 
-COPY . .
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=../uv.lock,target=../uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project --no-dev
+ADD . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
 
-FROM builder as runner
+
+# Then, use a final image without uv
+FROM python:3.12-slim-bookworm as base
+
+WORKDIR /app
+
+# It is important to use the image that matches the builder, as the path to the
+# Python executable must be the same, e.g., using `python:3.11-slim-bookworm`
+# will fail.
+
+# Copy the application from the builder
+COPY --from=builder --chown=app:app /app /app
+
+# Place executables in the environment at the front of the path
+ENV PATH="/app/.venv/bin:$PATH"
+
+FROM base as runner
 
 CMD ["saq", "src.worker.settings"]

@@ -1,40 +1,16 @@
-[tool.pyright]
-pythonVersion = "3.11.3"
-
-[tool.ruff]
-
-exclude = [
-    ".venv",
-    ".vscode",
-    ".github",
-    "venv",
-    "vendor"
+[project]
+name = "infini-gram-attribution-worker"
+version = "0.1.0"
+requires-python = "~=3.12"
+dependencies = [
+    "pydantic-settings==2.3.4",
+    "pydantic==2.10.6",
+    "saq[postgres]==0.22.4",
+    "transformers==4.41.2",
 ]
 
-[tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
-
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
-
-[tool.mypy]
-
-files = [
-    '.'
+[tool.uv.sources]
+infini-gram = [
+    { path = "../vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl", marker = "sys_platform == 'darwin'" },
+    { path = "../vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", marker = "sys_platform == 'linux'" }
 ]
-
-exclude = [
-    'vendor',
-    'indexing',
-    'compute_stats',
-    'scripts',
-]
-
-strict = true
-
-[[tool.mypy.overrides]]
-module = [
-    "src.glog"
-]
-disable_error_code = ['type-arg', 'no-untyped-def', 'no-untyped-call']

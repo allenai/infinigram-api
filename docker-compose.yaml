@@ -2,7 +2,8 @@ services:
   api:
     platform: linux/amd64
     build:
-      context: ./api
+      context: .
+      dockerfile: ./api/Dockerfile
       target: dev
     volumes:
       - ./api:/api
@@ -25,7 +26,8 @@ services:
   attribution-worker:
     platform: linux/amd64
     build:
-      context: ./attribution-worker
+      context: .
+      dockerfile: ./attribution-worker/Dockerfile
     volumes:
       - ./attribution-worker:/attribution-worker
       # If you add an volume here make sure you add it to /bin/download-infini-gram-array.sh too

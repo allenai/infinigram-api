@@ -1,0 +1,18 @@
+[project]
+name = "infini-gram-processor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+
+requires-python = ">=3.12"
+dependencies = [
+    "opentelemetry-api==1.30.0",
+    "opentelemetry-sdk==1.30.0",
+    "infini-gram",
+    "transformers==4.41.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+

@@ -7,7 +7,14 @@ requires-python = "~=3.12"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["api", "attribution-worker"]
+members = ["api", "attribution-worker", "infini-gram-processor"]
+
+[tool.uv.sources]
+infini-gram = [
+    { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl", marker = "sys_platform == 'darwin'" },
+    { path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", marker = "sys_platform == 'linux'" }
+]
+infini-gram-processor = { workspace = true }
 
 [dependency-groups]
 dev = [

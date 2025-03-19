@@ -31,7 +31,8 @@ steps:
     '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME-api:$COMMIT_SHA',
     '--cache-from', 'gcr.io/$PROJECT_ID/$REPO_NAME-api:latest',
     '--build-arg', 'BUILDKIT_INLINE_CACHE=1',
-    '.'
+    '-f', 'Dockerfile',
+    '..'
   ]
   waitFor: [ '-' ]
   dir: 'api'
@@ -51,7 +52,8 @@ steps:
     '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:$COMMIT_SHA',
     '--cache-from', 'gcr.io/$PROJECT_ID/$REPO_NAME-attribution-worker:latest',
     '--build-arg', 'BUILDKIT_INLINE_CACHE=1',
-    '.'
+    '-f', 'Dockerfile',
+    '..'
   ]
   waitFor: [ '-' ]
   dir: 'attribution-worker'

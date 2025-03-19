@@ -13,11 +13,13 @@ installed on your local machine.
 
 ## Getting Started
 
+### Installing uv
+
+This repo uses `uv` for Python dependency management. Follow the instructions on https://docs.astral.sh/uv/getting-started/installation to install it.
+
 ### Installing Dependencies
 
-If you're on a Mac, you won't be able to install the infini-gram library locally. (It'll work in the docker-compose though!) To install other dependencies, install dependencies from `api/requirements/dev-requirements.txt` instead of from `api/requirements.txt`.
-
-`pip install -r requirements/dev-requirements.txt`
+Run `uv sync --all-packages` to get the packages for every project in this repo.
 
 ### Adding an index for local development
 

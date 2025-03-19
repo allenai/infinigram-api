@@ -10,6 +10,8 @@ COPY --from=ghcr.io/astral-sh/uv:0.6.8 /uv /bin/uv
 
 WORKDIR /app
 
+# uv keeps package info at the root of the workspace
+# Make sure you build this at the root context
 COPY uv.lock pyproject.toml .python-version /app/
 
 COPY vendor vendor

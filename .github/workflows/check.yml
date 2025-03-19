@@ -32,6 +32,8 @@ jobs:
   type-check:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       with:
@@ -40,7 +42,7 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-       python-version-file: "./api/pyproject.toml"
+       python-version-file: "pyproject.toml"
 
     - run: uv sync --all-extras --dev --all-packages
     - run: uv run mypy --config ./api/pyproject.toml

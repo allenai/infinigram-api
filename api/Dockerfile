@@ -1,4 +1,7 @@
-# Taken from https://github.com/astral-sh/uv-docker-example/blob/main/multistage.Dockerfile
+# An example using multi-stage image builds to create a final image without uv.
+
+# First, build the application in the `/app` directory.
+# See `Dockerfile` for details.
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
@@ -8,31 +11,34 @@ ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 # for an example.
 ENV UV_PYTHON_DOWNLOADS=0
 
-WORKDIR /api
-
+WORKDIR /app
 COPY vendor vendor
 
-# Install the project's dependencies using the lockfile and settings
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
-
-# Copy over the source code
-COPY . /api
+ADD . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
-# Place executables in the environment at the front of the path
 
-FROM --platform=amd64 python:3.12.4 as base
+# Then, use a final image without uv
+FROM python:3.12-slim-bookworm as base
+
+COPY vendor/llama-2-7b-hf/ vendor/llama-2-7b-hf/
+COPY vendor/olmo-7b-hf/ vendor/olmo-7b-hf/
+COPY vendor/llama-2_bow_ids.txt vendor/llama-2_bow_ids.txt
+
+# It is important to use the image that matches the builder, as the path to the
+# Python executable must be the same, e.g., using `python:3.11-slim-bookworm`
+# will fail.
+
 # Copy the application from the builder
-COPY --from=builder --chown=api:api /api /api
+COPY --from=builder --chown=app:app /app /app
 
-ENV PATH="/api/.venv/bin:$PATH"
-
-# Reset the entrypoint, don't invoke `uv`
-ENTRYPOINT []
+# Place executables in the environment at the front of the path
+ENV PATH="/app/.venv/bin:$PATH"
 
 FROM base as dev
 ENV OTEL_SERVICE_NAME=infinigram-api-dev
@@ -41,9 +47,9 @@ ENV OTEL_METRICS_EXPORTER=otlp
 ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://otelcol:4318"
 ENV ENV=development
 
-CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
+CMD ["fastapi", "dev", "/app/app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
 
-FROM builder as prod
+FROM base as prod
 ENV ENV=production
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]
+CMD ["fastapi", "run", "/app/app.py", "--port", "8000", "--proxy-headers"]

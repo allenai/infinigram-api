@@ -438,8 +438,8 @@ requires-dist = [{ name = "tqdm" }]
 
 [[package]]
 name = "infini-gram"
-version = "2.5.0"
-source = { path = "vendor/infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }
+version = "2.5.1"
+source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }
 resolution-markers = [
     "python_full_version < '3.13' and sys_platform == 'linux'",
     "python_full_version >= '3.13' and sys_platform == 'linux'",
@@ -448,7 +448,7 @@ dependencies = [
     { name = "tqdm", marker = "sys_platform == 'linux'" },
 ]
 wheels = [
-    { filename = "infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:335005ff9443f26732fd0d74629574f3ef9ea432652e7893b4de1d94b924aa65" },
+    { filename = "infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3748a2655f1fb0eba6df83bec7c609e736fd890d0b22afd2830f6e2032ac04c0" },
 ]
 
 [package.metadata]
@@ -462,7 +462,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "infini-gram", version = "2.1.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
     { name = "infini-gram", version = "2.1.0", source = { path = "vendor/infini_gram-2.1.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "sys_platform == 'darwin'" },
-    { name = "infini-gram", version = "2.5.0", source = { path = "vendor/infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-gcp-trace" },
@@ -488,7 +488,7 @@ requires-dist = [
     { name = "fastapi", specifier = "==0.111.0" },
     { name = "infini-gram", marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
     { name = "infini-gram", marker = "sys_platform == 'darwin'", path = "vendor/infini_gram-2.1.0-cp312-cp312-macosx_11_0_arm64.whl" },
-    { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
+    { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
     { name = "numpy", specifier = "<2.0.0" },
     { name = "opentelemetry-api", specifier = "==1.30.0" },
     { name = "opentelemetry-exporter-gcp-trace", specifier = "==1.9.0" },

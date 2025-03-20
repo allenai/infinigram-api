@@ -15,16 +15,17 @@ WORKDIR /app
 COPY uv.lock pyproject.toml .python-version /app/
 
 COPY vendor vendor
+COPY packages/ packages/
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-install-project --no-dev --package infini-gram-api --no-install-workspace
+    uv sync --frozen --no-install-project --no-dev --package infini-gram-attribution-worker --no-install-workspace
 
 COPY ./attribution-worker ./attribution-worker
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev --no-editable --package infini-gram-api
+    uv sync --frozen --no-dev --no-editable --package infini-gram-attribution-worker
 
 
 # Then, use a final image without uv

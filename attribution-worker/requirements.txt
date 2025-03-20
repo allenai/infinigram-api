@@ -1,4 +1,0 @@
-saq[postgres]==0.22.4
-transformers==4.41.2
-pydantic==2.10.6
-pydantic_settings==2.3.4

@@ -1,12 +1,13 @@
 version = 1
-requires-python = ">=3.12, <4"
+requires-python = ">=3.12"
 resolution-markers = [
-    "python_full_version >= '3.13' and sys_platform == 'darwin'",
     "python_full_version < '3.13' and sys_platform == 'darwin'",
-    "python_full_version >= '3.13' and sys_platform == 'linux'",
+    "python_full_version == '3.13.*' and sys_platform == 'darwin'",
+    "python_full_version >= '3.14' and sys_platform == 'darwin'",
     "python_full_version < '3.13' and sys_platform == 'linux'",
-    "python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version >= '3.13' and sys_platform == 'linux'",
     "python_full_version < '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
 ]
 
 [manifest]
@@ -432,11 +433,12 @@ name = "infini-gram"
 version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version >= '3.14' and sys_platform == 'darwin'",
     "python_full_version < '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
 ]
 dependencies = [
-    { name = "tqdm", marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
+    { name = "tqdm", marker = "(sys_platform != 'darwin' and sys_platform != 'linux') or (python_full_version >= '3.14' and sys_platform != 'linux')" },
 ]
 
 [[package]]
@@ -444,11 +446,10 @@ name = "infini-gram"
 version = "2.4.0"
 source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }
 resolution-markers = [
-    "python_full_version >= '3.13' and sys_platform == 'darwin'",
     "python_full_version < '3.13' and sys_platform == 'darwin'",
 ]
 dependencies = [
-    { name = "tqdm", marker = "sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
 ]
 wheels = [
     { filename = "infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:3ae2a58229e11fc9c14d13a3ab445d8475320cb3eaac38fb7da0075e20e9e369" },
@@ -462,8 +463,8 @@ name = "infini-gram"
 version = "2.4.0"
 source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }
 resolution-markers = [
-    "python_full_version >= '3.13' and sys_platform == 'linux'",
     "python_full_version < '3.13' and sys_platform == 'linux'",
+    "python_full_version >= '3.13' and sys_platform == 'linux'",
 ]
 dependencies = [
     { name = "tqdm", marker = "sys_platform == 'linux'" },
@@ -476,14 +477,32 @@ wheels = [
 requires-dist = [{ name = "tqdm" }]
 
 [[package]]
+name = "infini-gram"
+version = "2.4.0"
+source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }
+resolution-markers = [
+    "python_full_version == '3.13.*' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "tqdm", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
+]
+wheels = [
+    { filename = "infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:c88ce542a791f0c9ea76261a836ce256e71bc5d0f9fe85cd5175bf6f3e17e89d" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tqdm" }]
+
+[[package]]
 name = "infini-gram-api"
 version = "0.1.0"
 source = { virtual = "api" }
 dependencies = [
     { name = "fastapi" },
-    { name = "infini-gram", version = "2.3.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.3.0", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and sys_platform != 'linux') or (python_full_version >= '3.14' and sys_platform != 'linux')" },
+    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
     { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
+    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-gcp-trace" },
@@ -502,8 +521,9 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = "==0.111.0" },
-    { name = "infini-gram", marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
-    { name = "infini-gram", marker = "sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "(python_full_version < '3.12' and sys_platform != 'linux') or (python_full_version >= '3.14' and sys_platform != 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" },
     { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
     { name = "numpy", specifier = "<2.0.0" },
     { name = "opentelemetry-api", specifier = "==1.30.0" },
@@ -516,7 +536,7 @@ requires-dist = [
     { name = "python-json-logger", specifier = "==2.0.7" },
     { name = "requests", specifier = "==2.32.3" },
     { name = "saq", extras = ["postgres"], specifier = ">=0.22.4" },
-    { name = "transformers", specifier = "==4.41.2" },
+    { name = "transformers", specifier = "==4.49.0" },
     { name = "types-requests", specifier = "==2.32.0.20240914" },
 ]
 
@@ -526,6 +546,7 @@ version = "0.1.0"
 source = { virtual = "attribution-worker" }
 dependencies = [
     { name = "infini-gram-processor" },
+    { name = "psycopg", extra = ["binary", "pool"] },
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "saq", extra = ["postgres"] },
@@ -534,21 +555,23 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "infini-gram-processor", editable = "infini-gram-processor" },
+    { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
+    { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2.6" },
     { name = "pydantic", specifier = "==2.10.6" },
     { name = "pydantic-settings", specifier = "==2.3.4" },
     { name = "saq", extras = ["postgres"], specifier = "==0.22.4" },
-    { name = "transformers", specifier = "==4.41.2" },
+    { name = "transformers", specifier = "==4.49.0" },
 ]
 
 [[package]]
 name = "infini-gram-processor"
 version = "0.1.0"
-source = { editable = "infini-gram-processor" }
+source = { editable = "packages/infini-gram-processor" }
 dependencies = [
-    { name = "infini-gram", version = "2.3.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.3.0", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and sys_platform != 'linux') or (python_full_version >= '3.14' and sys_platform != 'linux')" },
+    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
     { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
+    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-sdk" },
     { name = "transformers" },
@@ -556,12 +579,13 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "infini-gram", marker = "sys_platform != 'darwin' and sys_platform != 'linux'" },
-    { name = "infini-gram", marker = "sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "(python_full_version < '3.12' and sys_platform != 'linux') or (python_full_version >= '3.14' and sys_platform != 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" },
     { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.4.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
     { name = "opentelemetry-api", specifier = "==1.30.0" },
     { name = "opentelemetry-sdk", specifier = "==1.30.0" },
-    { name = "transformers", specifier = "==4.41.2" },
+    { name = "transformers", specifier = "==4.49.0" },
 ]
 
 [[package]]
@@ -1405,25 +1429,27 @@ wheels = [
 
 [[package]]
 name = "tokenizers"
-version = "0.19.1"
+version = "0.21.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "huggingface-hub" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/48/04/2071c150f374aab6d5e92aaec38d0f3c368d227dd9e0469a1f0966ac68d1/tokenizers-0.19.1.tar.gz", hash = "sha256:ee59e6680ed0fdbe6b724cf38bd70400a0c1dd623b07ac729087270caeac88e3", size = 321039 }
+sdist = { url = "https://files.pythonhosted.org/packages/92/76/5ac0c97f1117b91b7eb7323dcd61af80d72f790b4df71249a7850c195f30/tokenizers-0.21.1.tar.gz", hash = "sha256:a1bb04dc5b448985f86ecd4b05407f5a8d97cb2c0532199b2a302a604a0165ab", size = 343256 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/63/90/2890cd096898dcdb596ee172cde40c0f54a9cf43b0736aa260a5501252af/tokenizers-0.19.1-cp312-cp312-macosx_10_12_x86_64.whl", hash = "sha256:621d670e1b1c281a1c9698ed89451395d318802ff88d1fc1accff0867a06f153", size = 2530580 },
-    { url = "https://files.pythonhosted.org/packages/74/d1/f4e1e950adb36675dfd8f9d0f4be644f3f3aaf22a5677a4f5c81282b662e/tokenizers-0.19.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:d924204a3dbe50b75630bd16f821ebda6a5f729928df30f582fb5aade90c818a", size = 2436682 },
-    { url = "https://files.pythonhosted.org/packages/ed/30/89b321a16c58d233e301ec15072c0d3ed5014825e72da98604cd3ab2fba1/tokenizers-0.19.1-cp312-cp312-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:4f3fefdc0446b1a1e6d81cd4c07088ac015665d2e812f6dbba4a06267d1a2c95", size = 3693494 },
-    { url = "https://files.pythonhosted.org/packages/05/40/fa899f32de483500fbc78befd378fd7afba4270f17db707d1a78c0a4ddc3/tokenizers-0.19.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9620b78e0b2d52ef07b0d428323fb34e8ea1219c5eac98c2596311f20f1f9266", size = 3566541 },
-    { url = "https://files.pythonhosted.org/packages/67/14/e7da32ae5fb4971830f1ef335932fae3fa57e76b537e852f146c850aefdf/tokenizers-0.19.1-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:04ce49e82d100594715ac1b2ce87d1a36e61891a91de774755f743babcd0dd52", size = 3430792 },
-    { url = "https://files.pythonhosted.org/packages/f2/4b/aae61bdb6ab584d2612170801703982ee0e35f8b6adacbeefe5a3b277621/tokenizers-0.19.1-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:c5c2ff13d157afe413bf7e25789879dd463e5a4abfb529a2d8f8473d8042e28f", size = 3962812 },
-    { url = "https://files.pythonhosted.org/packages/0a/b6/f7b7ef89c4da7b20256e6eab23d3835f05d1ca8f451d31c16cbfe3cd9eb6/tokenizers-0.19.1-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:3174c76efd9d08f836bfccaca7cfec3f4d1c0a4cf3acbc7236ad577cc423c840", size = 4024688 },
-    { url = "https://files.pythonhosted.org/packages/80/54/12047a69f5b382d7ee72044dc89151a2dd0d13b2c9bdcc22654883704d31/tokenizers-0.19.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7c9d5b6c0e7a1e979bec10ff960fae925e947aab95619a6fdb4c1d8ff3708ce3", size = 3610961 },
-    { url = "https://files.pythonhosted.org/packages/52/b7/1e8a913d18ac28feeda42d4d2d51781874398fb59cd1c1e2653a4b5742ed/tokenizers-0.19.1-cp312-cp312-musllinux_1_1_aarch64.whl", hash = "sha256:a179856d1caee06577220ebcfa332af046d576fb73454b8f4d4b0ba8324423ea", size = 9631367 },
-    { url = "https://files.pythonhosted.org/packages/ac/3d/2284f6d99f8f21d09352b88b8cfefa24ab88468d962aeb0aa15c20d76b32/tokenizers-0.19.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:952b80dac1a6492170f8c2429bd11fcaa14377e097d12a1dbe0ef2fb2241e16c", size = 9950121 },
-    { url = "https://files.pythonhosted.org/packages/2a/94/ec3369dbc9b7200c14c8c7a1a04c78b7a7398d0c001e1b7d1ffe30eb93a0/tokenizers-0.19.1-cp312-none-win32.whl", hash = "sha256:01d62812454c188306755c94755465505836fd616f75067abcae529c35edeb57", size = 2044069 },
-    { url = "https://files.pythonhosted.org/packages/0c/97/80bff6937e0c67d30c0facacd4f0bcf4254e581aa4995c73cef8c8640e56/tokenizers-0.19.1-cp312-none-win_amd64.whl", hash = "sha256:b70bfbe3a82d3e3fb2a5e9b22a39f8d1740c96c68b6ace0086b39074f08ab89a", size = 2214527 },
+    { url = "https://files.pythonhosted.org/packages/a5/1f/328aee25f9115bf04262e8b4e5a2050b7b7cf44b59c74e982db7270c7f30/tokenizers-0.21.1-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:e78e413e9e668ad790a29456e677d9d3aa50a9ad311a40905d6861ba7692cf41", size = 2780767 },
+    { url = "https://files.pythonhosted.org/packages/ae/1a/4526797f3719b0287853f12c5ad563a9be09d446c44ac784cdd7c50f76ab/tokenizers-0.21.1-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:cd51cd0a91ecc801633829fcd1fda9cf8682ed3477c6243b9a095539de4aecf3", size = 2650555 },
+    { url = "https://files.pythonhosted.org/packages/4d/7a/a209b29f971a9fdc1da86f917fe4524564924db50d13f0724feed37b2a4d/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:28da6b72d4fb14ee200a1bd386ff74ade8992d7f725f2bde2c495a9a98cf4d9f", size = 2937541 },
+    { url = "https://files.pythonhosted.org/packages/3c/1e/b788b50ffc6191e0b1fc2b0d49df8cff16fe415302e5ceb89f619d12c5bc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:34d8cfde551c9916cb92014e040806122295a6800914bab5865deb85623931cf", size = 2819058 },
+    { url = "https://files.pythonhosted.org/packages/36/aa/3626dfa09a0ecc5b57a8c58eeaeb7dd7ca9a37ad9dd681edab5acd55764c/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:aaa852d23e125b73d283c98f007e06d4595732104b65402f46e8ef24b588d9f8", size = 3133278 },
+    { url = "https://files.pythonhosted.org/packages/a4/4d/8fbc203838b3d26269f944a89459d94c858f5b3f9a9b6ee9728cdcf69161/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:a21a15d5c8e603331b8a59548bbe113564136dc0f5ad8306dd5033459a226da0", size = 3144253 },
+    { url = "https://files.pythonhosted.org/packages/d8/1b/2bd062adeb7c7511b847b32e356024980c0ffcf35f28947792c2d8ad2288/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:2fdbd4c067c60a0ac7eca14b6bd18a5bebace54eb757c706b47ea93204f7a37c", size = 3398225 },
+    { url = "https://files.pythonhosted.org/packages/8a/63/38be071b0c8e06840bc6046991636bcb30c27f6bb1e670f4f4bc87cf49cc/tokenizers-0.21.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2dd9a0061e403546f7377df940e866c3e678d7d4e9643d0461ea442b4f89e61a", size = 3038874 },
+    { url = "https://files.pythonhosted.org/packages/ec/83/afa94193c09246417c23a3c75a8a0a96bf44ab5630a3015538d0c316dd4b/tokenizers-0.21.1-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:db9484aeb2e200c43b915a1a0150ea885e35f357a5a8fabf7373af333dcc8dbf", size = 9014448 },
+    { url = "https://files.pythonhosted.org/packages/ae/b3/0e1a37d4f84c0f014d43701c11eb8072704f6efe8d8fc2dcdb79c47d76de/tokenizers-0.21.1-cp39-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:ed248ab5279e601a30a4d67bdb897ecbe955a50f1e7bb62bd99f07dd11c2f5b6", size = 8937877 },
+    { url = "https://files.pythonhosted.org/packages/ac/33/ff08f50e6d615eb180a4a328c65907feb6ded0b8f990ec923969759dc379/tokenizers-0.21.1-cp39-abi3-musllinux_1_2_i686.whl", hash = "sha256:9ac78b12e541d4ce67b4dfd970e44c060a2147b9b2a21f509566d556a509c67d", size = 9186645 },
+    { url = "https://files.pythonhosted.org/packages/5f/aa/8ae85f69a9f6012c6f8011c6f4aa1c96154c816e9eea2e1b758601157833/tokenizers-0.21.1-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:e5a69c1a4496b81a5ee5d2c1f3f7fbdf95e90a0196101b0ee89ed9956b8a168f", size = 9384380 },
+    { url = "https://files.pythonhosted.org/packages/e8/5b/a5d98c89f747455e8b7a9504910c865d5e51da55e825a7ae641fb5ff0a58/tokenizers-0.21.1-cp39-abi3-win32.whl", hash = "sha256:1039a3a5734944e09de1d48761ade94e00d0fa760c0e0551151d4dd851ba63e3", size = 2239506 },
+    { url = "https://files.pythonhosted.org/packages/e6/b6/072a8e053ae600dcc2ac0da81a23548e3b523301a442a6ca900e92ac35be/tokenizers-0.21.1-cp39-abi3-win_amd64.whl", hash = "sha256:0f0dcbcc9f6e13e675a66d7a5f2f225a736745ce484c1a4e07476a89ccdad382", size = 2435481 },
 ]
 
 [[package]]
@@ -1440,7 +1466,7 @@ wheels = [
 
 [[package]]
 name = "transformers"
-version = "4.41.2"
+version = "4.49.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "filelock" },
@@ -1454,9 +1480,9 @@ dependencies = [
     { name = "tokenizers" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/50/c9/b8acdf584f19558e29f46d36b5ed80954c2d3831811f129a5a6e84c4537b/transformers-4.41.2.tar.gz", hash = "sha256:80a4db216533d573e9cc7388646c31ed9480918feb7c55eb211249cb23567f87", size = 7841904 }
+sdist = { url = "https://files.pythonhosted.org/packages/79/50/46573150944f46df8ec968eda854023165a84470b42f69f67c7d475dabc5/transformers-4.49.0.tar.gz", hash = "sha256:7e40e640b5b8dc3f48743f5f5adbdce3660c82baafbd3afdfc04143cdbd2089e", size = 8610952 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d9/b7/98f821d70102e2d38483bbb7013a689d2d646daa4495377bc910374ad727/transformers-4.41.2-py3-none-any.whl", hash = "sha256:05555d20e43f808de1ef211ab64803cdb513170cef70d29a888b589caebefc67", size = 9092643 },
+    { url = "https://files.pythonhosted.org/packages/20/37/1f29af63e9c30156a3ed6ebc2754077016577c094f31de7b2631e5d379eb/transformers-4.49.0-py3-none-any.whl", hash = "sha256:6b4fded1c5fee04d384b1014495b4235a2b53c87503d7d592423c06128cbbe03", size = 9970275 },
 ]
 
 [[package]]

@@ -15,6 +15,8 @@ WORKDIR /app
 COPY uv.lock pyproject.toml .python-version /app/
 
 COPY vendor vendor
+COPY packages/ packages/
+
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \

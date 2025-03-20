@@ -1,3 +1,8 @@
+x-shared-env: &shared-env
+  PYTHONUNBUFFERED: 1
+  INDEX_BASE_PATH: /mnt/infinigram-array
+  ATTRIBUTION_QUEUE_URL: postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
+
 services:
   api:
     platform: linux/amd64
@@ -14,14 +19,10 @@ services:
       - ./infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt:/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-1124-13b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-0325-32b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
-    environment:
-      # This ensures that errors are printed as they occur, which
-      # makes debugging easier.
-      - PYTHONUNBUFFERED=1
-      - INDEX_BASE_PATH=/mnt/infinigram-array
-      - LOG_LEVEL=DEBUG
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
-      - ATTRIBUTION_QUEUE_URL=postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
+    environment: 
+      LOG_LEVEL: DEBUG
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4318
+      <<: *shared-env
 
   attribution-worker:
     platform: linux/amd64
@@ -35,15 +36,10 @@ services:
       - ./infinigram-array/v4_pileval_llama:/mnt/infinigram-array/v4_pileval_llama
       - ./infinigram-array/olmoe-mix-0924-dclm:/mnt/infinigram-array/olmoe-mix-0924-dclm
       - ./infinigram-array/olmoe-mix-0924-nodclm:/mnt/infinigram-array/olmoe-mix-0924-nodclm
-      - ./infinigram-array/v4-ultrafeedback:/mnt/infinigram-array/v4-ultrafeedback
-      - ./infinigram-array/v4-tulu-v3-1-mix:/mnt/infinigram-array/v4-tulu-v3-1-mix
+      - ./infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt:/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-1124-13b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt
-    environment:
-      # This ensures that errors are printed as they occur, which
-      # makes debugging easier.
-      - PYTHONUNBUFFERED=1
-      - INDEX_BASE_PATH=/mnt/infinigram-array
-      - ATTRIBUTION_QUEUE_URL=postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
+      - ./infinigram-array/v4-olmo-2-0325-32b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
+    environment: *shared-env
 
   proxy:
     build: ./proxy

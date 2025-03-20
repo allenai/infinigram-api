@@ -1,7 +1,6 @@
 import json
 from enum import Enum
 from typing import (
-    Annotated,
     Any,
     Iterable,
     List,
@@ -11,7 +10,6 @@ from typing import (
     cast,
 )
 
-from fastapi import Depends
 from infini_gram.engine import InfiniGramEngineDiff
 from infini_gram.models import (
     AttributionDoc,
@@ -33,7 +31,7 @@ from transformers.tokenization_utils_base import (  # type: ignore
 from .camel_case_model import CamelCaseModel
 from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
-from .tokenizer import Tokenizer
+from .tokenizers.tokenizer import Tokenizer
 
 
 class GetDocumentByRankRequest(BaseModel):
@@ -444,6 +442,6 @@ def InfiniGramProcessorFactoryPathParam(
     return indexes[index]
 
 
-InfiniGramProcessorDependency = Annotated[
-    InfiniGramProcessor, Depends(InfiniGramProcessorFactoryPathParam)
-]
+# InfiniGramProcessorDependency = Annotated[
+#     InfiniGramProcessor, Depends(InfiniGramProcessorFactoryPathParam)
+# ]

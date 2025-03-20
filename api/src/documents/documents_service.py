@@ -1,16 +1,16 @@
 from math import ceil
 from typing import Iterable, List
 
-from opentelemetry import trace
-
-from src.config import get_config
-from src.infinigram.processor import (
+from infini_gram_processor import InfiniGramProcessor
+from infini_gram_processor.processor import (
     BaseInfiniGramResponse,
     Document,
     GetDocumentByIndexRequest,
-    InfiniGramProcessor,
-    InfiniGramProcessorDependency,
 )
+from opentelemetry import trace
+
+from src.config import get_config
+from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 tracer = trace.get_tracer(get_config().application_name)
 
@@ -95,7 +95,8 @@ class DocumentsService:
 
     @tracer.start_as_current_span("documents_service/get_multiple_documents_by_index")
     def get_multiple_documents_by_index(
-        self, document_requests: Iterable[GetDocumentByIndexRequest],
+        self,
+        document_requests: Iterable[GetDocumentByIndexRequest],
     ) -> InfiniGramDocumentsResponse:
         documents = self.infini_gram_processor.get_documents_by_indexes(
             document_requests=document_requests,

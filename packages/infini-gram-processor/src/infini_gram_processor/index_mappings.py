@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import Iterable, TypedDict
 
+from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
-from .tokenizers.tokenizer_config import tokenizer_config
 from .tokenizers.tokenizer_factory import get_llama_2_tokenizer
 
 

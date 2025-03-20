@@ -1,6 +1,7 @@
 from typing import Annotated, TypeAlias
 
 from fastapi import APIRouter, Depends, Query
+from infini_gram_processor.processor import GetDocumentByIndexRequest
 
 from src.documents.documents_service import (
     DocumentsService,
@@ -8,7 +9,6 @@ from src.documents.documents_service import (
     InfiniGramDocumentsResponse,
     SearchResponse,
 )
-from src.infinigram.processor import GetDocumentByIndexRequest
 
 documents_router = APIRouter()
 

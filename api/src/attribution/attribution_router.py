@@ -1,6 +1,7 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
+from infini_gram_processor.processor import SpanRankingMethod
 from pydantic import Field
 
 from src.attribution.attribution_service import (
@@ -8,7 +9,6 @@ from src.attribution.attribution_service import (
     AttributionService,
 )
 from src.camel_case_model import CamelCaseModel
-from src.infinigram.processor import SpanRankingMethod
 
 attribution_router = APIRouter()
 

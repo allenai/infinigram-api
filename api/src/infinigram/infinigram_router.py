@@ -1,12 +1,12 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Query
-
-from src.infinigram.index_mappings import AvailableInfiniGramIndexId
-from src.infinigram.processor import (
+from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
+from infini_gram_processor.processor import (
     InfiniGramCountResponse,
-    InfiniGramProcessorDependency,
 )
+
+from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 infinigram_router = APIRouter()
 

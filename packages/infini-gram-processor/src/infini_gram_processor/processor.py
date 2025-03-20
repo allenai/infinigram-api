@@ -436,12 +436,6 @@ class InfiniGramProcessor:
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
 
 
-def InfiniGramProcessorFactoryPathParam(
-    index: AvailableInfiniGramIndexId,
-) -> InfiniGramProcessor:
-    return indexes[index]
-
-
 # InfiniGramProcessorDependency = Annotated[
 #     InfiniGramProcessor, Depends(InfiniGramProcessorFactoryPathParam)
 # ]

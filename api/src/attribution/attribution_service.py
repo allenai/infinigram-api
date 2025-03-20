@@ -3,6 +3,14 @@ from itertools import islice
 from typing import Iterable, List, Optional, Sequence
 
 import numpy as np
+from infini_gram_processor.processor import (
+    BaseInfiniGramResponse,
+    Document,
+    GetDocumentByPointerRequest,
+    InfiniGramAttributionResponse,
+    InfiniGramProcessor,
+    SpanRankingMethod,
+)
 from opentelemetry import trace
 from pydantic import Field
 from saq import Queue
@@ -13,15 +21,7 @@ from src.config import get_config
 from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
     DocumentsService,
-)
-from src.infinigram.processor import (
-    BaseInfiniGramResponse,
-    Document,
-    GetDocumentByPointerRequest,
-    InfiniGramAttributionResponse,
-    InfiniGramProcessor,
     InfiniGramProcessorDependency,
-    SpanRankingMethod,
 )
 
 tracer = trace.get_tracer(get_config().application_name)

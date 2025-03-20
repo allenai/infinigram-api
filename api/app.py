@@ -4,13 +4,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from infini_gram_processor.processor import InfiniGramEngineException
 from opentelemetry import trace
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
-
 from src import glog
 from src.attribution import attribution_router
 from src.attribution.attribution_queue_service import (
@@ -20,7 +20,6 @@ from src.attribution.attribution_queue_service import (
 from src.documents import documents_router
 from src.health import health_router
 from src.infinigram import infinigram_router
-from src.infinigram.infini_gram_engine_exception import InfiniGramEngineException
 from src.RFC9457Error import RFC9457Error
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.

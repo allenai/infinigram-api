@@ -1,7 +1,6 @@
 import asyncio
 from typing import (
     Any,
-    List,
 )
 
 from infini_gram_processor import indexes
@@ -21,7 +20,7 @@ async def attribution_job(
     *,
     index: str,
     input: str,
-    delimiters: List[str],
+    delimiters: list[str],
     allow_spans_with_partial_words: bool,
     minimum_span_length: int,
     maximum_frequency: int,

@@ -454,7 +454,7 @@ dependencies = [
     { name = "tqdm", marker = "sys_platform == 'linux'" },
 ]
 wheels = [
-    { filename = "infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:335005ff9443f26732fd0d74629574f3ef9ea432652e7893b4de1d94b924aa65" },
+    { filename = "infini_gram-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2a921231849afef88ad744fba8d371ae47fb5c3c275bcaa60affebdc36420cef" },
 ]
 
 [package.metadata]

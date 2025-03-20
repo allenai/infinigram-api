@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
-from infini_gram_processor.processor import (
+from infini_gram_processor.models import (
     InfiniGramCountResponse,
 )
 

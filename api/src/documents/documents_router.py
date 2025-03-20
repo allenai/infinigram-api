@@ -1,7 +1,7 @@
 from typing import Annotated, TypeAlias
 
 from fastapi import APIRouter, Depends, Query
-from infini_gram_processor.processor import GetDocumentByIndexRequest
+from infini_gram_processor.models import GetDocumentByIndexRequest
 
 from src.documents.documents_service import (
     DocumentsService,

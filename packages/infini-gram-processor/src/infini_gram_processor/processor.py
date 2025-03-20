@@ -1,105 +1,37 @@
 import json
-from enum import Enum
 from typing import (
-    Any,
     Iterable,
-    List,
     Sequence,
-    TypeGuard,
-    TypeVar,
     cast,
 )
 
 from infini_gram.engine import InfiniGramEngineDiff
 from infini_gram.models import (
-    AttributionDoc,
-    AttributionSpan,
-    ErrorResponse,
     InfiniGramEngineResponse,
 )
 from opentelemetry import trace
-from pydantic import (
-    BaseModel,
-    Field,
-)
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
     TextInput,
 )
 
-from .camel_case_model import CamelCaseModel
 from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
+from .models import (
+    Document,
+    GetDocumentByIndexRequest,
+    GetDocumentByPointerRequest,
+    GetDocumentByRankRequest,
+    InfiniGramAttributionResponse,
+    InfiniGramCountResponse,
+    InfiniGramSearchResponse,
+)
+from .models.is_infini_gram_error_response import (
+    TInfiniGramResponse,
+    is_infini_gram_error_response,
+)
 from .tokenizers.tokenizer import Tokenizer
-
-
-class GetDocumentByRankRequest(BaseModel):
-    shard: int
-    rank: int
-    needle_length: int
-    maximum_context_length: int
-
-
-class GetDocumentByPointerRequest(BaseModel):
-    docs: List[AttributionDoc]
-    span_ids: List[int]
-    needle_length: int
-    maximum_context_length: int
-
-
-class GetDocumentByIndexRequest(BaseModel):
-    document_index: int
-    maximum_context_length: int
-
-
-class SpanRankingMethod(Enum):
-    LENGTH = "length"
-    UNIGRAM_LOGPROB_SUM = "unigram_logprob_sum"
-
-
-class BaseInfiniGramResponse(CamelCaseModel):
-    index: str
-
-
-class InfiniGramErrorResponse(CamelCaseModel):
-    error: str
-
-
-class InfiniGramCountResponse(BaseInfiniGramResponse):
-    approx: bool
-    count: int
-
-
-class Document(CamelCaseModel):
-    document_index: int = Field(validation_alias="doc_ix")
-    document_length: int = Field(validation_alias="doc_len")
-    display_length: int = Field(validation_alias="disp_len")
-    needle_offset: int = Field(validation_alias="needle_offset")
-    metadata: dict[str, Any]
-    token_ids: List[int]
-    text: str
-    blocked: bool = False
-
-
-class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: List[AttributionSpan]
-    input_token_ids: List[int]
-
-
-class InfiniGramSearchResponse(CamelCaseModel):
-    documents: List[Document]
-    total_documents: int
-
-
-TInfiniGramResponse = TypeVar("TInfiniGramResponse")
-
-
-def is_infini_gram_error_response(
-    val: InfiniGramEngineResponse[TInfiniGramResponse],
-) -> TypeGuard[ErrorResponse]:
-    return isinstance(val, dict) and "error" in val
-
 
 tracer = trace.get_tracer(__name__)
 
@@ -120,6 +52,8 @@ class InfiniGramProcessor:
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
+            # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
+            attribution_block_size=256,  # type: ignore
             precompute_unigram_logprobs=True,
             # for the attribution feature, disabling prefetching can speed things up
             ds_prefetch_depth=0,
@@ -130,7 +64,7 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/tokenize")
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
-    ) -> List[int]:
+    ) -> list[int]:
         return self.tokenizer.tokenize(input)
 
     @tracer.start_as_current_span("infini_gram_processor/decode_tokens")
@@ -190,7 +124,7 @@ class InfiniGramProcessor:
     def get_documents_by_ranks(
         self,
         document_requests: Iterable[GetDocumentByRankRequest],
-    ) -> List[Document]:
+    ) -> list[Document]:
         get_docs_by_ranks_response = self.infini_gram_engine.get_docs_by_ranks_2(
             requests=[
                 (
@@ -254,7 +188,7 @@ class InfiniGramProcessor:
     def get_documents_by_pointers(
         self,
         document_request_by_span: Iterable[GetDocumentByPointerRequest],
-    ) -> List[List[Document]]:
+    ) -> list[list[Document]]:
         get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
             requests=[
                 {
@@ -313,7 +247,7 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/get_documents_by_indexes")
     def get_documents_by_indexes(
         self, document_requests: Iterable[GetDocumentByIndexRequest]
-    ) -> List[Document]:
+    ) -> list[Document]:
         get_docs_by_indexes_response = self.infini_gram_engine.get_docs_by_ixs_2(
             requests=[
                 (
@@ -407,7 +341,7 @@ class InfiniGramProcessor:
     def attribute(
         self,
         input: str,
-        delimiters: List[str],
+        delimiters: list[str],
         allow_spans_with_partial_words: bool,
         minimum_span_length: int,
         maximum_frequency: int,
@@ -434,8 +368,3 @@ class InfiniGramProcessor:
 
 
 indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
-
-
-# InfiniGramProcessorDependency = Annotated[
-#     InfiniGramProcessor, Depends(InfiniGramProcessorFactoryPathParam)
-# ]

@@ -3,13 +3,12 @@ from itertools import islice
 from typing import Iterable, List, Optional, Sequence
 
 import numpy as np
+from infini_gram_processor.models import BaseInfiniGramResponse, SpanRankingMethod
 from infini_gram_processor.processor import (
-    BaseInfiniGramResponse,
     Document,
     GetDocumentByPointerRequest,
     InfiniGramAttributionResponse,
     InfiniGramProcessor,
-    SpanRankingMethod,
 )
 from opentelemetry import trace
 from pydantic import Field

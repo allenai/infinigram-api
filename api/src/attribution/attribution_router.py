@@ -1,7 +1,7 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
-from infini_gram_processor.processor import SpanRankingMethod
+from infini_gram_processor.models import SpanRankingMethod
 from pydantic import Field
 
 from src.attribution.attribution_service import (

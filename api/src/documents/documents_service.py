@@ -2,7 +2,7 @@ from math import ceil
 from typing import Iterable, List
 
 from infini_gram_processor import InfiniGramProcessor
-from infini_gram_processor.processor import (
+from infini_gram_processor.models import (
     BaseInfiniGramResponse,
     Document,
     GetDocumentByIndexRequest,

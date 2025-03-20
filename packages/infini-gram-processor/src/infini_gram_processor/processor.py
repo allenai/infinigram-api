@@ -53,7 +53,7 @@ class InfiniGramProcessor:
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
             # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
-            # attribution_block_size=256,  # type: ignore
+            attribution_block_size=256,  # type: ignore
             precompute_unigram_logprobs=True,
             # for the attribution feature, disabling prefetching can speed things up
             ds_prefetch_depth=0,

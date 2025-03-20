@@ -69,10 +69,12 @@ class AttributionRequest(CamelCaseModel):
 
 @attribution_router.post(path="/{index}/attribution")
 async def get_document_attributions(
+    index: str,
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:
     result = await attribution_service.get_attribution_for_response(
+        index=index,
         response=body.response,
         delimiters=body.delimiters,
         allow_spans_with_partial_words=body.allow_spans_with_partial_words,

@@ -4,7 +4,8 @@ from typing import (
     List,
 )
 
-from infini_gram_processor import AvailableInfiniGramIndexId, indexes
+from infini_gram_processor import indexes
+from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from saq import Queue
 from saq.types import SettingsDict
 
@@ -14,20 +15,21 @@ config = get_config()
 
 queue = Queue.from_url(config.attribution_queue_url, name="infini-gram-attribution")
 
-index = indexes[AvailableInfiniGramIndexId.OLMO_2_0325_32B]
-
 
 async def attribution_job(
     ctx: Any,
     *,
+    index: str,
     input: str,
     delimiters: List[str],
     allow_spans_with_partial_words: bool,
     minimum_span_length: int,
     maximum_frequency: int,
 ):
+    infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
+
     result = await asyncio.to_thread(
-        index.attribute,
+        infini_gram_index.attribute,
         input=input,
         delimiters=delimiters,
         allow_spans_with_partial_words=allow_spans_with_partial_words,

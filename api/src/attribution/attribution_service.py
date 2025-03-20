@@ -100,6 +100,7 @@ class AttributionService:
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     async def get_attribution_for_response(
         self,
+        index: str,
         response: str,
         delimiters: List[str],
         allow_spans_with_partial_words: bool,
@@ -114,6 +115,7 @@ class AttributionService:
     ) -> AttributionResponse:
         attribute_result_json = await self.attribution_queue.apply(
             "attribute",
+            index=index,
             timeout=60,
             input=response,
             delimiters=delimiters,

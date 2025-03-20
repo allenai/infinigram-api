@@ -7,7 +7,6 @@ from infini_gram_processor import indexes
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from saq import Queue
 from saq.types import SettingsDict
-
 from src.config import get_config
 
 config = get_config()
@@ -24,7 +23,7 @@ async def attribution_job(
     allow_spans_with_partial_words: bool,
     minimum_span_length: int,
     maximum_frequency: int,
-):
+) -> str:
     infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
 
     result = await asyncio.to_thread(

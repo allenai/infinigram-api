@@ -6,8 +6,14 @@ from typing import (
     Sequence,
 )
 
+<<<<<<< Updated upstream
 import numpy as np
 from infini_gram_processor import indexes
+||||||| Stash base
+from infini_gram_processor import indexes
+=======
+from infini_gram_processor import get_indexes
+>>>>>>> Stashed changes
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.models import (
     AttributionDocument,
@@ -75,7 +81,7 @@ async def attribution_job(
     maximum_context_length_snippet: int,
     maximum_documents_per_span: int,
 ) -> str:
-    infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
+    infini_gram_index = get_indexes()[AvailableInfiniGramIndexId(index)]
 
     attribute_result = await asyncio.to_thread(
         infini_gram_index.attribute,

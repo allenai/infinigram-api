@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,8 +12,6 @@ class Config(BaseSettings):
     attribution_queue_url: str = "redis://localhost:6379"
 
 
-config = Config()
-
-
+@lru_cache
 def get_config() -> Config:
-    return config
+    return Config()

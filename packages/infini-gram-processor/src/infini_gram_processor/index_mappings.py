@@ -1,7 +1,8 @@
 from enum import Enum
+from functools import lru_cache
 from typing import Iterable, TypedDict
 
-from .processor_config import tokenizer_config
+from .processor_config import get_tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
 from .tokenizers.tokenizer_factory import get_llama_2_tokenizer
 
@@ -29,37 +30,42 @@ IndexMappings = TypedDict(
     },
 )
 
-index_mappings: IndexMappings = {
-    AvailableInfiniGramIndexId.PILEVAL_LLAMA.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": f"{tokenizer_config.index_base_path}/v4_pileval_llama",
-        "index_dir_diff": [],
-    },
-    AvailableInfiniGramIndexId.OLMOE_0125_1B_7B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
-            f"{tokenizer_config.index_base_path}/v4-olmoe-0125-1b-7b-anneal-adapt",
-        ],
-        "index_dir_diff": [],
-    },
-    AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
-            f"{tokenizer_config.index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
-        ],
-        "index_dir_diff": [],
-    },
-    AvailableInfiniGramIndexId.OLMO_2_0325_32B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
-            f"{tokenizer_config.index_base_path}/v4-olmo-2-0325-32b-anneal-adapt",
-        ],
-        "index_dir_diff": [],
-    },
-}
+
+@lru_cache
+def get_index_mappings() -> IndexMappings:
+    index_mappings: IndexMappings = {
+        AvailableInfiniGramIndexId.PILEVAL_LLAMA.value: {
+            "tokenizer": get_llama_2_tokenizer(),
+            "index_dir": f"{get_tokenizer_config().index_base_path}/v4_pileval_llama",
+            "index_dir_diff": [],
+        },
+        AvailableInfiniGramIndexId.OLMOE_0125_1B_7B.value: {
+            "tokenizer": get_llama_2_tokenizer(),
+            "index_dir": [
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-dclm",
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-nodclm",
+                f"{get_tokenizer_config().index_base_path}/v4-olmoe-0125-1b-7b-anneal-adapt",
+            ],
+            "index_dir_diff": [],
+        },
+        AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
+            "tokenizer": get_llama_2_tokenizer(),
+            "index_dir": [
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-dclm",
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-nodclm",
+                f"{get_tokenizer_config().index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
+            ],
+            "index_dir_diff": [],
+        },
+        AvailableInfiniGramIndexId.OLMO_2_0325_32B.value: {
+            "tokenizer": get_llama_2_tokenizer(),
+            "index_dir": [
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-dclm",
+                f"{get_tokenizer_config().index_base_path}/olmoe-mix-0924-nodclm",
+                f"{get_tokenizer_config().index_base_path}/v4-olmo-2-0325-32b-anneal-adapt",
+            ],
+            "index_dir_diff": [],
+        },
+    }
+
+    return index_mappings

@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,11 +9,9 @@ class Config(BaseSettings):
     index_base_path: str = "/mnt/infinigram-array"
     profiling_enabled: bool = False
     application_name: str = "infini-gram-api"
-    attribution_queue_url: str = "redis://localhost:6379"
+    attribution_queue_url: str = "postgres://localhost:5432"
 
 
-config = Config()
-
-
+@lru_cache
 def get_config() -> Config:
-    return config
+    return Config()

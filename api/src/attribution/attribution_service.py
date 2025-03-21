@@ -3,11 +3,14 @@ from itertools import islice
 from typing import Iterable, List, Optional, Sequence
 
 import numpy as np
-from infini_gram_processor.models import BaseInfiniGramResponse, SpanRankingMethod
-from infini_gram_processor.processor import (
+from infini_gram_processor.models import (
+    BaseInfiniGramResponse,
     Document,
     GetDocumentByPointerRequest,
     InfiniGramAttributionResponse,
+    SpanRankingMethod,
+)
+from infini_gram_processor.processor import (
     InfiniGramProcessor,
 )
 from opentelemetry import trace
@@ -20,8 +23,8 @@ from src.config import get_config
 from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
     DocumentsService,
-    InfiniGramProcessorDependency,
 )
+from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 tracer = trace.get_tracer(get_config().application_name)
 

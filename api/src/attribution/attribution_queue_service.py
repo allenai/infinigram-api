@@ -10,15 +10,15 @@ queue = Queue.from_url(
 )
 
 
-async def connect_to_attribution_queue():
+async def connect_to_attribution_queue() -> None:
     await queue.connect()
 
 
-async def disconnect_from_attribution_queue():
+async def disconnect_from_attribution_queue() -> None:
     await queue.disconnect()
 
 
-def get_queue():
+def get_queue() -> Queue:
     return queue
 
 

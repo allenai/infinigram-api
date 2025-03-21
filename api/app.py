@@ -1,10 +1,11 @@
 import logging
 import os
 from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from infini_gram_processor.processor import InfiniGramEngineException
+from infini_gram_processor.infini_gram_engine_exception import InfiniGramEngineException
 from opentelemetry import trace
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
@@ -31,7 +32,7 @@ logging.basicConfig(level=level, handlers=handlers)
 
 # https://fastapi.tiangolo.com/advanced/events/
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
     # Things before yield on on startup
     await connect_to_attribution_queue()
     yield

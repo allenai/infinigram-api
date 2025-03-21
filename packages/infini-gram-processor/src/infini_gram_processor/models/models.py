@@ -5,7 +5,7 @@ from infini_gram.models import (
     AttributionDoc,
 )
 from infini_gram.models import (
-    AttributionSpan as AttributionSpanDict,
+    AttributionSpan as AttributionSpanFromEngine,
 )
 from pydantic import BaseModel, Field
 
@@ -61,7 +61,7 @@ class Document(CamelCaseModel):
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: list[AttributionSpanDict]
+    spans: list[AttributionSpanFromEngine]
     input_token_ids: list[int]
 
 

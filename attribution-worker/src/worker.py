@@ -10,18 +10,22 @@ import numpy as np
 from infini_gram_processor import indexes
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.models import (
-    AttributionDocument,
     SpanRankingMethod,
 )
 from infini_gram_processor.models.models import (
     AttributionResponse,
+    AttributionSpan,
 )
 from infini_gram_processor.processor import InfiniGramProcessor
 from saq import Queue
 from saq.types import SettingsDict
 
 from src.config import get_config
-from src.get_documents import get_document_requests, get_spans_with_documents
+from src.get_documents import (
+    get_document_requests,
+    get_spans_with_documents,
+    sort_and_cap_spans,
+)
 
 config = get_config()
 
@@ -38,25 +42,6 @@ def __get_span_text(
     span_text = infini_gram_index.decode_tokens(token_ids=span_text_tokens)
 
     return (span_text_tokens, span_text)
-
-
-def cut_document(
-    infini_gram_index: InfiniGramProcessor,
-    token_ids: list[int],
-    needle_offset: int,
-    span_length: int,
-    maximum_context_length: int,
-) -> tuple[int, int, str]:
-    # cut the left context if necessary
-    if needle_offset > maximum_context_length:
-        token_ids = token_ids[(needle_offset - maximum_context_length) :]
-        needle_offset = maximum_context_length
-    # cut the right context if necessary
-    if len(token_ids) - needle_offset - span_length > maximum_context_length:
-        token_ids = token_ids[: (needle_offset + span_length + maximum_context_length)]
-    display_length = len(token_ids)
-    text = infini_gram_index.decode_tokens(token_ids)
-    return display_length, needle_offset, text
 
 
 async def attribution_job(
@@ -91,69 +76,39 @@ async def attribution_job(
         np.ceil(len(attribute_result.input_token_ids) * maximum_span_density)
     )
 
-    if span_ranking_method == SpanRankingMethod.LENGTH:
-        attribute_result.spans = sorted(
-            attribute_result.spans, key=lambda x: x["length"], reverse=True
-        )
-    elif span_ranking_method == SpanRankingMethod.UNIGRAM_LOGPROB_SUM:
-        attribute_result.spans = sorted(
-            attribute_result.spans,
-            key=lambda x: x["unigram_logprob_sum"],
-            reverse=False,
-        )
-    else:
-        raise ValueError(f"Unknown span ranking method: {span_ranking_method}")
-
-    attribute_result.spans = attribute_result.spans[:maximum_num_spans]
-    attribute_result.spans = list(sorted(attribute_result.spans, key=lambda x: x["l"]))
-
-    spans_with_document = get_spans_with_documents(
-        infini_gram_index=infini_gram_index, attribution_response=attribute_result
+    sorted_spans = sort_and_cap_spans(
+        attribute_result.spans,
+        ranking_method=span_ranking_method,
+        maximum_num_spans=maximum_num_spans,
     )
 
     document_request_by_span = get_document_requests(
-        attribution_response=attribute_result,
+        spans=sorted_spans,
+        input_token_ids=attribute_result.input_token_ids,
         maximum_documents_per_span=maximum_documents_per_span,
         maximum_context_length=maximum_context_length,
     )
 
-    documents_by_span = infini_gram_index.get_documents_by_pointers(
+    documents_by_span = await asyncio.to_thread(
+        infini_gram_index.get_documents_by_pointers,
         document_request_by_span=document_request_by_span,
     )
 
-    for span_with_document, documents in zip(spans_with_document, documents_by_span):
-        for document in documents:
-            display_length_long, needle_offset_long, text_long = cut_document(
-                infini_gram_index=infini_gram_index,
-                token_ids=document.token_ids,
-                needle_offset=document.needle_offset,
-                span_length=span_with_document.length,
-                maximum_context_length=maximum_context_length_long,
-            )
-            display_length_snippet, needle_offset_snippet, text_snippet = cut_document(
-                infini_gram_index=infini_gram_index,
-                token_ids=document.token_ids,
-                needle_offset=document.needle_offset,
-                span_length=span_with_document.length,
-                maximum_context_length=maximum_context_length_snippet,
-            )
-            span_with_document.documents.append(
-                AttributionDocument(
-                    **vars(document),
-                    display_length_long=display_length_long,
-                    needle_offset_long=needle_offset_long,
-                    text_long=text_long,
-                    display_offset_snippet=display_length_snippet,
-                    needle_offset_snippet=needle_offset_snippet,
-                    text_snippet=text_snippet,
-                )
-            )
+    spans_with_documents: list[AttributionSpan] = get_spans_with_documents(
+        infini_gram_index=infini_gram_index,
+        spans=sorted_spans,
+        documents_by_span=documents_by_span,
+        input_token_ids=attribute_result.input_token_ids,
+        maximum_context_length_long=maximum_context_length_long,
+        maximum_context_length_snippet=maximum_context_length_snippet,
+    )
 
-    return AttributionResponse(
+    response = AttributionResponse(
         index=infini_gram_index.index,
-        spans=spans_with_document,
+        spans=spans_with_documents,
         input_tokens=infini_gram_index.tokenize_to_list(input),
-    ).model_dump_json()
+    )
+    return response.model_dump_json()
 
 
 settings = SettingsDict(

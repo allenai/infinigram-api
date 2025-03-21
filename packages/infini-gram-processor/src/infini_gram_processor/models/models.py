@@ -1,9 +1,11 @@
 from enum import Enum
-from typing import Any
+from typing import Any, Optional, Sequence
 
 from infini_gram.models import (
     AttributionDoc,
-    AttributionSpan,
+)
+from infini_gram.models import (
+    AttributionSpan as AttributionSpanDict,
 )
 from pydantic import BaseModel, Field
 
@@ -59,10 +61,37 @@ class Document(CamelCaseModel):
 
 
 class InfiniGramAttributionResponse(BaseInfiniGramResponse):
-    spans: list[AttributionSpan]
+    spans: list[AttributionSpanDict]
     input_token_ids: list[int]
 
 
 class InfiniGramSearchResponse(CamelCaseModel):
     documents: list[Document]
     total_documents: int
+
+
+class AttributionDocument(Document):
+    display_length_long: int
+    needle_offset_long: int
+    text_long: str
+    display_offset_snippet: int
+    needle_offset_snippet: int
+    text_snippet: str
+
+
+class AttributionSpan(CamelCaseModel):
+    left: int
+    right: int
+    length: int
+    count: int
+    unigram_logprob_sum: float
+    text: str
+    token_ids: Sequence[int]
+    documents: list[AttributionDocument]
+
+
+class AttributionResponse(BaseInfiniGramResponse):
+    spans: Sequence[AttributionSpan]
+    input_tokens: Optional[Sequence[str]] = Field(
+        examples=[["busy", " medieval", " streets", "."]]
+    )

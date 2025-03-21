@@ -24,7 +24,16 @@ dev = ["mypy>=1.15.0", "pytest>=8.3.5", "ruff>=0.11.0"]
 pythonVersion = "3.12"
 
 [tool.ruff]
-exclude = [".venv", ".vscode", ".github", "venv", "vendor"]
+exclude = [
+    ".venv",
+    ".vscode",
+    ".github",
+    "venv",
+    "vendor",
+    "indexing",
+    "compute_stats",
+    "scripts",
+]
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.

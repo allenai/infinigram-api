@@ -541,6 +541,12 @@ function(
     local attributionWorkerPodLabels = podLabels + { app: config.appName + '-attribution-worker' };
     local attributionWorkerFullyQualifiedName = fullyQualifiedName + '-attribution-worker';
 
+    // This is used to verify that the worker is functional.
+    local workerHealthCheck = {
+        port: 8080,
+        scheme: 'HTTP'
+    };
+
     local attributionWorkerDeployment = {
         apiVersion: 'apps/v1',
         kind: 'Deployment',
@@ -625,13 +631,13 @@ function(
                             # If you think your application is likely to be unstable after running
                             # for long periods send a note to reviz@allenai.org so we can work
                             # with you to craft the right livenessProbe.
-                            // readinessProbe: {
-                            //     httpGet: apiHealthCheck + {
-                            //         path: '/health?check=rdy'
-                            //     },
-                            //     periodSeconds: 10,
-                            //     failureThreshold: 3
-                            // },
+                            readinessProbe: {
+                                httpGet: workerHealthCheck + {
+                                    path: '/'
+                                },
+                                periodSeconds: 10,
+                                failureThreshold: 3
+                            },
                             # This tells Kubernetes what CPU and memory resources your API needs.
                             # We set these values low by default, as most applications receive
                             # bursts of activity and accordingly don't need dedicated resources

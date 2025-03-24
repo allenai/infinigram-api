@@ -48,9 +48,8 @@ ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
 FROM base as dev
 
-CMD ["saq", "--verbose", "attribution_worker.worker_settings"]
-# CMD ["/bin/bash", "-c", "sleep infinity"]
+CMD ["saq", "--verbose", "--web", "attribution_worker.worker_settings"]
 
 FROM base as prod
 
-CMD ["saq", "attribution_worker.worker_settings"]
+CMD ["saq", "--web", "attribution_worker.worker_settings"]

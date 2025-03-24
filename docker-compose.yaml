@@ -26,6 +26,8 @@ services:
 
   attribution-worker:
     platform: linux/amd64
+    ports: 
+      - 8081:8080
     build:
       context: .
       dockerfile: ./attribution_worker/Dockerfile

@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Optional, Sequence
 
 from infini_gram.models import (
@@ -31,7 +31,7 @@ class GetDocumentByIndexRequest(BaseModel):
     maximum_context_length: int
 
 
-class SpanRankingMethod(Enum):
+class SpanRankingMethod(StrEnum):
     LENGTH = "length"
     UNIGRAM_LOGPROB_SUM = "unigram_logprob_sum"
 

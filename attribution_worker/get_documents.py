@@ -1,9 +1,9 @@
 import random
 
+from infini_gram.models import AttributionSpan as AttributionSpanFromEngine
 from infini_gram_processor.models import (
     AttributionDocument,
     AttributionSpan,
-    AttributionSpanFromEngine,
     Document,
     GetDocumentByPointerRequest,
     SpanRankingMethod,

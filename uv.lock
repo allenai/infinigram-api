@@ -544,7 +544,7 @@ requires-dist = [
 [[package]]
 name = "infini-gram-attribution-worker"
 version = "0.1.0"
-source = { virtual = "attribution-worker" }
+source = { virtual = "attribution_worker" }
 dependencies = [
     { name = "infini-gram-processor" },
     { name = "numpy" },

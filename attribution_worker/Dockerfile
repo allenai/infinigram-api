@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev --package infini-gram-attribution-worker --no-install-workspace
 
-COPY ./attribution-worker ./attribution-worker
+COPY ./attribution_worker ./attribution_worker
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev --no-editable --package infini-gram-attribution-worker
@@ -48,9 +48,9 @@ ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
 FROM base as dev
 
-CMD ["saq", "--verbose", "attribution-worker.worker_settings"]
+CMD ["saq", "--verbose", "attribution_worker.worker_settings"]
 # CMD ["/bin/bash", "-c", "sleep infinity"]
 
 FROM base as prod
 
-CMD ["saq", "attribution-worker.worker_settings"]
+CMD ["saq", "attribution_worker.worker_settings"]

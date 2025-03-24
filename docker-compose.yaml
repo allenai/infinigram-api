@@ -28,10 +28,10 @@ services:
     platform: linux/amd64
     build:
       context: .
-      dockerfile: ./attribution-worker/Dockerfile
+      dockerfile: ./attribution_worker/Dockerfile
       target: dev
     volumes:
-      - ./attribution-worker:/app/attribution-worker
+      - ./attribution_worker:/app/attribution_worker
       # If you add an volume here make sure you add it to /bin/download-infini-gram-array.sh too
       - ./infinigram-array/v4_pileval_llama:/mnt/infinigram-array/v4_pileval_llama
       - ./infinigram-array/olmoe-mix-0924-dclm:/mnt/infinigram-array/olmoe-mix-0924-dclm

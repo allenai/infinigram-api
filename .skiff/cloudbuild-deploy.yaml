@@ -56,7 +56,7 @@ steps:
     '..'
   ]
   waitFor: [ '-' ]
-  dir: 'attribution-worker'
+  dir: 'attribution_worker'
 - id: 'attribution-worker.push'
   name: 'gcr.io/cloud-builders/docker'
   args: [

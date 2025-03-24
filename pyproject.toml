@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["api", "attribution-worker", "packages/*"]
+members = ["api", "attribution_worker", "packages/*"]
 
 [tool.uv.sources]
 infini-gram = [
@@ -44,7 +44,7 @@ line-ending = "auto"
 
 [tool.mypy]
 
-files = ['./api', './attribution-worker', 'packages/*']
+files = ['./api', './attribution_worker', 'packages/*']
 
 exclude = ['vendor', 'indexing', 'compute_stats', 'scripts']
 

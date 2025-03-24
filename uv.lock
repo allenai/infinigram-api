@@ -2,8 +2,12 @@ version = 1
 revision = 1
 requires-python = ">=3.12"
 resolution-markers = [
-    "python_full_version == '3.13.*' and sys_platform == 'darwin'",
-    "python_full_version < '3.13' and sys_platform == 'darwin'",
+    "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'",
+    "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
+    "python_full_version == '3.13.*' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine == 'arm64' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
     "python_full_version >= '3.13' and sys_platform == 'linux'",
     "python_full_version < '3.13' and sys_platform == 'linux'",
     "(python_full_version >= '3.14' and sys_platform == 'darwin') or (python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux')",
@@ -433,25 +437,27 @@ name = "infini-gram"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
+    "python_full_version == '3.13.*' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
     "(python_full_version >= '3.14' and sys_platform == 'darwin') or (python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux')",
     "python_full_version < '3.13' and sys_platform != 'darwin' and sys_platform != 'linux'",
 ]
 dependencies = [
-    { name = "tqdm", marker = "(python_full_version >= '3.14' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "tqdm", marker = "(python_full_version >= '3.14' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
 ]
 
 [[package]]
 name = "infini-gram"
-version = "2.4.0"
-source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }
+version = "2.5.1"
+source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl" }
 resolution-markers = [
-    "python_full_version < '3.13' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
 ]
 dependencies = [
-    { name = "tqdm", marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
 ]
 wheels = [
-    { filename = "infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:3ae2a58229e11fc9c14d13a3ab445d8475320cb3eaac38fb7da0075e20e9e369" },
+    { filename = "infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl", hash = "sha256:59dfaecba7a4be11d320377c34b383a51c2ff7484a4fed7208d65b7612c03851" },
 ]
 
 [package.metadata]
@@ -459,16 +465,16 @@ requires-dist = [{ name = "tqdm" }]
 
 [[package]]
 name = "infini-gram"
-version = "2.4.0"
-source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }
+version = "2.5.1"
+source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl" }
 resolution-markers = [
-    "python_full_version == '3.13.*' and sys_platform == 'darwin'",
+    "python_full_version < '3.13' and platform_machine == 'arm64' and sys_platform == 'darwin'",
 ]
 dependencies = [
-    { name = "tqdm", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "python_full_version < '3.13' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
 ]
 wheels = [
-    { filename = "infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:c88ce542a791f0c9ea76261a836ce256e71bc5d0f9fe85cd5175bf6f3e17e89d" },
+    { filename = "infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:7fc4cec31d763aff195636e300f6c5c090ce391f5a3377941a47045d9c4b1769" },
 ]
 
 [package.metadata]
@@ -493,15 +499,51 @@ wheels = [
 requires-dist = [{ name = "tqdm" }]
 
 [[package]]
+name = "infini-gram"
+version = "2.5.1"
+source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl" }
+resolution-markers = [
+    "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "tqdm", marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+]
+wheels = [
+    { filename = "infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl", hash = "sha256:41f016c4cf2e6cb825b45fd063fb73a868db67d0eca173ed25edb798a49c9357" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tqdm" }]
+
+[[package]]
+name = "infini-gram"
+version = "2.5.1"
+source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl" }
+resolution-markers = [
+    "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "tqdm", marker = "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
+]
+wheels = [
+    { filename = "infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:17f76c5833b77b3c8ce450b36e56b1b8bed874102890fb31400ff0ca5e358efa" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tqdm" }]
+
+[[package]]
 name = "infini-gram-api"
 version = "0.1.0"
 source = { virtual = "api" }
 dependencies = [
     { name = "fastapi" },
-    { name = "infini-gram", version = "2.1.0", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.14' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.1.0", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.14' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl" }, marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
     { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl" }, marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
     { name = "infini-gram-processor" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
@@ -521,9 +563,11 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = "==0.111.0" },
-    { name = "infini-gram", marker = "(python_full_version < '3.12' and sys_platform == 'darwin') or (python_full_version >= '3.14' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
-    { name = "infini-gram", marker = "python_full_version == '3.12.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
-    { name = "infini-gram", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "(python_full_version < '3.12' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version < '3.12' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and platform_machine == 'arm64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl" },
     { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
     { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
     { name = "numpy", specifier = "<2.0.0" },
@@ -571,10 +615,12 @@ name = "infini-gram-processor"
 version = "0.1.0"
 source = { editable = "packages/infini-gram-processor" }
 dependencies = [
-    { name = "infini-gram", version = "2.1.0", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.14' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and sys_platform == 'darwin'" },
-    { name = "infini-gram", version = "2.4.0", source = { path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.1.0", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.14' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl" }, marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl" }, marker = "python_full_version < '3.13' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
     { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }, marker = "sys_platform == 'linux'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl" }, marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+    { name = "infini-gram", version = "2.5.1", source = { path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl" }, marker = "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-sdk" },
     { name = "transformers" },
@@ -582,9 +628,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "infini-gram", marker = "(python_full_version < '3.12' and sys_platform == 'darwin') or (python_full_version >= '3.14' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
-    { name = "infini-gram", marker = "python_full_version == '3.12.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp312-cp312-macosx_11_0_arm64.whl" },
-    { name = "infini-gram", marker = "python_full_version == '3.13.*' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.4.0-cp313-cp313-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "(python_full_version < '3.12' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'arm64' and sys_platform == 'darwin') or (python_full_version < '3.12' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (python_full_version >= '3.14' and platform_machine == 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and platform_machine == 'arm64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and platform_machine == 'arm64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_11_0_arm64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.12.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp312-cp312-macosx_10_15_x86_64.whl" },
+    { name = "infini-gram", marker = "python_full_version == '3.13.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'", path = "vendor/infini_gram-2.5.1-cp313-cp313-macosx_10_15_x86_64.whl" },
     { name = "infini-gram", marker = "sys_platform == 'linux'", path = "vendor/infini_gram-2.5.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" },
     { name = "opentelemetry-api", specifier = "==1.30.0" },
     { name = "opentelemetry-sdk", specifier = "==1.30.0" },

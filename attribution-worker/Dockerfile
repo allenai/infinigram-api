@@ -40,7 +40,7 @@ WORKDIR /app
 # Copy the application from the builder
 COPY --from=builder --chown=app:app /app /app
 
-WORKDIR /app/attribution-worker
+WORKDIR /app
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
@@ -48,8 +48,9 @@ ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
 FROM base as dev
 
-CMD ["saq", "--verbose", "src.worker.settings"]
+CMD ["saq", "--verbose", "attribution-worker.worker_settings"]
+# CMD ["/bin/bash", "-c", "sleep infinity"]
 
 FROM base as prod
 
-CMD ["saq", "src.worker.settings"]
+CMD ["saq", "attribution-worker.worker_settings"]

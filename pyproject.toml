@@ -44,7 +44,7 @@ line-ending = "auto"
 
 [tool.mypy]
 
-files = ['./api', './attribution-worker']
+files = ['./api', './attribution-worker', 'packages/*']
 
 exclude = ['vendor', 'indexing', 'compute_stats', 'scripts']
 

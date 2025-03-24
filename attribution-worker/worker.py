@@ -1,9 +1,6 @@
 import asyncio
-from itertools import islice
 from typing import (
     Any,
-    Iterable,
-    Sequence,
 )
 
 import numpy as np
@@ -16,12 +13,11 @@ from infini_gram_processor.models.models import (
     AttributionResponse,
     AttributionSpan,
 )
-from infini_gram_processor.processor import InfiniGramProcessor
 from saq import Queue
 from saq.types import SettingsDict
 
-from src.config import get_config
-from src.get_documents import (
+from .config import get_config
+from .get_documents import (
     get_document_requests,
     get_spans_with_documents,
     sort_and_cap_spans,
@@ -30,18 +26,6 @@ from src.get_documents import (
 config = get_config()
 
 queue = Queue.from_url(config.attribution_queue_url, name="infini-gram-attribution")
-
-
-def __get_span_text(
-    infini_gram_index: InfiniGramProcessor,
-    input_token_ids: Iterable[int],
-    start: int,
-    stop: int,
-) -> tuple[Sequence[int], str]:
-    span_text_tokens = list(islice(input_token_ids, start, stop))
-    span_text = infini_gram_index.decode_tokens(token_ids=span_text_tokens)
-
-    return (span_text_tokens, span_text)
 
 
 async def attribution_job(

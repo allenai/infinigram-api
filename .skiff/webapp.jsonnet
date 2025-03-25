@@ -313,7 +313,7 @@ function(
             }
         }
     ];
-    
+
     local indexVolumeMounts = [
         {
             mountPath: "/mnt/infinigram-array/v4_pileval_llama",
@@ -401,7 +401,7 @@ function(
                         },
                     },
                     nodeSelector: {
-                        "cloud.google.com/gke-nodepool": "cpu64"
+                        "cloud.google.com/gke-nodepool": "cpu64-256g"
                     },
                     volumes: indexVolumes,
                     containers: [
@@ -454,8 +454,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 62,
-                                    memory: '130G'
+                                    cpu: 63,
+                                    memory: '240G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
@@ -601,7 +601,7 @@ function(
                         },
                     },
                     nodeSelector: {
-                        "cloud.google.com/gke-nodepool": "cpu64"
+                        "cloud.google.com/gke-nodepool": "cpu64-256g"
                     },
                     volumes: indexVolumes,
                     containers: [
@@ -654,13 +654,13 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 62,
-                                    memory: '130G'
+                                    cpu: 63,
+                                    memory: '240G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
                             },
-                            env: [                                
+                            env: [
                                 {
                                     name: "ATTRIBUTION_QUEUE_URL",
                                     valueFrom: {

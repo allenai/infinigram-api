@@ -455,7 +455,7 @@ function(
                             resources: {
                                 requests: {
                                     cpu: 63,
-                                    memory: '240G'
+                                    memory: '257G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
@@ -655,7 +655,7 @@ function(
                             resources: {
                                 requests: {
                                     cpu: 63,
-                                    memory: '240G'
+                                    memory: '257G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied

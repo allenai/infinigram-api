@@ -122,7 +122,6 @@ function(
     else
          { };
 
-
     // The port the NGINX proxy is bound to.
     local proxyPort = 8080;
 

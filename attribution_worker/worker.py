@@ -25,7 +25,7 @@ from .get_documents import (
 
 config = get_config()
 
-queue = Queue.from_url(config.attribution_queue_url, name="infini-gram-attribution")
+queue = Queue.from_url(config.attribution_queue_url, name=config.attribution_queue_name)
 
 
 async def attribution_job(

@@ -6,7 +6,7 @@ from saq import Queue
 from src.config import get_config
 
 queue = Queue.from_url(
-    get_config().attribution_queue_url, name="infini-gram-attribution"
+    get_config().attribution_queue_url, name=get_config().attribution_queue_name
 )
 
 

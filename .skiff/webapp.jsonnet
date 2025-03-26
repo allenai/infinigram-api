@@ -122,6 +122,7 @@ function(
     else
          { };
 
+
     // The port the NGINX proxy is bound to.
     local proxyPort = 8080;
 
@@ -267,6 +268,23 @@ function(
             ]
         }
     };
+
+
+    local sharedEnv = [
+        {
+            name: "PYTHON_ENV",
+            value: env
+        },
+        {
+            name: "ATTRIBUTION_QUEUE_URL",
+            valueFrom: {
+                secretKeyRef: {
+                    name: "attribution-worker",
+                    key: "ATTRIBUTION_QUEUE_URL"
+                }
+            }
+        }
+    ];
 
     local indexVolumes = [
         {
@@ -460,20 +478,11 @@ function(
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
                             },
-                            env: [
+                            env: sharedEnv + [
                                 {
                                     name: 'LOG_FORMAT',
                                     value: 'google:json'
                                 },
-                                {
-                                    name: "ATTRIBUTION_QUEUE_URL",
-                                    valueFrom: {
-                                        secretKeyRef: {
-                                            name: "attribution-worker",
-                                            key: "ATTRIBUTION_QUEUE_URL"
-                                        }
-                                    }
-                                }
                             ]
                         },
                         {
@@ -660,17 +669,7 @@ function(
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
                             },
-                            env: [
-                                {
-                                    name: "ATTRIBUTION_QUEUE_URL",
-                                    valueFrom: {
-                                        secretKeyRef: {
-                                            name: "attribution-worker",
-                                            key: "ATTRIBUTION_QUEUE_URL"
-                                        }
-                                    }
-                                }
-                            ]
+                            env: sharedEnv + []
                         }
                     ]
                 }

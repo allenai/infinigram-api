@@ -33,3 +33,18 @@ To check for `mypy` issues, run `uv run mypy --config ./pyproject.toml`
 
 ### VSCode
 Install the [ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) and [mypy](https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker) extensions. These are listed in the "Recommended Extensions" for the workspace as well.
+
+## Running the server
+
+### Docker Compose
+The easiest way to run the full setup is to use the Docker Compose file. This will start the API, worker, proxy, and queue with all the appropriate connections.
+
+To start with Docker Compose, run `docker compose up` in the root of this repo.
+
+
+### Outside of Docker
+If you want to run applications outside of docker, you'll need to set up a queue yourself. The easiest method is to still go through Compose by just starting the queue. `docker compose up queue`
+
+After that, make sure your environment variables are set correctly through a `.env` file or just environment variables, then run the services.
+API: `uv run api/app.py`
+Worker: `uv run saq attribution_worker.worker.settings`

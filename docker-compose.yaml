@@ -63,7 +63,7 @@ services:
       # Collector prometheus port. The metrics are checked in tests
       - 8888
 
-  db:
+  queue:
     image: postgres:15
     ports:
       - 5432:5432

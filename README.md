@@ -33,5 +33,9 @@ flowchart TB
     proxy --> api
 ```
 
+This application is deployed on Ai2's [Skiff](https://skiff.allenai.org/) platform. It's a wrapper over k8s designed to streamline development and deployment.
+
+The API and worker are in different deployments and are separately scalable.
+
 Both the API and worker access infini-gram and the associated indexes. The API will pass any `attribution` requests to the queue and await the result. The worker reads requests from the queue and works them, returning the result to the queue when finished. Requests other than `attribution` will be handled in the API. `attribution` requests are split off because they take much longer, which was causing the server to hang under load.
 

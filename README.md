@@ -1,6 +1,6 @@
 # Infini-gram API
 
-This API is a wrapper over [infini-gram](https://github.com/liujch1998/infini-gram) to allow it to be used through an API at scale. It's a uv workspace with two applications ([the API](./api/README.md) and [the worker](./attribution_worker/README.md)) and one library to share code between the two ([infini-gram-processor](./packages/infini-gram-processor/README.md)).
+This API is a wrapper over [infini-gram](https://infini-gram.io) to allow it to be used through an API at scale. It's a uv workspace with two applications ([the API](./api/README.md) and [the worker](./attribution_worker/README.md)) and one library to share code between the two ([infini-gram-processor](./packages/infini-gram-processor/README.md)).
 
 ## Reference
 This application is only made possible by researchers that worked on the infini-gram paper:

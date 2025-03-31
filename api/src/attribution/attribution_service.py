@@ -11,6 +11,7 @@ from infini_gram_processor.processor import (
 )
 from opentelemetry import trace
 from pydantic import Field
+from rfc9457 import StatusProblem
 from saq import Queue
 
 from src.attribution.attribution_queue_service import AttributionQueueDependency
@@ -50,6 +51,12 @@ class AttributionResponse(BaseInfiniGramResponse):
     input_tokens: Optional[Sequence[str]] = Field(
         examples=[["busy", " medieval", " streets", "."]]
     )
+
+
+class AttributionTimeoutError(StatusProblem):
+    type_ = "server-overloaded"
+    title = "Server overloaded"
+    status = 503
 
 
 class AttributionService:
@@ -112,25 +119,28 @@ class AttributionService:
         maximum_context_length_snippet: int,
         maximum_documents_per_span: int,
     ) -> AttributionResponse:
-        attribute_result_json = await self.attribution_queue.apply(
-            "attribute",
-            index=index,
-            timeout=60,
-            input=response,
-            delimiters=delimiters,
-            allow_spans_with_partial_words=allow_spans_with_partial_words,
-            minimum_span_length=minimum_span_length,
-            maximum_frequency=maximum_frequency,
-            maximum_span_density=maximum_span_density,
-            span_ranking_method=span_ranking_method,
-            maximum_context_length=maximum_context_length,
-            maximum_context_length_long=maximum_context_length_long,
-            maximum_context_length_snippet=maximum_context_length_snippet,
-            maximum_documents_per_span=maximum_documents_per_span,
-        )
+        try:
+            attribute_result_json = await self.attribution_queue.apply(
+                "attribute",
+                index=index,
+                timeout=60,
+                input=response,
+                delimiters=delimiters,
+                allow_spans_with_partial_words=allow_spans_with_partial_words,
+                minimum_span_length=minimum_span_length,
+                maximum_frequency=maximum_frequency,
+                maximum_span_density=maximum_span_density,
+                span_ranking_method=span_ranking_method,
+                maximum_context_length=maximum_context_length,
+                maximum_context_length_long=maximum_context_length_long,
+                maximum_context_length_snippet=maximum_context_length_snippet,
+                maximum_documents_per_span=maximum_documents_per_span,
+            )
 
-        attribute_result = AttributionResponse.model_validate_json(
-            attribute_result_json
-        )
+            attribute_result = AttributionResponse.model_validate_json(
+                attribute_result_json
+            )
 
-        return attribute_result
+            return attribute_result
+        except TimeoutError:
+            raise AttributionTimeoutError()

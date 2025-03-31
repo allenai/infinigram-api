@@ -1,7 +1,7 @@
 x-shared-env: &shared-env
   PYTHONUNBUFFERED: 1
   INDEX_BASE_PATH: /mnt/infinigram-array
-  ATTRIBUTION_QUEUE_URL: postgres://infini-gram:llmz@db:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
+  ATTRIBUTION_QUEUE_URL: postgres://infini-gram:llmz@queue:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
   PYTHON_ENV: development
 
 services:

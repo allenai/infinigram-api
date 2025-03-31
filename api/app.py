@@ -3,8 +3,8 @@ import os
 from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
+from fastapi_problem.handler import add_exception_handler
 from infini_gram_processor.infini_gram_engine_exception import InfiniGramEngineException
 from opentelemetry import trace
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
@@ -20,8 +20,8 @@ from src.attribution.attribution_queue_service import (
 )
 from src.documents import documents_router
 from src.health import health_router
+from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
-from src.RFC9457Error import RFC9457Error
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")
@@ -41,33 +41,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
 
 
 app = FastAPI(title="infini-gram API", version="0.0.1", lifespan=lifespan)
+add_exception_handler(
+    app,
+    handlers={InfiniGramEngineException: infini_gram_engine_exception_handler},  # type: ignore
+)
 
 app.include_router(health_router)
 app.include_router(router=infinigram_router)
 app.include_router(router=documents_router)
 app.include_router(router=attribution_router)
-
-
-@app.exception_handler(InfiniGramEngineException)
-def infini_gram_engine_exception_handler(
-    request: Request, exception: InfiniGramEngineException
-) -> JSONResponse:
-    logger = logging.getLogger("uvicorn.error")
-
-    logger.error(f"infini-gram engine exception: {exception}")
-
-    response = RFC9457Error(
-        title="infini-gram error",
-        status=500,
-        detail=exception.detail,
-        instance=f"{request.url}",
-    )
-
-    return JSONResponse(
-        status_code=response.status,
-        content=response.model_dump(),
-    )
-
 
 tracer_provider = TracerProvider()
 

@@ -1,12 +1,14 @@
 from typing import Annotated, List
 
 from fastapi import APIRouter, Depends
+from fastapi_problem.handler import generate_swagger_response
 from infini_gram_processor.models import SpanRankingMethod
 from pydantic import Field
 
 from src.attribution.attribution_service import (
     AttributionResponse,
     AttributionService,
+    AttributionTimeoutError,
 )
 from src.camel_case_model import CamelCaseModel
 
@@ -67,7 +69,14 @@ class AttributionRequest(CamelCaseModel):
     )
 
 
-@attribution_router.post(path="/{index}/attribution")
+@attribution_router.post(
+    path="/{index}/attribution",
+    responses={
+        AttributionTimeoutError.status: generate_swagger_response(
+            AttributionTimeoutError  # type: ignore
+        )
+    },
+)
 async def get_document_attributions(
     index: str,
     body: AttributionRequest,

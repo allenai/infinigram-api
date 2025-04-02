@@ -123,7 +123,7 @@ class AttributionService:
             attribute_result_json = await self.attribution_queue.apply(
                 "attribute",
                 index=index,
-                timeout=1,
+                timeout=60,
                 input=response,
                 delimiters=delimiters,
                 allow_spans_with_partial_words=allow_spans_with_partial_words,

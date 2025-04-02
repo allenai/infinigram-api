@@ -47,7 +47,7 @@ services:
   proxy:
     build: ./proxy
     ports:
-      - 8082:8080
+      - 8080:8080
     depends_on:
       - api
 

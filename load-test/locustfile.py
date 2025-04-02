@@ -1,7 +1,9 @@
 import json
+import random
 from dataclasses import dataclass
 from typing import Callable
 
+from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from locust import HttpUser, run_single_user
 
 with open("bailey100.json", "r") as file:
@@ -35,7 +37,8 @@ def create_task(data: AttributionData) -> Callable[..., None]:
     }
 
     def get_attribution(self: "InfiniGramApiUser") -> None:
-        self.client.post("/olmo-2-1124-13b/attribution", json=request)
+        index = random.choice([index.value for index in AvailableInfiniGramIndexId])
+        self.client.post(f"/{index}/attribution", json=request)
 
     return get_attribution
 

@@ -1058,11 +1058,15 @@ name = "load-test"
 version = "0.1.0"
 source = { virtual = "load-test" }
 dependencies = [
+    { name = "infini-gram-processor" },
     { name = "locust" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "locust", specifier = "==2.33.2" }]
+requires-dist = [
+    { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
+    { name = "locust", specifier = "==2.33.2" },
+]
 
 [[package]]
 name = "locust"

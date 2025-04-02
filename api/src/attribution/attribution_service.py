@@ -95,7 +95,7 @@ class AttributionService:
         try:
             attribute_result_json = await self.attribution_queue.apply(
                 "attribute",
-                timeout=0,
+                timeout=60,
                 key=job_key,
                 index=index,
                 input=response,

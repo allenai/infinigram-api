@@ -12,9 +12,7 @@
             "cwd": "${workspaceFolder}/api",
             "args": [
                 "app:app",
-                "--reload",
-                "--port",
-                "8082"
+                "--reload"
             ],
             "jinja": true
         }

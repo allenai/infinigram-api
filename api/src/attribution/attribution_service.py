@@ -123,7 +123,7 @@ class AttributionService:
             attribute_result_json = await self.attribution_queue.apply(
                 "attribute",
                 index=index,
-                timeout=60,
+                timeout=1,
                 input=response,
                 delimiters=delimiters,
                 allow_spans_with_partial_words=allow_spans_with_partial_words,
@@ -143,4 +143,6 @@ class AttributionService:
 
             return attribute_result
         except TimeoutError:
-            raise AttributionTimeoutError()
+            raise AttributionTimeoutError(
+                "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."
+            )

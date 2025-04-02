@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["api", "attribution_worker", "packages/*"]
+members = ["api", "attribution_worker", "packages/*", "load-test"]
 
 [tool.uv.sources]
 infini-gram = [

@@ -1,5 +1,5 @@
-from itertools import islice
-from typing import Iterable, List, Optional, Sequence
+from typing import List, Optional, Sequence
+from uuid import uuid4
 
 from infini_gram_processor.models import (
     BaseInfiniGramResponse,
@@ -74,35 +74,6 @@ class AttributionService:
         self.documents_service = documents_service
         self.attribution_queue = attribution_queue
 
-    def __get_span_text(
-        self, input_token_ids: Iterable[int], start: int, stop: int
-    ) -> tuple[Sequence[int], str]:
-        span_text_tokens = list(islice(input_token_ids, start, stop))
-        span_text = self.infini_gram_processor.decode_tokens(token_ids=span_text_tokens)
-
-        return (span_text_tokens, span_text)
-
-    @tracer.start_as_current_span("attribution_service/cut_document")
-    def cut_document(
-        self,
-        token_ids: List[int],
-        needle_offset: int,
-        span_length: int,
-        maximum_context_length: int,
-    ) -> tuple[int, int, str]:
-        # cut the left context if necessary
-        if needle_offset > maximum_context_length:
-            token_ids = token_ids[(needle_offset - maximum_context_length) :]
-            needle_offset = maximum_context_length
-        # cut the right context if necessary
-        if len(token_ids) - needle_offset - span_length > maximum_context_length:
-            token_ids = token_ids[
-                : (needle_offset + span_length + maximum_context_length)
-            ]
-        display_length = len(token_ids)
-        text = self.infini_gram_processor.decode_tokens(token_ids)
-        return display_length, needle_offset, text
-
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     async def get_attribution_for_response(
         self,
@@ -119,11 +90,14 @@ class AttributionService:
         maximum_context_length_snippet: int,
         maximum_documents_per_span: int,
     ) -> AttributionResponse:
+        job_key = str(uuid4())
+
         try:
             attribute_result_json = await self.attribution_queue.apply(
                 "attribute",
+                timeout=0,
+                key=job_key,
                 index=index,
-                timeout=60,
                 input=response,
                 delimiters=delimiters,
                 allow_spans_with_partial_words=allow_spans_with_partial_words,
@@ -143,6 +117,10 @@ class AttributionService:
 
             return attribute_result
         except TimeoutError:
+            job_to_abort = await self.attribution_queue.job(job_key)
+            if job_to_abort is not None:
+                await self.attribution_queue.abort(job_to_abort, "Client timeout")
+
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."
             )

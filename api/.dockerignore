@@ -6,6 +6,6 @@
 # Docker artifacts
 Dockerfile
 
-**/.env*
+.env
 
 .venv

@@ -152,7 +152,8 @@ function(
     };
 
     local rateLimitAnnotations = {
-        'nginx.ingress.kubernetes.io/limit-rpm': '1'
+        'nginx.ingress.kubernetes.io/limit-rps': '5',
+        'nginx.ingress.kubernetes.io/limit-burst-multiplier': '1'
     };
 
     local tls = util.getTLSConfig(fullyQualifiedName, hosts);
@@ -160,7 +161,7 @@ function(
         apiVersion: 'networking.k8s.io/v1',
         kind: 'Ingress',
         metadata: {
-            name: fullyQualifiedName + '-ingress',
+            name: fullyQualifiedName,
             namespace: namespaceName,
             labels: labels,
             annotations: annotations + tls.ingressAnnotations + util.getAuthAnnotations(config, '.apps.allenai.org') + rateLimitAnnotations + {

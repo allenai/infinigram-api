@@ -151,6 +151,10 @@ function(
         }
     };
 
+    local rateLimitAnnotations = {
+        'nginx.ingress.kubernetes.io/limit-rpm': '1'
+    };
+
     local tls = util.getTLSConfig(fullyQualifiedName, hosts);
     local ingress = {
         apiVersion: 'networking.k8s.io/v1',
@@ -159,7 +163,7 @@ function(
             name: fullyQualifiedName,
             namespace: namespaceName,
             labels: labels,
-            annotations: annotations + tls.ingressAnnotations + util.getAuthAnnotations(config, '.apps.allenai.org') + {
+            annotations: annotations + tls.ingressAnnotations + util.getAuthAnnotations(config, '.apps.allenai.org') + rateLimitAnnotations + {
                 'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
                 'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }
@@ -198,7 +202,7 @@ function(
             name: fullyQualifiedName + '-allen-dot-ai',
             namespace: namespaceName,
             labels: labels,
-            annotations: annotations + allenAITLS.ingressAnnotations + util.getAuthAnnotations(config, '.allen.ai') + {
+            annotations: annotations + allenAITLS.ingressAnnotations + util.getAuthAnnotations(config, '.allen.ai') + rateLimitAnnotations + {
                 'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
                 'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }
@@ -237,7 +241,7 @@ function(
             name: fullyQualifiedName + '-scholar',
             namespace: namespaceName,
             labels: labels,
-            annotations: annotations + scholarTLS.ingressAnnotations + util.getAuthAnnotations(config, 'apps.semanticscholar.org') + {
+            annotations: annotations + scholarTLS.ingressAnnotations + util.getAuthAnnotations(config, 'apps.semanticscholar.org') + rateLimitAnnotations + {
                 'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
                 'nginx.ingress.kubernetes.io/proxy-read-timeout': '120'
             }

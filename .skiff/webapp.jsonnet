@@ -160,7 +160,7 @@ function(
         apiVersion: 'networking.k8s.io/v1',
         kind: 'Ingress',
         metadata: {
-            name: fullyQualifiedName,
+            name: fullyQualifiedName + '-ingress',
             namespace: namespaceName,
             labels: labels,
             annotations: annotations + tls.ingressAnnotations + util.getAuthAnnotations(config, '.apps.allenai.org') + rateLimitAnnotations + {

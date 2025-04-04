@@ -482,6 +482,15 @@ function(
                                     name: 'LOG_FORMAT',
                                     value: 'google:json'
                                 },
+                                {
+                                    name: "CACHE_URL",
+                                    valueFrom: {
+                                        secretKeyRef: {
+                                            name: "api",
+                                            key: "CACHE_URL"
+                                        }
+                                    }
+                                }
                             ]
                         },
                         {

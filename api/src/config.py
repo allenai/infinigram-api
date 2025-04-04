@@ -1,3 +1,7 @@
+from functools import lru_cache
+from typing import Annotated
+
+from fastapi import Depends
 from pydantic import computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -10,6 +14,7 @@ class Config(BaseSettings):
     application_name: str = "infini-gram-api"
     attribution_queue_url: str = "redis://localhost:6379"
     python_env: str = "prod"
+    cache_url: str = "redis://localhost:6379"
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -19,8 +24,9 @@ class Config(BaseSettings):
         return f"{queue_prefix}-{self.python_env}"
 
 
-config = Config()
-
-
+@lru_cache
 def get_config() -> Config:
-    return config
+    return Config()
+
+
+ConfigDependency = Annotated[Config, Depends(get_config)]

@@ -23,6 +23,7 @@ services:
     environment: 
       LOG_LEVEL: DEBUG
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4318
+      CACHE_URL: redis://cache:6379
       <<: *shared-env
 
   attribution-worker:
@@ -73,6 +74,12 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./schema:/docker-entrypoint-initdb.d
+
+  cache:
+    image: redis:7
+    ports:
+      - 6379:6379
+
 volumes:
   logs:
   pgdata:

@@ -99,7 +99,9 @@ class AttributionService:
         key = self._get_cache_key(index, request)
 
         try:
-            cached_json = await self.cache.get(key)
+            # Since someone asked for this again, we should keep it around longer
+            # This sets it to expire after 12 hours
+            cached_json = await self.cache.getex(key, ex=43_200)
 
             if cached_json is None:
                 return None
@@ -133,7 +135,8 @@ class AttributionService:
         key = self._get_cache_key(index, request)
 
         try:
-            await self.cache.set(key, json_response)
+            # save the response and expire it after an hour
+            await self.cache.set(key, json_response, ex=3_600)
 
             logger.debug(
                 "Saved attribution response to cache",

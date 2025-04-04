@@ -1,8 +1,8 @@
 from typing import Annotated
 
-import redis.asyncio as redis
 from fastapi import Depends
+from redis.asyncio import Redis
 
-from api.src.cache.redis import get_redis
+from src.cache.redis import get_redis
 
-CacheDependency = Annotated[redis.Redis, Depends(get_redis)]
+CacheDependency = Annotated[Redis, Depends(get_redis)]

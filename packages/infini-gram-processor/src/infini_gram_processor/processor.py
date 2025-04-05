@@ -1,5 +1,4 @@
 import json
-from functools import lru_cache
 from typing import (
     Iterable,
     Sequence,
@@ -17,7 +16,7 @@ from transformers.tokenization_utils_base import (  # type: ignore
     TextInput,
 )
 
-from .index_mappings import AvailableInfiniGramIndexId, get_index_mappings
+from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
 from .models import (
     Document,
@@ -44,7 +43,7 @@ class InfiniGramProcessor:
 
     def __init__(self, index: AvailableInfiniGramIndexId):
         self.index = index.value
-        index_mapping = get_index_mappings()[index.value]
+        index_mapping = index_mappings[index.value]
 
         self.tokenizer = index_mapping["tokenizer"]
 
@@ -368,6 +367,4 @@ class InfiniGramProcessor:
         )
 
 
-@lru_cache
-def get_indexes() -> dict[AvailableInfiniGramIndexId, InfiniGramProcessor]:
-    return {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
+indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

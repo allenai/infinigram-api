@@ -11,6 +11,8 @@ from infini_gram_processor.processor import (
     InfiniGramProcessor,
 )
 from opentelemetry import trace
+from opentelemetry.semconv.trace import SpanAttributes
+from opentelemetry.trace import SpanKind, Status, StatusCode
 from pydantic import Field, ValidationError
 from redis.asyncio import Redis
 from rfc9457 import StatusProblem
@@ -29,6 +31,9 @@ from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")
+
+_TASK_NAME_KEY = "saq.task_name"
+_TASK_TAG_KEY = "saq.action"
 
 
 class AttributionDocument(Document):
@@ -108,6 +113,8 @@ class AttributionService:
 
             cached_response = AttributionResponse.model_validate_json(cached_json)
 
+            current_span = trace.get_current_span()
+            current_span.add_event("retrieved-cached-attribution-response")
             logger.debug(
                 "Retrieved cached attribution response",
             )
@@ -138,6 +145,8 @@ class AttributionService:
             # save the response and expire it after an hour
             await self.cache.set(key, json_response, ex=3_600)
 
+            current_span = trace.get_current_span()
+            current_span.add_event("cached-attribution-response")
             logger.debug(
                 "Saved attribution response to cache",
             )
@@ -161,23 +170,32 @@ class AttributionService:
         try:
             logger.debug("Adding attribution request to queue", extra={"index": index})
 
-            attribute_result_json = await self.attribution_queue.apply(
-                "attribute",
-                timeout=60,
-                key=job_key,
-                index=index,
-                input=request.response,
-                delimiters=request.delimiters,
-                allow_spans_with_partial_words=request.allow_spans_with_partial_words,
-                minimum_span_length=request.minimum_span_length,
-                maximum_frequency=request.maximum_frequency,
-                maximum_span_density=request.maximum_span_density,
-                span_ranking_method=request.span_ranking_method,
-                maximum_context_length=request.maximum_context_length,
-                maximum_context_length_long=request.maximum_context_length_long,
-                maximum_context_length_snippet=request.maximum_context_length_snippet,
-                maximum_documents_per_span=request.maximum_documents_per_span,
-            )
+            with tracer.start_as_current_span(
+                "attribution_service/publish_attribution_job",
+                kind=SpanKind.PRODUCER,
+                attributes={
+                    _TASK_NAME_KEY: "attribute",
+                    SpanAttributes.MESSAGING_MESSAGE_ID: job_key,
+                    _TASK_TAG_KEY: "apply_async",
+                },
+            ) as attribution_job_publish_span:
+                attribute_result_json = await self.attribution_queue.apply(
+                    "attribute",
+                    timeout=60,
+                    key=job_key,
+                    index=index,
+                    input=request.response,
+                    delimiters=request.delimiters,
+                    allow_spans_with_partial_words=request.allow_spans_with_partial_words,
+                    minimum_span_length=request.minimum_span_length,
+                    maximum_frequency=request.maximum_frequency,
+                    maximum_span_density=request.maximum_span_density,
+                    span_ranking_method=request.span_ranking_method,
+                    maximum_context_length=request.maximum_context_length,
+                    maximum_context_length_long=request.maximum_context_length_long,
+                    maximum_context_length_snippet=request.maximum_context_length_snippet,
+                    maximum_documents_per_span=request.maximum_documents_per_span,
+                )
 
             attribute_result = AttributionResponse.model_validate_json(
                 attribute_result_json
@@ -186,11 +204,15 @@ class AttributionService:
             await self._cache_response(index, request, attribute_result_json)
 
             return attribute_result
-        except TimeoutError:
+        except TimeoutError as ex:
             logger.error(
                 "Attribution request timed out",
                 extra={"job_key": job_key, "index": index},
             )
+
+            current_span = trace.get_current_span()
+            current_span.set_status(Status(StatusCode.ERROR))
+            current_span.record_exception(ex)
 
             job_to_abort = await self.attribution_queue.job(job_key)
             if job_to_abort is not None:

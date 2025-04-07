@@ -19,6 +19,7 @@ from src.attribution.attribution_queue_service import (
     disconnect_from_attribution_queue,
 )
 from src.cache.redis import create_connection_pool
+from src.config import get_config
 from src.documents import documents_router
 from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
@@ -34,7 +35,8 @@ logging.basicConfig(level=level, handlers=handlers)
 # https://fastapi.tiangolo.com/advanced/events/
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
-    create_connection_pool()
+    config = get_config()
+    create_connection_pool(config.cache_url)
     # Things before yield on on startup
     await connect_to_attribution_queue()
     yield

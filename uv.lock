@@ -1016,6 +1016,10 @@ source = { virtual = "attribution_worker" }
 dependencies = [
     { name = "infini-gram-processor" },
     { name = "numpy" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-gcp-trace" },
+    { name = "opentelemetry-exporter-otlp-proto-http" },
+    { name = "opentelemetry-sdk" },
     { name = "psycopg", extra = ["binary", "pool"] },
     { name = "pydantic" },
     { name = "pydantic-settings" },
@@ -1027,6 +1031,10 @@ dependencies = [
 requires-dist = [
     { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
     { name = "numpy", specifier = "<2.0.0" },
+    { name = "opentelemetry-api", specifier = "==1.30.0" },
+    { name = "opentelemetry-exporter-gcp-trace", specifier = "==1.9.0" },
+    { name = "opentelemetry-exporter-otlp-proto-http", specifier = "==1.30.0" },
+    { name = "opentelemetry-sdk", specifier = "==1.30.0" },
     { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2.6" },
     { name = "pydantic", specifier = "==2.10.6" },
     { name = "pydantic-settings", specifier = "==2.3.4" },

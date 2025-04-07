@@ -6,7 +6,7 @@ class Config(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     index_base_path: str = "/mnt/infinigram-array"
-    application_name: str = "infini-gram-api"
+    application_name: str = "infini-gram-api-worker"
     attribution_queue_url: str = "redis://localhost:6379"
     python_env: str = "prod"
 

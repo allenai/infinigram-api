@@ -48,6 +48,12 @@ ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
 FROM base as dev
 
+ENV OTEL_SERVICE_NAME=infinigram-api-worker-dev
+ENV OTEL_TRACES_EXPORTER=otlp
+ENV OTEL_METRICS_EXPORTER=otlp
+ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://otelcol:4318"
+ENV ENV=development
+
 CMD ["saq", "--verbose", "--web", "attribution_worker.worker_settings"]
 
 FROM base as prod

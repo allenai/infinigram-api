@@ -1,6 +1,6 @@
 import logging
 from hashlib import sha256
-from typing import List, Optional, Sequence
+from typing import Any, List, Optional, Sequence
 from uuid import uuid4
 
 from infini_gram_processor.models import (
@@ -13,6 +13,7 @@ from infini_gram_processor.processor import (
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind, Status, StatusCode
+from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 from pydantic import Field, ValidationError
 from redis.asyncio import Redis
 from rfc9457 import StatusProblem
@@ -177,8 +178,11 @@ class AttributionService:
                     _TASK_NAME_KEY: "attribute",
                     SpanAttributes.MESSAGING_MESSAGE_ID: job_key,
                     _TASK_TAG_KEY: "apply_async",
+                    SpanAttributes.MESSAGING_SYSTEM: "saq",
                 },
-            ) as attribution_job_publish_span:
+            ):
+                otel_context: dict[str, Any] = {}
+                TraceContextTextMapPropagator().inject(otel_context)
                 attribute_result_json = await self.attribution_queue.apply(
                     "attribute",
                     timeout=60,
@@ -195,6 +199,7 @@ class AttributionService:
                     maximum_context_length_long=request.maximum_context_length_long,
                     maximum_context_length_snippet=request.maximum_context_length_snippet,
                     maximum_documents_per_span=request.maximum_documents_per_span,
+                    otel_context=otel_context,
                 )
 
             attribute_result = AttributionResponse.model_validate_json(

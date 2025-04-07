@@ -484,6 +484,10 @@ function(
                             },
                             env: sharedEnv + [
                                 {
+                                    name: 'OTEL_SERVICE_NAME',
+                                    value: 'infinigram-api'
+                                },
+                                {
                                     name: 'LOG_FORMAT',
                                     value: 'google:json'
                                 },
@@ -682,7 +686,12 @@ function(
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
                             },
-                            env: sharedEnv + []
+                            env: sharedEnv + [
+                                {
+                                    name: 'OTEL_SERVICE_NAME',
+                                    value: 'infinigram-api-worker'
+                                },
+                            ]
                         }
                     ]
                 }

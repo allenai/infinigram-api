@@ -183,8 +183,6 @@ class AttributionService:
                 attribute_result_json
             )
 
-            logger.debug("Adding attribution request to queue", extra={"index": index})
-
             await self._cache_response(index, request, attribute_result_json)
 
             return attribute_result

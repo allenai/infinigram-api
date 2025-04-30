@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import Any, Optional, Sequence
+from typing import Any, Optional, Sequence, Tuple, List
 
 from infini_gram.models import (
     AttributionDoc,
@@ -12,6 +12,46 @@ from pydantic import BaseModel, Field
 from .camel_case_model import CamelCaseModel
 
 
+class InfiniGramFindRequest(CamelCaseModel):
+    input_ids: List[int]
+
+
+class InfiniGramFindCnfRequest(CamelCaseModel):
+    cnf: List[List[List[int]]]
+    max_clause_freq: Optional[int] = None
+    max_diff_tokens: Optional[int] = None
+
+
+class InfiniGramCountRequest(CamelCaseModel):
+    input_ids: List[int]
+
+
+class InfiniGramCountCnfRequest(CamelCaseModel):
+    cnf: List[List[List[int]]]
+    max_clause_freq: Optional[int] = None
+    max_diff_tokens: Optional[int] = None
+
+
+class InfiniGramProbRequest(CamelCaseModel):
+    prompt_ids: List[int]
+    cont_id: int
+
+
+class InfiniGramNtdRequest(CamelCaseModel):
+    prompt_ids: List[int]
+    max_support: Optional[int] = None
+
+
+class InfiniGramInfgramProbRequest(CamelCaseModel):
+    prompt_ids: List[int]
+    cont_id: int
+
+
+class InfiniGramInfgramNtdRequest(CamelCaseModel):
+    prompt_ids: List[int]
+    max_support: Optional[int] = None
+
+
 class GetDocumentByRankRequest(BaseModel):
     shard: int
     rank: int
@@ -20,6 +60,13 @@ class GetDocumentByRankRequest(BaseModel):
 
 
 class GetDocumentByPointerRequest(BaseModel):
+    shard: int
+    pointer: int
+    needle_length: int
+    maximum_context_length: int
+
+
+class GetDocumentByPointerGroupedRequest(BaseModel):
     docs: list[AttributionDoc]
     span_ids: list[int]
     needle_length: int
@@ -44,9 +91,45 @@ class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
+class InfiniGramFindResponse(BaseInfiniGramResponse):
+    cnt: int
+    segment_by_shard: List[Tuple[int, int]]
+
+
+class InfiniGramFindCnfResponse(BaseInfiniGramResponse):
+    cnt: int
+    approx: bool
+    ptrs_by_shard: List[Tuple[int, int]]
+
+
 class InfiniGramCountResponse(BaseInfiniGramResponse):
     approx: bool
     count: int
+
+
+class InfiniGramProbResponse(BaseInfiniGramResponse):
+    prompt_cnt: int
+    cont_cnt: int
+    prob: float
+
+
+class DistTokenResult(BaseModel):
+    cont_cnt: int
+    prob: float
+
+
+class InfiniGramNtdResponse(BaseInfiniGramResponse):
+    prompt_cnt: int
+    result_by_token_id: dict[int, DistTokenResult]
+    approx: bool
+
+
+class InfiniGramInfgramProbResponse(InfiniGramProbResponse):
+    suffix_len: int
+
+
+class InfiniGramInfgramNtdResponse(InfiniGramNtdResponse):
+    suffix_len: int
 
 
 class Document(CamelCaseModel):

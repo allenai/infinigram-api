@@ -3,6 +3,8 @@ from typing import (
     Iterable,
     Sequence,
     cast,
+    List,
+    Optional,
 )
 
 from infini_gram.engine import InfiniGramEngineDiff
@@ -23,8 +25,15 @@ from .models import (
     GetDocumentByIndexRequest,
     GetDocumentByPointerRequest,
     GetDocumentByRankRequest,
+    GetDocumentByPointerGroupedRequest,
     InfiniGramAttributionResponse,
     InfiniGramCountResponse,
+    InfiniGramFindCnfResponse,
+    InfiniGramFindResponse,
+    InfiniGramInfgramNtdResponse,
+    InfiniGramInfgramProbResponse,
+    InfiniGramNtdResponse,
+    InfiniGramProbResponse,
     InfiniGramSearchResponse,
 )
 from .models.is_infini_gram_error_response import (
@@ -84,15 +93,107 @@ class InfiniGramProcessor:
 
         return cast(TInfiniGramResponse, result)
 
-    @tracer.start_as_current_span("infini_gram_processor/count_n_gram")
-    def count_n_gram(self, query: str) -> InfiniGramCountResponse:
-        tokenized_query_ids = self.tokenize(query)
+    @tracer.start_as_current_span("infini_gram_processor/find")
+    def find(self, input_ids: List[int]) -> InfiniGramFindResponse:
+        find_response = self.infini_gram_engine.find(input_ids=input_ids)
 
-        count_response = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
+        find_result = self.__handle_error(find_response)
+
+        return InfiniGramFindResponse(index=self.index, **find_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/find_cnf")
+    def find_cnf(
+        self,
+        cnf: List[List[List[int]]],
+        max_clause_freq: Optional[int] = None,
+        max_diff_tokens: Optional[int] = None,
+    ) -> InfiniGramFindCnfResponse:
+        find_cnf_response = self.infini_gram_engine.find_cnf(
+            cnf=cnf, max_clause_freq=max_clause_freq, max_diff_tokens=max_diff_tokens
+        )
+
+        find_cnf_result = self.__handle_error(find_cnf_response)
+
+        return InfiniGramFindCnfResponse(index=self.index, **find_cnf_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/count")
+    def count(self, input_ids: List[int]) -> InfiniGramCountResponse:
+        count_response = self.infini_gram_engine.count(input_ids=input_ids)
 
         count_result = self.__handle_error(count_response)
 
         return InfiniGramCountResponse(index=self.index, **count_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/count_cnf")
+    def count_cnf(
+        self,
+        cnf: List[List[List[int]]],
+        max_clause_freq: Optional[int] = None,
+        max_diff_tokens: Optional[int] = None,
+    ) -> InfiniGramCountResponse:
+        count_cnf_response = self.infini_gram_engine.count_cnf(
+            cnf=cnf, max_clause_freq=max_clause_freq, max_diff_tokens=max_diff_tokens
+        )
+
+        count_cnf_result = self.__handle_error(count_cnf_response)
+
+        return InfiniGramCountResponse(index=self.index, **count_cnf_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/prob")
+    def prob(
+        self,
+        prompt_ids: List[int],
+        cont_id: int,
+    ) -> InfiniGramProbResponse:
+        prob_response = self.infini_gram_engine.prob(
+            prompt_ids=prompt_ids, cont_id=cont_id
+        )
+
+        prob_result = self.__handle_error(prob_response)
+
+        return InfiniGramProbResponse(index=self.index, **prob_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/ntd")
+    def ntd(
+        self,
+        prompt_ids: List[int],
+        max_support: Optional[int] = None,
+    ) -> InfiniGramNtdResponse:
+        ntd_response = self.infini_gram_engine.ntd(
+            prompt_ids=prompt_ids, max_support=max_support
+        )
+
+        ntd_result = self.__handle_error(ntd_response)
+
+        return InfiniGramNtdResponse(index=self.index, **ntd_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/infgram_prob")
+    def infgram_prob(
+        self,
+        prompt_ids: List[int],
+        cont_id: int,
+    ) -> InfiniGramInfgramProbResponse:
+        infgram_prob_response = self.infini_gram_engine.infgram_prob(
+            prompt_ids=prompt_ids, cont_id=cont_id
+        )
+
+        infgram_prob_result = self.__handle_error(infgram_prob_response)
+
+        return InfiniGramInfgramProbResponse(index=self.index, **infgram_prob_result)
+
+    @tracer.start_as_current_span("infini_gram_processor/infgram_ntd")
+    def infgram_ntd(
+        self,
+        prompt_ids: List[int],
+        max_support: Optional[int] = None,
+    ) -> InfiniGramInfgramNtdResponse:
+        infgram_ntd_response = self.infini_gram_engine.infgram_ntd(
+            prompt_ids=prompt_ids, max_support=max_support
+        )
+
+        infgram_ntd_result = self.__handle_error(infgram_ntd_response)
+
+        return InfiniGramInfgramNtdResponse(index=self.index, **infgram_ntd_result)
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_rank")
     def get_document_by_rank(
@@ -187,9 +288,42 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/get_documents_by_pointers")
     def get_documents_by_pointers(
         self,
-        document_request_by_span: Iterable[GetDocumentByPointerRequest],
-    ) -> list[list[Document]]:
+        document_requests: Iterable[GetDocumentByPointerRequest],
+    ) -> list[Document]:
         get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
+            requests=[
+                {
+                    "shard": document_request.shard,
+                    "pointer": document_request.pointer,
+                    "needle_len": document_request.needle_length,
+                    "max_ctx_len": document_request.maximum_context_length,
+                }
+                for document_request in document_requests
+            ],
+        )
+
+        documents_result = self.__handle_error(get_docs_by_pointers_response)
+
+        return [
+            Document(
+                document_index=document_result["doc_ix"],
+                document_length=document_result["doc_len"],
+                display_length=document_result["disp_len"],
+                needle_offset=document_result["needle_offset"],
+                metadata=json.loads(document_result["metadata"]),
+                token_ids=document_result["token_ids"],
+                text=self.decode_tokens(document_result["token_ids"]),
+                blocked=document_result["blocked"],
+            )
+            for document_result in documents_result
+        ]
+
+    @tracer.start_as_current_span("infini_gram_processor/get_documents_by_pointers_grouped")
+    def get_documents_by_pointers_grouped(
+        self,
+        document_request_by_span: Iterable[GetDocumentByPointerGroupedRequest],
+    ) -> list[list[Document]]:
+        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2_grouped(
             requests=[
                 {
                     "docs": document_request.docs,

@@ -64,12 +64,12 @@ payload = {
     'maximumContextLengthSnippet': 40,
 }
 
-# url = 'http://0.0.0.0:8008/pileval-llama/attribution'
-url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
+url = 'http://0.0.0.0:8080/pileval-llama/attribution'
+# url = 'http://0.0.0.0:8080/olmo-2-1124-13b/attribution'
 
 start_time = time.time()
 result = requests.post(url, json=payload).json()
-# print(result)
+print(result)
 # print(result.keys())
 # for span in result['spans']:
 #     print(span['length'], span['unigramLogprobSum'])

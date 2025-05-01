@@ -2,24 +2,23 @@ from fastapi import APIRouter
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.models import (
     InfiniGramFindRequest,
-    InfiniGramFindResponse,
+    FindResponse,
     InfiniGramFindCnfRequest,
-    InfiniGramFindCnfResponse,
+    FindCnfResponse,
     InfiniGramCountRequest,
-    InfiniGramCountResponse,
+    CountResponse,
     InfiniGramCountCnfRequest,
+    CountCnfResponse,
     InfiniGramProbRequest,
-    InfiniGramProbResponse,
+    ProbResponse,
     InfiniGramNtdRequest,
-    InfiniGramNtdResponse,
+    NtdResponse,
     InfiniGramInfgramProbRequest,
-    InfiniGramInfgramProbResponse,
+    InfgramProbResponse,
     InfiniGramInfgramNtdRequest,
-    InfiniGramInfgramNtdResponse,
+    InfgramNtdResponse,
 )
-from src.camel_case_model import CamelCaseModel
 from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
-from typing import List, Optional
 
 infinigram_router = APIRouter()
 
@@ -33,9 +32,9 @@ def get_available_indexes() -> list[AvailableInfiniGramIndexId]:
 def find(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramFindRequest,
-) -> InfiniGramFindResponse:
+) -> FindResponse:
     return infini_gram_processor.find(
-        input_ids=body.input_ids,
+        query=body.query,
     )
 
 
@@ -43,9 +42,9 @@ def find(
 def find_cnf(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramFindCnfRequest,
-) -> InfiniGramFindCnfResponse:
+) -> FindCnfResponse:
     return infini_gram_processor.find_cnf(
-        cnf=body.cnf,
+        query=body.query,
         max_clause_freq=body.max_clause_freq,
         max_diff_tokens=body.max_diff_tokens,
     )
@@ -55,17 +54,17 @@ def find_cnf(
 def count(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramCountRequest,
-) -> InfiniGramCountResponse:
-    return infini_gram_processor.count(input_ids=body.input_ids)
+) -> CountResponse:
+    return infini_gram_processor.count(query=body.query)
 
 
 @infinigram_router.post(path="/{index}/count_cnf")
 def count_cnf(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramCountCnfRequest,
-) -> InfiniGramCountResponse:
+) -> CountCnfResponse:
     return infini_gram_processor.count_cnf(
-        cnf=body.cnf,
+        query=body.query,
         max_clause_freq=body.max_clause_freq,
         max_diff_tokens=body.max_diff_tokens,
     )
@@ -75,10 +74,9 @@ def count_cnf(
 def prob(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramProbRequest,
-) -> InfiniGramProbResponse:
+) -> ProbResponse:
     return infini_gram_processor.prob(
-        prompt_ids=body.prompt_ids,
-        cont_id=body.cont_id,
+        query=body.query,
     )
 
 
@@ -86,9 +84,9 @@ def prob(
 def ntd(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramNtdRequest,
-) -> InfiniGramNtdResponse:
+) -> NtdResponse:
     return infini_gram_processor.ntd(
-        prompt_ids=body.prompt_ids,
+        query=body.query,
         max_support=body.max_support,
     )
 
@@ -97,10 +95,9 @@ def ntd(
 def infgram_prob(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramInfgramProbRequest,
-) -> InfiniGramInfgramProbResponse:
+) -> InfgramProbResponse:
     return infini_gram_processor.infgram_prob(
-        prompt_ids=body.prompt_ids,
-        cont_id=body.cont_id,
+        query=body.query,
     )
 
 
@@ -108,8 +105,8 @@ def infgram_prob(
 def infgram_ntd(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramInfgramNtdRequest,
-) -> InfiniGramInfgramNtdResponse:
+) -> InfgramNtdResponse:
     return infini_gram_processor.infgram_ntd(
-        prompt_ids=body.prompt_ids,
+        query=body.query,
         max_support=body.max_support,
     )

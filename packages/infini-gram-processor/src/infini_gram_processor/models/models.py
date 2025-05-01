@@ -13,42 +13,40 @@ from .camel_case_model import CamelCaseModel
 
 
 class InfiniGramFindRequest(CamelCaseModel):
-    input_ids: List[int]
+    query: str | List[int]
 
 
 class InfiniGramFindCnfRequest(CamelCaseModel):
-    cnf: List[List[List[int]]]
+    query: str | List[List[List[int]]]
     max_clause_freq: Optional[int] = None
     max_diff_tokens: Optional[int] = None
 
 
 class InfiniGramCountRequest(CamelCaseModel):
-    input_ids: List[int]
+    query: str | List[int]
 
 
 class InfiniGramCountCnfRequest(CamelCaseModel):
-    cnf: List[List[List[int]]]
+    query: str | List[List[List[int]]]
     max_clause_freq: Optional[int] = None
     max_diff_tokens: Optional[int] = None
 
 
 class InfiniGramProbRequest(CamelCaseModel):
-    prompt_ids: List[int]
-    cont_id: int
+    query: str | List[int]
 
 
 class InfiniGramNtdRequest(CamelCaseModel):
-    prompt_ids: List[int]
+    query: str | List[int]
     max_support: Optional[int] = None
 
 
 class InfiniGramInfgramProbRequest(CamelCaseModel):
-    prompt_ids: List[int]
-    cont_id: int
+    query: str | List[int]
 
 
 class InfiniGramInfgramNtdRequest(CamelCaseModel):
-    prompt_ids: List[int]
+    query: str | List[int]
     max_support: Optional[int] = None
 
 
@@ -91,45 +89,65 @@ class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
-class InfiniGramFindResponse(BaseInfiniGramResponse):
+class FindResponse(BaseInfiniGramResponse):
     cnt: int
     segment_by_shard: List[Tuple[int, int]]
+    token_ids: List[int]
+    tokens: List[str]
 
 
-class InfiniGramFindCnfResponse(BaseInfiniGramResponse):
+class FindCnfResponse(BaseInfiniGramResponse):
     cnt: int
     approx: bool
-    ptrs_by_shard: List[Tuple[int, int]]
+    ptrs_by_shard: List[List[int]]
+    token_ids: List[List[List[int]]]
+    tokens: List[List[List[str]]]
 
 
-class InfiniGramCountResponse(BaseInfiniGramResponse):
-    approx: bool
+class CountResponse(BaseInfiniGramResponse):
     count: int
+    approx: bool
+    token_ids: List[int]
+    tokens: List[str]
 
 
-class InfiniGramProbResponse(BaseInfiniGramResponse):
+class CountCnfResponse(BaseInfiniGramResponse):
+    count: int
+    approx: bool
+    token_ids: List[List[List[int]]]
+    tokens: List[List[List[str]]]
+
+
+class ProbResponse(BaseInfiniGramResponse):
     prompt_cnt: int
     cont_cnt: int
     prob: float
+    token_ids: List[int]
+    tokens: List[str]
 
 
-class DistTokenResult(BaseModel):
+class DistTokenResult(CamelCaseModel):
     cont_cnt: int
     prob: float
+    token: str
 
 
-class InfiniGramNtdResponse(BaseInfiniGramResponse):
+class NtdResponse(BaseInfiniGramResponse):
     prompt_cnt: int
     result_by_token_id: dict[int, DistTokenResult]
     approx: bool
+    token_ids: List[int]
+    tokens: List[str]
 
 
-class InfiniGramInfgramProbResponse(InfiniGramProbResponse):
+class InfgramProbResponse(ProbResponse):
     suffix_len: int
+    longest_suffix: str
 
 
-class InfiniGramInfgramNtdResponse(InfiniGramNtdResponse):
+class InfgramNtdResponse(NtdResponse):
     suffix_len: int
+    longest_suffix: str
 
 
 class Document(CamelCaseModel):

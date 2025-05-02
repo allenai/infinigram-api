@@ -59,9 +59,9 @@ class Tokenizer:
 
         offset_mapping = tokenized_input.data.get("offset_mapping", [])  # pyright: ignore [reportUnknownMemberType]
         # This is to fix a corner case: when input begins with a number, the token ids will begin with [29871 (whitespace), 29896, ...] with offset_mapping being [(0, 1), (0, 1), ...]
-        if len(offset_mapping) > 1:
-            if offset_mapping[0][1] > offset_mapping[1][0]:
-                offset_mapping[0] = (offset_mapping[0][0], offset_mapping[1][0])
+        if len(tokenized_input.input_ids) > 0 and tokenized_input.input_ids[0] == 29871:
+            if len(offset_mapping) > 1 and offset_mapping[0][1] > offset_mapping[1][0]:
+                offset_mapping = offset_mapping[1:]
 
         return [
             input[offset[0] : offset[1]]

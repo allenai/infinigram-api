@@ -28,7 +28,7 @@ def get_available_indexes() -> list[AvailableInfiniGramIndexId]:
     return [index for index in AvailableInfiniGramIndexId]
 
 
-@infinigram_router.post(path="/{index}/find")
+@infinigram_router.post(path="/{index}/find", description="Find the locations of an n-gram in the index")
 def find(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramFindRequest,
@@ -38,7 +38,7 @@ def find(
     )
 
 
-@infinigram_router.post(path="/{index}/find_cnf")
+@infinigram_router.post(path="/{index}/find_cnf", description="Find the locations of a CNF query in the index")
 def find_cnf(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramFindCnfRequest,
@@ -50,7 +50,7 @@ def find_cnf(
     )
 
 
-@infinigram_router.post(path="/{index}/count")
+@infinigram_router.post(path="/{index}/count", description="Count the number of times an n-gram appears in the index")
 def count(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramCountRequest,
@@ -58,7 +58,7 @@ def count(
     return infini_gram_processor.count(query=body.query)
 
 
-@infinigram_router.post(path="/{index}/count_cnf")
+@infinigram_router.post(path="/{index}/count_cnf", description="Count the number of times a CNF query appears in the index")
 def count_cnf(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramCountCnfRequest,
@@ -70,7 +70,7 @@ def count_cnf(
     )
 
 
-@infinigram_router.post(path="/{index}/prob")
+@infinigram_router.post(path="/{index}/prob", description="Compute the n-gram probability of the last token conditioned on all previous tokens")
 def prob(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramProbRequest,
@@ -80,7 +80,7 @@ def prob(
     )
 
 
-@infinigram_router.post(path="/{index}/ntd")
+@infinigram_router.post(path="/{index}/ntd", description="Compute the distribution of next token conditioned on all tokens in the query according to the n-gram model")
 def ntd(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramNtdRequest,
@@ -91,7 +91,7 @@ def ntd(
     )
 
 
-@infinigram_router.post(path="/{index}/infgram_prob")
+@infinigram_router.post(path="/{index}/infgram_prob", description="Compute the infinity-gram probability of the last token conditioned on all previous tokens")
 def infgram_prob(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramInfgramProbRequest,
@@ -101,7 +101,7 @@ def infgram_prob(
     )
 
 
-@infinigram_router.post(path="/{index}/infgram_ntd")
+@infinigram_router.post(path="/{index}/infgram_ntd", description="Compute the distribution of next token conditioned on all tokens in the query according to the infinity-gram model")
 def infgram_ntd(
     infini_gram_processor: InfiniGramProcessorDependency,
     body: InfiniGramInfgramNtdRequest,

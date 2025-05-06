@@ -47,6 +47,7 @@ class Tokenizer:
     ) -> List[int]:
         encoded_query: List[int] = self.hf_tokenizer.encode(input)  # pyright: ignore[reportUnknownMemberType]
         # This is to fix a corner case: when input begins with a number, the token ids will begin with [29871 (whitespace), 29896, ...]
+        # WARNING: This works only with the Llama-2 tokenizer. Non-trivial changes are needed for other tokenizers.
         if len(encoded_query) > 0 and encoded_query[0] == 29871:
             encoded_query = encoded_query[1:]
         return encoded_query
@@ -59,6 +60,7 @@ class Tokenizer:
 
         offset_mapping = tokenized_input.data.get("offset_mapping", [])  # pyright: ignore [reportUnknownMemberType]
         # This is to fix a corner case: when input begins with a number, the token ids will begin with [29871 (whitespace), 29896, ...] with offset_mapping being [(0, 1), (0, 1), ...]
+        # WARNING: This works only with the Llama-2 tokenizer. Non-trivial changes are needed for other tokenizers.
         if len(tokenized_input.input_ids) > 0 and tokenized_input.input_ids[0] == 29871:
             if len(offset_mapping) > 1 and offset_mapping[0][1] > offset_mapping[1][0]:
                 offset_mapping = offset_mapping[1:]

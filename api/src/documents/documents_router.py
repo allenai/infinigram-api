@@ -58,13 +58,13 @@ def get_document_by_rank(
     shard: int,
     rank: int,
     needle_length: int,
-    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+    maximum_context_length: MaximumDocumentDisplayLengthType = 10,
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_rank(
         shard=shard,
         rank=rank,
         needle_length=needle_length,
-        maximum_context_length=maximum_document_display_length,
+        maximum_context_length=maximum_context_length,
     )
 
     return result
@@ -76,13 +76,13 @@ def get_document_by_pointer(
     shard: int,
     pointer: int,
     needle_length: int,
-    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+    maximum_context_length: MaximumDocumentDisplayLengthType = 10,
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_pointer(
         shard=shard,
         pointer=pointer,
         needle_length=needle_length,
-        maximum_context_length=maximum_document_display_length,
+        maximum_context_length=maximum_context_length,
     )
 
     return result

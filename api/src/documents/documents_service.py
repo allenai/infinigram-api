@@ -6,6 +6,8 @@ from infini_gram_processor.models import (
     BaseInfiniGramResponse,
     Document,
     GetDocumentByIndexRequest,
+    GetDocumentByPointerRequest,
+    GetDocumentByRankRequest,
 )
 from opentelemetry import trace
 
@@ -73,6 +75,97 @@ class DocumentsService:
             page_count=ceil(search_documents_result.total_documents / page_size),
         )
 
+    @tracer.start_as_current_span("documents_service/get_document_by_rank")
+    def get_document_by_rank(
+        self, shard: int, rank: int, needle_length: int, maximum_context_length: int
+    ) -> InfiniGramDocumentResponse:
+        document = self.infini_gram_processor.get_document_by_rank(
+            shard=shard,
+            rank=rank,
+            needle_length=needle_length,
+            maximum_context_length=maximum_context_length,
+        )
+
+        return InfiniGramDocumentResponse(
+            index=self.infini_gram_processor.index,
+            document_index=document.document_index,
+            document_length=document.document_length,
+            display_length=document.display_length,
+            needle_offset=document.needle_offset,
+            metadata=document.metadata,
+            token_ids=document.token_ids,
+            text=document.text,
+        )
+
+    @tracer.start_as_current_span("documents_service/get_multiple_documents_by_rank")
+    def get_multiple_documents_by_rank(
+        self,
+        document_requests: Iterable[GetDocumentByRankRequest],
+    ) -> InfiniGramDocumentsResponse:
+        documents = self.infini_gram_processor.get_documents_by_ranks(
+            document_requests=document_requests,
+        )
+        mapped_documents = [
+            Document(
+                document_index=document.document_index,
+                document_length=document.document_length,
+                display_length=document.display_length,
+                needle_offset=document.needle_offset,
+                metadata=document.metadata,
+                token_ids=document.token_ids,
+                text=document.text,
+            )
+            for document in documents
+        ]
+        return InfiniGramDocumentsResponse(
+            index=self.infini_gram_processor.index, documents=mapped_documents
+        )
+
+    @tracer.start_as_current_span("documents_service/get_document_by_pointer")
+    def get_document_by_pointer(
+        self, shard: int, pointer: int, needle_length: int, maximum_context_length: int
+    ) -> InfiniGramDocumentResponse:
+        document = self.infini_gram_processor.get_document_by_pointer(
+            shard=shard,
+            pointer=pointer,
+            needle_length=needle_length,
+            maximum_context_length=maximum_context_length,
+        )
+
+        return InfiniGramDocumentResponse(
+            index=self.infini_gram_processor.index,
+            document_index=document.document_index,
+            document_length=document.document_length,
+            display_length=document.display_length,
+            needle_offset=document.needle_offset,
+            metadata=document.metadata,
+            token_ids=document.token_ids,
+            text=document.text,
+        )
+
+    @tracer.start_as_current_span("documents_service/get_multiple_documents_by_pointer")
+    def get_multiple_documents_by_pointer(
+        self,
+        document_requests: Iterable[GetDocumentByPointerRequest],
+    ) -> InfiniGramDocumentsResponse:
+        documents = self.infini_gram_processor.get_documents_by_pointers(
+            document_requests=document_requests,
+        )
+        mapped_documents = [
+            Document(
+                document_index=document.document_index,
+                document_length=document.document_length,
+                display_length=document.display_length,
+                needle_offset=document.needle_offset,
+                metadata=document.metadata,
+                token_ids=document.token_ids,
+                text=document.text,
+            )
+            for document in documents
+        ]
+        return InfiniGramDocumentsResponse(
+            index=self.infini_gram_processor.index, documents=mapped_documents
+        )
     @tracer.start_as_current_span("documents_service/get_document_by_index")
     def get_document_by_index(
         self, document_index: int, maximum_context_length: int

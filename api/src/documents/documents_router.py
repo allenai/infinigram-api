@@ -52,7 +52,43 @@ def search_documents(
     return result
 
 
-@documents_router.get("/{index}/documents/{document_index}", tags=["documents"])
+@documents_router.get("/{index}/get_document_by_rank/{shard}/{rank}", tags=["documents"])
+def get_document_by_rank(
+    documents_service: DocumentsServiceDependency,
+    shard: int,
+    rank: int,
+    needle_length: int,
+    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+) -> InfiniGramDocumentResponse:
+    result = documents_service.get_document_by_rank(
+        shard=shard,
+        rank=rank,
+        needle_length=needle_length,
+        maximum_context_length=maximum_document_display_length,
+    )
+
+    return result
+
+
+@documents_router.get("/{index}/get_document_by_pointer/{shard}/{pointer}", tags=["documents"])
+def get_document_by_pointer(
+    documents_service: DocumentsServiceDependency,
+    shard: int,
+    pointer: int,
+    needle_length: int,
+    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+) -> InfiniGramDocumentResponse:
+    result = documents_service.get_document_by_pointer(
+        shard=shard,
+        pointer=pointer,
+        needle_length=needle_length,
+        maximum_context_length=maximum_document_display_length,
+    )
+
+    return result
+
+
+@documents_router.get("/{index}/get_document_by_index/{document_index}", tags=["documents"])
 def get_document_by_index(
     documents_service: DocumentsServiceDependency,
     document_index: int,
@@ -66,7 +102,7 @@ def get_document_by_index(
     return result
 
 
-@documents_router.get("/{index}/documents", tags=["documents"])
+@documents_router.get("/{index}/get_documents_by_index", tags=["documents"])
 def get_documents_by_index(
     documents_service: DocumentsServiceDependency,
     document_indexes: Annotated[list[int], Query()],

@@ -1,7 +1,11 @@
 from typing import Annotated, TypeAlias
 
 from fastapi import APIRouter, Depends, Query
-from infini_gram_processor.models import GetDocumentByIndexRequest
+from infini_gram_processor.models import (
+    GetDocumentByIndexRequest,
+    GetDocumentByPointerRequest,
+    GetDocumentByRankRequest,
+)
 
 from src.documents.documents_service import (
     DocumentsService,
@@ -55,16 +59,13 @@ def search_documents(
 @documents_router.post("/{index}/get_document_by_rank", tags=["documents"])
 def get_document_by_rank(
     documents_service: DocumentsServiceDependency,
-    shard: int,
-    rank: int,
-    needle_length: int,
-    maximum_context_length: MaximumDocumentDisplayLengthType = 10,
+    body: GetDocumentByRankRequest,
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_rank(
-        shard=shard,
-        rank=rank,
-        needle_length=needle_length,
-        maximum_context_length=maximum_context_length,
+        shard=body.shard,
+        rank=body.rank,
+        needle_length=body.needle_length,
+        maximum_context_length=body.maximum_context_length,
     )
 
     return result
@@ -73,16 +74,13 @@ def get_document_by_rank(
 @documents_router.post("/{index}/get_document_by_pointer", tags=["documents"])
 def get_document_by_pointer(
     documents_service: DocumentsServiceDependency,
-    shard: int,
-    pointer: int,
-    needle_length: int,
-    maximum_context_length: MaximumDocumentDisplayLengthType = 10,
+    body: GetDocumentByPointerRequest,
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_pointer(
-        shard=shard,
-        pointer=pointer,
-        needle_length=needle_length,
-        maximum_context_length=maximum_context_length,
+        shard=body.shard,
+        pointer=body.pointer,
+        needle_length=body.needle_length,
+        maximum_context_length=body.maximum_context_length,
     )
 
     return result
@@ -91,12 +89,11 @@ def get_document_by_pointer(
 @documents_router.post("/{index}/get_document_by_index", tags=["documents"])
 def get_document_by_index(
     documents_service: DocumentsServiceDependency,
-    document_index: int,
-    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+    body: GetDocumentByIndexRequest,
 ) -> InfiniGramDocumentResponse:
     result = documents_service.get_document_by_index(
-        document_index=int(document_index),
-        maximum_context_length=maximum_document_display_length,
+        document_index=body.document_index,
+        maximum_context_length=body.maximum_context_length,
     )
 
     return result
@@ -105,17 +102,10 @@ def get_document_by_index(
 @documents_router.post("/{index}/get_documents_by_index", tags=["documents"])
 def get_documents_by_index(
     documents_service: DocumentsServiceDependency,
-    document_indexes: Annotated[list[int], Query()],
-    maximum_document_display_length: MaximumDocumentDisplayLengthType = 10,
+    body: list[GetDocumentByIndexRequest],
 ) -> InfiniGramDocumentsResponse:
     result = documents_service.get_multiple_documents_by_index(
-        document_requests=[
-            GetDocumentByIndexRequest(
-                document_index=document_index,
-                maximum_context_length=maximum_document_display_length,
-            )
-            for document_index in document_indexes
-        ],
+        document_requests=body,
     )
 
     return result

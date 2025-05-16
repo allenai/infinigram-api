@@ -52,7 +52,7 @@ def search_documents(
     return result
 
 
-@documents_router.get("/{index}/get_document_by_rank/", tags=["documents"])
+@documents_router.post("/{index}/get_document_by_rank", tags=["documents"])
 def get_document_by_rank(
     documents_service: DocumentsServiceDependency,
     shard: int,
@@ -70,7 +70,7 @@ def get_document_by_rank(
     return result
 
 
-@documents_router.get("/{index}/get_document_by_pointer/", tags=["documents"])
+@documents_router.post("/{index}/get_document_by_pointer", tags=["documents"])
 def get_document_by_pointer(
     documents_service: DocumentsServiceDependency,
     shard: int,
@@ -88,7 +88,7 @@ def get_document_by_pointer(
     return result
 
 
-@documents_router.get("/{index}/get_document_by_index/", tags=["documents"])
+@documents_router.post("/{index}/get_document_by_index", tags=["documents"])
 def get_document_by_index(
     documents_service: DocumentsServiceDependency,
     document_index: int,
@@ -102,7 +102,7 @@ def get_document_by_index(
     return result
 
 
-@documents_router.get("/{index}/get_documents_by_index", tags=["documents"])
+@documents_router.post("/{index}/get_documents_by_index", tags=["documents"])
 def get_documents_by_index(
     documents_service: DocumentsServiceDependency,
     document_indexes: Annotated[list[int], Query()],

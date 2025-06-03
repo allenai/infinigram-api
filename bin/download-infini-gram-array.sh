@@ -34,3 +34,20 @@ if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-olmo-2-0325-32b-anneal-adapt ]; then
     echo "creating a link from v4_pileval_llama to v4-olmo-2-0325-32b-anneal-adapt"
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-olmo-2-0325-32b-anneal-adapt
 fi
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt-llama ]; then
+    echo "creating a link from v4_pileval_llama to v4-tulu-3-8b-adapt-llama"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt-llama
+fi
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-70b-adapt-llama ]; then
+    echo "creating a link from v4_pileval_llama to v4-tulu-3-70b-adapt-llama"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-70b-adapt-llama
+fi
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-405b-adapt-llama ]; then
+    echo "creating a link from v4_pileval_llama to v4-tulu-3-405b-adapt-llama"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-405b-adapt-llama
+fi
+
+

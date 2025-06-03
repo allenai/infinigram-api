@@ -20,6 +20,9 @@ services:
       - ./infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt:/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-1124-13b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-0325-32b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
+      - ./infinigram-array/v4-tulu-3-8b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-8b-adapt-llama
+      - ./infinigram-array/v4-tulu-3-70b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-70b-adapt-llama
+      - ./infinigram-array/v4-tulu-3-405b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-405b-adapt-llama
     environment: 
       LOG_LEVEL: DEBUG
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4318
@@ -43,6 +46,9 @@ services:
       - ./infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt:/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-1124-13b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt
       - ./infinigram-array/v4-olmo-2-0325-32b-anneal-adapt:/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
+      - ./infinigram-array/v4-tulu-3-8b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-8b-adapt-llama
+      - ./infinigram-array/v4-tulu-3-70b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-70b-adapt-llama
+      - ./infinigram-array/v4-tulu-3-405b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-405b-adapt-llama
     environment: *shared-env
 
   proxy:

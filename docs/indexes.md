@@ -70,7 +70,7 @@
   DISK_NAME is optional, it defaults to 'infinigram-$INDEX_NAME', which the script above creates.
 
 ### Adding the volume to webapp.jsonnet
-  1. Add a volume to the deployment
+  1. Add a volume to the indexVolumes
      ```
       {
         name: "infinigram-array-<ARRAY_NAME>>",
@@ -80,7 +80,7 @@
         }
       }
      ```
-  2. Add a volumeMount to the -api container
+  2. Add a volumeMount to the indexVolumeMounts
      ```
       {
           mountPath: "/mnt/infinigram-array/<VOLUME_NAME>",

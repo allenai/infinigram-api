@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: "infinigram"
   capacity:
-    storage: 300Gi
+    storage: 290Gi 
   accessModes:
     - ReadOnlyMany
   claimRef:
@@ -13,7 +13,7 @@ spec:
     name: infinigram-v4-olmoe-0125-1b-7b-anneal-adapt
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/$DISK_NAME
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-v4-olmoe-0125-1b-7b-anneal-adapt
     fsType: ext4
     readOnly: true
 ---
@@ -29,4 +29,4 @@ spec:
     - ReadOnlyMany
   resources:
     requests:
-      storage: 300Gi
+      storage: 290Gi

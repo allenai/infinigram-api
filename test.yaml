@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: v4-tulu-v3-1-mix-infini-gram-writer 
+spec:
+  template:
+    spec:
+      containers:
+      - name: v4-tulu-v3-1-mix-infini-gram-writer
+        image: gcr.io/ai2-reviz/infinigram-api-writer
+        volumeMounts:
+          - mountPath: /mnt/infini-gram-array/
+            name: infinigram-array
+        env: 
+        - name: INDEX_NAME
+          value: v4_tulu-v3.1-mix-preview-4096-OLMoE_llama
+      
+      volumes:
+        - name: infinigram-array
+          persistentVolumeClaim:
+            claimName: v4-tulu-v3-1-mix-writer
+
+      restartPolicy: Never
+      
+  backoffLimit: 3
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: v4-tulu-v3-1-mix-writer
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: $INDEX_SIZE
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: infinigram-api
+    name: v4-tulu-v3-1-mix-writer
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infini-gram-v4-tulu-v3-1-mix
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: v4-tulu-v3-1-mix-writer
+spec:
+  storageClassName: "infinigram"
+  volumeName: v4-tulu-v3-1-mix-writer
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: $INDEX_SIZE

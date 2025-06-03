@@ -5,7 +5,7 @@ from infini_gram_processor.models import (
     AttributionDocument,
     AttributionSpan,
     Document,
-    GetDocumentByPointerRequest,
+    GetDocumentByPointerGroupedRequest,
     SpanRankingMethod,
 )
 from infini_gram_processor.processor import InfiniGramProcessor
@@ -100,15 +100,15 @@ def get_document_requests(
     input_token_ids: list[int],
     maximum_documents_per_span: int,
     maximum_context_length: int,
-) -> list[GetDocumentByPointerRequest]:
-    document_request_by_span: list[GetDocumentByPointerRequest] = []
+) -> list[GetDocumentByPointerGroupedRequest]:
+    document_request_by_span: list[GetDocumentByPointerGroupedRequest] = []
     for span in spans:
         docs = span["docs"]
         if len(docs) > maximum_documents_per_span:
             random.seed(42)  # For reproducibility
             docs = random.sample(docs, maximum_documents_per_span)
         document_request_by_span.append(
-            GetDocumentByPointerRequest(
+            GetDocumentByPointerGroupedRequest(
                 docs=docs,
                 span_ids=input_token_ids[span["l"] : span["r"]],
                 needle_length=span["length"],

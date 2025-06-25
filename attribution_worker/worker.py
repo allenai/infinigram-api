@@ -1,6 +1,8 @@
 import asyncio
 import os
 from typing import Any
+from infini_gram_processor.tokenizers.tokenizer_factory import get_llama_2_tokenizer
+from infini_gram_processor.processor import InfiniGramProcessor
 
 import numpy as np
 from infini_gram_processor import indexes
@@ -91,7 +93,12 @@ async def attribution_job(
         if worker is not None:
             otel_span.set_attribute(SpanAttributes.MESSAGING_CLIENT_ID, worker.id)
 
-        infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
+        #infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
+        infini_gram_index = InfiniGramProcessor({
+                    "tokenizer": get_llama_2_tokenizer(),
+                    "index_dir": f"{os.getenv('INDEX_BASE_PATH')}/{index}",
+                    "index_dir_diff": [],
+                })
 
         attribute_result = await asyncio.to_thread(
             infini_gram_index.attribute,

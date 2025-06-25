@@ -15,7 +15,7 @@ from transformers.tokenization_utils_base import (  # type: ignore
     PreTokenizedInput,
     TextInput,
 )
-
+from .index_mappings import IndexMapping, index_mappings
 from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
 from .models import (
@@ -37,19 +37,35 @@ tracer = trace.get_tracer(__name__)
 
 
 class InfiniGramProcessor:
+    index_mapping: IndexMapping
     index: str
     tokenizer: Tokenizer
     infini_gram_engine: InfiniGramEngineDiff
 
-    def __init__(self, index: AvailableInfiniGramIndexId):
-        self.index = index.value
-        index_mapping = index_mappings[index.value]
+    # def __init__(self, index: AvailableInfiniGramIndexId):
+    #     self.index = index.value
+    #     index_mapping = index_mappings[index.value]
 
-        self.tokenizer = index_mapping["tokenizer"]
+    #     self.tokenizer = index_mapping["tokenizer"]
+    
+    def __init__(self, index: AvailableInfiniGramIndexId | dict):
+        if isinstance(index, dict):
+            # Handle direct config dictionary
+            self.index = str(index["index_dir"])
+            self.tokenizer = index["tokenizer"]
+            index_dir_diff = index.get("index_dir_diff", [])
+        else:
+            # Handle enum-based initialization
+            self.index = index.value
+            index_mapping = index_mappings[index.value]
+            self.tokenizer = index_mapping["tokenizer"]
+            index_dir_diff = index_mapping["index_dir_diff"]
 
         self.infini_gram_engine = InfiniGramEngineDiff(
-            index_dir=index_mapping["index_dir"],
-            index_dir_diff=index_mapping["index_dir_diff"],
+            index_dir=self.index,
+            index_dir_diff=index_dir_diff,
+            # index_dir=index_mapping["index_dir"],
+            # index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
             # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
@@ -367,4 +383,6 @@ class InfiniGramProcessor:
         )
 
 
-indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
+# indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
+indexes = {}
+

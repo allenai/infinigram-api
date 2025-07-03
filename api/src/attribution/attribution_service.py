@@ -1,8 +1,12 @@
+from rank_bm25 import BM25Okapi
+import math
+from typing import List, Sequence, Optional
+import numpy as np
+
 import logging
 from hashlib import sha256
 from typing import Any, List, Optional, Sequence
 from uuid import uuid4
-
 from infini_gram_processor.models import (
     BaseInfiniGramResponse,
     Document,
@@ -20,7 +24,7 @@ from rfc9457 import StatusProblem
 from saq import Queue
 
 from src.attribution.attribution_queue_service import AttributionQueueDependency
-from src.attribution.attribution_request import AttributionRequest
+from src.attribution.attribution_request import AttributionRequest, FilterMethod, FieldsConsideredForRanking
 from src.cache import CacheDependency
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
@@ -44,6 +48,7 @@ class AttributionDocument(Document):
     display_offset_snippet: int
     needle_offset_snippet: int
     text_snippet: str
+    relevance_score: float | None = None
 
 
 class AttributionSpan(CamelCaseModel):
@@ -68,7 +73,6 @@ class AttributionTimeoutError(StatusProblem):
     type_ = "server-overloaded"
     title = "Server overloaded"
     status = 503
-
 
 class AttributionService:
     infini_gram_processor: InfiniGramProcessor
@@ -206,7 +210,14 @@ class AttributionService:
                 attribute_result_json
             )
 
-            await self._cache_response(index, request, attribute_result_json)
+            # Apply BM25 filtering on each span's documents if requested
+            for span in attribute_result.spans:
+                span.documents = [AttributionDocument(**doc.model_dump()) for doc in span.documents]
+            attribute_result.spans = filter_spans(attribute_result.spans, request)
+
+            # Cache the filtered response
+            filtered_result_json = attribute_result.model_dump_json()
+            await self._cache_response(index, request, filtered_result_json)
 
             return attribute_result
         except TimeoutError as ex:
@@ -226,3 +237,106 @@ class AttributionService:
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."
             )
+
+def filter_spans(
+    spans: Sequence[AttributionSpan],
+    request: AttributionRequest,
+    prompt: Optional[str] = None,
+) -> List[AttributionSpan]:
+    if request.filter_method == FilterMethod.NONE:
+        return list(spans)
+
+    if request.filter_method == FilterMethod.BM25:
+        return apply_global_bm25_filter(spans, request, prompt)
+
+    return list(spans)
+
+
+def apply_global_bm25_filter(
+    spans: Sequence[AttributionSpan],
+    request: AttributionRequest,
+    prompt: Optional[str] = None,
+) -> List[AttributionSpan]:
+    """
+    Apply global BM25 filtering across all span documents.
+    """
+    all_docs = []
+    span_doc_mapping = []
+
+    for span_idx, span in enumerate(spans):
+        for doc_idx, doc in enumerate(span.documents):
+            all_docs.append(doc.text)
+            span_doc_mapping.append((span_idx, doc_idx))
+
+    if not all_docs:
+        return list(spans)
+
+    tokenized_corpus = [doc.split() for doc in all_docs]
+    bm25 = BM25Okapi(tokenized_corpus)
+
+    if request.filter_bm25_fields_considered == FieldsConsideredForRanking.RESPONSE:
+        query = request.response.split()
+        scores_array = bm25.get_scores(query)
+
+    elif request.filter_bm25_fields_considered == FieldsConsideredForRanking.PROMPT:
+        if prompt:
+            query = prompt.split()
+            scores_array = bm25.get_scores(query)
+        else:
+            query = request.response.split()
+            scores_array = bm25.get_scores(query)
+
+    elif request.filter_bm25_fields_considered == FieldsConsideredForRanking.CONCATENATE_PROMPT_AND_RESPONSE:
+        if prompt:
+            query = (prompt + " " + request.response).split()
+        else:
+            query = request.response.split()
+        scores_array = bm25.get_scores(query)
+
+    elif request.filter_bm25_fields_considered == FieldsConsideredForRanking.ADD_PROMPT_AND_RESPONSE_SCORES:
+        response_query = request.response.split()
+        response_scores = bm25.get_scores(response_query)
+        if prompt:
+            prompt_query = prompt.split()
+            prompt_scores = bm25.get_scores(prompt_query)
+            scores_array = response_scores + prompt_scores
+        else:
+            scores_array = response_scores
+
+    else:
+        raise ValueError("Unknown BM25 fields_considered option")
+
+    n_docs = len(all_docs)
+    n_keep = math.ceil(n_docs * request.filter_bm25_ratio_to_keep)
+    n_keep = max(1, min(n_keep, n_docs))
+
+    indices_sorted = np.argsort(scores_array)[::-1]
+    indices_to_keep = set(indices_sorted[:n_keep])
+
+    # Build filtered spans
+    filtered_spans = []
+    doc_global_idx = 0
+
+    for span_idx, span in enumerate(spans):
+        new_docs = []
+        for doc_idx, doc in enumerate(span.documents):
+            if doc_global_idx in indices_to_keep:
+                doc.relevance_score = float(scores_array[doc_global_idx])
+                new_docs.append(doc)
+                # new_docs.append(doc.model_dump())
+                doc_global_idx += 1
+
+        filtered_spans.append(
+            AttributionSpan(
+                left=span.left,
+                right=span.right,
+                length=span.length,
+                count=span.count,
+                unigram_logprob_sum=span.unigram_logprob_sum,
+                text=span.text,
+                token_ids=span.token_ids,
+                documents=new_docs,
+            )
+        )
+
+    return filtered_spans

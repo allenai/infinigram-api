@@ -21,4 +21,5 @@ dependencies = [
     "fastapi_problem==0.10.7",
     "redis[hiredis]==5.2.1",
     "infini-gram-processor",
+     "rank-bm25",
 ]

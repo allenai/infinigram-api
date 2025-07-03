@@ -1,13 +1,19 @@
 from typing import List
-
+from enum import Enum
 from infini_gram_processor.models import SpanRankingMethod
 from pydantic import ConfigDict, Field
 
 from src.camel_case_model import CamelCaseModel
 
 EXAMPLE_ATTRIBUTION_RESPONSE = "Hailing a taxi in Rome is fairly easy. Expect to pay around EUR 10-15 (approx. $11.29 - $15.58) to most tourist spots. Tipping isn't common in Italy, but round up the taxi fare or leave a small tip in the event of exceptional service. car rental is an alternative, but traffic in Rome can be daunting for newbies. If you decide to rent a car, make sure you're comfortable navigating busy medieval streets."
-
-
+class FilterMethod(Enum):
+    NONE = "none"
+    BM25 = "bm25"
+class FieldsConsideredForRanking(Enum):
+    PROMPT = "prompt"
+    RESPONSE = "response"
+    CONCATENATE_PROMPT_AND_RESPONSE = "prompt|response"
+    ADD_PROMPT_AND_RESPONSE_SCORES = "prompt+response"
 class AttributionRequest(CamelCaseModel):
     model_config = ConfigDict(frozen=True)
 
@@ -59,4 +65,21 @@ class AttributionRequest(CamelCaseModel):
         gt=0,
         default=40,
         description="The maximum number of tokens of the context (on each side) for the snippet in document cards",
+    )
+    
+    filter_method: FilterMethod = Field(
+        default=FilterMethod.NONE,
+        description="Filtering method for post-processing the retrieved documents. Options: 'none', 'bm25'",
+    )
+    
+    filter_bm25_fields_considered: FieldsConsideredForRanking = Field(
+        default=FieldsConsideredForRanking.RESPONSE,
+        description="Fields to consider for BM25 scoring: 'prompt', 'response', 'prompt|response', 'prompt+response'",
+    )
+    
+    filter_bm25_ratio_to_keep: float = Field(
+        default=1.0,
+        ge=0.0,
+        le=1.0,
+        description="Ratio of top-scoring documents to retain after BM25 filtering (between 0.0 and 1.0)",
     )

@@ -1,0 +1,8 @@
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000003.npy /data_c/tokenized/s2pdf/science_math_and_technology/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000003.csv.gz /data_c/tokenized/s2pdf/science_math_and_technology/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000004.npy /data_c/tokenized/s2pdf/science_math_and_technology/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000004.csv.gz /data_c/tokenized/s2pdf/science_math_and_technology/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000005.npy /data_c/tokenized/s2pdf/science_math_and_technology/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000005.csv.gz /data_c/tokenized/s2pdf/science_math_and_technology/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000006.npy /data_c/tokenized/s2pdf/science_math_and_technology/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf/science_math_and_technology/000006.csv.gz /data_c/tokenized/s2pdf/science_math_and_technology/000006.csv.gz

@@ -1,0 +1,8 @@
+name: he-indexing-dolma2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12.9
+  - pip:
+    - infini-gram==2.6.0

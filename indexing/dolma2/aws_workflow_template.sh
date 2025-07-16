@@ -1,7 +1,6 @@
-INSTANCE_TYPE="i7i"
 NUM_SHARDS=25
 NUM_NODES=25
-RANK=0
+RANK=19
 REMOTE_DIR="s3://infini-gram/index/dolma2-0625-v01"
 
 # Mount volumes
@@ -43,6 +42,7 @@ echo "Install conda: Starting ..."
 mkdir -p ~/miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh --quiet
 bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+# NEED TO FIGURE OUT A WAY TO AUTO ACCEPT THE TOS
 rm -rf ~/miniconda3/miniconda.sh
 # ~/miniconda3/bin/conda init bash
 # source /home/ubuntu/.bashrc
@@ -73,7 +73,7 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     export INDEX_NAME="v6_${NAME}_u32"
 
     echo "Download data: Starting ..."
-    time s5cmd run ./s5cmd_files/${NAME}.s5cmd
+    time s5cmd run ./s5cmd_files/shard_${NAME}.s5cmd
     time python make_raw_s5cmd_file.py
     time s5cmd run ./s5cmd_files/raw.s5cmd
     echo "Download data: Done"

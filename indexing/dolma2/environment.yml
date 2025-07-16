@@ -6,3 +6,5 @@ dependencies:
   - python=3.12.9
   - pip:
     - infini-gram==2.6.0
+    - tqdm
+    - zstandard

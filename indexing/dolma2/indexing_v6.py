@@ -13,9 +13,7 @@ import shutil
 import sys
 import time
 from tqdm import tqdm
-import transformers
 import zstandard as zstd
-transformers.utils.logging.set_verbosity(40) # suppress warnings
 
 tokenizer = None
 
@@ -304,20 +302,21 @@ def prepare_manyfiles(args):
 
 def prepare(args):
 
-    global tokenizer
-    if args.tokenizer is None:
-        tokenizer = None
-    elif args.tokenizer == 'gpt2':
-        tokenizer = transformers.AutoTokenizer.from_pretrained('gpt2', use_fast=False, add_bos_token=False, add_eos_token=False)
-    elif args.tokenizer == 'llama':
-        tokenizer = transformers.AutoTokenizer.from_pretrained('meta-llama/Llama-2-7b-hf', token=os.environ.get('HF_TOKEN'), use_fast=False, add_bos_token=False, add_eos_token=False) # The fast tokenizer seems unbearably slow ...
-    elif args.tokenizer == 'olmo':
-        tokenizer = transformers.AutoTokenizer.from_pretrained("allenai/OLMo-7B", add_bos_token=False, add_eos_token=False)
-        # # The following is a faster version, but the result is a bit different
-        # from dolma.tokenizer import Tokenizer
-        # tokenizer = Tokenizer.from_pretrained('allenai/gpt-neox-olmo-dolma-v1_5', bos_token_id=None, eos_token_id=None, pad_token_id=1, segment_before_tokenization=True)
-    else:
-        raise ValueError(f'Unknown tokenizer: {args.tokenizer}')
+    if args.tokenizer is not None:
+        import transformers
+        transformers.utils.logging.set_verbosity(40) # suppress warnings
+        global tokenizer
+        if args.tokenizer == 'gpt2':
+            tokenizer = transformers.AutoTokenizer.from_pretrained('gpt2', use_fast=False, add_bos_token=False, add_eos_token=False)
+        elif args.tokenizer == 'llama':
+            tokenizer = transformers.AutoTokenizer.from_pretrained('meta-llama/Llama-2-7b-hf', token=os.environ.get('HF_TOKEN'), use_fast=False, add_bos_token=False, add_eos_token=False) # The fast tokenizer seems unbearably slow ...
+        elif args.tokenizer == 'olmo':
+            tokenizer = transformers.AutoTokenizer.from_pretrained("allenai/OLMo-7B", add_bos_token=False, add_eos_token=False)
+            # # The following is a faster version, but the result is a bit different
+            # from dolma.tokenizer import Tokenizer
+            # tokenizer = Tokenizer.from_pretrained('allenai/gpt-neox-olmo-dolma-v1_5', bos_token_id=None, eos_token_id=None, pad_token_id=1, segment_before_tokenization=True)
+        else:
+            raise ValueError(f'Unknown tokenizer: {args.tokenizer}')
 
     if args.prepare_mode == 'fewfiles':
         prepare_fewfiles(args)

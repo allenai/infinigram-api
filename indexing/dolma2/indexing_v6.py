@@ -140,7 +140,7 @@ def prepare_manyfiles_map(args, filenum, path):
     if path.endswith('.csv.gz'):
         npy_path = path[:-len('.csv.gz')] + '.npy'
         with open(npy_path, 'rb') as f:
-            tokens = np.frombuffer(f.read(), dtype=np.uint32)
+            tokens = np.frombuffer(f.read(), dtype=args.token_dtype)
         with gzip.open(path, 'rt') as f:
             reader = csv.reader(f)
             rows = list(reader)
@@ -150,14 +150,14 @@ def prepare_manyfiles_map(args, filenum, path):
             s3_raw_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(s3_raw_path.split('pretraining-data')[1:])
             assert 0 <= start < end <= len(tokens)
             assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
-            doc_tokens = np.concatenate(np.array([256**args.token_width-1], tokens[start:end-1]))
+            doc_tokens = np.concatenate([np.array([256**args.token_width-1], dtype=args.token_dtype), tokens[start:end-1]])
             data = doc_tokens.view(np.uint8).tobytes()
             ds_fout.write(data)
             od_fout.write(np.array([od], dtype=np.uint64).view(np.uint8).tobytes())
             od += len(data)
             if args.add_metadata:
                 local_raw_path = s3_raw_path.replace('s3://', args.data_dir.replace('tokenized', 'raw') + '/')
-                num_lines = os.path.getsize(local_raw_path) // 8
+                num_lines = os.path.getsize(f'{local_raw_path}.metaoff') // 8
                 assert 0 <= s3_raw_doc_ix < num_lines
                 with open(f'{local_raw_path}.metaoff', 'rb') as f:
                     f.seek(s3_raw_doc_ix * 8)

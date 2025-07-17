@@ -144,10 +144,10 @@ def prepare_manyfiles_map(args, filenum, path):
         with gzip.open(path, 'rt') as f:
             reader = csv.reader(f)
             rows = list(reader)
-        curr_s3_raw_path = ''
-        curr_raw_lines = None
         for row in rows:
             start, end, _, s3_raw_path, s3_raw_doc_ix = row
+            start, end, s3_raw_doc_ix = int(start), int(end), int(s3_raw_doc_ix) - 1 # since it is 1-indexed
+            s3_raw_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(s3_raw_path.split('pretraining-data')[1:])
             assert 0 <= start < end <= len(tokens)
             assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
             doc_tokens = np.concatenate(np.array([256**args.token_width-1], tokens[start:end-1]))
@@ -156,17 +156,19 @@ def prepare_manyfiles_map(args, filenum, path):
             od_fout.write(np.array([od], dtype=np.uint64).view(np.uint8).tobytes())
             od += len(data)
             if args.add_metadata:
-                if curr_s3_raw_path != s3_raw_path:
-                    curr_s3_raw_path = s3_raw_path
-                    local_raw_path = s3_raw_path.replace('s3://', args.data_dir.replace('tokenized', 'raw') + '/')
-                    curr_raw_lines = load_file(local_raw_path)
-                assert curr_raw_lines is not None
-                s3_raw_doc_ix -= 1 # since it is 1-indexed
-                assert 0 <= s3_raw_doc_ix < len(curr_raw_lines)
-                line = curr_raw_lines[s3_raw_doc_ix]
-                meta = json.loads(line.strip('\n'))
-                del meta['text']
-                meta = (json.dumps({'path': rel_path, 'linenum': s3_raw_doc_ix, 'metadata': meta}) + '\n').encode('utf-8')
+                local_raw_path = s3_raw_path.replace('s3://', args.data_dir.replace('tokenized', 'raw') + '/')
+                num_lines = os.path.getsize(local_raw_path) // 8
+                assert 0 <= s3_raw_doc_ix < num_lines
+                with open(f'{local_raw_path}.metaoff', 'rb') as f:
+                    f.seek(s3_raw_doc_ix * 8)
+                    b = np.frombuffer(f.read(8), dtype=np.uint64)[0]
+                    if s3_raw_doc_ix < num_lines - 1:
+                        e = np.frombuffer(f.read(8), dtype=np.uint64)[0]
+                    else:
+                        e = os.path.getsize(f'{local_raw_path}.metadata')
+                with open(f'{local_raw_path}.metadata', 'rb') as f:
+                    f.seek(b)
+                    meta = f.read(e-b)
                 mt_fout.write(meta)
                 om_fout.write(np.array([om], dtype=np.uint64).view(np.uint8).tobytes())
                 om += len(meta)

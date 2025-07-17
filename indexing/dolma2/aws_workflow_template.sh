@@ -80,7 +80,7 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     echo "------------------------------------------------"
 
     echo "Indexing: Starting ..."
-    time python indexing_v6.py --data_dir /data_c/tokenized --temp_dir /data_t/${INDEX_NAME} --save_dir /data_i/${INDEX_NAME} --pretokenized --token_dtype u32 --cpus 192 --num_batches 16 --add_metadata
+    time python indexing_v6.py --data_dir /data_c/tokenized --temp_dir /data_t/${INDEX_NAME} --save_dir /data_i/${INDEX_NAME} --pretokenized --token_dtype u32 --cpus 192 --mem 1800 --add_metadata
     echo "Indexing: Done"
     echo "------------------------------------------------"
 

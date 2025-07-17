@@ -8,3 +8,4 @@ dependencies:
     - infini-gram==2.6.0
     - tqdm
     - zstandard
+    - numpy

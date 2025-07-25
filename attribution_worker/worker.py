@@ -1,7 +1,7 @@
 import asyncio
 import os
 from typing import Any
-from infini_gram_processor.tokenizers.tokenizer_factory import get_llama_2_tokenizer
+from infini_gram_processor.tokenizers.tokenizer_factory import get_tokenizer_for_index
 from infini_gram_processor.processor import InfiniGramProcessor
 
 import numpy as np
@@ -95,7 +95,7 @@ async def attribution_job(
 
         #infini_gram_index = indexes[AvailableInfiniGramIndexId(index)]
         infini_gram_index = InfiniGramProcessor({
-                    "tokenizer": get_llama_2_tokenizer(),
+                    "tokenizer": get_tokenizer_for_index(index),
                     "index_dir": f"{os.getenv('INDEX_BASE_PATH')}/{index}",
                     "index_dir_diff": [],
                 })

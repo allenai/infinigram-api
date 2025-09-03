@@ -12,7 +12,7 @@ This application is only made possible by researchers that worked on the infini-
 To develop in this repo, see the [contributing doc](./docs/CONTRIBUTING.md).
 
 ## Indexes
-You can find the index documentation [here](./docs/indexes).
+You can find the index documentation [here](./docs/indexes.md).
 
 ## Architecture
 

@@ -18,7 +18,7 @@ parser.add_argument('--overwrite_eval', default=False, action='store_true')
 parser.add_argument('--num_docs_per_thread', type=int, default=5)
 args = parser.parse_args()
 
-api_url = 'http://0.0.0.0:8008/olmoe/attribution'
+api_url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
 params = {
     'delimiters': ['\n', '.'],
     'allowSpansWithPartialWords': False,
@@ -26,13 +26,10 @@ params = {
     'maximumFrequency': 1000000,
     'maximumSpanDensity': 0.05,
     'spanRankingMethod': 'unigram_logprob_sum',
-    'includeDocuments': True,
     'maximumDocumentsPerSpan': 10,
-    'maximumDocumentDisplayLength': 500,
-    'filterMethod': 'bm25',
-    'filterBm25FieldsConsidered': 'prompt|response',
-    'filterBm25RatioToKeep': 1.0,
-    'includeInputAsTokens': True,
+    'maximumContextLength': 250,
+    'maximumContextLengthLong': 250,
+    'maximumContextLengthSnippet': 40,
 }
 
 # llm_as_a_judge_system_message = """You will be given a user prompt, a model's response to the prompt, and a retrieved document. Please rate how relevant the document is to the prompt and model response. Rate on a scale of 0 (not relevant) to 3 (very relevant). Respond with a single number, and do not include any other text in your response."""

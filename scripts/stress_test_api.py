@@ -3,7 +3,7 @@ import multiprocessing as mp
 import random
 
 NUM_TOKENS = 500
-NUM_CONCURRENT_REQUESTS = 32
+NUM_CONCURRENT_REQUESTS = 16
 
 PAYLOAD = {
     'prompt': '',
@@ -20,11 +20,16 @@ PAYLOAD = {
     'maximumContextLengthSnippet': 40,
 }
 
-url = 'http://0.0.0.0:8008/olmo-2-1124-13b/attribution'
+urls = [
+    'http://0.0.0.0:8008/olmo-2-1124-13b/attribution',
+    'http://0.0.0.0:8008/olmoe-0125-1b-7b/attribution',
+    'http://0.0.0.0:8008/olmo-2-0325-32b/attribution',
+]
 
 def issue_request(response):
     payload = PAYLOAD.copy()
     payload['response'] = response
+    url = random.choice(urls)
     return requests.post(url, json=payload).json()
 
 with mp.get_context('fork').Pool(NUM_CONCURRENT_REQUESTS) as p:

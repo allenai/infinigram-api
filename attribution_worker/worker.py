@@ -121,7 +121,7 @@ async def attribution_job(
         )
 
         documents_by_span = await asyncio.to_thread(
-            infini_gram_index.get_documents_by_pointers,
+            infini_gram_index.get_documents_by_pointers_grouped,
             document_request_by_span=document_request_by_span,
         )
 

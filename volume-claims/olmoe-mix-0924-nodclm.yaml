@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: "infinigram"
   capacity:
-    storage: 2Ti
+    storage: 2Ti 
   accessModes:
     - ReadOnlyMany
   claimRef:
@@ -13,7 +13,7 @@ spec:
     name: infinigram-olmoe-mix-0924-nodclm
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infini-gram-olmoe-mix-0924-nodclm
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-olmoe-mix-0924-nodclm
     fsType: ext4
     readOnly: true
 ---

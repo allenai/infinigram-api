@@ -5,7 +5,7 @@
 
 ### Transferring indexes from AWS
 
-#### Creating Agents
+#### Creating Transfer Agents
 
 1. Create VMs in google compute engine
   * Google recommends 4vCPU and 8GB of memory per agent. Three VMs with the appropriate specs seems to be the most cost-effective
@@ -41,41 +41,36 @@
       ```
 
 #### Starting the transfer job
+  Run this from infinigram-api root folder:
+  `./bin/transfer-index-from-s3.sh <S3_SOURCE> <INDEX_NAME>`
+  Example:
+  `./bin/transfer-index-from-s3.sh s3://infini-gram/index/v4_olmo-2-1124-13b-anneal-adapt_llama/ v4-olmo-2-1124-13b-anneal-adapt`
 
-  1. Go to the [create a transfer job page](https://console.cloud.google.com/transfer/create?project=ai2-reviz)
-  2. Set the Source type to "S3-compatible object storage". Destination type should be "Google Cloud Storage"
-  3. Fill in data for the source.
-    * Bucket or folder will be the bucket path. If copying from an s3 URL like `s3://infini-gram-lite/index/v4_pileval_llama` you can take off the `s3://` part, resulting in `infini-gram-lite/index/v4_pileval_llama`
-    * Endpoint depends on the bucket. Most of the time it'll be `s3.us-east-1.amazonaws.com`
-    * Signing region should be the region the bucket is in
-  4. The destination should be `infinigram/index/<index name>`
-  5. The job should run once, starting now
-  6. The rest of the settings can stay the same
-    * I do fine it nice to name the transfer job. Something like `infini-gram-transfer-<index name>`
-    * Make sure you don't change the Storage class and don't delete from the source
+  S3_SOURCE will be prefixed with `s3://`
+  INDEX_NAME may need to be shortened to fit GCP requirements! You'll want to keep it as close to the actual index name as possible.
 
-### Making a Persistent Disk
-  1. ```
-     gcloud compute disks create infini-gram-<index name> \
-       --project=ai2-reviz \
-       --type=pd-balanced \
-       --size=<index size in GB> \
-       --labels=project=infini-gram \
-       --zone=us-west1-b
-       ```
-  2. Change names in `volume-claims/writer-pod.yaml` to match the disk you created and the index name
-  3. Create a writer pod: `kubectl apply -f volume-claims/writer-pod.yaml --namespace=infinigram-api`
-    * (TODO) Set up a baseline image to use for transferring files. Needs to have python3 and gcloud tools
-  4. connect to the pod and set it up with python3 and gcloud
-    * kubectl exec --stdin --tty infini-gram-writer --namespace=infinigram-api -- /bin/ash
-    * apk add python3 curl which bash
-    * curl -sSL https://sdk.cloud.google.com | bash
-    * bash
-  4. Download the files from the bucket into /mnt/infini-gram-array
-    * `gcloud storage cp gs://infinigram/index/<index name>/* /mnt/infini-gram-array/`
+  You may need to restart the transfer agents in the infini-gram-transfer pool: https://console.cloud.google.com/transfer/agent-pools/pool/infini-gram-transfer/agents?project=ai2-reviz
+
+
+#### Making a Persistent Disk
+  Run this from infinigram-api root folder:
+  `./bin/copy-files-to-disk.sh <INDEX_NAME> <INDEX_SIZE> <Optional:INDEX_BUCKET_NAME>`
+
+  INDEX_NAME should match what you used when starting the transfer job
+  INDEX_SIZE needs to be at least the space required by the index and uses the K8s Quantity unit: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+  INDEX_BUCKET_NAME is optional, it defaults to the INDEX_NAME. This is just here as an option if needed, stick with the INDEX_NAME default unless you really need to change it.
+  
+  When the copy job is finished, run the script to create the readonly volume claim:
+  `./bin/create-readonly-volume-claim.sh <INDEX_NAME> <INDEX_SIZE> <Optional:DISK_NAME>`
+  Example:
+  `/bin/create-readonly-volume-claim.sh v4-olmo-2-1124-13b-anneal-adapt 290Gi`
+  
+  INDEX_NAME should match what you used when starting the transfer job and making the disk
+  INDEX_SIZE should match what you used when starting the transfer job and making the disk
+  DISK_NAME is optional, it defaults to 'infinigram-$INDEX_NAME', which the script above creates.
 
 ### Adding the volume to webapp.jsonnet
-  1. Add a volume to the deployment
+  1. Add a volume to the indexVolumes
      ```
       {
         name: "infinigram-array-<ARRAY_NAME>>",
@@ -85,7 +80,7 @@
         }
       }
      ```
-  2. Add a volumeMount to the -api container
+  2. Add a volumeMount to the indexVolumeMounts
      ```
       {
           mountPath: "/mnt/infinigram-array/<VOLUME_NAME>",
@@ -94,10 +89,16 @@
       }
      ```
 
+### Updating the transfer docker image
+If you update the docker image or script we use in the writer job, you'l need to rebuild the image and push it to GCP. 
+
+run this:
+`gcloud builds submit --config ./bin/infini-gram-writer/cloudbuild-infini-gram-writer.yaml`
+
 ## Locally
 
 1. Add the ID of the index to `AvailableInfiniGramIndexId` in `api/src/infinigram/index_mappings.py`
 2. Add the ID as a string to `IndexMappings` in `api/src/infinigram/index_mappings.py`
 3. Add the tokenizer and index directory to `index_mappings` in `api/src/infinigram/index_mappings.py`
-4. add a line in /bin/download-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
+4. add a line in /bin/download-local-infini-gram-array.sh to make a new symlink with that array's path. The path will be the `index_dir` you added in `index_mappings` but has `/mnt/infinigram-array` replaced with `$INFINIGRAM_ARRAY_DIR`
 5. Add a mount in `docker-compose.yaml`: `- ./infinigram-array/<ARRAY_PATH_NAME>:/mnt/infinigram-array/<ARRAY_PATH_NAME>

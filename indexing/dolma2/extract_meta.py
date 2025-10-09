@@ -2,6 +2,7 @@ import glob
 import json
 import gzip
 import sys
+import numpy as np
 import multiprocessing as mp
 from indexing_v6 import load_file
 

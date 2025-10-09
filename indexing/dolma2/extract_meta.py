@@ -1,7 +1,7 @@
 import glob
 import json
 import gzip
-import numpy as np
+import sys
 import multiprocessing as mp
 from indexing_v6 import load_file
 
@@ -19,7 +19,16 @@ def extract_meta(raw_path):
     om_fout = open(om_path, 'wb')
     om = 0
     for linenum, line in enumerate(lines):
-        meta = json.loads(line.strip('\n'))
+        try:
+            meta = json.loads(line.strip('\n'))
+        except json.JSONDecodeError as e:
+            # Report detailed context for debugging malformed JSON lines
+            print(
+                f"JSON parse error in document '{rel_path}' (source: {raw_path}) at line {linenum}: {e}. Line repr: {repr(line)}",
+                file=sys.stderr,
+                flush=True,
+            )
+            raise
         del meta['text']
         meta = (json.dumps({'path': rel_path, 'linenum': linenum, 'metadata': meta}) + '\n').encode('utf-8')
         mt_fout.write(meta)

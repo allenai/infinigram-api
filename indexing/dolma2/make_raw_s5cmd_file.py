@@ -27,7 +27,7 @@ with open(f's5cmd_files/raw.s5cmd', 'w') as f:
             # e.g. s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/adult_content/vigintile_0018/shard_00000192.jsonl.zst
             # should be s3://ai2-llm/pretraining-data/sources/dolma2-0625-official/common_crawl-adult_content-0018/shard_00000192.jsonl.zst
             raw_s3_path = raw_s3_path.replace('cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/', 'dolma2-0625-official/common_crawl-')
-            raw_s3_path = raw_s3_path.replace('vigintile_', '-')
+            raw_s3_path = raw_s3_path.replace('/vigintile_', '-')
             assert raw_s3_path.startswith('s3://'), raw_s3_path
             raw_local_path = og_raw_s3_path.replace('s3://', '/data_c/raw/')
             f.write(f'cp {raw_s3_path} {raw_local_path}\n')

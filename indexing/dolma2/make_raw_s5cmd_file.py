@@ -22,7 +22,7 @@ with open(f's5cmd_files/raw.s5cmd', 'w') as f:
             raw_s3_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(raw_s3_path.split('pretraining-data')[1:])
         else:
             raise NotImplementedError(f'{raw_s3_path} is not supported')
-        if 'all-dressed-snazzy2-fixed' in raw_s3_path:
+        if 'cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/' in raw_s3_path:
             og_raw_s3_path = raw_s3_path
             # e.g. s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/adult_content/vigintile_0018/shard_00000192.jsonl.zst
             # should be s3://ai2-llm/pretraining-data/sources/dolma2-0625-official/common_crawl-adult_content-0018/shard_00000192.jsonl.zst

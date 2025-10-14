@@ -47,7 +47,10 @@ rm -rf ~/miniconda3/miniconda.sh
 # ~/miniconda3/bin/conda init bash
 # source /home/ubuntu/.bashrc
 eval "$(~/miniconda3/bin/conda 'shell.bash' 'hook' 2> /dev/null)"
-conda env create -f environment.yml
+conda config --system --remove channels defaults || true
+conda config --system --add channels conda-forge
+conda config --system --set channel_priority strict
+conda env create -f environment.yml -y
 conda activate he-indexing-dolma2
 wget https://github.com/peak/s5cmd/releases/download/v2.2.2/s5cmd_2.2.2_Linux-64bit.tar.gz
 mkdir -p s5cmd_2.2.2
@@ -86,14 +89,17 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     echo "------------------------------------------------"
 
     echo "Upload data: Starting ..."
-    time s5cmd cp -sp /data_i/${INDEX_NAME} ${REMOTE_DIR}/${NAME}
+    time s5cmd cp -sp "/data_i/${INDEX_NAME}/*" "${REMOTE_DIR}/${NAME}/"
     echo "Upload data: Done"
     echo "------------------------------------------------"
 
-    rm -r /data_c/tokenized
-    rm -r /data_c/raw
-    rm -r /data_t/${INDEX_NAME}
-    rm -r /data_i/${INDEX_NAME}
+    # rm -r /data_c/tokenized
+    # rm -r /data_c/raw
+    # rm -r /data_t/${INDEX_NAME}
+    # rm -r /data_i/${INDEX_NAME}
+
+    screen -X hardcopy -h ~/screen_output.txt
+    # rm -r /data_c/tokenized
     echo "Run workflow for shard $shard: Done"
     echo "================================================"
 

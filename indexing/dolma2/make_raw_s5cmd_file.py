@@ -20,6 +20,14 @@ with open(f's5cmd_files/raw.s5cmd', 'w') as f:
             pass
         elif 'pretraining-data' in raw_s3_path: # stack-edu, s2pdf
             raw_s3_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(raw_s3_path.split('pretraining-data')[1:])
+        elif '/mnt/raid0/pdfs-reshard/software_dev/' in raw_s3_path:
+            import re
+            match = re.search(r'/shard_0*([0-9]+)\.jsonl\.zst$', raw_s3_path)
+            if match:
+                shard_num = int(match.group(1))
+            else:
+                raise ValueError(f"Cannot extract shard number from {raw_s3_path}")
+            raw_s3_path = f's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-{shard_num}.jsonl.gz'
         else:
             raise NotImplementedError(f'{raw_s3_path} is not supported')
         assert raw_s3_path.startswith('s3://'), raw_s3_path

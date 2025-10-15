@@ -149,7 +149,7 @@ def prepare_manyfiles_map(args, filenum, path):
             start, end, s3_raw_doc_ix = int(start), int(end), int(s3_raw_doc_ix) - 1 # since it is 1-indexed
             s3_raw_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(s3_raw_path.split('pretraining-data')[1:])
             assert 0 <= start < end <= len(tokens)
-            assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
+            assert tokens[end-1] == 100257  or tokens[end-1] == 100277 # EOS or pad token in dolma2 tokenizer
             doc_tokens = np.concatenate([np.array([256**args.token_width-1], dtype=args.token_dtype), tokens[start:end-1]])
             data = doc_tokens.view(np.uint8).tobytes()
             ds_fout.write(data)

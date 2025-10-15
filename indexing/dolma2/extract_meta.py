@@ -8,7 +8,10 @@ from indexing_v6 import load_file
 
 cpus = 192
 data_dir = '/data_c/raw'
-raw_paths = list(sorted(glob.glob(f'{data_dir}/**/*.json*', recursive=True)))
+raw_paths = list(sorted(
+    glob.glob(f'{data_dir}/**/*.json*', recursive=True)
+    + glob.glob(f'{data_dir}/**/*.gz', recursive=True)
+))
 print(len(raw_paths))
 
 def extract_meta(raw_path):

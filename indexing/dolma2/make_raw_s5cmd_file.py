@@ -24,7 +24,7 @@ with open(f's5cmd_files/raw.s5cmd', 'w') as f:
             import re
             match = re.search(r'/shard_0*([0-9]+)\.jsonl\.zst$', raw_s3_path)
             if match:
-                shard_num = int(match.group(1))
+                shard_num = match.group(1).zfill(4) if len(match.group(1)) < 4 else match.group(1)
             else:
                 raise ValueError(f"Cannot extract shard number from {raw_s3_path}")
             raw_s3_path = f's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-{shard_num}.jsonl.gz'

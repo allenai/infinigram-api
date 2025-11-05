@@ -147,6 +147,16 @@ def prepare_manyfiles_map(args, filenum, path):
         for row in rows:
             start, end, _, s3_raw_path, s3_raw_doc_ix = row
             start, end, s3_raw_doc_ix = int(start), int(end), int(s3_raw_doc_ix) - 1 # since it is 1-indexed
+            # Patch bad s3_raw_path names for software_dev mishandling (cf. make_raw_s5cmd_file.py)
+            if not s3_raw_path.startswith('s3://') and '/mnt/raid0/pdfs-reshard/software_dev/' in s3_raw_path:
+                import re
+                match = re.search(r'/shard_0*([0-9]+)\.jsonl\.zst$', s3_raw_path)
+                if match:
+                    shard_num = match.group(1).zfill(4) if len(match.group(1)) < 4 else match.group(1)
+                else:
+                    raise ValueError(f"Cannot extract shard number from {s3_raw_path}")
+                s3_raw_path = f's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-{shard_num}.jsonl.gz'
+                assert s3_raw_path.startswith('s3://'), s3_raw_path
             s3_raw_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(s3_raw_path.split('pretraining-data')[1:])
             assert 0 <= start < end <= len(tokens)
             assert tokens[end-1] == 100257  or tokens[end-1] == 100277 # EOS or pad token in dolma2 tokenizer

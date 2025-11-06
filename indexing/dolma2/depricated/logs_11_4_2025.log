@@ -1,0 +1,918 @@
+Instance i-058850a4b519b40e9:
+stdout: ubuntu@ip-172-31-88-39:~$ bash b5dc5847-0a1d-4b81-8cde-103d29b4bc7f/run_all.sh; echo 'CMD_COMPLETED_d
+c473ffd326b'; screen -X quit
++ ./b5dc5847-0a1d-4b81-8cde-103d29b4bc7f/rank_0022.sh
+Mount volumes: Starting ...
+mke2fs 1.47.0 (5-Feb-2023)
+Discarding device blocks: done
+Creating filesystem with 915527343 4k blocks and 228884480 inodes
+Filesystem UUID: a4af38f5-fe11-405b-8275-a61b18a75044
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968,
+        102400000, 214990848, 512000000, 550731776, 644972544
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+mke2fs 1.47.0 (5-Feb-2023)
+Discarding device blocks: done
+Creating filesystem with 915527343 4k blocks and 228884480 inodes
+Filesystem UUID: 9c444c18-5328-41f5-a3a2-69d634c305eb
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968,
+        102400000, 214990848, 512000000, 550731776, 644972544
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+mke2fs 1.47.0 (5-Feb-2023)
+Discarding device blocks: done
+Creating filesystem with 915527343 4k blocks and 228884480 inodes
+Filesystem UUID: 81eacbea-1c86-4108-b764-330ed25ec878
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968,
+        102400000, 214990848, 512000000, 550731776, 644972544
+
+Allocating group tables: done
+Writing inode tables: done
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+Mount volumes: Done
+================================================
+Clone repo: Starting ...
+Cloning into 'infinigram-api'...
+remote: Enumerating objects: 2024, done.
+remote: Counting objects: 100% (769/769), done.
+remote: Compressing objects: 100% (354/354), done.
+remote: Total 2024 (delta 641), reused 434 (delta 415), pack-reused 1255 (from 2)
+Receiving objects: 100% (2024/2024), 101.73 MiB | 95.04 MiB/s, done.
+Resolving deltas: 100% (1291/1291), done.
+Clone repo: Done
+================================================
+Install conda: Starting ...
+PREFIX=/home/ubuntu/miniconda3
+Unpacking bootstrapper...
+Unpacking payload...
+
+Installing base environment...
+
+Preparing transaction: ...working... done
+Executing transaction: ...working... done
+installation finished.
+Retrieving notices: done
+Warning: you have pip-installed dependencies in your environment file, but you do not list pip itself
+ as one of your conda dependencies.  Conda may not use the correct pip to install your packages, and
+they may end up in the wrong place.  Please add an explicit pip dependency.  I'm adding one for you,
+but still nagging you.
+Channels:
+ - conda-forge
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+Downloading and Extracting Packages:
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+Installing pip dependencies: \ Ran pip subprocess with arguments:
+['/home/ubuntu/miniconda3/envs/he-indexing-dolma2/bin/python', '-m', 'pip', 'install', '-U', '-r', '/
+home/ubuntu/infinigram-api/indexing/dolma2/condaenv.6skuto1_.requirements.txt', '--exists-action=b']
+Pip subprocess output:
+Collecting infini-gram==2.6.0 (from -r /home/ubuntu/infinigram-api/indexing/dolma2/condaenv.6skuto1_.
+requirements.txt (line 1))
+  Downloading infini_gram-2.6.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (
+1.2 kB)
+Collecting tqdm (from -r /home/ubuntu/infinigram-api/indexing/dolma2/condaenv.6skuto1_.requirements.t
+xt (line 2))
+  Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting zstandard (from -r /home/ubuntu/infinigram-api/indexing/dolma2/condaenv.6skuto1_.requireme
+nts.txt (line 3))
+  Downloading zstandard-0.25.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3
+.3 kB)
+Collecting numpy (from -r /home/ubuntu/infinigram-api/indexing/dolma2/condaenv.6skuto1_.requirements.
+txt (line 4))
+  Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB
+)
+Downloading infini_gram-2.6.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (7.9 MB)
+    7.9/7.9 MB 43.2 MB/s  0:00:00
+Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+Downloading zstandard-0.25.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.5 MB)
+    5.5/5.5 MB 221.8 MB/s  0:00:00
+Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+    16.6/16.6 MB 197.6 MB/s  0:00:00
+Installing collected packages: zstandard, tqdm, numpy, infini-gram
+
+Successfully installed infini-gram-2.6.0 numpy-2.3.4 tqdm-4.67.1 zstandard-0.25.0
+                                                                                                   do
+ne
+#
+# To activate this environment, use
+#
+#     $ conda activate he-indexing-dolma2
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+--2025-11-05 05:04:49--  https://github.com/peak/s5cmd/releases/download/v2.2.2/s5cmd_2.2.2_Linux-64b
+it.tar.gz
+Resolving github.com (github.com)... 140.82.113.3
+Connecting to github.com (github.com)|140.82.113.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://release-assets.githubusercontent.com/github-production-release-asset/73909333/e095a
+e85-9acf-4dcc-b744-128b3311849c?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-05T06%3A00%3A49Z&rscd=at
+tachment%3B+filename%3Ds5cmd_2.2.2_Linux-64bit.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-
+5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-05T04%3A59%3A57Z&s
+ke=2025-11-05T06%3A00%3A49Z&sks=b&skv=2018-11-09&sig=sN6uTtKdmQbo6UEUm1r%2FiuSXKfoiBkmA45Py2FtweF8%3D
+&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l
+0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2MjMxOTM4OSwibmJmIjoxNzYyMzE5MDg5LCJwYXRoIjoi
+cmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.MhKFHjwNzU_QD7sQYY_rDiVT_-r0sAy3JPFYbR
+2yrb0&response-content-disposition=attachment%3B%20filename%3Ds5cmd_2.2.2_Linux-64bit.tar.gz&response
+-content-type=application%2Foctet-stream [following]
+--2025-11-05 05:04:49--  https://release-assets.githubusercontent.com/github-production-release-asset
+/73909333/e095ae85-9acf-4dcc-b744-128b3311849c?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-05T06%3A0
+0%3A49Z&rscd=attachment%3B+filename%3Ds5cmd_2.2.2_Linux-64bit.tar.gz&rsct=application%2Foctet-stream&
+skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-05T
+04%3A59%3A57Z&ske=2025-11-05T06%3A00%3A49Z&sks=b&skv=2018-11-09&sig=sN6uTtKdmQbo6UEUm1r%2FiuSXKfoiBkm
+A45Py2FtweF8%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFz
+ZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2MjMxOTM4OSwibmJmIjoxNzYyMzE5M
+Dg5LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.MhKFHjwNzU_QD7sQYY_rDiV
+T_-r0sAy3JPFYbR2yrb0&response-content-disposition=attachment%3B%20filename%3Ds5cmd_2.2.2_Linux-64bit.
+tar.gz&response-content-type=application%2Foctet-stream
+Resolving release-assets.githubusercontent.com (release-assets.githubusercontent.com)... 185.199.111.
+133, 185.199.108.133, 185.199.109.133, ...
+Connecting to release-assets.githubusercontent.com (release-assets.githubusercontent.com)|185.199.111
+.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4821452 (4.6M) [application/octet-stream]
+Saving to: s5cmd_2.2.2_Linux-64bit.tar.gz
+
+s5cmd_2.2.2_Linux-64bit.t 100%[==================================>]   4.60M  --.-KB/s    in 0.01s
+
+2025-11-05 05:04:49 (358 MB/s) - s5cmd_2.2.2_Linux-64bit.tar.gz saved [4821452/4821452]
+
+CHANGELOG.md
+LICENSE
+README.md
+s5cmd
+Install conda: Done
+================================================
+Run workflow for shard 22: Starting ...
+Download data: Starting ...
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000001.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/travel_and_tour
+ism/000000.csv.gz /data_c/tokenized/s2pdf_redacted/travel_and_tourism/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/social_life/000
+000.csv.gz /data_c/tokenized/s2pdf_redacted/social_life/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000000.csv.gz /data_c/tokenized/s2pdf_redacted/transportation/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000000.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000002.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000003.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000006.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000003
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000005.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000002.csv.gz /data_c/tokenized/s2pdf_redacted/transportation/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000005
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000007.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000006
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000001
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000004
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000004.csv.gz /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000000
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000007.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000002
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000001.csv.gz /data_c/tokenized/s2pdf_redacted/transportation/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000004.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000007
+.csv.gz /data_c/tokenized/s2pdf_redacted/software/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000004.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000002.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000006.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000000.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000005.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000001.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000005.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000003.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000000.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000006.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000007.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000003.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000001.csv.gz /da
+ta_c/tokenized/stack-edu/Go/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000002.csv.gz /data_c/tokenized/s2pdf_redacted/software_development/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000007.csv.gz /dat
+a_c/tokenized/stack-edu/C/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000003.csv.gz /dat
+a_c/tokenized/stack-edu/C/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/science_math_an
+d_technology/000007.csv.gz /data_c/tokenized/s2pdf_redacted/science_math_and_technology/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000005.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000002.csv.gz /dat
+a_c/tokenized/stack-edu/C/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000004.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000001.csv.gz /dat
+a_c/tokenized/stack-edu/C/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000006.csv.gz /dat
+a_c/tokenized/stack-edu/C/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000004.csv.gz /dat
+a_c/tokenized/stack-edu/C/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000005.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000000.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000000.csv.gz /dat
+a_c/tokenized/stack-edu/C/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000004.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000004.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000007.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000002.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000007.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000007.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000000.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000003.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000005.csv.gz /dat
+a_c/tokenized/stack-edu/C/000005.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000001.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/travel_and_tour
+ism/000000.npy /data_c/tokenized/s2pdf_redacted/travel_and_tourism/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Java/000000.csv.gz /
+data_c/tokenized/stack-edu/Java/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000006.csv.gz
+ /data_c/tokenized/stack-edu/CSharp/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000006.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000006.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/social_life/000
+000.npy /data_c/tokenized/s2pdf_redacted/social_life/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000003.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000003.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000001.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000002.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000001.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000001.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000007.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000005.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000006.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000002.csv.gz /d
+ata_c/tokenized/stack-edu/Cpp/000002.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000003.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000000.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000001.npy /data_c/tokenized/s2pdf_redacted/transportation/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000000.npy /data_
+c/tokenized/stack-edu/Go/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000004.npy /data_
+c/tokenized/stack-edu/Go/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000005.npy /data_
+c/tokenized/stack-edu/Go/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000002.npy /data_c/tokenized/s2pdf_redacted/transportation/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fitn
+ess/000004.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000002.npy /data_
+c/tokenized/stack-edu/Go/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000003.npy /data_
+c/tokenized/stack-edu/Go/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000007.npy /data_
+c/tokenized/stack-edu/Go/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportation/
+000000.npy /data_c/tokenized/s2pdf_redacted/transportation/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000006.npy /data_
+c/tokenized/stack-edu/Go/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000001.npy /data_
+c/tokenized/stack-edu/Go/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000001
+.npy /data_c/tokenized/s2pdf_redacted/software/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000004
+.npy /data_c/tokenized/s2pdf_redacted/software/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000006
+.npy /data_c/tokenized/s2pdf_redacted/software/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000000
+.npy /data_c/tokenized/s2pdf_redacted/software/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000005
+.npy /data_c/tokenized/s2pdf_redacted/software/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000003
+.npy /data_c/tokenized/s2pdf_redacted/software/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000007
+.npy /data_c/tokenized/s2pdf_redacted/software/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000002
+.npy /data_c/tokenized/s2pdf_redacted/software/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000002.npy /data_c
+/tokenized/stack-edu/C/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000006.npy /data_c
+/tokenized/stack-edu/C/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000007.npy /data_c
+/tokenized/stack-edu/C/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000000.npy /data_c
+/tokenized/stack-edu/C/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000001.npy /data_c
+/tokenized/stack-edu/C/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000004.npy /data_c
+/tokenized/stack-edu/C/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000005.npy /data_c
+/tokenized/stack-edu/C/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000003.npy /data_c
+/tokenized/stack-edu/C/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000006.npy /d
+ata_c/tokenized/stack-edu/CSharp/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000003.npy /d
+ata_c/tokenized/stack-edu/CSharp/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000004.npy /d
+ata_c/tokenized/stack-edu/CSharp/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000002.npy /d
+ata_c/tokenized/stack-edu/CSharp/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000005.npy /d
+ata_c/tokenized/stack-edu/CSharp/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000007.npy /d
+ata_c/tokenized/stack-edu/CSharp/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000001.npy /d
+ata_c/tokenized/stack-edu/CSharp/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000000.npy /d
+ata_c/tokenized/stack-edu/CSharp/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000004.npy /data
+_c/tokenized/stack-edu/Cpp/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000005.npy /data
+_c/tokenized/stack-edu/Cpp/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000007.npy /data
+_c/tokenized/stack-edu/Cpp/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000001.npy /data
+_c/tokenized/stack-edu/Cpp/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000000.npy /data
+_c/tokenized/stack-edu/Cpp/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000006.npy /data
+_c/tokenized/stack-edu/Cpp/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000003.npy /data
+_c/tokenized/stack-edu/Cpp/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000002.npy /data
+_c/tokenized/stack-edu/Cpp/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000006.npy /data_c/tokenized/s2pdf_redacted/software_development/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000004.npy /data_c/tokenized/s2pdf_redacted/software_development/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000003.npy /data_c/tokenized/s2pdf_redacted/software_development/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000001.npy /data_c/tokenized/s2pdf_redacted/software_development/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Java/000000.npy /dat
+a_c/tokenized/stack-edu/Java/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000005.npy /data_c/tokenized/s2pdf_redacted/software_development/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000000.npy /data_c/tokenized/s2pdf_redacted/software_development/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000002.npy /data_c/tokenized/s2pdf_redacted/software_development/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_develo
+pment/000007.npy /data_c/tokenized/s2pdf_redacted/software_development/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/science_math_an
+d_technology/000007.npy /data_c/tokenized/s2pdf_redacted/science_math_and_technology/000007.npy
+
+real    14m33.317s
+user    8m16.404s
+sys     30m37.018s
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 63/63 [03:39<00:00,  3.49s/it]
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/make_raw_s5cmd_file.py", line 32, in <module>
+    raise NotImplementedError(f'{raw_s3_path} is not supported')
+NotImplementedError: /mnt/raid0/pdfs-reshard/software/shard_00003952.jsonl.zst is not supported
+
+real    3m39.865s
+user    3m39.004s
+sys     0m0.850s
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-12918.jsonl.gz /dat
+a_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-12918.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-4150.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-4150.jsonl.gz
+ERROR "cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_dat
+adelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-
+887.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_q
+uality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_sof
+tware_dev-887.jsonl.gz": NoSuchKey: The specified key does not exist. status code: 404, request id: R
+32FRTTZPMMRR28P, host id: 950h4EKdsjDDkAs2q98yLFDq56hd0fpvOXd9lilxUWKyehD6q62OZR3asKTb+R5UPuUlM0syDkw
+8MFVugWAV+8XQzYh3EkQd
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-9450.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-9450.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-617
+5.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-6175.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-194
+69.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-19469.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-4581.json
+l.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_d
+atadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-
+4581.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-795
+5.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-7955.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-182
+88.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-18288.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-123
+40.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-12340.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-951
+8.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-9518.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-933
+1.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-9331.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-20800.jso
+nl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_
+datadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life
+-20800.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-183
+02.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-18302.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-784
+2.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-7842.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-0605.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-0605.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-254
+32.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-25432.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-19146.jso
+nl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_
+datadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life
+-19146.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-24878.jsonl.gz /dat
+a_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-24878.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-209
+85.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-20985.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-236
+79.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-23679.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-202
+75.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-20275.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-100
+02.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-10002.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-809
+1.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-8091.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-252
+10.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-25210.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-871
+0.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-8710.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-229
+53.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-22953.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-233
+74.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-23374.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-749
+0.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-7490.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-182
+19.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-18219.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-100
+37.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-10037.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-345
+9.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-3459.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-5009.json
+l.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_d
+atadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-
+5009.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-806
+3.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-8063.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-232
+06.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-23206.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-230
+38.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-23038.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-249
+07.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-24907.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-179
+70.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-17970.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-138
+62.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-13862.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-602
+6.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-6026.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-121
+57.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-12157.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-251
+44.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-25144.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-179
+99.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-17999.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-22126.jso
+nl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_
+datadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life
+-22126.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-186
+81.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-18681.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-216
+28.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-21628.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-176
+52.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-17652.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-201
+16.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-20116.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-833
+3.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-8333.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-404
+1.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-4041.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-076
+8.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-0768.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-147
+13.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-14713.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-186
+8.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-1868.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-2503.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-2503.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-252
+06.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-25206.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-178
+5.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-1785.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-18839.jsonl.gz /dat
+a_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-18839.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-262
+4.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-2624.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-292
+2.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-2922.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-2768.json
+l.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_d
+atadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-
+2768.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-853
+8.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-8538.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-104
+9.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-1049.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-255
+79.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-25579.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-9364.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-9364.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-2512.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-2512.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-780
+5.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-7805.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-924
+5.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-9245.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-211
+0.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-2110.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-160
+08.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-16008.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-116
+19.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-11619.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-685
+9.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_spo
+rts_fitness-6859.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-095
+3.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-0953.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-7441.jsonl.gz /data
+_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_n
+orefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-7441.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-713
+0.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qua
+lity_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tra
+nsportation-7130.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness-110
+23.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sp
+orts_fitness-11023.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-10182.j
+sonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qualit
+y_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software
+_dev-10182.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-9318.js
+onl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality
+_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_
+dev-9318.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation-178
+05.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_tr
+ansportation-17805.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-6720.js
+onl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality
+_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_
+dev-6720.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00036132.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/science_tech/shard_00036132.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00010158.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/science_tech/shard_00010158.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_
+norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034610.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/science_tech/shard_00034610.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000152.jsonl.zst /data_c/raw
+/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000152.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000149.jsonl.zst /data_c/raw
+/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000149.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000087.jsonl.zst /data_c/raw
+/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000087.jsonl.zst
+
+real    0m2.947s
+user    0m0.654s
+sys     0m0.466s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+162
+
+real    0m4.043s
+user    0m19.853s
+sys     0m6.011s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", line
+ 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", line
+ 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 170, in prepare_manyfiles_m
+ap
+    num_lines = os.path.getsize(f'{local_raw_path}.metaoff') // 8
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 62, in getsize
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sources
+/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/social_lif
+e/step_final/step_final/s2pdf_datadelve_social_life-10188.jsonl.gz.metaoff'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 497, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 493, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 336, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 270, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in enum
+erate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", line
+ 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", line
+ 774, in get
+    raise self._value
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sources
+/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/social_lif
+e/step_final/step_final/s2pdf_datadelve_social_life-10188.jsonl.gz.metaoff'
+
+real    2m25.355s
+user    7m22.714s
+sys     14m44.390s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_22_u32/* s3://infini-gram/index/dolma2-0625-v01/22/": no ma
+tch found for "/data_i/v6_22_u32/*"
+?%                                                                                                   
+         0 B ? p/s 0s (0/0)
+
+real    0m0.127s
+user    0m0.012s
+sys     0m0.011s
+Upload data: Done
+------------------------------------------------
+stderr: 
+

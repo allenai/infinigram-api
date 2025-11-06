@@ -1,6 +1,6 @@
 NUM_SHARDS=25
 NUM_NODES=25
-RANK=[[RANK]]
+RANK=23
 REMOTE_DIR="s3://infini-gram/index/dolma2-0625-v01"
 
 # Mount volumes

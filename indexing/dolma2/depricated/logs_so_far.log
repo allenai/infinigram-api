@@ -1,0 +1,1243 @@
+Instance i-0fd4c9567ca5d9182:
+stdout: sys     538m2.071s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1901.69 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [53:11<00:00, 398.93s/it]
+Step 2.1 (make-part): Done. Took 3191.47 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-089003486fbfba069:
+stdout: sys     355m41.281s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1582.11 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [50:48<00:00, 762.08s/it]
+Step 2.1 (make-part): Done. Took 3048.31 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-07c77a2027f44f7b9:
+stdout: sys     395m12.602s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2512.80 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [53:37<00:00, 402.14s/it]
+Step 2.1 (make-part): Done. Took 3217.09 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0b7177b3cb5e3a1df:
+stdout: sys     114m52.874s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1303.60 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [48:25<00:00, 726.32s/it]
+Step 2.1 (make-part): Done. Took 2905.30 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0154f8d36ec5777dc:
+stdout: _v2_denylisted_reshard/science_tech/shard_00038340.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00032809.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00032809.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00032265.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00032265.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00020145.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00020145.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00005747.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00005747.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00038445.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00038445.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034711.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034711.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037591.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037591.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037171.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037171.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00002884.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00002884.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00022132.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00022132.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00030922.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00030922.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00036325.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00036325.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00030360.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00030360.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00033027.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00033027.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00029582.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00029582.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00031537.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00031537.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00029697.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00029697.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00028229.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00028229.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00038265.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00038265.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00014799.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00014799.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00031370.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00031370.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00010507.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00010507.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00029731.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00029731.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034036.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034036.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00031440.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00031440.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037893.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037893.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00026677.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00026677.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00030150.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00030150.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00028534.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00028534.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00021176.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00021176.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00025525.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00025525.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00035295.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00035295.jsonl.zst
+
+real    0m31.885s
+user    6m2.927s
+sys     12m43.336s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+8348
+
+real    6m21.289s
+user    350m13.195s
+sys     711m46.834s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 152, in prepare_manyfiles
+_map
+    assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+AssertionError
+
+real    6m11.825s
+user    1m13.650s
+sys     14m6.325s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_21_u32/* s3://infini-gram/index/dolma2-0625-v01/21/": no
+match found for "/data_i/v6_21_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.016s
+user    0m0.012s
+sys     0m0.005s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-091dc788f4a5276b0:
+stdout: sys     167m25.675s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1940.63 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [54:03<00:00, 405.47s/it]
+Step 2.1 (make-part): Done. Took 3243.76 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-068f6a9da2c5de8e9:
+stdout: sys     524m43.969s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1971.32 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [51:55<00:00, 778.96s/it]
+Step 2.1 (make-part): Done. Took 3115.83 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-048873bbd6cecaa03:
+stdout: cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000297.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000297.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00023.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00023.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000264.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000264.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000034.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000034.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000032.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000032.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00042.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00042.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Rust/shard_00000001.jsonl.zst /data_c/
+raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Rust/shard_00000001.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000017.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000017.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000223.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000223.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000038.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000038.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00043.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00043.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000093.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000093.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000132.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000132.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00027.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00027.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000015.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000015.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000059.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000059.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000044.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000044.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000035.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000035.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00026.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00026.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Rust/shard_00000016.jsonl.zst /data_c/
+raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Rust/shard_00000016.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000064.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000064.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000019.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000019.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000031.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000031.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000229.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000229.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000186.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000186.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000027.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000027.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000017.jsonl.zst /data_c/
+raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000017.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000072.jsonl.zst /data_c/r
+aw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000072.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000022.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000022.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00057.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00057.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000021.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000021.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000038.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000038.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000047.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000047.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000020.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000020.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00008.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00008.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000012.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000012.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000012.jsonl.zst /data_
+c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000012.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00013.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00013.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000003.jsonl.zst /d
+ata_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000003.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00048.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00048.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00017.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00017.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00028.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00028.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00037.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00037.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000042.jsonl.zst /data_c
+/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000042.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00033.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00033.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00040.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00040.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00039.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00039.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00019.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00019.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00022.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00022.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00009.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00009.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00034.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00034.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00055.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00055.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00002.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00002.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00052.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00052.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00006.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00006.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00036.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00036.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00004.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00004.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00001.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00001.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00018.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00018.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00005.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00005.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00041.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00041.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00054.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00054.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00030.gz /data_c/raw/ai2-ll
+m/pretraining-data/sources/wikipedia/v0/documents/lang=en/00030.gz
+
+real    0m4.932s
+user    0m33.950s
+sys     2m4.200s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+504
+
+real    0m24.417s
+user    27m44.510s
+sys     39m33.695s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 160, in prepare_manyfiles
+_map
+    num_lines = os.path.getsize(f'{local_raw_path}.metaoff') // 8
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 62, in getsize
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/wikipedia/v0/documents/lang=en/00027.gz.metaoff'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/wikipedia/v0/documents/lang=en/00027.gz.metaoff'
+
+real    5m24.028s
+user    22m20.241s
+sys     16m55.853s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_24_u32/* s3://infini-gram/index/dolma2-0625-v01/24/": no
+match found for "/data_i/v6_24_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.014s
+user    0m0.012s
+sys     0m0.008s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-0abc6e80c6e0ea020:
+stdout: /data_c/tokenized/stack-edu/Java/000000.csv.gz
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000006.npy /dat
+a_c/tokenized/stack-edu/Go/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fi
+tness/000001.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000005.npy /dat
+a_c/tokenized/stack-edu/Go/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fi
+tness/000004.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000004.npy /dat
+a_c/tokenized/stack-edu/Go/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/sports_and_fi
+tness/000003.npy /data_c/tokenized/s2pdf_redacted/sports_and_fitness/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000003.npy /dat
+a_c/tokenized/stack-edu/Go/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportatio
+n/000000.npy /data_c/tokenized/s2pdf_redacted/transportation/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/transportatio
+n/000002.npy /data_c/tokenized/s2pdf_redacted/transportation/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000001.npy /dat
+a_c/tokenized/stack-edu/Go/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000000.npy /dat
+a_c/tokenized/stack-edu/Go/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000002.npy /dat
+a_c/tokenized/stack-edu/Go/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+00.npy /data_c/tokenized/s2pdf_redacted/software/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Go/000007.npy /dat
+a_c/tokenized/stack-edu/Go/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+04.npy /data_c/tokenized/s2pdf_redacted/software/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+06.npy /data_c/tokenized/s2pdf_redacted/software/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+03.npy /data_c/tokenized/s2pdf_redacted/software/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+01.npy /data_c/tokenized/s2pdf_redacted/software/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+05.npy /data_c/tokenized/s2pdf_redacted/software/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+07.npy /data_c/tokenized/s2pdf_redacted/software/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/0000
+02.npy /data_c/tokenized/s2pdf_redacted/software/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000006.npy /data
+_c/tokenized/stack-edu/C/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000002.npy /data
+_c/tokenized/stack-edu/C/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000001.npy /data
+_c/tokenized/stack-edu/C/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000000.npy /data
+_c/tokenized/stack-edu/C/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000004.npy /data
+_c/tokenized/stack-edu/C/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000007.npy /data
+_c/tokenized/stack-edu/C/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000005.npy /data
+_c/tokenized/stack-edu/C/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/C/000003.npy /data
+_c/tokenized/stack-edu/C/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000004.npy
+/data_c/tokenized/stack-edu/CSharp/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000005.npy
+/data_c/tokenized/stack-edu/CSharp/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000002.npy
+/data_c/tokenized/stack-edu/CSharp/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000006.npy
+/data_c/tokenized/stack-edu/CSharp/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000007.npy
+/data_c/tokenized/stack-edu/CSharp/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000003.npy
+/data_c/tokenized/stack-edu/CSharp/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000000.npy
+/data_c/tokenized/stack-edu/CSharp/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/CSharp/000001.npy
+/data_c/tokenized/stack-edu/CSharp/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000005.npy /da
+ta_c/tokenized/stack-edu/Cpp/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000004.npy /da
+ta_c/tokenized/stack-edu/Cpp/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000001.npy /da
+ta_c/tokenized/stack-edu/Cpp/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000007.npy /da
+ta_c/tokenized/stack-edu/Cpp/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000006.npy /da
+ta_c/tokenized/stack-edu/Cpp/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000000.npy /da
+ta_c/tokenized/stack-edu/Cpp/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000003.npy /da
+ta_c/tokenized/stack-edu/Cpp/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Cpp/000002.npy /da
+ta_c/tokenized/stack-edu/Cpp/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000001.npy /data_c/tokenized/s2pdf_redacted/software_development/000001.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000006.npy /data_c/tokenized/s2pdf_redacted/software_development/000006.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/stack-edu/Java/000000.npy /d
+ata_c/tokenized/stack-edu/Java/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000003.npy /data_c/tokenized/s2pdf_redacted/software_development/000003.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000005.npy /data_c/tokenized/s2pdf_redacted/software_development/000005.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000004.npy /data_c/tokenized/s2pdf_redacted/software_development/000004.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000000.npy /data_c/tokenized/s2pdf_redacted/software_development/000000.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000002.npy /data_c/tokenized/s2pdf_redacted/software_development/000002.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_deve
+lopment/000007.npy /data_c/tokenized/s2pdf_redacted/software_development/000007.npy
+cp s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/science_math_
+and_technology/000007.npy /data_c/tokenized/s2pdf_redacted/science_math_and_technology/000007.npy
+
+real    13m15.617s
+user    9m24.401s
+sys     58m40.586s
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 63/63 [03:39<00:00,  3.48s/it]
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/make_raw_s5cmd_file.py", line 24, in <module>
+    raise NotImplementedError(f'{raw_s3_path} is not supported')
+NotImplementedError: /mnt/raid0/pdfs-reshard/software_dev/shard_00014422.jsonl.zst is not supported
+
+real    3m39.440s
+user    3m38.595s
+sys     0m0.831s
+
+real    0m0.013s
+user    0m0.008s
+sys     0m0.009s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+0
+
+real    0m0.283s
+user    0m4.167s
+sys     0m0.408s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 160, in prepare_manyfiles
+_map
+    num_lines = os.path.getsize(f'{local_raw_path}.metaoff') // 8
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 62, in getsize
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/travel
+/step_final/step_final/s2pdf_datadelve_travel-3576.jsonl.gz.metaoff'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/travel
+/step_final/step_final/s2pdf_datadelve_travel-3576.jsonl.gz.metaoff'
+
+real    2m27.110s
+user    7m12.217s
+sys     14m33.800s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_22_u32/* s3://infini-gram/index/dolma2-0625-v01/22/": no
+match found for "/data_i/v6_22_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.343s
+user    0m0.014s
+sys     0m0.011s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-0972952ec806186c8:
+stdout: 
+stderr: 
+
+Instance i-041410a45e9d5ff57:
+stdout: sys     275m0.665s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2562.82 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [49:42<00:00, 372.83s/it]
+Step 2.1 (make-part): Done. Took 2982.67 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-06b160d9c59d45ff4:
+stdout: sys     477m58.794s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2424.29 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [51:16<00:00, 769.01s/it]
+Step 2.1 (make-part): Done. Took 3076.10 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-08f53e0f1b5af8510:
+stdout: sys     148m44.168s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1362.21 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [49:51<00:00, 373.96s/it]
+Step 2.1 (make-part): Done. Took 2991.71 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-06c2d22402439083f:
+stdout: sys     521m40.776s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2039.50 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [52:24<00:00, 393.03s/it]
+Step 2.1 (make-part): Done. Took 3144.21 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-08d9f12a0e2ca2e2f:
+stdout: sys     313m16.239s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2004.22 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [53:00<00:00, 397.61s/it]
+Step 2.1 (make-part): Done. Took 3180.89 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0bc158144aca32c52:
+stdout: sys     462m42.879s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2614.28 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [52:50<00:00, 792.56s/it]
+Step 2.1 (make-part): Done. Took 3170.24 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-053ecdc11d1f18b57:
+stdout: sys     450m44.047s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2526.74 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [52:35<00:00, 394.46s/it]
+Step 2.1 (make-part): Done. Took 3155.79 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0ac4966a4e876c2a8:
+stdout: _v2_denylisted_reshard/science_tech/shard_00032736.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/politics/shard_00012253.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_
+denylisted_reshard/politics/shard_00012253.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00035526.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00035526.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034402.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034402.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00028529.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00028529.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00030073.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00030073.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00031772.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00031772.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00031655.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00031655.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034646.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034646.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00024822.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00024822.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00008976.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00008976.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00023820.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00023820.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00024066.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00024066.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/politics/shard_00015356.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_
+denylisted_reshard/politics/shard_00015356.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00017343.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00017343.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034235.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034235.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00025312.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00025312.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00025719.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00025719.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00033355.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00033355.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034192.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034192.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00024824.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00024824.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037451.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037451.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037778.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037778.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00034917.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00034917.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00010375.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00010375.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00013247.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00013247.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00021342.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00021342.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00035410.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00035410.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00037954.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00037954.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00029456.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00029456.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00036186.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00036186.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00036821.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00036821.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00035443.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00035443.jsonl.zst
+
+real    0m35.536s
+user    5m37.980s
+sys     6m55.305s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+17688
+
+real    5m42.167s
+user    309m53.951s
+sys     632m12.684s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 152, in prepare_manyfiles
+_map
+    assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+AssertionError
+
+real    5m58.900s
+user    1m18.504s
+sys     12m44.023s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_20_u32/* s3://infini-gram/index/dolma2-0625-v01/20/": no
+match found for "/data_i/v6_20_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.121s
+user    0m0.010s
+sys     0m0.011s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-0db10481ded6df765:
+stdout: igintiles/data/electronics_and_hardware/vigintile_0018/shard_00000085.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/
+electronics_and_hardware/vigintile_0018/shard_00000085.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/education_and_jobs/vigintile_0020/shard_00000110.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/educat
+ion_and_jobs/vigintile_0020/shard_00000110.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/education_and_jobs/vigintile_0018/shard_00000021.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/cc_all_dressed/all_dressed_v3/web
+stderr: 
+
+Instance i-0bbc866e9093d7a4d:
+stdout: e_norefs_mdtables_v2_denylisted_reshard/health/shard_00024187.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00024187.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00023129.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00023129.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/crime_law/shard_00011231.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2
+_denylisted_reshard/crime_law/shard_00011231.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00011209.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00011209.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00021129.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00021129.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00000722.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00000722.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00017202.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00017202.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/crime_law/shard_00006957.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2
+_denylisted_reshard/crime_law/shard_00006957.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/crime_law/shard_00016476.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2
+_denylisted_reshard/crime_law/shard_00016476.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00027261.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00027261.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00024121.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00024121.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00025622.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00025622.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00006604.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00006604.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00019685.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00019685.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/crime_law/shard_00006657.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2
+_denylisted_reshard/crime_law/shard_00006657.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00024590.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00024590.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00057-of-00128.jsonl.zst /da
+ta_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00057-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00012721.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00012721.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00011210.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00011210.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00024393.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00024393.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00022480.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00022480.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00022034.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00022034.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00014821.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00014821.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/industrial/shard_00014657.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v
+2_denylisted_reshard/industrial/shard_00014657.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00025703.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00025703.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00012989.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00012989.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00003528.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00003528.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00024885.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00024885.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00007011.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00007011.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00058-of-00128.jsonl.zst /da
+ta_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00058-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00042-of-00128.jsonl.zst /da
+ta_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00042-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00082-of-00128.jsonl.zst /da
+ta_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00082-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00020274.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00020274.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/health/shard_00018770.jsonl.zst /data_c/raw/ai2-llm/pretrai
+ning-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_de
+nylisted_reshard/health/shard_00018770.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00011-of-00128.jsonl.zst /da
+ta_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00011-of-00128.jsonl.zst
+
+real    1m0.392s
+user    14m30.059s
+sys     10m19.006s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+59777
+
+real    13m41.985s
+user    274m53.379s
+sys     56m14.879s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 152, in prepare_manyfiles
+_map
+    assert tokens[end-1] == 100257 # EOS token in dolma2 tokenizer
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+AssertionError
+
+real    10m21.085s
+user    12m2.843s
+sys     20m40.231s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_19_u32/* s3://infini-gram/index/dolma2-0625-v01/19/": no
+match found for "/data_i/v6_19_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.106s
+user    0m0.004s
+sys     0m0.019s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-0b113c8fcacc1a1e4:
+stdout: sys     210m35.252s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1907.66 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [53:52<00:00, 404.09s/it]
+Step 2.1 (make-part): Done. Took 3232.69 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0bf1e1008e19e73bd:
+stdout: sys     141m16.812s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1533.14 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [47:42<00:00, 357.85s/it]
+Step 2.1 (make-part): Done. Took 2862.82 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-080ea8514a68bd3f6:
+stdout: sys     240m14.425s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2108.21 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [50:19<00:00, 377.49s/it]
+Step 2.1 (make-part): Done. Took 3019.95 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0b708b1d73f508d78:
+stdout: sys     419m52.383s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2004.55 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [49:23<00:00, 740.93s/it]
+Step 2.1 (make-part): Done. Took 2963.72 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-04bbe150cd6fa5a3f:
+stdout: sys     318m32.751s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1712.71 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [53:19<00:00, 399.91s/it]
+Step 2.1 (make-part): Done. Took 3199.28 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+

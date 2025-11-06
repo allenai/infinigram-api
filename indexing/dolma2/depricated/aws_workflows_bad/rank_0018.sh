@@ -1,6 +1,6 @@
 NUM_SHARDS=25
 NUM_NODES=25
-RANK=[[RANK]]
+RANK=18
 REMOTE_DIR="s3://infini-gram/index/dolma2-0625-v01"
 
 # Mount volumes
@@ -47,10 +47,7 @@ rm -rf ~/miniconda3/miniconda.sh
 # ~/miniconda3/bin/conda init bash
 # source /home/ubuntu/.bashrc
 eval "$(~/miniconda3/bin/conda 'shell.bash' 'hook' 2> /dev/null)"
-conda config --system --remove channels defaults || true
-conda config --system --add channels conda-forge
-conda config --system --set channel_priority strict
-conda env create -f environment.yml -y
+conda env create -f environment.yml
 conda activate he-indexing-dolma2
 wget https://github.com/peak/s5cmd/releases/download/v2.2.2/s5cmd_2.2.2_Linux-64bit.tar.gz
 mkdir -p s5cmd_2.2.2
@@ -76,9 +73,9 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     export INDEX_NAME="v6_${NAME}_u32"
 
     echo "Download data: Starting ..."
-    time s5cmd run ./s5cmd_files_v02/shard_${NAME}.s5cmd
+    time s5cmd run ./s5cmd_files/shard_${NAME}.s5cmd
     time python make_raw_s5cmd_file.py
-    time s5cmd run ./s5cmd_files_v02/raw.s5cmd
+    time s5cmd run ./s5cmd_files/raw.s5cmd
     echo "Download data: Done"
     echo "------------------------------------------------"
 
@@ -89,17 +86,14 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     echo "------------------------------------------------"
 
     echo "Upload data: Starting ..."
-    time s5cmd cp -sp "/data_i/${INDEX_NAME}/*" "${REMOTE_DIR}/${NAME}/"
+    time s5cmd cp -sp /data_i/${INDEX_NAME} ${REMOTE_DIR}/${NAME}
     echo "Upload data: Done"
     echo "------------------------------------------------"
 
-    # rm -r /data_c/tokenized
-    # rm -r /data_c/raw
-    # rm -r /data_t/${INDEX_NAME}
-    # rm -r /data_i/${INDEX_NAME}
-
-    screen -X hardcopy -h ~/screen_output.txt
-    # rm -r /data_c/tokenized
+    rm -r /data_c/tokenized
+    rm -r /data_c/raw
+    rm -r /data_t/${INDEX_NAME}
+    rm -r /data_i/${INDEX_NAME}
     echo "Run workflow for shard $shard: Done"
     echo "================================================"
 

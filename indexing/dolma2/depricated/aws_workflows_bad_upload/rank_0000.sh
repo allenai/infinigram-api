@@ -1,6 +1,6 @@
 NUM_SHARDS=25
 NUM_NODES=25
-RANK=[[RANK]]
+RANK=0
 REMOTE_DIR="s3://infini-gram/index/dolma2-0625-v01"
 
 # Mount volumes
@@ -76,9 +76,9 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     export INDEX_NAME="v6_${NAME}_u32"
 
     echo "Download data: Starting ..."
-    time s5cmd run ./s5cmd_files_v02/shard_${NAME}.s5cmd
+    time s5cmd run ./s5cmd_files/shard_${NAME}.s5cmd
     time python make_raw_s5cmd_file.py
-    time s5cmd run ./s5cmd_files_v02/raw.s5cmd
+    time s5cmd run ./s5cmd_files/raw.s5cmd
     echo "Download data: Done"
     echo "------------------------------------------------"
 
@@ -89,7 +89,7 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     echo "------------------------------------------------"
 
     echo "Upload data: Starting ..."
-    time s5cmd cp -sp "/data_i/${INDEX_NAME}/*" "${REMOTE_DIR}/${NAME}/"
+    time s5cmd cp -sp /data_i/${INDEX_NAME} ${REMOTE_DIR}/${NAME}
     echo "Upload data: Done"
     echo "------------------------------------------------"
 

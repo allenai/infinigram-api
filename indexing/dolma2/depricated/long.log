@@ -1,0 +1,1073 @@
+Instance i-0a11fe1d57db4993a:
+stdout: /pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000485.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000546.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000546.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000131.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000131.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000545.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000545.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000708.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000708.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000114.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000114.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000167.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000167.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000483.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000483.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000335.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000335.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000299.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000299.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000344.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000344.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000308.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000308.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000436.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000436.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000083.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000083.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000641.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000641.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000191.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000191.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000636.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000636.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000134.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000134.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0016/shard_00000085.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0016/shard_00000085.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000243.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000243.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000406.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000406.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000131.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000131.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000270.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000270.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000130.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000130.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000463.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000463.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000618.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000618.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000036.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000036.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000351.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000351.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000471.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000471.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000050.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000050.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000329.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000329.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000324.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000324.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000383.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000383.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000305.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000305.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000120.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000120.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000087.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000087.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000297.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000297.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000496.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000496.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000056.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000056.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000212.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000212.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000428.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000428.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000691.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000691.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000259.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000259.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000092.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000092.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000427.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000427.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000141.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000141.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000369.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000369.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000167.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000167.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000696.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000696.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000746.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000746.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000022.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000022.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000385.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000385.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0017/shard_00000313.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0017/shard_00000313.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000141.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000141.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000293.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000293.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000411.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000411.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000071.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000071.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000284.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000284.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000366.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000366.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000105.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000105.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000055.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000055.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000662.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000662.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000220.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000220.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000296.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000296.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000204.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000204.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000025.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000025.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000542.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000542.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000776.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000776.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000686.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000686.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000348.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000348.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000232.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000232.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000645.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000645.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000025.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000025.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000000.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000000.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000233.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000233.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000146.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000146.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000604.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000604.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000655.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000655.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0016/shard_00000005.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0016/shard_00000005.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000379.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000379.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000108.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000108.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000380.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000380.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000086.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000086.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000513.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000513.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000214.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000214.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000157.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000157.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0020/shard_00000054.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0020/shard_00000054.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000081.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000081.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000419.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000419.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000149.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000149.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000346.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000346.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000489.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000489.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000340.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000340.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000314.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000314.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000313.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000313.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000012.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000012.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000262.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000262.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000385.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000385.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000317.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000317.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000333.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000333.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0017/shard_00000029.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0017/shard_00000029.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000396.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000396.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000369.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000369.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000684.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000684.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000498.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000498.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000417.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000417.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000170.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000170.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000123.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000123.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000272.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000272.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000190.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000190.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000019.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000019.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000381.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000381.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000583.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000583.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0020/shard_00000020.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0020/shard_00000020.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000020.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000020.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000414.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000414.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000167.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000167.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000036.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000036.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000107.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000107.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000220.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000220.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000279.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000279.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000318.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000318.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000214.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000214.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000148.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000148.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000191.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000191.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000158.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000158.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000419.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000419.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000194.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000194.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000280.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000280.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000626.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000626.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000110.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000110.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000178.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000178.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000018.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000018.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000428.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000428.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000125.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000125.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000251.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000251.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000066.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000066.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000271.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000271.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000049.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000049.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000107.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000107.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000346.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000346.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000493.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000493.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000390.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000390.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0020/shard_00000018.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0020/shard_00000018.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0017/shard_00000272.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0017/shard_00000272.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000452.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000452.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000026.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000026.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000238.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000238.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000554.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000554.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000309.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000309.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000477.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000477.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000294.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000294.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000050.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000050.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000610.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000610.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000235.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000235.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000118.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000118.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000621.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000621.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000289.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000289.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000316.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000316.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000105.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000105.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000433.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000433.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000202.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000202.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000334.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000334.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000106.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000106.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0017/shard_00000107.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0017/shard_00000107.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000099.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000099.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000149.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000149.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000368.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000368.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000134.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000134.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000182.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000182.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0017/shard_00000077.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0017/shard_00000077.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000093.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000093.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000537.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000537.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000487.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000487.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000434.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000434.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000429.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000429.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000342.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000342.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0017/shard_00000371.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0017/shard_00000371.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000438.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000438.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000153.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000153.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000263.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000263.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000453.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000453.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000083.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000083.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000303.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000303.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000661.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000661.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000490.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000490.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000659.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000659.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000317.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000317.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000111.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000111.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000291.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000291.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000657.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000657.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000192.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000192.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000241.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000241.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000162.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000162.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000218.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000218.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000475.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000475.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000235.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000235.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000395.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000395.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000154.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000154.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000388.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000388.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000255.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000255.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000720.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000720.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000013.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000013.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000116.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000116.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000034.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000034.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000059.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000059.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000263.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000263.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000461.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000461.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000109.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000109.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000046.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000046.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/adult_content/vigintile_0018/shard_00000137.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/ad
+ult_content/vigintile_0018/shard_00000137.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000312.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000312.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000167.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000167.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0017/shard_00000534.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0017/shard_00000534.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0017/shard_00000514.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0017/shard_00000514.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000306.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000306.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000427.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000427.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000247.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000247.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000300.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000300.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000224.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000224.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000251.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000251.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000639.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000639.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000481.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000481.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000105.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000105.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000555.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000555.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000384.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000384.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000061.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000061.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000014.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000014.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000203.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000203.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000166.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000166.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000193.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000193.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000024.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000024.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000548.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000548.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000437.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000437.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000413.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000413.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0017/shard_00000409.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0017/shard_00000409.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000129.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000129.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000272.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000272.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000372.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000372.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000206.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000206.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000172.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000172.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000055.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000055.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000288.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000288.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000607.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000607.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000692.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000692.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000440.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000440.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000456.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000456.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000146.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000146.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000568.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000568.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000250.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000250.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000116.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000116.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000474.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000474.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000010.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000010.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000135.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000135.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000329.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000329.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0018/shard_00000475.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0018/shard_00000475.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0018/shard_00000047.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0018/shard_00000047.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000243.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000243.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0018/shard_00000158.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0018/shard_00000158.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000365.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000365.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/art_and_design/vigintile_0020/shard_00000022.jsonl.zst /data_c/raw/ai2-llm/pre
+training-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/a
+rt_and_design/vigintile_0020/shard_00000022.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/crime_and_law/vigintile_0020/shard_00000427.jsonl.zst /data_c/raw/ai2-llm/pret
+raining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/cr
+ime_and_law/vigintile_0020/shard_00000427.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus
+2_vigintiles/data/education_and_jobs/vigintile_0020/shard_00000514.jsonl.zst /data_c/raw/ai2-llm
+/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/education_and_jobs/vigintile_0020/shard_00000514.jsonl.zst
+
+real    0m29.615s
+user    5m6.929s
+sys     66m19.469s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+2831
+
+real    2m14.843s
+user    214m19.889s
+sys     184m28.541s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1843.84 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [51:50<00:00, 388.78s/it]
+Step 2.1 (make-part): Done. Took 3110.26 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+

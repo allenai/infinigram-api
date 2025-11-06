@@ -3,13 +3,13 @@ import os
 
 LIMIT = int(1e12) # 1TB = 250B uint32 tokens
 
-with open('dolma2-0625-v01.csv') as f:
+with open('dolma2-0625-v02.csv') as f:
     reader = csv.DictReader(f)
     rows = list(reader)
 
-S3_PREFIX = 's3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/'
+S3_PREFIX = 's3://ai2-llm/preprocessed/dolma2-0625/'
 LOCAL_PREFIX = '/data_c/tokenized/'
-OUTPUT_DIR = './s5cmd_files'
+OUTPUT_DIR = './s5cmd_files_v02'
 
 def write_shard(shard_ix, npy_paths):
     with open(f'{OUTPUT_DIR}/shard_{shard_ix:02d}.s5cmd', 'w') as f:

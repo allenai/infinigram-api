@@ -1,0 +1,493 @@
+Instance i-009c7dabb824a8aa0:
+stdout: real    5m0.307s
+user    244m31.596s
+sys     552m18.460s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1947.80 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 38%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8b                                       | 3/8 [19:24<32:19, 387.91s/it]
+stderr: 
+
+Instance i-0a34aba1259e5a8d3:
+stdout: real    2m22.587s
+user    145m47.159s
+sys     277m54.091s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1623.63 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 50%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8c                               | 2/4 [26:22<26:09, 784.54s/it]
+stderr: 
+
+Instance i-0d7544920100bb074:
+stdout: real    5m21.518s
+user    290m43.899s
+sys     577m23.141s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2470.77 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 2/8 [12:23<37:04, 370.73s/it]
+stderr: 
+
+Instance i-02dbb82cb7c805ce0:
+stdout: real    1m7.488s
+user    87m12.457s
+sys     114m20.953s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1269.45 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 75%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8e               | 3/4 [35:48<11:52, 712.25s/it]
+stderr: 
+
+Instance i-0e3dcefbc9a2c5c01:
+stdout: real    6m4.313s
+user    329m26.880s
+sys     661m22.926s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2894.48 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+  0%|                                                                        | 0/8 [00:00<?, ?it/s]
+stderr: 
+
+Instance i-00009501a76ae1ab7:
+stdout: real    4m50.954s
+user    235m2.151s
+sys     536m30.902s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1908.83 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 38%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8b                                       | 3/8 [20:38<34:21, 412.39s/it]
+stderr: 
+
+Instance i-021ddbdfbab586622:
+stdout: real    3m19.281s
+user    214m55.317s
+sys     320m26.457s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1891.46 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 50%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8c                               | 2/4 [25:46<25:33, 766.53s/it]
+stderr: 
+
+Instance i-01eaa39b9b0056e3c:
+stdout: sys     41m45.633s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 557.30 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 2 batches of 192 jobs each, for a total of 384 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 2/2 [09:36<00:00, 288.42s/it]
+Step 2.1 (make-part): Done. Took 576.85 seconds
+Step 2.2 (merge): Starting ...
+stderr: 
+
+Instance i-0844db97036791ed7:
+stdout: cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation
+-21300.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_data
+delve_transportation-21300.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-16174.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-16174.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-4995.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datad
+elve_sports_fitness-4995.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_social_life-22456
+.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_qu
+ality_datadelve_norefs_mdtables_v2_denylisted/social_life/step_final/step_final/s2pdf_datadelve_soc
+ial_life-22456.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-15109.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-15109.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-0560.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datad
+elve_sports_fitness-0560.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-17899.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-17899.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-21241.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-21241.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation
+-19180.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_data
+delve_transportation-19180.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-4414.jsonl.gz /
+data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datad
+elve_norefs_mdtables_v2_denylisted/travel/step_final/step_final/s2pdf_datadelve_travel-4414.jsonl.g
+z
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation
+-6741.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datad
+elve_transportation-6741.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-7982.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datad
+elve_sports_fitness-7982.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-23002.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-23002.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation
+-16813.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_data
+delve_transportation-16813.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-1095.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datad
+elve_sports_fitness-1095.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_datadelve_transportation
+-22545.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/transportation/step_final/step_final/s2pdf_data
+delve_transportation-22545.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-23514.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_ba
+sic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_data
+delve_sports_fitness-23514.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-118
+78.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_
+quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_
+software_dev-11878.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datadelve_sports_fitness
+-8265.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_bas
+ic_quality_datadelve_norefs_mdtables_v2_denylisted/sports_fitness/step_final/step_final/s2pdf_datad
+elve_sports_fitness-8265.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-137
+26.jsonl.gz /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_
+quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_
+software_dev-13726.jsonl.gz
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00032542.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00032542.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00019992.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00019992.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00020009.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00020009.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00032258.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00032258.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00033558.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00033558.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelv
+e_norefs_mdtables_v2_denylisted_reshard/science_tech/shard_00036294.jsonl.zst /data_c/raw/ai2-llm/p
+retraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables
+_v2_denylisted_reshard/science_tech/shard_00036294.jsonl.zst
+
+real    0m1.006s
+user    0m0.292s
+sys     0m0.316s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+72
+
+real    0m2.036s
+user    0m12.919s
+sys     0m3.914s
+Step 1 (prepare): Starting ...
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 160, in prepare_manyfiles
+_map
+    num_lines = os.path.getsize(f'{local_raw_path}.metaoff') // 8
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 62, in getsize
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/travel
+/step_final/step_final/s2pdf_datadelve_travel-3576.jsonl.gz.metaoff'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 487, in <module>
+    main()
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 483, in main
+    prepare(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 326, in prepare
+    prepare_manyfiles(args)
+  File "/home/ubuntu/infinigram-api/indexing/dolma2/indexing_v6.py", line 260, in prepare_manyfiles
+    _ = p.starmap(prepare_manyfiles_map, [(args, filenum, data_path) for (filenum, data_path) in en
+umerate(data_paths)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/envs/he-indexing-dolma2/lib/python3.12/multiprocessing/pool.py", li
+ne 774, in get
+    raise self._value
+FileNotFoundError: [Errno 2] No such file or directory: '/data_c/raw/ai2-llm/pretraining-data/sourc
+es/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/travel
+/step_final/step_final/s2pdf_datadelve_travel-3576.jsonl.gz.metaoff'
+
+real    2m28.047s
+user    7m16.758s
+sys     14m59.319s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+ERROR "cp --show-progress=true /data_i/v6_22_u32/* s3://infini-gram/index/dolma2-0625-v01/22/": no
+match found for "/data_i/v6_22_u32/*"
+?%                                                                                                 
+           0 B ? p/s 0s (0/0)
+
+real    0m0.988s
+user    0m0.043s
+sys     0m0.019s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-01b49daf3c54b613e:
+stdout: cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/health/vigintile_0017/shard_00000772.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/
+sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/health/vigintile_0
+017/shard_00000772.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/health/vigintile_0018/shard_00000970.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/
+sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/health/vigintile_0
+018/shard_00000970.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/health/vigintile_0020/shard_0000082
+stderr: 
+
+Instance i-05a2128ebf420de0b:
+stdout: real    2m8.778s
+user    202m22.283s
+sys     173m55.496s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2557.59 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 12%|\x88\x88\x88\x88\x88\x88\x88\x89                                                       | 1/8 [06:04<42:30, 364.40s/it]
+stderr: 
+
+Instance i-0a218352ac67ec8e1:
+stdout: real    4m12.395s
+user    229m17.574s
+sys     466m16.349s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2480.10 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 1/4 [14:31<43:33, 871.27s/it]
+stderr: 
+
+Instance i-01e9d3b6602b62d88:
+stdout: real    1m56.209s
+user    101m48.700s
+sys     238m26.009s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1511.85 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 75%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8e               | 6/8 [38:15<12:56, 388.20s/it]
+stderr: 
+
+Instance i-01622134c90068c6a:
+stdout: real    4m34.214s
+user    218m26.758s
+sys     530m13.056s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2131.81 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 2/8 [13:39<41:15, 412.58s/it]
+stderr: 
+
+Instance i-0b24afa7ef37b4600:
+stdout: real    3m11.768s
+user    279m44.799s
+sys     298m35.055s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2119.60 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 38%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8b                                       | 3/8 [18:35<31:10, 374.05s/it]
+stderr: 
+
+Instance i-027f3b6c385e7090b:
+stdout: igintiles/data/science_math_and_technology/vigintile_0016/shard_00000735.jsonl.zst /data_c/raw/ai2-
+llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/science_math_and_technology/vigintile_0016/shard_00000735.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/science_math_and_technology/vigintile_0017/shard_00000646.jsonl.zst /data_c/raw/ai2-
+llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/da
+ta/science_math_and_technology/vigintile_0017/shard_00000646.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/science_math_and_technology/vigintile_0016/shard_00000310.jsonl.zst /data_c/raw/ai2-
+llm/pretraining-data/sources/cc_all_dressed/all_dress
+stderr: 
+
+Instance i-0eacd4c573ae2db33:
+stdout: real    4m20.036s
+user    232m24.479s
+sys     477m53.040s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2527.38 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 2/8 [12:00<35:56, 359.45s/it]
+stderr: 
+
+Instance i-0e016e574bc704d53:
+stdout: real    6m58.242s
+user    352m12.463s
+sys     722m30.537s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2380.98 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 1/4 [13:45<41:17, 825.91s/it]
+stderr: 
+
+Instance i-02d95e30720eb3771:
+stdout: real    2m26.197s
+user    200m56.023s
+sys     221m40.951s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2072.52 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 38%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8b                                       | 3/8 [19:35<33:09, 397.98s/it]
+stderr: 
+
+Instance i-05c195a0b6daa1bf1:
+stdout: real    20m53.944s
+user    391m55.452s
+sys     49m33.191s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1726.69 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 38%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8b                                       | 3/8 [15:02<25:55, 311.20s/it]
+stderr: 
+
+Instance i-0ea6dbbc671b0dc45:
+stdout: real    2m13.944s
+user    212m48.023s
+sys     186m6.668s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1920.63 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 50%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8c                               | 4/8 [27:06<27:04, 406.07s/it]
+stderr: 
+
+Instance i-0ab535655e58d6a95:
+stdout: aining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/sports
+_and_fitness/vigintile_0020/shard_00000262.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/transportation/vigintile_0018/shard_00000315.jsonl.zst /data_c/raw/ai2-llm/pretraini
+ng-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/transporta
+tion/vigintile_0018/shard_00000315.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_v
+igintiles/data/sports_and_fitness/vigintile_0018/shard_00000446.jsonl.zst /data_c/raw/ai2-llm/pretr
+aining-data/sources/cc_all_dressed/all_dressed_v3/weborganizer_ft/dclm_plus2_vigintiles/data/sports
+_and_fitness/vigintil
+stderr: 
+
+Instance i-061b62ca86f426362:
+stdout: real    2m12.725s
+user    205m38.831s
+sys     184m27.904s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2223.62 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 2/8 [12:15<36:41, 366.85s/it]
+stderr: 
+
+Instance i-0a17ad84026d51806:
+stdout: real    3m20.966s
+user    180m28.821s
+sys     394m47.873s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2076.90 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+ 25%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8a                                               | 1/4 [12:41<38:03, 761.13s/it]
+stderr: 
+
+Instance i-0fd1ec5d1f977cf06:
+stdout: real    2m52.229s
+user    203m37.144s
+sys     300m15.905s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1736.96 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+ 50%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x8c                               | 4/8 [26:35<26:15, 394.00s/it]
+stderr: 
+

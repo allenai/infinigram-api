@@ -14,7 +14,7 @@ for csv_path in tqdm(csv_paths):
             if raw_s3_path not in raw_s3_paths:
                 raw_s3_paths.add(raw_s3_path)
 
-with open(f's5cmd_files/raw.s5cmd', 'w') as f:
+with open(f's5cmd_files_v02/raw.s5cmd', 'w') as f:
     for raw_s3_path in raw_s3_paths:
         if raw_s3_path.startswith('s3://'):
             pass

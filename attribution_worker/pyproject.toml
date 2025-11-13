@@ -7,7 +7,7 @@ dependencies = [
     "pydantic==2.10.6",
     "saq[postgres,web]==0.22.4",
     "psycopg[binary,pool]>=3.2.6",
-    "transformers==4.49.0",
+    "transformers==4.57.1",
     "infini-gram-processor",
     "numpy<2.0.0",
     "opentelemetry-api==1.30.0",

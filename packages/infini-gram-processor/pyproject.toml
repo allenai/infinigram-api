@@ -9,10 +9,9 @@ dependencies = [
     "opentelemetry-api==1.30.0",
     "opentelemetry-sdk==1.30.0",
     "infini-gram",
-    "transformers==4.49.0",
+    "transformers==4.57.1",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-

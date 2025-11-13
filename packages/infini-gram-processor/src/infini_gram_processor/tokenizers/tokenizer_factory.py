@@ -13,3 +13,14 @@ def get_llama_2_tokenizer() -> Tokenizer:
         delimiter_mapping={"\n": 13, ".": 29889},
         bow_ids_path=f"{config.vendor_base_path}/llama-2_bow_ids.txt",
     )
+
+
+@lru_cache
+def get_olmo_3_tokenizer() -> Tokenizer:
+    config = get_processor_config()
+
+    return Tokenizer(
+        pretrained_model_name_or_path=f"{config.vendor_base_path}/dolma2-hf",
+        delimiter_mapping={"\n": 198, ".": 13},
+        bow_ids_path=None,
+    )

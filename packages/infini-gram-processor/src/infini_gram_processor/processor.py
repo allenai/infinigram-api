@@ -51,7 +51,7 @@ class InfiniGramProcessor:
             index_dir=index_mapping["index_dir"],
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
-            bow_ids_path=self.tokenizer.bow_ids_path,
+            bow_ids_path=self.tokenizer.bow_ids_path,  # type:ignore
             # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
             attribution_block_size=256,
             precompute_unigram_logprobs=True,
@@ -59,6 +59,7 @@ class InfiniGramProcessor:
             ds_prefetch_depth=0,
             sa_prefetch_depth=0,
             od_prefetch_depth=0,
+            vocab_size=self.tokenizer.hf_tokenizer.vocab_size,
         )
 
     @tracer.start_as_current_span("infini_gram_processor/tokenize")

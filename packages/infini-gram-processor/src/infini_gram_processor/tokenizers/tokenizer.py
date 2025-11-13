@@ -1,12 +1,12 @@
 from os import PathLike
 from typing import Iterable, List, Sequence, Tuple, cast
 
-from transformers import (  # type: ignore
+from transformers import (
     AutoTokenizer,
     PreTrainedTokenizer,
     PreTrainedTokenizerFast,
 )
-from transformers.tokenization_utils_base import (  # type: ignore
+from transformers.tokenization_utils_base import (
     EncodedInput,
     PreTokenizedInput,
     TextInput,
@@ -17,15 +17,15 @@ class Tokenizer:
     hf_tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
     delimiter_mapping: dict[str, int]
     eos_token_id: int
-    bow_ids_path: str
+    bow_ids_path: str | None
 
     def __init__(
         self,
         pretrained_model_name_or_path: str | PathLike[str],
-        bow_ids_path: str,
+        bow_ids_path: str | None,
         delimiter_mapping: dict[str, int] = {},
     ):
-        self.hf_tokenizer = AutoTokenizer.from_pretrained(  # pyright: ignore[reportUnknownMemberType]
+        self.hf_tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             pretrained_model_name_or_path=pretrained_model_name_or_path,
             add_bos_token=False,
             add_eos_token=False,
@@ -37,7 +37,7 @@ class Tokenizer:
                 f"The tokenizer for {pretrained_model_name_or_path} didn't have an eos token id"
             )
 
-        self.eos_token_id = self.hf_tokenizer.eos_token_id
+        self.eos_token_id = int(self.hf_tokenizer.eos_token_id)  # type: ignore IDK what to do here if the eos_token_id is a list so we should just fail
         self.delimiter_mapping = delimiter_mapping
         self.bow_ids_path = bow_ids_path
 

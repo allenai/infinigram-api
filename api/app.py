@@ -10,6 +10,7 @@ from opentelemetry import trace
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.instrumentation.logging import LoggingInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
 from src import glog
@@ -24,6 +25,8 @@ from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
 from src.service_name_span_processor import ServiceNameSpanProcessor
+
+LoggingInstrumentor().instrument()
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")

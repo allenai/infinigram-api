@@ -14,7 +14,7 @@ dependencies = [
     "pydantic-settings==2.3.4",
     "python-json-logger==4.0.0",
     "requests==2.32.3",
-    "saq[postgres]>=0.26.0",
+    "saq[postgres]>=0.22.4",
     "transformers==4.57.1",
     "types-requests==2.32.0.20240914",
     "psycopg[binary,pool]>=3.2.6",

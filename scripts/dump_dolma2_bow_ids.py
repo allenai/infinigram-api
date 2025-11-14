@@ -7,8 +7,7 @@ token_to_id = tokenizer.get_vocab()
 bow_token_ids = []
 for token, token_id in token_to_id.items():
     # Ġ (U+120) marks the beginning of words
-    # Ċ marks the beginning of a sequence with whitespaces/newlines
-    if token[0] == 'Ġ' or token[0] == 'Ċ':
+    if token[0] == 'Ġ':
         bow_token_ids.append(token_id)
 
 bow_token_ids = sorted(bow_token_ids)

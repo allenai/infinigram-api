@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Iterable, TypedDict
+from typing import Iterable, Literal, TypedDict
 
 from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
@@ -23,6 +23,7 @@ class IndexMapping(TypedDict):
     tokenizer: Tokenizer
     index_dir: str | Iterable[str]
     index_dir_diff: str | Iterable[str]
+    token_dtype: Literal["u32"] | Literal["u16"]
 
 
 # Python doesn't support exhaustive checking like TS does so we have to manually do this
@@ -48,6 +49,7 @@ index_mappings: IndexMappings = {
         "tokenizer": get_llama_2_tokenizer(),
         "index_dir": f"{tokenizer_config.index_base_path}/v4_pileval_llama",
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.OLMOE_0125_1B_7B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -57,6 +59,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-olmoe-0125-1b-7b-anneal-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -66,6 +69,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.OLMO_2_0325_32B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -75,6 +79,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-olmo-2-0325-32b-anneal-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.TULU_3_8B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -82,6 +87,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-tulu-3-8b-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.TULU_3_70B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -89,6 +95,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-tulu-3-70b-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.TULU_3_405B.value: {
         "tokenizer": get_llama_2_tokenizer(),
@@ -96,6 +103,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/v4-tulu-3-405b-adapt",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u16",
     },
     AvailableInfiniGramIndexId.OLMO_3_0625_7B_THINK.value: {
         "tokenizer": get_dolma_2_tokenizer(),
@@ -104,6 +112,7 @@ index_mappings: IndexMappings = {
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
         ],
         "index_dir_diff": [],
+        "token_dtype": "u32",
     },
     # AvailableInfiniGramIndexId.OLMO_3_0625_7B_INSTRUCT.value: {
     #     "tokenizer": get_dolma_2_tokenizer(),

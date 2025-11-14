@@ -2,10 +2,10 @@ import logging
 from datetime import datetime
 from typing import TextIO
 
-from pythonjsonlogger import jsonlogger
+from pythonjsonlogger.json import JsonFormatter as pjlJsonFormatter
 
 
-class JsonFormatter(jsonlogger.JsonFormatter):
+class JsonFormatter(pjlJsonFormatter):
     def formatTime(self, record: logging.LogRecord, datefmt: str | None = None):
         # Format the timestamp as RFC 3339 with microsecond precision
         isoformat = datetime.fromtimestamp(record.created).isoformat()

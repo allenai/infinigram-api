@@ -23,8 +23,7 @@ from src.config import get_config
 from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
-
-from api.src.service_name_span_processor import ServiceNameSpanProcessor
+from src.service_name_span_processor import ServiceNameSpanProcessor
 
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")

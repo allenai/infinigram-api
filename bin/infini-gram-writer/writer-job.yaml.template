@@ -21,6 +21,14 @@ spec:
           persistentVolumeClaim:
             claimName: infinigram-$INDEX_NAME-writer
 
+      requests:
+        cpu: 20
+        memory: 32Gi
+
+      limits:
+      cpu: 50
+      memory: 64Gi
+
       restartPolicy: Never
       
   backoffLimit: 3

@@ -22,5 +22,5 @@ def get_dolma_2_tokenizer() -> Tokenizer:
     return Tokenizer(
         pretrained_model_name_or_path=f"{config.vendor_base_path}/dolma2-hf",
         delimiter_mapping={"\n": 198, ".": 13},
-        bow_ids_path=None,
+        bow_ids_path=f"{config.vendor_base_path}/dolma2_bow_ids.txt",
     )

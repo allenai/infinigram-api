@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-dolma2-0625-v01-7b
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: 9500Gi 
+  accessModes:
+    - ReadOnlyMany
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-dolma2-0625-v01-7b
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-dolma2-0625-v01-7b
+    fsType: ext4
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-dolma2-0625-v01-7b
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-dolma2-0625-v01-7b
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 9500Gi

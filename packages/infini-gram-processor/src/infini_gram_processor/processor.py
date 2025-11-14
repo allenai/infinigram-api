@@ -10,6 +10,7 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from opentelemetry import trace
+from opentelemetry.trace.status import StatusCode
 from transformers.tokenization_utils_base import (  # type: ignore
     EncodedInput,
     PreTokenizedInput,
@@ -82,7 +83,13 @@ class InfiniGramProcessor:
         result: InfiniGramEngineResponse[TInfiniGramResponse],
     ) -> TInfiniGramResponse:
         if is_infini_gram_error_response(result):
-            raise InfiniGramEngineException(detail=result["error"])
+            exception = InfiniGramEngineException(detail=result["error"])
+
+            current_span = trace.get_current_span()
+            current_span.record_exception(exception)
+            current_span.set_status(StatusCode.ERROR)
+
+            raise exception
 
         return cast(TInfiniGramResponse, result)
 

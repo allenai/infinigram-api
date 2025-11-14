@@ -14,7 +14,9 @@ class AvailableInfiniGramIndexId(Enum):
     TULU_3_8B = "tulu-3-8b"
     TULU_3_70B = "tulu-3-70b"
     TULU_3_405B = "tulu-3-405b"
-    OLMO_3_0625_7B = "olmo-3-0625-7b"
+    OLMO_3_0625_7B_THINK = "olmo-3-0625-7b-think"
+    OLMO_3_0625_7B_INSTRUCT = "olmo-3-0625-7b-instruct"
+    OLMO_3_0625_32B_THINK = "olmo-3-0625-32b-think"
 
 
 class IndexMapping(TypedDict):
@@ -23,6 +25,8 @@ class IndexMapping(TypedDict):
     index_dir_diff: str | Iterable[str]
 
 
+# Python doesn't support exhaustive checking like TS does so we have to manually do this
+# https://stackoverflow.com/questions/72022403/type-hint-for-an-exhaustive-dictionary-with-enum-literal-keys
 IndexMappings = TypedDict(
     "IndexMappings",
     {
@@ -33,7 +37,9 @@ IndexMappings = TypedDict(
         "tulu-3-8b": IndexMapping,
         "tulu-3-70b": IndexMapping,
         "tulu-3-405b": IndexMapping,
-        "olmo-3-0625-7b": IndexMapping,
+        "olmo-3-0625-7b-think": IndexMapping,
+        "olmo-3-0625-7b-instruct": IndexMapping,
+        "olmo-3-0625-32b-think": IndexMapping,
     },
 )
 
@@ -91,11 +97,26 @@ index_mappings: IndexMappings = {
         ],
         "index_dir_diff": [],
     },
-    AvailableInfiniGramIndexId.OLMO_3_0625_7B.value: {
+    AvailableInfiniGramIndexId.OLMO_3_0625_7B_THINK.value: {
         "tokenizer": get_olmo_3_tokenizer(),
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
+        ],
+        "index_dir_diff": [],
+    },
+    AvailableInfiniGramIndexId.OLMO_3_0625_7B_INSTRUCT.value: {
+        "tokenizer": get_olmo_3_tokenizer(),
+        "index_dir": [
+            f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
+            f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
+        ],
+        "index_dir_diff": [],
+    },
+    AvailableInfiniGramIndexId.OLMO_3_0625_32B_THINK.value: {
+        "tokenizer": get_olmo_3_tokenizer(),
+        "index_dir": [
+            f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
         ],
         "index_dir_diff": [],
     },

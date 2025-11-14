@@ -3,7 +3,7 @@ from typing import Iterable, TypedDict
 
 from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
-from .tokenizers.tokenizer_factory import get_llama_2_tokenizer, get_olmo_3_tokenizer
+from .tokenizers.tokenizer_factory import get_dolma_2_tokenizer, get_llama_2_tokenizer
 
 
 class AvailableInfiniGramIndexId(Enum):
@@ -98,7 +98,7 @@ index_mappings: IndexMappings = {
         "index_dir_diff": [],
     },
     AvailableInfiniGramIndexId.OLMO_3_0625_7B_THINK.value: {
-        "tokenizer": get_olmo_3_tokenizer(),
+        "tokenizer": get_dolma_2_tokenizer(),
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
@@ -106,7 +106,7 @@ index_mappings: IndexMappings = {
         "index_dir_diff": [],
     },
     AvailableInfiniGramIndexId.OLMO_3_0625_7B_INSTRUCT.value: {
-        "tokenizer": get_olmo_3_tokenizer(),
+        "tokenizer": get_dolma_2_tokenizer(),
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
@@ -114,7 +114,7 @@ index_mappings: IndexMappings = {
         "index_dir_diff": [],
     },
     AvailableInfiniGramIndexId.OLMO_3_0625_32B_THINK.value: {
-        "tokenizer": get_olmo_3_tokenizer(),
+        "tokenizer": get_dolma_2_tokenizer(),
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
         ],

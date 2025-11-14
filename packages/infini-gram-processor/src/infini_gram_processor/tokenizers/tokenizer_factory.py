@@ -16,7 +16,7 @@ def get_llama_2_tokenizer() -> Tokenizer:
 
 
 @lru_cache
-def get_olmo_3_tokenizer() -> Tokenizer:
+def get_dolma_2_tokenizer() -> Tokenizer:
     config = get_processor_config()
 
     return Tokenizer(

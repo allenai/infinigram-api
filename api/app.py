@@ -24,6 +24,8 @@ from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
 
+from api.src.service_name_span_processor import ServiceNameSpanProcessor
+
 # If LOG_FORMAT is "google:json" emit log message as JSON in a format Google Cloud can parse.
 fmt = os.getenv("LOG_FORMAT")
 handlers = [glog.create_stream_handler()] if fmt == "google:json" else []
@@ -63,6 +65,8 @@ else:
     tracer_provider.add_span_processor(
         BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore
     )
+
+tracer_provider.add_span_processor(ServiceNameSpanProcessor())
 
 trace.set_tracer_provider(tracer_provider)
 

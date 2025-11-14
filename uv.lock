@@ -1034,7 +1034,7 @@ requires-dist = [
     { name = "python-json-logger", specifier = "==2.0.7" },
     { name = "redis", extras = ["hiredis"], specifier = "==5.2.1" },
     { name = "requests", specifier = "==2.32.3" },
-    { name = "saq", extras = ["postgres"], specifier = ">=0.22.4" },
+    { name = "saq", extras = ["postgres"], specifier = ">=0.26.0" },
     { name = "transformers", specifier = "==4.57.1" },
     { name = "types-requests", specifier = "==2.32.0.20240914" },
 ]
@@ -1068,7 +1068,7 @@ requires-dist = [
     { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2.6" },
     { name = "pydantic", specifier = "==2.10.6" },
     { name = "pydantic-settings", specifier = "==2.3.4" },
-    { name = "saq", extras = ["postgres", "web"], specifier = "==0.22.4" },
+    { name = "saq", extras = ["postgres", "web"], specifier = ">=0.26.0" },
     { name = "transformers", specifier = "==4.57.1" },
 ]
 
@@ -2149,14 +2149,14 @@ wheels = [
 
 [[package]]
 name = "saq"
-version = "0.22.4"
+version = "0.26.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "croniter" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/73/a5/d7876116c557f0910dea88bd7c849e5cfabc191ef1668ea26b168d031779/saq-0.22.4.tar.gz", hash = "sha256:e745f6bee6e224545778fb0f008a34df6f3a9524fee2b06063387d5b10a02c3c", size = 57452, upload-time = "2025-03-13T16:23:46.514Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/a1/772f9d4b56f0bfef691005a4f1fe5aac18973dfa339efe8a3e0d260867d6/saq-0.26.0.tar.gz", hash = "sha256:2b4cceda3f8f39d0acd10c46d0e12c8f2f7b1e38ae1eab6260abde45ee7f7af2", size = 59568, upload-time = "2025-10-14T02:35:01.059Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/3c/5a2fdbbd8e5ea8575c8b3277bf041a0234f8acf319fed8f240ca9be26dc5/saq-0.22.4-py3-none-any.whl", hash = "sha256:02a8d7113aad09d0f210f65201ceef9fd6b2e6a99711f6f8af987a44de2b4ac6", size = 60507, upload-time = "2025-03-13T16:23:45.072Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/18/42ac00417607c6cea8b5231c7556c52d62cf43b868c17405bf768407266d/saq-0.26.0-py3-none-any.whl", hash = "sha256:3d8bb499dc59c6f0e942f98a7c1bab86571d07f2898b544ea35c7d24c877f067", size = 62810, upload-time = "2025-10-14T02:34:58.605Z" },
 ]
 
 [package.optional-dependencies]

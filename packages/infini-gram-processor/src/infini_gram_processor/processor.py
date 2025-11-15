@@ -200,16 +200,18 @@ class InfiniGramProcessor:
         self,
         document_request_by_span: Iterable[GetDocumentByPointerRequest],
     ) -> list[list[Document]]:
-        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
-            requests=[
-                {
-                    "docs": document_request.docs,
-                    "span_ids": document_request.span_ids,
-                    "needle_len": document_request.needle_length,
-                    "max_ctx_len": document_request.maximum_context_length,
-                }
-                for document_request in document_request_by_span
-            ],
+        get_docs_by_pointers_response = (
+            self.infini_gram_engine.get_docs_by_ptrs_2_grouped(
+                requests=[
+                    {
+                        "docs": document_request.docs,
+                        "span_ids": document_request.span_ids,
+                        "needle_len": document_request.needle_length,
+                        "max_ctx_len": document_request.maximum_context_length,
+                    }
+                    for document_request in document_request_by_span
+                ],
+            )
         )
 
         documents_by_span_result = self.__handle_error(get_docs_by_pointers_response)

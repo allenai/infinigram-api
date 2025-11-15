@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import (
     Iterable,
     Sequence,
@@ -35,6 +36,7 @@ from .models.is_infini_gram_error_response import (
 from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
+logger = logging.getLogger("uvicorn.error")
 
 
 class InfiniGramProcessor:
@@ -43,6 +45,7 @@ class InfiniGramProcessor:
     infini_gram_engine: InfiniGramEngineDiff
 
     def __init__(self, index: AvailableInfiniGramIndexId):
+        logger.debug("Initializing index %s", index.value)
         self.index = index.value
         index_mapping = index_mappings[index.value]
 
@@ -63,6 +66,7 @@ class InfiniGramProcessor:
             vocab_size=self.tokenizer.hf_tokenizer.vocab_size,
             token_dtype=index_mapping["token_dtype"],
         )
+        logger.debug("Finished initializing index %s", index.value)
 
     @tracer.start_as_current_span("infini_gram_processor/tokenize")
     def tokenize(

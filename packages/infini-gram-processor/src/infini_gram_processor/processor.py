@@ -11,7 +11,7 @@ from infini_gram.models import (
 )
 from opentelemetry import trace
 from opentelemetry.trace.status import StatusCode
-from transformers.tokenization_utils_base import (  # type: ignore
+from transformers.tokenization_utils_base import (
     EncodedInput,
     PreTokenizedInput,
     TextInput,

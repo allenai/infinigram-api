@@ -37,7 +37,7 @@ class Tokenizer:
                 f"The tokenizer for {pretrained_model_name_or_path} didn't have an eos token id"
             )
 
-        self.eos_token_id = int(self.hf_tokenizer.eos_token_id)  # type: ignore IDK what to do here if the eos_token_id is a list so we should just fail
+        self.eos_token_id = int(self.hf_tokenizer.eos_token_id)  # type: ignore # IDK what to do here if the eos_token_id is a list so we should just fail
         self.delimiter_mapping = delimiter_mapping
         self.bow_ids_path = bow_ids_path
 
@@ -48,7 +48,7 @@ class Tokenizer:
         return encoded_query
 
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
-        return self.hf_tokenizer.decode(token_ids)  # type: ignore
+        return self.hf_tokenizer.decode(token_ids)
 
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         tokenized_input = self.hf_tokenizer(input, return_offsets_mapping=True)

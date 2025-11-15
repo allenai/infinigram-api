@@ -287,6 +287,10 @@ function(
                     key: "ATTRIBUTION_QUEUE_URL"
                 }
             }
+        },
+        {
+            name: "LOG_LEVEL",
+            value: "DEBUG"
         }
     ];
 

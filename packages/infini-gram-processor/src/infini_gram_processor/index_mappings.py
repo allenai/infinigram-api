@@ -3,7 +3,7 @@ from typing import Iterable, Literal, TypedDict
 
 from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
-from .tokenizers.tokenizer_factory import get_dolma_2_tokenizer, get_llama_2_tokenizer
+from .tokenizers.tokenizer_factory import get_dolma_2_tokenizer
 
 
 class AvailableInfiniGramIndexId(Enum):
@@ -33,10 +33,10 @@ IndexMappings = TypedDict(
     {
         # "pileval-llama": IndexMapping,
         # "olmoe-0125-1b-7b": IndexMapping,
-        "olmo-2-1124-13b": IndexMapping,
-        "olmo-2-0325-32b": IndexMapping,
-        "tulu-3-8b": IndexMapping,
-        "tulu-3-70b": IndexMapping,
+        # "olmo-2-1124-13b": IndexMapping,
+        # "olmo-2-0325-32b": IndexMapping,
+        # "tulu-3-8b": IndexMapping,
+        # "tulu-3-70b": IndexMapping,
         # "tulu-3-405b": IndexMapping,
         "olmo-3-0625-7b-think": IndexMapping,
         # "olmo-3-0625-7b-instruct": IndexMapping,
@@ -61,42 +61,42 @@ index_mappings: IndexMappings = {
     #     "index_dir_diff": [],
     #     "token_dtype": "u16",
     # },
-    AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
-            f"{tokenizer_config.index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
-        ],
-        "index_dir_diff": [],
-        "token_dtype": "u16",
-    },
-    AvailableInfiniGramIndexId.OLMO_2_0325_32B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
-            f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
-            f"{tokenizer_config.index_base_path}/v4-olmo-2-0325-32b-anneal-adapt",
-        ],
-        "index_dir_diff": [],
-        "token_dtype": "u16",
-    },
-    AvailableInfiniGramIndexId.TULU_3_8B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/v4-tulu-3-8b-adapt",
-        ],
-        "index_dir_diff": [],
-        "token_dtype": "u16",
-    },
-    AvailableInfiniGramIndexId.TULU_3_70B.value: {
-        "tokenizer": get_llama_2_tokenizer(),
-        "index_dir": [
-            f"{tokenizer_config.index_base_path}/v4-tulu-3-70b-adapt",
-        ],
-        "index_dir_diff": [],
-        "token_dtype": "u16",
-    },
+    # AvailableInfiniGramIndexId.OLMO_2_1124_13B.value: {
+    #     "tokenizer": get_llama_2_tokenizer(),
+    #     "index_dir": [
+    #         f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
+    #         f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
+    #         f"{tokenizer_config.index_base_path}/v4-olmo-2-1124-13b-anneal-adapt",
+    #     ],
+    #     "index_dir_diff": [],
+    #     "token_dtype": "u16",
+    # },
+    # AvailableInfiniGramIndexId.OLMO_2_0325_32B.value: {
+    #     "tokenizer": get_llama_2_tokenizer(),
+    #     "index_dir": [
+    #         f"{tokenizer_config.index_base_path}/olmoe-mix-0924-dclm",
+    #         f"{tokenizer_config.index_base_path}/olmoe-mix-0924-nodclm",
+    #         f"{tokenizer_config.index_base_path}/v4-olmo-2-0325-32b-anneal-adapt",
+    #     ],
+    #     "index_dir_diff": [],
+    #     "token_dtype": "u16",
+    # },
+    # AvailableInfiniGramIndexId.TULU_3_8B.value: {
+    #     "tokenizer": get_llama_2_tokenizer(),
+    #     "index_dir": [
+    #         f"{tokenizer_config.index_base_path}/v4-tulu-3-8b-adapt",
+    #     ],
+    #     "index_dir_diff": [],
+    #     "token_dtype": "u16",
+    # },
+    # AvailableInfiniGramIndexId.TULU_3_70B.value: {
+    #     "tokenizer": get_llama_2_tokenizer(),
+    #     "index_dir": [
+    #         f"{tokenizer_config.index_base_path}/v4-tulu-3-70b-adapt",
+    #     ],
+    #     "index_dir_diff": [],
+    #     "token_dtype": "u16",
+    # },
     # AvailableInfiniGramIndexId.TULU_3_405B.value: {
     #     "tokenizer": get_llama_2_tokenizer(),
     #     "index_dir": [

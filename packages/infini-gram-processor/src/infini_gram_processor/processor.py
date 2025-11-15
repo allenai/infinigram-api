@@ -61,7 +61,7 @@ class InfiniGramProcessor:
             sa_prefetch_depth=0,
             od_prefetch_depth=0,
             vocab_size=self.tokenizer.hf_tokenizer.vocab_size,
-            token_dtype="u32",
+            token_dtype=index_mapping["token_dtype"],
         )
 
     @tracer.start_as_current_span("infini_gram_processor/tokenize")
@@ -86,9 +86,7 @@ class InfiniGramProcessor:
             exception = InfiniGramEngineException(detail=result["error"])
 
             current_span = trace.get_current_span()
-            current_span.record_exception(
-                exception, attributes={"detail": exception.detail}
-            )
+            current_span.record_exception(exception)
             current_span.set_status(StatusCode.ERROR)
 
             raise exception

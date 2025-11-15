@@ -109,7 +109,7 @@ index_mappings: IndexMappings = {
         "tokenizer": get_dolma_2_tokenizer(),
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
-            # f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
+            f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",

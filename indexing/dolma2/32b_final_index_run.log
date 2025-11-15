@@ -1,0 +1,612 @@
+Instance i-0b185d8de1e85389b:
+stdout: cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000225.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000225.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000312.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000312.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000442.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000442.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000001.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000001.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000082.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000082.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000134.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000134.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000316.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000316.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000070.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000070.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000013.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000013.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000238.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000238.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000381.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000381.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000067.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000067.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000323.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000323.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000133.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000133.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000114.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000114.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000240.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000240.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000433.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000433.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000242.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000242.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000258.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000258.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000160.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000160.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000367.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000367.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000150.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000150.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000197.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000197.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000218.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000218.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000112.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000112.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000284.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000284.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000204.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000204.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000078.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000078.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000272.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000272.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000359.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000359.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000058.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000058.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000372.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000372.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000305.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000305.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000100.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000100.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000072.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000072.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000131.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000131.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000091.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000091.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000101.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000101.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000067.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000067.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000244.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000244.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000215.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000215.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000059.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000059.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000025.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/PHP/shard_00000025.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000324.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000324.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000119.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000119.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000006.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000006.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000289.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000289.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000256.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000256.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000297.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000297.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000341.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000341.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000330.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000330.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000265.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000265.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000228.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000228.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000326.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000326.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000076.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/JavaScript/shard_00000076.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000024.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000024.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000303.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000303.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000293.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000293.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000236.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000236.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000271.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Markdown/shard_00000271.jsonl.zst
+
+real    0m13.393s
+user    2m16.733s
+sys     28m6.642s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+1363
+
+real    1m9.263s
+user    86m41.235s
+sys     120m28.899s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1308.98 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [47:22<00:00, 710.53s/it]
+Step 2.1 (make-part): Done. Took 2842.11 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 137920.04 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 1000.70 seconds
+Step 2 (build_sa): Done. Took 141762.85 seconds
+
+real    2384m31.940s
+user    305176m43.386s
+sys     3255m28.890s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    2.39 TB / 2.39 TB (713.35 MB/s) 55m48s (5/5)
+
+real    55m48.345s
+user    139m51.150s
+sys     30m3.611s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-0f91649506d5b82d3:
+stdout: pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00012277.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032127.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032127.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00018356.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00018356.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00012699.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00012699.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037937.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037937.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032650.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032650.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033912.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033912.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037727.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037727.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00034546.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00034546.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00026855.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00026855.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036144.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036144.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029076.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029076.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036697.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036697.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035914.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035914.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028824.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028824.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028013.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028013.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029347.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029347.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00026495.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00026495.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033476.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033476.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036688.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036688.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00025679.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00025679.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032996.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032996.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00038369.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00038369.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00022979.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00022979.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00022506.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00022506.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031082.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031082.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00019796.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00019796.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037612.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037612.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035045.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035045.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029156.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00029156.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037832.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00037832.jsonl.zst
+
+real    0m41.682s
+user    7m44.542s
+sys     84m25.198s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+8771
+
+real    8m8.610s
+user    368m33.467s
+sys     1021m3.637s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2840.60 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [45:09<00:00, 338.63s/it]
+Step 2.1 (make-part): Done. Took 2709.06 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 21956.59 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 1023.23 seconds
+Step 2 (build_sa): Done. Took 25688.88 seconds
+
+real    475m29.683s
+user    68168m51.867s
+sys     2963m11.556s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    2.64 TB / 2.64 TB (760.83 MB/s) 57m48s (5/5)
+
+real    57m48.269s
+user    155m52.440s
+sys     31m18.035s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-04a6b7b8aedbea340:
+stdout: dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00027571.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/crime_law/shard_00014528.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_
+minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/crime_law/shard_00014528.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00028460.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_de
+dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00028460.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00026362.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00026362.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022655.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022655.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00028483.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_de
+dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00028483.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00015709.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00015709.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022905.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022905.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00020918.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00020918.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00010417.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00010417.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00029249.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_de
+dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00029249.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00091-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00091-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00020166.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_de
+dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00020166.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00015607.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00015607.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00012924.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00012924.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00025105.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00025105.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00021402.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00021402.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00008163.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00008163.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/entertainment/shard_00002776.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_ded
+upe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/entertainment/shard_00002776.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00078-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00078-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00018421.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00018421.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00019344.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00019344.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/crime_law/shard_00005197.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_
+minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/crime_law/shard_00005197.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00010929.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00010929.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022606.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00022606.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00005547.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00005547.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00021741.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_de
+dupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/education_jobs/shard_00021741.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00008867.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_min
+hash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/health/shard_00008867.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00085-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00085-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00004-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00004-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00047-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00047-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00098-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00098-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00126-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00126-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00072-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00072-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00064-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00064-of-00128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00016-of-00128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/finemath/finemath-3plus/train-00016-of-00128.jsonl.zst
+
+real    0m39.169s
+user    7m16.114s
+sys     81m47.861s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+7955
+
+real    6m46.232s
+user    311m59.428s
+sys     582m51.120s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 1920.14 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [48:12<00:00, 723.22s/it]
+Step 2.1 (make-part): Done. Took 2892.87 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 40885.90 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 991.56 seconds
+Step 2 (build_sa): Done. Took 44770.33 seconds
+
+real    778m10.708s
+user    78660m9.552s
+sys     3270m29.396s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    2.59 TB / 2.59 TB (737.29 MB/s) 58m28s (5/5)
+
+real    58m28.598s
+user    152m25.061s
+sys     31m13.999s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-017a4ea5ab1702e82:
+stdout: inhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/politics/shard_00010562.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00030131.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00030131.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00025938.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00025938.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00009656.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00009656.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00003167.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00003167.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032438.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032438.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035508.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035508.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00007149.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00007149.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00024488.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00024488.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028434.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00028434.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020810.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020810.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00030877.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00030877.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035607.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035607.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/politics/shard_00015952.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_m
+inhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/politics/shard_00015952.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032239.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032239.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032005.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00032005.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036431.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036431.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031042.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031042.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00015026.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00015026.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031919.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00031919.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035153.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035153.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00015235.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00015235.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035340.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035340.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00027021.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00027021.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00002403.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00002403.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/politics/shard_00005361.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_m
+inhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/politics/shard_00005361.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00010109.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00010109.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/religion/shard_00012520.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe_m
+inhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/religion/shard_00012520.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00009597.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedupe
+_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/industrial/shard_00009597.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033104.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033104.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00027888.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00027888.jsonl.zst
+
+real    0m33.481s
+user    6m27.415s
+sys     48m15.326s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+8491
+
+real    6m26.775s
+user    312m44.065s
+sys     775m30.085s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2622.31 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 4 batches of 192 jobs each, for a total of 768 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 4/4 [50:00<00:00, 750.21s/it]
+Step 2.1 (make-part): Done. Took 3000.86 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 27154.78 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 975.17 seconds
+Step 2 (build_sa): Done. Took 31130.81 seconds
+
+real    562m33.280s
+user    53331m46.387s
+sys     3607m39.299s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    2.56 TB / 2.56 TB (754.94 MB/s) 56m27s (5/5)
+
+real    56m27.152s
+user    149m53.127s
+sys     31m33.513s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-017f06f6425578ca1:
+stdout: cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000148.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000148.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000046.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000046.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00013.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00013.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000002.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000002.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000047.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000047.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00054.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00054.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000166.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000166.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000021.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000021.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00041.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00041.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000027.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000027.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00022.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00022.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000049.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000049.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00007.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00007.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000004.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000004.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000022.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Swift/shard_00000022.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000043.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000043.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000015.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Shell/shard_00000015.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000034.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000034.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00037.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00037.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000019.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000019.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000070.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000070.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000139.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000139.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00059.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00059.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000008.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000008.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000013.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000013.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00005.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00005.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000124.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000124.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000014.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000014.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000017.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Ruby/shard_00000017.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00036.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00036.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000044.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000044.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000037.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000037.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000229.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000229.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000093.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000093.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00040.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00040.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000015.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/SQL/shard_00000015.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000173.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Python/part-000000173.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00028.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00028.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00039.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00039.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000017.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000017.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00009.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00009.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00025.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00025.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00008.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00008.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00000.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00000.gz
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000012.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/TypeScript/shard_00000012.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00021.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00021.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00006.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00006.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00004.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00004.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00001.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00001.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00027.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00027.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00003.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00003.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00019.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00019.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00056.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00056.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00010.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00010.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00042.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00042.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00034.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00034.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00026.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00026.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00032.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00032.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00018.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00018.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00023.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00023.gz
+cp s3://ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00043.gz /data_c/raw/ai2-llm/pretraining-data/sources/wikipedia/v0/documents/lang=en/00043.gz
+
+real    0m6.003s
+user    0m25.454s
+sys     0m55.663s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+548
+
+real    0m25.926s
+user    30m59.099s
+sys     40m56.222s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 550.30 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 2 batches of 192 jobs each, for a total of 384 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 2/2 [09:07<00:00, 273.63s/it]
+Step 2.1 (make-part): Done. Took 547.26 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 29438.97 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 283.32 seconds
+Step 2 (build_sa): Done. Took 30269.54 seconds
+
+real    513m39.956s
+user    50662m1.797s
+sys     434m18.164s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    666.01 GB / 666.01 GB (648.24 MB/s) 17m8s (5/5)
+
+real    17m7.737s
+user    39m7.831s
+sys     5m40.074s
+Upload data: Done
+------------------------------------------------
+stderr: 
+
+Instance i-061c796d4a86b3088:
+stdout: cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00010927.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00010927.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00038201.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00038201.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00012609.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00012609.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035984.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035984.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033315.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033315.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000069.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000069.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00007161.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00007161.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035414.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00035414.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00005875.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00005875.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020232.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020232.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036031.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036031.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000066.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000066.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036091.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036091.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020791.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020791.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036654.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00036654.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033813.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00033813.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00014642.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00014642.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/C/shard_00000060.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/C/shard_00000060.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020907.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00020907.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000194.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000194.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000036.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000036.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000137.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000137.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000128.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000128.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000020.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000020.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000426.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000426.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00014146.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/software_dev/shard_00014146.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000063.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000063.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/C/shard_00000055.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/C/shard_00000055.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000044.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000044.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000057.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000057.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00017865.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/s2pdf_dedu
+pe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard_denyagain/science_tech/shard_00017865.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000138.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000138.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000248.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000248.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000074.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000074.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000092.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/CSharp/shard_00000092.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000146.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000146.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000279.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000279.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000088.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000088.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000049.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000049.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000224.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000224.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Go/shard_00000012.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Go/shard_00000012.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000251.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Java/shard_00000251.jsonl.zst
+cp s3://ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000129.jsonl.zst /data_c/raw/ai2-llm/pretraining-data/sources/stack-edu/documents/Cpp/shard_00000129.jsonl.zst
+
+real    0m22.591s
+user    4m2.638s
+sys     40m54.185s
+Download data: Done
+------------------------------------------------
+Indexing: Starting ...
+4718
+
+real    5m26.758s
+user    245m9.534s
+sys     700m8.191s
+Step 1 (prepare): Starting ...
+Step 1 (prepare): Done. Took 2189.84 seconds
+Step 2 (build_sa): Starting ...
+Step 2.1 (make-part): Starting ...
+Using 8 batches of 192 jobs each, for a total of 1536 jobs.
+100%|\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88\x88| 8/8 [45:16<00:00, 339.58s/it]
+Step 2.1 (make-part): Done. Took 2716.67 seconds
+Step 2.2 (merge): Starting ...
+Step 2.2 (merge): Done. Took 125851.49 seconds
+Step 2.3 (concat): Starting ...
+Step 2.3 (concat): Done. Took 950.25 seconds
+Step 2 (build_sa): Done. Took 129518.41 seconds
+
+real    2195m8.482s
+user    205141m6.869s
+sys     3533m28.200s
+Indexing: Done
+------------------------------------------------
+Upload data: Starting ...
+100.00%    2.56 TB / 2.56 TB (730.39 MB/s) 58m22s (5/5)
+
+real    58m22.454s
+user    150m17.052s
+sys     31m3.974s
+Upload data: Done
+------------------------------------------------
+stderr: 
+

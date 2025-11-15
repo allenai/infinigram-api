@@ -37,7 +37,7 @@ class Tokenizer:
                 f"The tokenizer for {pretrained_model_name_or_path} didn't have an eos token id"
             )
 
-        self.eos_token_id = int(self.hf_tokenizer.eos_token_id)  # type: ignore # IDK what to do here if the eos_token_id is a list so we should just fail
+        self.eos_token_id = int(self.hf_tokenizer.eos_token_id)  # pyright: ignore[reportArgumentType]
         self.delimiter_mapping = delimiter_mapping
         self.bow_ids_path = bow_ids_path
 

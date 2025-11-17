@@ -55,8 +55,7 @@ class InfiniGramProcessor:
             index_dir=index_mapping["index_dir"],
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
-            bow_ids_path=self.tokenizer.bow_ids_path,  # type:ignore
-            # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
+            bow_ids_path=self.tokenizer.bow_ids_path,
             attribution_block_size=256,
             precompute_unigram_logprobs=True,
             # for the attribution feature, disabling prefetching can speed things up
@@ -381,4 +380,4 @@ class InfiniGramProcessor:
         )
 
 
-indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}
+# indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

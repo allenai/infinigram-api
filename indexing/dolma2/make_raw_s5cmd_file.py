@@ -2,6 +2,12 @@ import gzip
 import csv
 import glob
 from tqdm import tqdm
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--s5cmd-output-path", type=str, default="s5cmd_files_v02/raw.s5cmd")
+args = parser.parse_args()
+
 
 # Dolma3-dolmino-official prefixes
 DOLMA3_DOLMINO_PREFIXES = [
@@ -185,7 +191,7 @@ for csv_path in tqdm(csv_paths):
             if raw_s3_path not in raw_s3_paths:
                 raw_s3_paths.add(raw_s3_path)
 
-with open(f's5cmd_files_v02/raw.s5cmd', 'w') as f:
+with open(args.s5cmd_output_path, 'w') as f:
     for raw_s3_path in raw_s3_paths:
         if raw_s3_path.startswith('s3://'):
             pass

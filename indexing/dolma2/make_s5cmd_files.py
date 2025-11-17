@@ -1,15 +1,21 @@
 import csv
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--csv-path', type=str, required=True)
+parser.add_argument('--output-dir', type=str, required=True)
+args = parser.parse_args()
 
 LIMIT = int(1e12) # 1TB = 250B uint32 tokens
 
-with open('dolma2-0625-v02.csv') as f:
+with open(args.csv_path) as f:
     reader = csv.DictReader(f)
     rows = list(reader)
 
-S3_PREFIX = 's3://ai2-llm/preprocessed/dolma2-0625/'
+S3_PREFIX = 's3://ai2-llm/preprocessed/'
 LOCAL_PREFIX = '/data_c/tokenized/'
-OUTPUT_DIR = './s5cmd_files_v02'
+OUTPUT_DIR = args.output_dir
 
 def write_shard(shard_ix, npy_paths):
     with open(f'{OUTPUT_DIR}/shard_{shard_ix:02d}.s5cmd', 'w') as f:

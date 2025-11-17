@@ -1,0 +1,9 @@
+# Dolma2 indexing (aka Dolma3)
+
+1. make a file like `indexing/dolma2/dolma2-0625-v01.csv` (example script `scripts/generate_s2pdf_csv.py`)
+2. `python make_s5cmd_files.py --csv-path dolma3-dolmino-official-100b.csv --output-dir s5cmd_files_dolmino`
+3. `"python create_aws_workflows.py --num-nodes 1 --remote-dir "s3://infini-gram/index/dolma3-dolmino-official-100B"` (adust num ranks as needed) and push these to git
+4. `source aws_launch.sh dolma3-indexing 1`
+5. progress monitoring `poormanray run --name ${NAME} --command 's=$(screen -ls 2>/dev/null | awk "/Detached|Attached/{print \$1}" | tail -n1); [ -n "$s" ] && screen -r "$s" -X hardcopy -h /tmp/screen.out && tail -n 200 /tmp/screen.out || echo "no screen session"'`
+6. dump log when done `poormanray run --name ${NAME} --command 'tail -n 10 ~/screen_output.txt' > my_logs.log`
+6. when finished `poormanray terminate --name ${NAME} --region us-east-1 --detach`

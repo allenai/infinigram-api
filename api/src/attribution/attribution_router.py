@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 from fastapi_problem.handler import generate_swagger_response
+from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 
 from src.attribution.attribution_request import AttributionRequest
 from src.attribution.attribution_service import (
@@ -22,7 +23,7 @@ attribution_router = APIRouter()
     },
 )
 async def get_document_attributions(
-    index: str,
+    index: AvailableInfiniGramIndexId,
     body: AttributionRequest,
     attribution_service: Annotated[AttributionService, Depends()],
 ) -> AttributionResponse:

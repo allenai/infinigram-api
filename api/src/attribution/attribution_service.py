@@ -7,9 +7,6 @@ from infini_gram_processor.models import (
     BaseInfiniGramResponse,
     Document,
 )
-from infini_gram_processor.processor import (
-    InfiniGramProcessor,
-)
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind, Status, StatusCode
@@ -28,7 +25,6 @@ from src.documents.documents_router import DocumentsServiceDependency
 from src.documents.documents_service import (
     DocumentsService,
 )
-from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")
@@ -71,19 +67,16 @@ class AttributionTimeoutError(StatusProblem):
 
 
 class AttributionService:
-    infini_gram_processor: InfiniGramProcessor
     documents_service: DocumentsService
     attribution_queue: Queue
     cache: Redis
 
     def __init__(
         self,
-        infini_gram_processor: InfiniGramProcessorDependency,
         documents_service: DocumentsServiceDependency,
         attribution_queue: AttributionQueueDependency,
         cache: CacheDependency,
     ):
-        self.infini_gram_processor = infini_gram_processor
         self.documents_service = documents_service
         self.attribution_queue = attribution_queue
         self.cache = cache

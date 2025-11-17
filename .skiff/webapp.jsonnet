@@ -536,8 +536,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 63,
-                                    memory: '257G'
+                                    cpu: 2,
+                                    memory: '8G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied

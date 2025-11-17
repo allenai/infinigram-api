@@ -1,7 +1,7 @@
 NUM_SHARDS=25
 NUM_NODES=25
 RANK=[[RANK]]
-REMOTE_DIR="s3://infini-gram/index/dolma2-0625-v02"
+REMOTE_DIR=[[REMOTE_DIR]]
 
 # Mount volumes
 echo "Mount volumes: Starting ..."

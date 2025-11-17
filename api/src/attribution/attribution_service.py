@@ -26,9 +26,6 @@ from src.config import get_config
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")
 
-_TASK_NAME_KEY = "saq.task_name"
-_TASK_TAG_KEY = "saq.action"
-
 
 class AttributionDocument(Document):
     display_length_long: int
@@ -63,7 +60,7 @@ class AttributionTimeoutError(StatusProblem):
     status = 503
 
 
-CACHE_EXPIRATION_TIME = 43_200
+_CACHE_EXPIRATION_TIME = 43_200
 
 
 class AttributionService:
@@ -94,7 +91,7 @@ class AttributionService:
         try:
             # Since someone asked for this again, we should keep it around longer
             # This sets it to expire after 12 hours
-            cached_json = await self.cache.getex(key, ex=CACHE_EXPIRATION_TIME)
+            cached_json = await self.cache.getex(key, ex=_CACHE_EXPIRATION_TIME)
 
             if cached_json is None:
                 return None

@@ -8,7 +8,7 @@ from opentelemetry.trace import SpanKind
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 from saq import Queue
 
-from api.src.attribution.attribution_request import AttributionRequest
+from src.attribution.attribution_request import AttributionRequest
 from src.config import get_config
 
 queue = Queue.from_url(
@@ -74,7 +74,7 @@ async def publish_attribution_job(
         )
 
 
-async def abort_attribution_job(job_key: str):
+async def abort_attribution_job(job_key: str) -> None:
     job_to_abort = await get_queue().job(job_key)
 
     if job_to_abort is not None:

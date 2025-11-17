@@ -2,6 +2,7 @@ from typing import Annotated, Any
 
 from fastapi import Depends
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
+from infini_gram_processor.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind
@@ -33,10 +34,6 @@ AttributionQueueDependency = Annotated[Queue, Depends(get_queue)]
 tracer = trace.get_tracer(get_config().application_name)
 
 
-_TASK_NAME_KEY = "saq.task_name"
-_TASK_TAG_KEY = "saq.action"
-
-
 async def publish_attribution_job(
     index: AvailableInfiniGramIndexId, request: AttributionRequest, job_key: str
 ) -> Any:
@@ -44,9 +41,9 @@ async def publish_attribution_job(
         "attribution_queue_service/publish_attribution_job",
         kind=SpanKind.PRODUCER,
         attributes={
-            _TASK_NAME_KEY: "attribute",
+            TASK_NAME_KEY: "attribute",
             SpanAttributes.MESSAGING_MESSAGE_ID: job_key,
-            _TASK_TAG_KEY: "apply_async",
+            TASK_TAG_KEY: "apply_async",
             SpanAttributes.MESSAGING_SYSTEM: "saq",
             "index": index.value,
         },

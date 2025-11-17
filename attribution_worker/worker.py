@@ -13,6 +13,7 @@ from infini_gram_processor.models.models import (
     AttributionResponse,
     AttributionSpan,
 )
+from infini_gram_processor.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from opentelemetry import trace
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
@@ -52,9 +53,6 @@ trace.set_tracer_provider(tracer_provider)
 
 tracer = trace.get_tracer(config.application_name)
 
-_TASK_NAME_KEY = "saq.task_name"
-_TASK_TAG_KEY = "saq.action"
-
 
 async def attribution_job(
     ctx: Context,
@@ -80,8 +78,8 @@ async def attribution_job(
         context=extracted_context,
         attributes={
             SpanAttributes.MESSAGING_SYSTEM: "saq",
-            _TASK_NAME_KEY: "attribute",
-            _TASK_TAG_KEY: "apply_async",
+            TASK_NAME_KEY: "attribute",
+            TASK_TAG_KEY: "apply_async",
         },
     ) as otel_span:
         job = ctx.get("job")

@@ -77,7 +77,7 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
 
     echo "Download data: Starting ..."
     time s5cmd run ./[[S5CMD_FILES_DIR]]/shard_${NAME}.s5cmd
-    time python make_raw_s5cmd_file.py
+    time python make_raw_s5cmd_file.py --s5cmd-output-path ./[[S5CMD_FILES_DIR]]/raw.s5cmd
     time s5cmd run ./[[S5CMD_FILES_DIR]]/raw.s5cmd
     echo "Download data: Done"
     echo "------------------------------------------------"

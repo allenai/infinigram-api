@@ -3,8 +3,8 @@
 
 FROM python:3.12-slim AS builder
 
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
 COPY --from=ghcr.io/astral-sh/uv:0.6.8 /uv /bin/uv
 
@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 
 # Then, use a final image without uv
-FROM python:3.12-slim-bookworm AS base
+FROM python:3.12-slim-bookworm as base
 
 WORKDIR /app
 
@@ -44,9 +44,9 @@ WORKDIR /app
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
-ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
+ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
 
-FROM base AS dev
+FROM base as dev
 
 ENV OTEL_SERVICE_NAME=infinigram-api-worker-dev
 ENV OTEL_TRACES_EXPORTER=otlp
@@ -56,6 +56,6 @@ ENV ENV=development
 
 CMD ["saq", "--verbose", "--web", "attribution_worker.worker_settings"]
 
-FROM base AS prod
+FROM base as prod
 
-CMD ["saq", "--web", "attribution_worker.worker_settings", "--verbose"]
+CMD ["saq", "--web", "attribution_worker.worker_settings"]

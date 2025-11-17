@@ -76,9 +76,9 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     export INDEX_NAME="v6_${NAME}_u32"
 
     echo "Download data: Starting ..."
-    time s5cmd run ./s5cmd_files_v02/shard_${NAME}.s5cmd
+    time s5cmd run ./[[S5CMD_FILES_DIR]]/shard_${NAME}.s5cmd
     time python make_raw_s5cmd_file.py
-    time s5cmd run ./s5cmd_files_v02/raw.s5cmd
+    time s5cmd run ./[[S5CMD_FILES_DIR]]/raw.s5cmd
     echo "Download data: Done"
     echo "------------------------------------------------"
 

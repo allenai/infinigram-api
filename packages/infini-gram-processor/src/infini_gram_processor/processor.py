@@ -68,17 +68,14 @@ class InfiniGramProcessor:
         )
         logger.debug("Finished initializing processor for index %s", index.value)
 
-    @tracer.start_as_current_span("infini_gram_processor/tokenize")
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
     ) -> list[int]:
         return self.tokenizer.tokenize(input)
 
-    @tracer.start_as_current_span("infini_gram_processor/decode_tokens")
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
 
-    @tracer.start_as_current_span("infini_gram_processor/tokenize_to_list")
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         return self.tokenizer.tokenize_to_list(input)
 

@@ -5,6 +5,7 @@ from typing import Any
 import numpy as np
 from infini_gram_processor import indexes
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
+from infini_gram_processor.job_name import get_job_name_for_index
 from infini_gram_processor.models import (
     SpanRankingMethod,
 )
@@ -142,8 +143,14 @@ async def attribution_job(
         return response.model_dump_json()
 
 
+assigned_index = os.getenv("ASSIGNED_INDEX")
+try:
+    assigned_index_enum = AvailableInfiniGramIndexId(assigned_index)
+except Exception as e:
+    raise Exception("Invalid index ID") from e
+
 settings = SettingsDict(
     queue=queue,
-    functions=[("attribute", attribution_job)],  # type: ignore
+    functions=[(get_job_name_for_index(assigned_index_enum), attribution_job)],  # type: ignore
     concurrency=1,
 )

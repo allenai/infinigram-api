@@ -751,7 +751,10 @@ function(
                                     name: 'OTEL_SERVICE_NAME',
                                     value: 'infinigram-api-worker'
                                 },
-                                
+                                {
+                                    name: 'ASSIGNED_INDEX',
+                                    value: 'olmo-3-0625-7b-think'
+                                }
                             ]
                         }
                     ]

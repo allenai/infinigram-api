@@ -58,9 +58,7 @@ function(
     // Since we deploy resources for different environments in the same namespace,
     // we need to give things a fully qualified name that includes the environment
     // as to avoid unintentional collision / redefinition.
-    // local fullyQualifiedName = config.appName + '-' + env;
-    
-    local fullyQualifiedName = config.appName + '-' + if (env == 'separate-workers-per-index') then 'swpi' else env;
+    local fullyQualifiedName = config.appName + '-' + env;
 
 
     // Every resource is tagged with the same set of labels. These labels serve the
@@ -800,7 +798,7 @@ function(
         ],
         config,
         podLabels,
-        fullyQualifiedName,
+        config.appName,
         labels,
         namespaceName,
         annotations,
@@ -843,7 +841,7 @@ function(
         ],
         config,
         podLabels,
-        fullyQualifiedName,
+        config.appName,
         labels,
         namespaceName,
         annotations,

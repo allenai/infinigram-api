@@ -6,7 +6,7 @@ function(
     volumeMounts,
     config,
     podLabels,
-    fullyQualifiedName,
+    appName,
     labels,
     namespaceName,
     annotations,
@@ -21,7 +21,7 @@ function(
         env: env
     };
     local attributionWorkerPodLabels = podLabels + { app: config.appName + attributionWorkerSuffix };
-    local attributionWorkerFullyQualifiedName = fullyQualifiedName + attributionWorkerSuffix;
+    local attributionWorkerFullyQualifiedName = appName + '-' + (if (env == 'separate-workers-per-index') then 'swpi' else env) + attributionWorkerSuffix;
 
     // This is used to verify that the worker is functional.
     local workerHealthCheck = {

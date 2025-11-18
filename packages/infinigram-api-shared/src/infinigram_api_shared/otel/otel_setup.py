@@ -9,7 +9,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcess
 from .service_name_span_processor import ServiceNameSpanProcessor
 
 
-def set_up_tracing() -> None:
+def set_up_tracing(service_name: str = "infinigram-api") -> None:
     tracer_provider = TracerProvider()
 
     if os.getenv("ENV") == "development":
@@ -21,6 +21,6 @@ def set_up_tracing() -> None:
             BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore[no-untyped-call]
         )
 
-    tracer_provider.add_span_processor(ServiceNameSpanProcessor())
+    tracer_provider.add_span_processor(ServiceNameSpanProcessor(service_name))
 
     trace.set_tracer_provider(tracer_provider)

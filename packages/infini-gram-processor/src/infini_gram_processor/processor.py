@@ -49,7 +49,7 @@ class InfiniGramProcessor:
         self.index = index.value
         index_mapping = index_mappings[index.value]
 
-        self.tokenizer = index_mapping["tokenizer"]
+        self.tokenizer = index_mapping["tokenizer_factory"]()
 
         self.infini_gram_engine = InfiniGramEngineDiff(
             index_dir=index_mapping["index_dir"],

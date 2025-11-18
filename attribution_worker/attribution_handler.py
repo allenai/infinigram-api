@@ -9,7 +9,7 @@ from infini_gram_processor.models.models import (
     AttributionResponse,
     AttributionSpan,
 )
-from infini_gram_processor.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
+from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind

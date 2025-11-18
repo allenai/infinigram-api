@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["opentelemetry-api==1.38.0", "opentelemetry-sdk==1.38.0"]
+dependencies = [
+    "opentelemetry-api==1.38.0",
+    "opentelemetry-sdk==1.38.0",
+    "saq[postgres]>=0.26.0",
+]
 
 
 [build-system]

@@ -2,8 +2,8 @@ from typing import Annotated, Any
 
 from fastapi import Depends
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
-from infini_gram_processor.job_name import get_attribute_job_name_for_index
-from infini_gram_processor.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
+from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
+from infinigram_api_shared.saq.queue_utils import get_attribute_job_name_for_index
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind

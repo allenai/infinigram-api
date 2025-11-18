@@ -21,6 +21,7 @@ members = [
     "infini-gram-api",
     "infini-gram-attribution-worker",
     "infini-gram-processor",
+    "infinigram-api-shared",
     "load-test",
     "root",
 ]
@@ -982,6 +983,7 @@ dependencies = [
     { name = "fastapi-problem" },
     { name = "infini-gram" },
     { name = "infini-gram-processor" },
+    { name = "infinigram-api-shared" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-gcp-trace" },
@@ -1005,6 +1007,7 @@ requires-dist = [
     { name = "fastapi-problem", specifier = "==0.10.7" },
     { name = "infini-gram" },
     { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
+    { name = "infinigram-api-shared", editable = "packages/infinigram-api-shared" },
     { name = "numpy", specifier = "<2.0.0" },
     { name = "opentelemetry-api", specifier = "==1.38.0" },
     { name = "opentelemetry-exporter-gcp-trace", specifier = "==1.11.0" },
@@ -1028,6 +1031,7 @@ version = "0.1.0"
 source = { virtual = "attribution_worker" }
 dependencies = [
     { name = "infini-gram-processor" },
+    { name = "infinigram-api-shared" },
     { name = "numpy" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-gcp-trace" },
@@ -1043,6 +1047,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "infini-gram-processor", editable = "packages/infini-gram-processor" },
+    { name = "infinigram-api-shared", editable = "packages/infinigram-api-shared" },
     { name = "numpy", specifier = "<2.0.0" },
     { name = "opentelemetry-api", specifier = "==1.38.0" },
     { name = "opentelemetry-exporter-gcp-trace", specifier = "==1.11.0" },
@@ -1072,6 +1077,21 @@ requires-dist = [
     { name = "opentelemetry-api", specifier = "==1.38.0" },
     { name = "opentelemetry-sdk", specifier = "==1.38.0" },
     { name = "transformers", specifier = "==4.57.1" },
+]
+
+[[package]]
+name = "infinigram-api-shared"
+version = "0.1.0"
+source = { editable = "packages/infinigram-api-shared" }
+dependencies = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-sdk" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "opentelemetry-api", specifier = "==1.38.0" },
+    { name = "opentelemetry-sdk", specifier = "==1.38.0" },
 ]
 
 [[package]]

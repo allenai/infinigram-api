@@ -21,5 +21,6 @@ dependencies = [
     "fastapi_problem==0.10.7",
     "redis[hiredis]==5.2.1",
     "infini-gram-processor",
+    "infinigram-api-shared",
     "opentelemetry-instrumentation-logging==0.59b0",
 ]

@@ -6,6 +6,8 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
 
+from .service_name_span_processor import ServiceNameSpanProcessor
+
 
 def set_up_tracing() -> None:
     tracer_provider = TracerProvider()
@@ -18,5 +20,7 @@ def set_up_tracing() -> None:
         tracer_provider.add_span_processor(
             BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore[no-untyped-call]
         )
+
+    tracer_provider.add_span_processor(ServiceNameSpanProcessor())
 
     trace.set_tracer_provider(tracer_provider)

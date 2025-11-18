@@ -3,6 +3,8 @@ x-shared-env: &shared-env
   INDEX_BASE_PATH: /mnt/infinigram-array
   ATTRIBUTION_QUEUE_URL: postgres://infini-gram:llmz@queue:5432/infini-gram?sslmode=disable&application_name=infini-gram-attribution-worker
   PYTHON_ENV: development
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4318
+
 
 services:
   api:
@@ -25,7 +27,6 @@ services:
       - ./infinigram-array/v4-tulu-3-405b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-405b-adapt-llama
     environment: 
       LOG_LEVEL: DEBUG
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://otelcol:4318
       CACHE_URL: redis://cache:6379
       <<: *shared-env
 
@@ -49,7 +50,9 @@ services:
       - ./infinigram-array/v4-tulu-3-8b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-8b-adapt-llama
       - ./infinigram-array/v4-tulu-3-70b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-70b-adapt-llama
       - ./infinigram-array/v4-tulu-3-405b-adapt-llama:/mnt/infinigram-array/v4-tulu-3-405b-adapt-llama
-    environment: *shared-env
+    environment: 
+      ASSIGNED_INDEX: pileval-llama
+      <<: *shared-env
 
   proxy:
     build: ./proxy

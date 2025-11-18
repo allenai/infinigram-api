@@ -6,13 +6,9 @@ from typing import Any, AsyncGenerator
 from fastapi import FastAPI
 from fastapi_problem.handler import add_exception_handler
 from infini_gram_processor.infini_gram_engine_exception import InfiniGramEngineException
-from opentelemetry import trace
-from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from infinigram_api_shared.otel.otel_setup import set_up_tracing
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
 from src import glog
 from src.attribution import attribution_router
 from src.attribution.attribution_queue_service import (
@@ -24,7 +20,6 @@ from src.config import get_config
 from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
-from src.service_name_span_processor import ServiceNameSpanProcessor
 
 LoggingInstrumentor().instrument()
 
@@ -57,19 +52,6 @@ app.include_router(health_router)
 app.include_router(router=infinigram_router)
 app.include_router(router=attribution_router)
 
-tracer_provider = TracerProvider()
-
-if os.getenv("ENV") == "development":
-    tracer_provider.add_span_processor(
-        span_processor=SimpleSpanProcessor(OTLPSpanExporter())
-    )
-else:
-    tracer_provider.add_span_processor(
-        BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore
-    )
-
-tracer_provider.add_span_processor(ServiceNameSpanProcessor())
-
-trace.set_tracer_provider(tracer_provider)
+set_up_tracing()
 
 FastAPIInstrumentor.instrument_app(app, excluded_urls="health")

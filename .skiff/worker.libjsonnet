@@ -15,7 +15,7 @@ function(
     workerImage
 )
     local attributionWorkerReplicas = if env == 'prod' then config.attributionWorkerReplicas.prod else 1;
-    local attributionWorkerSuffix = '-worker' + '-' + indexId;
+    local attributionWorkerSuffix = '-' + indexId;
     local attributionWorkerSelectorLabels = {
         app: config.appName + attributionWorkerSuffix,
         env: env

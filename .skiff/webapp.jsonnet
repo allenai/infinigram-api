@@ -57,7 +57,7 @@ function(
 
     // Since we deploy resources for different environments in the same namespace,
     // we need to give things a fully qualified name that includes the environment
-    // as to avoid unintentional collission / redefinition.
+    // as to avoid unintentional collision / redefinition.
     local fullyQualifiedName = config.appName + '-' + env;
 
     // Every resource is tagged with the same set of labels. These labels serve the

@@ -9,7 +9,7 @@ _BASE_JOB_NAME = "attribute"
 
 
 def get_attribute_job_name_for_index(index_id: AvailableInfiniGramIndexId) -> str:
-    return f"${_BASE_JOB_NAME}_${index_id.value}"
+    return _BASE_JOB_NAME
 
 
 @lru_cache

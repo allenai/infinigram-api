@@ -378,6 +378,3 @@ class InfiniGramProcessor:
             index=self.index,
             input_token_ids=input_ids,
         )
-
-
-# indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

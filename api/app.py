@@ -20,6 +20,7 @@ from src.config import get_config
 from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
 from src.infinigram import infinigram_router
+from src.service_name_span_processor import ServiceNameSpanProcessor
 
 LoggingInstrumentor().instrument()
 

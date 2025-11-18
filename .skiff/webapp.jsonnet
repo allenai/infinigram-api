@@ -357,20 +357,6 @@ function(
                 readOnly: true,
             }
         },
-        {
-            name: "infinigram-array-dolma2-0625-base-shared",
-            persistentVolumeClaim: {
-                claimName: "infinigram-dolma2-0625-base-shared",
-                readOnly: true
-            }
-        },
-        {
-            name: "infinigram-array-dolma2-0625-v01-7b",
-            persistentVolumeClaim: {
-                claimName: "infinigram-dolma2-0625-v01-7b",
-                readOnly: true
-            }
-        }
     ];
 
     local indexVolumeMounts = [
@@ -419,16 +405,6 @@ function(
             name: "infinigram-array-v4-tulu-3-405b-adapt",
             readOnly: true,
         },
-        {
-            mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
-            name: "infinigram-array-dolma2-0625-base-shared",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
-            name: "infinigram-array-dolma2-0625-v01-7b",
-            readOnly: true,
-        }
     ];
 
     local deployment = {

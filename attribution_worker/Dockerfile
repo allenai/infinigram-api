@@ -58,4 +58,4 @@ CMD ["saq", "--verbose", "--web", "attribution_worker.worker_settings"]
 
 FROM base as prod
 
-CMD ["saq", "--web", "attribution_worker.worker_settings"]
+CMD ["saq", "--web", "attribution_worker.worker_settings", "--verbose"]

@@ -1,6 +1,5 @@
-from typing import Annotated, Any
+from typing import Any
 
-from fastapi import Depends
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from infinigram_api_shared.saq.queue_utils import (
@@ -38,8 +37,6 @@ def get_queue(index_id: AvailableInfiniGramIndexId) -> Queue:
         index_id=index_id,
     )
 
-
-AttributionQueueDependency = Annotated[Queue, Depends(get_queue)]
 
 tracer = trace.get_tracer(get_config().application_name)
 

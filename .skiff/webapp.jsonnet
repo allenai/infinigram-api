@@ -856,9 +856,8 @@ function(
         deployment,
         service,
         pdb,
-        attributionWorkerDeployment,
         olmo3_7b_instruct_worker,
-
+        olmo3_32b_think_worker
     ];
 
     if std.length(scholarHosts) > 0 then

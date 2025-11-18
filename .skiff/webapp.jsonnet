@@ -10,6 +10,7 @@
 // from that point forward.
 local config = import '../skiff.json';
 local util = import './util.libsonnet';
+local createWorker = import './worker.libjsonnet';
 
 function(
     apiImage, proxyImage, workerImage, cause, sha, env='staging', branch='', repo='',
@@ -490,7 +491,6 @@ function(
                         {
                             name: fullyQualifiedName + '-api',
                             image: apiImage,
-                            volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.
                             #
@@ -763,6 +763,92 @@ function(
         }
     };
 
+    local olmo3_7b_instruct_worker = createWorker(
+        'olmo-3-0625-7b-instruct',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-v01-7b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                readOnly: true,
+            }
+        ],
+        config,
+        podLabels,
+        fullyQualifiedName,
+        labels,
+        namespaceName,
+        annotations,
+        cause,
+        antiAffinityLabels,
+        workerImage
+    );
+
+    local olmo3_32b_think_worker = createWorker(
+        'olmo-3-0625-32b-think',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-v6-dolma2-0625-v02-32b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                readOnly: true,
+            }
+        ],
+        config,
+        podLabels,
+        fullyQualifiedName,
+        labels,
+        namespaceName,
+        annotations,
+        cause,
+        antiAffinityLabels,
+        workerImage
+    );
+
     local defaultObjects = [
         namespace,
         ingress,
@@ -770,7 +856,9 @@ function(
         deployment,
         service,
         pdb,
-        attributionWorkerDeployment
+        attributionWorkerDeployment,
+        olmo3_7b_instruct_worker,
+
     ];
 
     if std.length(scholarHosts) > 0 then

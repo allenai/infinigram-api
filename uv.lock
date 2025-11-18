@@ -1086,12 +1086,14 @@ source = { editable = "packages/infinigram-api-shared" }
 dependencies = [
     { name = "opentelemetry-api" },
     { name = "opentelemetry-sdk" },
+    { name = "saq", extra = ["postgres"] },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "opentelemetry-api", specifier = "==1.38.0" },
     { name = "opentelemetry-sdk", specifier = "==1.38.0" },
+    { name = "saq", extras = ["postgres"], specifier = ">=0.26.0" },
 ]
 
 [[package]]

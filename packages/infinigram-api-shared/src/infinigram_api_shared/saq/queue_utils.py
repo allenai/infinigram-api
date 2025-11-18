@@ -19,6 +19,10 @@ def get_queue_connection_pool(queue_url: str) -> AsyncConnectionPool:
     )
 
 
+def get_queue_name(index_id: AvailableInfiniGramIndexId, base_queue_name: str) -> str:
+    return f"${base_queue_name}_${index_id.value}"
+
+
 @lru_cache
 def get_queue_for_index(
     queue_url: str,
@@ -28,7 +32,7 @@ def get_queue_for_index(
     manage_pool_lifecycle: bool = False,
 ) -> Queue:
     connection_pool = get_queue_connection_pool(queue_url)
-    queue_name = f"${base_queue_name}_${index_id.value}"
+    queue_name = get_queue_name(index_id, base_queue_name)
     return PostgresQueue(
         pool=connection_pool,
         name=queue_name,

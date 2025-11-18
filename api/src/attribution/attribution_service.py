@@ -1,40 +1,30 @@
 import logging
 from hashlib import sha256
-from typing import Any, List, Optional, Sequence
+from typing import List, Optional, Sequence
 from uuid import uuid4
 
+from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.models import (
     BaseInfiniGramResponse,
     Document,
 )
-from infini_gram_processor.processor import (
-    InfiniGramProcessor,
-)
 from opentelemetry import trace
-from opentelemetry.semconv.trace import SpanAttributes
-from opentelemetry.trace import SpanKind, Status, StatusCode
-from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+from opentelemetry.trace import Status, StatusCode
 from pydantic import Field, ValidationError
 from redis.asyncio import Redis
 from rfc9457 import StatusProblem
-from saq import Queue
 
-from src.attribution.attribution_queue_service import AttributionQueueDependency
+from src.attribution.attribution_queue_service import (
+    abort_attribution_job,
+    publish_attribution_job,
+)
 from src.attribution.attribution_request import AttributionRequest
 from src.cache import CacheDependency
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
-from src.documents.documents_router import DocumentsServiceDependency
-from src.documents.documents_service import (
-    DocumentsService,
-)
-from src.infinigram.infini_gram_dependency import InfiniGramProcessorDependency
 
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")
-
-_TASK_NAME_KEY = "saq.task_name"
-_TASK_TAG_KEY = "saq.action"
 
 
 class AttributionDocument(Document):
@@ -70,22 +60,16 @@ class AttributionTimeoutError(StatusProblem):
     status = 503
 
 
+_CACHE_EXPIRATION_TIME = 43_200
+
+
 class AttributionService:
-    infini_gram_processor: InfiniGramProcessor
-    documents_service: DocumentsService
-    attribution_queue: Queue
     cache: Redis
 
     def __init__(
         self,
-        infini_gram_processor: InfiniGramProcessorDependency,
-        documents_service: DocumentsServiceDependency,
-        attribution_queue: AttributionQueueDependency,
         cache: CacheDependency,
     ):
-        self.infini_gram_processor = infini_gram_processor
-        self.documents_service = documents_service
-        self.attribution_queue = attribution_queue
         self.cache = cache
 
     def _get_cache_key(self, index: str, request: AttributionRequest) -> bytes:
@@ -100,14 +84,14 @@ class AttributionService:
 
     @tracer.start_as_current_span("attribution_service/_get_cached_response")
     async def _get_cached_response(
-        self, index: str, request: AttributionRequest
+        self, index: AvailableInfiniGramIndexId, request: AttributionRequest
     ) -> AttributionResponse | None:
-        key = self._get_cache_key(index, request)
+        key = self._get_cache_key(index.value, request)
 
         try:
             # Since someone asked for this again, we should keep it around longer
             # This sets it to expire after 12 hours
-            cached_json = await self.cache.getex(key, ex=43_200)
+            cached_json = await self.cache.getex(key, ex=_CACHE_EXPIRATION_TIME)
 
             if cached_json is None:
                 return None
@@ -138,9 +122,12 @@ class AttributionService:
 
     @tracer.start_as_current_span("attribution_service/_cache_response")
     async def _cache_response(
-        self, index: str, request: AttributionRequest, json_response: str
+        self,
+        index: AvailableInfiniGramIndexId,
+        request: AttributionRequest,
+        json_response: str,
     ) -> None:
-        key = self._get_cache_key(index, request)
+        key = self._get_cache_key(index.value, request)
 
         try:
             # save the response and expire it after an hour
@@ -160,7 +147,7 @@ class AttributionService:
 
     @tracer.start_as_current_span("attribution_service/get_attribution_for_response")
     async def get_attribution_for_response(
-        self, index: str, request: AttributionRequest
+        self, index: AvailableInfiniGramIndexId, request: AttributionRequest
     ) -> AttributionResponse:
         cached_response = await self._get_cached_response(index, request)
         if cached_response is not None:
@@ -171,37 +158,9 @@ class AttributionService:
         try:
             logger.debug("Adding attribution request to queue", extra={"index": index})
 
-            with tracer.start_as_current_span(
-                "attribution_service/publish_attribution_job",
-                kind=SpanKind.PRODUCER,
-                attributes={
-                    _TASK_NAME_KEY: "attribute",
-                    SpanAttributes.MESSAGING_MESSAGE_ID: job_key,
-                    _TASK_TAG_KEY: "apply_async",
-                    SpanAttributes.MESSAGING_SYSTEM: "saq",
-                },
-            ):
-                otel_context: dict[str, Any] = {}
-                TraceContextTextMapPropagator().inject(otel_context)
-                attribute_result_json = await self.attribution_queue.apply(
-                    "attribute",
-                    timeout=60,
-                    key=job_key,
-                    index=index,
-                    input=request.response,
-                    delimiters=request.delimiters,
-                    allow_spans_with_partial_words=request.allow_spans_with_partial_words,
-                    minimum_span_length=request.minimum_span_length,
-                    maximum_frequency=request.maximum_frequency,
-                    maximum_span_density=request.maximum_span_density,
-                    span_ranking_method=request.span_ranking_method,
-                    maximum_context_length=request.maximum_context_length,
-                    maximum_context_length_long=request.maximum_context_length_long,
-                    maximum_context_length_snippet=request.maximum_context_length_snippet,
-                    maximum_documents_per_span=request.maximum_documents_per_span,
-                    otel_context=otel_context,
-                )
-
+            attribute_result_json = await publish_attribution_job(
+                index, request, job_key=job_key
+            )
             attribute_result = AttributionResponse.model_validate_json(
                 attribute_result_json
             )
@@ -217,11 +176,11 @@ class AttributionService:
 
             current_span = trace.get_current_span()
             current_span.set_status(Status(StatusCode.ERROR))
-            current_span.record_exception(ex)
+            current_span.record_exception(
+                ex, attributes={"job_key": job_key, "index": index.value}
+            )
 
-            job_to_abort = await self.attribution_queue.job(job_key)
-            if job_to_abort is not None:
-                await self.attribution_queue.abort(job_to_abort, "Client timeout")
+            await abort_attribution_job(job_key, index=index)
 
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."

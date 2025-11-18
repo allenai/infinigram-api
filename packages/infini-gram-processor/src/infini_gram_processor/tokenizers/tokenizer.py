@@ -17,12 +17,12 @@ class Tokenizer:
     hf_tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast
     delimiter_mapping: dict[str, int]
     eos_token_id: int
-    bow_ids_path: str | None
+    bow_ids_path: str
 
     def __init__(
         self,
         pretrained_model_name_or_path: str | PathLike[str],
-        bow_ids_path: str | None,
+        bow_ids_path: str,
         delimiter_mapping: dict[str, int] = {},
     ):
         self.hf_tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]

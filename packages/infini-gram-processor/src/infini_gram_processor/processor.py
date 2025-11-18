@@ -49,14 +49,13 @@ class InfiniGramProcessor:
         self.index = index.value
         index_mapping = index_mappings[index.value]
 
-        self.tokenizer = index_mapping["tokenizer"]
+        self.tokenizer = index_mapping["tokenizer_factory"]()
 
         self.infini_gram_engine = InfiniGramEngineDiff(
             index_dir=index_mapping["index_dir"],
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
-            bow_ids_path=self.tokenizer.bow_ids_path,  # type:ignore
-            # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
+            bow_ids_path=self.tokenizer.bow_ids_path,
             attribution_block_size=256,
             precompute_unigram_logprobs=True,
             # for the attribution feature, disabling prefetching can speed things up
@@ -68,17 +67,14 @@ class InfiniGramProcessor:
         )
         logger.debug("Finished initializing processor for index %s", index.value)
 
-    @tracer.start_as_current_span("infini_gram_processor/tokenize")
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput
     ) -> list[int]:
         return self.tokenizer.tokenize(input)
 
-    @tracer.start_as_current_span("infini_gram_processor/decode_tokens")
     def decode_tokens(self, token_ids: Iterable[int]) -> str:
         return self.tokenizer.decode_tokens(token_ids)
 
-    @tracer.start_as_current_span("infini_gram_processor/tokenize_to_list")
     def tokenize_to_list(self, input: TextInput) -> Sequence[str]:
         return self.tokenizer.tokenize_to_list(input)
 
@@ -382,6 +378,3 @@ class InfiniGramProcessor:
             index=self.index,
             input_token_ids=input_ids,
         )
-
-
-indexes = {index: InfiniGramProcessor(index) for index in AvailableInfiniGramIndexId}

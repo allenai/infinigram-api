@@ -5,6 +5,5 @@ from .infini_gram_engine_exception import (
 )
 from .models.camel_case_model import CamelCaseModel as CamelCaseModel
 from .processor import InfiniGramProcessor as InfiniGramProcessor
-from .processor import indexes as indexes
 from .tokenizers.tokenizer import Tokenizer as Tokenizer
 from .tokenizers.tokenizer_factory import get_llama_2_tokenizer as get_llama_2_tokenizer

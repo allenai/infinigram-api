@@ -10,6 +10,7 @@
 // from that point forward.
 local config = import '../skiff.json';
 local util = import './util.libsonnet';
+local createWorker = import './worker.libjsonnet';
 
 function(
     apiImage, proxyImage, workerImage, cause, sha, env='staging', branch='', repo='',
@@ -56,8 +57,9 @@ function(
 
     // Since we deploy resources for different environments in the same namespace,
     // we need to give things a fully qualified name that includes the environment
-    // as to avoid unintentional collission / redefinition.
+    // as to avoid unintentional collision / redefinition.
     local fullyQualifiedName = config.appName + '-' + env;
+
 
     // Every resource is tagged with the same set of labels. These labels serve the
     // following purposes:
@@ -290,145 +292,6 @@ function(
         }
     ];
 
-    local indexVolumes = [
-        {
-            name: "infinigram-array-pileval-gpt2",
-            persistentVolumeClaim: {
-                claimName: "infinigram-pileval-gpt2",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-olmoe-mix-0924-dclm",
-            persistentVolumeClaim: {
-                // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
-                claimName: "infinigram-olmoe-mix-0924",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-olmoe-mix-0924-nodclm",
-            persistentVolumeClaim: {
-                claimName: "infinigram-olmoe-mix-0924-nodclm",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-olmoe-0125-1b-7b-anneal-adapt",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-olmo-2-1124-13b-anneal-adapt",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-olmo-2-0325-32b-anneal-adapt",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-tulu-3-8b-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-tulu-3-8b-adapt-llama",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-tulu-3-70b-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-tulu-3-70b-adapt-llama",
-                readOnly: true,
-            }
-        },
-        {
-            name: "infinigram-array-v4-tulu-3-405b-adapt",
-            persistentVolumeClaim: {
-                claimName: "infinigram-v4-tulu-3-405b-adapt-llama",
-                readOnly: true,
-            }
-        },
-        // {
-        //     name: "infinigram-array-dolma2-0625-base-shared",
-        //     persistentVolumeClaim: {
-        //         claimName: "infinigram-dolma2-0625-base-shared",
-        //         readOnly: true
-        //     }
-        // },
-        // {
-        //     name: "infinigram-array-dolma2-0625-v01-7b",
-        //     persistentVolumeClaim: {
-        //         claimName: "infinigram-dolma2-0625-v01-7b",
-        //         readOnly: true
-        //     }
-        // }
-    ];
-
-    local indexVolumeMounts = [
-        {
-            mountPath: "/mnt/infinigram-array/v4_pileval_llama",
-            name: "infinigram-array-pileval-gpt2",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
-            name: "infinigram-array-olmoe-mix-0924-dclm",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
-            name: "infinigram-array-olmoe-mix-0924-nodclm",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-olmoe-0125-1b-7b-anneal-adapt",
-            name: "infinigram-array-v4-olmoe-0125-1b-7b-anneal-adapt",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-olmo-2-1124-13b-anneal-adapt",
-            name: "infinigram-array-v4-olmo-2-1124-13b-anneal-adapt",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt",
-            name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-tulu-3-8b-adapt",
-            name: "infinigram-array-v4-tulu-3-8b-adapt",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-tulu-3-70b-adapt",
-            name: "infinigram-array-v4-tulu-3-70b-adapt",
-            readOnly: true,
-        },
-        {
-            mountPath: "/mnt/infinigram-array/v4-tulu-3-405b-adapt",
-            name: "infinigram-array-v4-tulu-3-405b-adapt",
-            readOnly: true,
-        },
-        // {
-        //     mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
-        //     name: "infinigram-array-dolma2-0625-base-shared",
-        //     readOnly: true,
-        // },
-        // {
-        //     mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
-        //     name: "infinigram-array-dolma2-0625-v01-7b",
-        //     readOnly: true,
-        // }
-    ];
-
     local deployment = {
         apiVersion: 'apps/v1',
         kind: 'Deployment',
@@ -485,12 +348,10 @@ function(
                     nodeSelector: {
                         "cloud.google.com/gke-nodepool": "cpu64-256g"
                     },
-                    volumes: indexVolumes,
                     containers: [
                         {
                             name: fullyQualifiedName + '-api',
                             image: apiImage,
-                            volumeMounts: indexVolumeMounts,
                             # The "probes" below allow Kubernetes to determine
                             # if your application is working properly.
                             #
@@ -536,8 +397,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 63,
-                                    memory: '257G'
+                                    cpu: 2,
+                                    memory: '8G'
                                 },
                                 limits: { }
                                    + gpuLimits # only the first container should have gpuLimits applied
@@ -619,145 +480,124 @@ function(
         },
     };
 
-    local attributionWorkerReplicas = if env == 'prod' then config.attributionWorkerReplicas.prod else 1;
-    local attributionWorkerSelectorLabels = {
-        app: config.appName + '-attribution-worker',
-        env: env
-    };
-    local attributionWorkerPodLabels = podLabels + { app: config.appName + '-attribution-worker' };
-    local attributionWorkerFullyQualifiedName = fullyQualifiedName + '-attribution-worker';
+    local curriedCreateWorker = function(indexId, env, envVariables, volumes, volumeMounts) createWorker (
+        indexId,
+        env,
+        envVariables,
+        volumes,
+        volumeMounts,
+        config,
+        podLabels,
+        config.appName,
+        labels,
+        namespaceName,
+        annotations,
+        cause,
+        antiAffinityLabels,
+        workerImage
+    );
 
-    // This is used to verify that the worker is functional.
-    local workerHealthCheck = {
-        port: 8080,
-        scheme: 'HTTP'
-    };
-
-    local attributionWorkerDeployment = {
-        apiVersion: 'apps/v1',
-        kind: 'Deployment',
-        metadata: {
-            labels: labels,
-            name: attributionWorkerFullyQualifiedName,
-            namespace: namespaceName,
-            annotations: annotations + {
-                'kubernetes.io/change-cause': cause
-            }
-        },
-        spec: {
-            strategy: {
-                type: 'RollingUpdate',
-                rollingUpdate: {
-                    maxSurge: attributionWorkerReplicas // This makes deployments faster.
+    local olmo3_7b_instruct_worker = curriedCreateWorker(
+        'olmo-3-0625-7b-instruct',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
                 }
             },
-            revisionHistoryLimit: 3,
-            replicas: attributionWorkerReplicas,
-            selector: {
-                matchLabels: attributionWorkerSelectorLabels
-            },
-            template: {
-                metadata: {
-                    name: attributionWorkerFullyQualifiedName,
-                    namespace: namespaceName,
-                    labels: attributionWorkerPodLabels,
-                    annotations: annotations
-                },
-                spec: {
-                    # This block tells the cluster that we'd like to make sure
-                    # each instance of your application is on a different node. This
-                    # way if a node goes down, your application doesn't:
-                    # See: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-isolation-restriction
-                    affinity: {
-                        podAntiAffinity: {
-                            requiredDuringSchedulingIgnoredDuringExecution: [
-                                {
-                                   labelSelector: {
-                                        matchExpressions: [
-                                            {
-                                                    key: labelName,
-                                                    operator: "In",
-                                                    values: [ antiAffinityLabels[labelName], ],
-                                            } for labelName in std.objectFields(antiAffinityLabels)
-                                       ],
-                                    },
-                                    topologyKey: "kubernetes.io/hostname"
-                                },
-                            ]
-                        },
-                    },
-                    nodeSelector: {
-                        "cloud.google.com/gke-nodepool": "cpu64-256g"
-                    },
-                    volumes: indexVolumes,
-                    containers: [
-                        {
-                            name: attributionWorkerFullyQualifiedName,
-                            image: workerImage,
-                            volumeMounts: indexVolumeMounts,
-                            # The "probes" below allow Kubernetes to determine
-                            # if your application is working properly.
-                            #
-                            # The readinessProbe is used to determine if
-                            # an instance of your application can accept live
-                            # requests. The configuration below tells Kubernetes
-                            # to stop sending live requests to your application
-                            # if it returns 3 non 2XX responses over 30 seconds.
-                            # When this happens the application instance will
-                            # be taken out of rotation and given time to "catch-up".
-                            # Once it returns a single 2XX, Kubernetes will put
-                            # it back in rotation.
-                            #
-                            # Kubernetes also has a livenessProbe that can be used to restart
-                            # deadlocked processes. You can find out more about it here:
-                            # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-command
-                            #
-                            # We don't use a livenessProbe as it's easy to cause unnecessary
-                            # restarts, which can be really disruptive to a site's availability.
-                            # If you think your application is likely to be unstable after running
-                            # for long periods send a note to reviz@allenai.org so we can work
-                            # with you to craft the right livenessProbe.
-                            readinessProbe: {
-                                httpGet: workerHealthCheck + {
-                                    path: '/'
-                                },
-                                periodSeconds: 10,
-                                failureThreshold: 3
-                            },
-                            # This tells Kubernetes what CPU and memory resources your API needs.
-                            # We set these values low by default, as most applications receive
-                            # bursts of activity and accordingly don't need dedicated resources
-                            # at all times.
-                            #
-                            # Your application will be allowed to use more resources than what's
-                            # specified below. But your application might be killed if it uses
-                            # more than what's requested. If you know you need more memory
-                            # or that your workload is CPU intensive, consider increasing the
-                            # values below.
-                            #
-                            # For more information about these values, and the current maximums
-                            # that your application can request, see:
-                            # https://skiff.allenai.org/resources.html
-                            resources: {
-                                requests: {
-                                    cpu: 63,
-                                    memory: '257G'
-                                },
-                                limits: { }
-                                   + gpuLimits # only the first container should have gpuLimits applied
-                            },
-                            env: sharedEnv + [
-                                {
-                                    name: 'OTEL_SERVICE_NAME',
-                                    value: 'infinigram-api-worker'
-                                },
-                            ]
-                        }
-                    ]
+            {
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-v01-7b",
+                    readOnly: true
                 }
             }
-        }
-    };
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                readOnly: true,
+            }
+        ]
+    );
+
+    local olmo3_7b_think_worker = curriedCreateWorker(
+        'olmo-3-0625-7b-think',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-v01-7b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
+                name: "infinigram-array-dolma2-0625-v01-7b",
+                readOnly: true,
+            }
+        ]
+    );
+
+    local olmo3_32b_think_worker = curriedCreateWorker(
+        'olmo-3-0625-32b-think',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-v6-dolma2-0625-v02-32b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                readOnly: true,
+            }
+        ]
+    );
 
     local defaultObjects = [
         namespace,
@@ -766,7 +606,9 @@ function(
         deployment,
         service,
         pdb,
-        attributionWorkerDeployment
+        olmo3_7b_instruct_worker,
+        olmo3_32b_think_worker,
+        olmo3_7b_think_worker
     ];
 
     if std.length(scholarHosts) > 0 then

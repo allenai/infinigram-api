@@ -140,7 +140,7 @@ function(
                                     memory: '257G'
                                 },
                             },
-                            env: env + [
+                            env: envVariables + [
                                 {
                                     name: 'OTEL_SERVICE_NAME',
                                     value: 'infinigram-api-worker'

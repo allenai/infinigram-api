@@ -31,7 +31,12 @@ async def startup(ctx: AttributionWorkerContext) -> None:
     logging.getLogger().info(
         "Worker starting up for index %s", assigned_index_enum.value
     )
+
     ctx["infini_gram_processor"] = InfiniGramProcessor(assigned_index_enum)
+
+    logging.getLogger().info(
+        "Worker finished starting up for index %s", assigned_index_enum.value
+    )
 
 
 settings = SettingsDict(

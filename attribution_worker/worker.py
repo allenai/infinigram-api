@@ -143,5 +143,7 @@ async def attribution_job(
 
 
 settings = SettingsDict(
-    queue=queue, functions=[("attribute", attribution_job)], concurrency=1
+    queue=queue,
+    functions=[("attribute", attribution_job)],  # type: ignore
+    concurrency=1,
 )

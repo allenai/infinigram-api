@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import (
     Iterable,
     Sequence,
@@ -10,7 +11,8 @@ from infini_gram.models import (
     InfiniGramEngineResponse,
 )
 from opentelemetry import trace
-from transformers.tokenization_utils_base import (  # type: ignore
+from opentelemetry.trace.status import StatusCode
+from transformers.tokenization_utils_base import (
     EncodedInput,
     PreTokenizedInput,
     TextInput,
@@ -34,6 +36,7 @@ from .models.is_infini_gram_error_response import (
 from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
+logger = logging.getLogger("uvicorn.error")
 
 
 class InfiniGramProcessor:
@@ -42,6 +45,7 @@ class InfiniGramProcessor:
     infini_gram_engine: InfiniGramEngineDiff
 
     def __init__(self, index: AvailableInfiniGramIndexId):
+        logger.debug("Initializing index %s", index.value)
         self.index = index.value
         index_mapping = index_mappings[index.value]
 
@@ -51,7 +55,7 @@ class InfiniGramProcessor:
             index_dir=index_mapping["index_dir"],
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
-            bow_ids_path=self.tokenizer.bow_ids_path,
+            bow_ids_path=self.tokenizer.bow_ids_path,  # type:ignore
             # We need to get the OSX build of infini-gram working again so we can upgrade it to 2.5.0
             attribution_block_size=256,
             precompute_unigram_logprobs=True,
@@ -59,7 +63,10 @@ class InfiniGramProcessor:
             ds_prefetch_depth=0,
             sa_prefetch_depth=0,
             od_prefetch_depth=0,
+            vocab_size=self.tokenizer.hf_tokenizer.vocab_size,
+            token_dtype=index_mapping["token_dtype"],
         )
+        logger.debug("Finished initializing processor for index %s", index.value)
 
     @tracer.start_as_current_span("infini_gram_processor/tokenize")
     def tokenize(
@@ -80,7 +87,15 @@ class InfiniGramProcessor:
         result: InfiniGramEngineResponse[TInfiniGramResponse],
     ) -> TInfiniGramResponse:
         if is_infini_gram_error_response(result):
-            raise InfiniGramEngineException(detail=result["error"])
+            exception = InfiniGramEngineException(detail=result["error"])
+
+            current_span = trace.get_current_span()
+            current_span.record_exception(
+                exception, attributes={"detail": exception.detail}
+            )
+            current_span.set_status(StatusCode.ERROR)
+
+            raise exception
 
         return cast(TInfiniGramResponse, result)
 
@@ -189,16 +204,18 @@ class InfiniGramProcessor:
         self,
         document_request_by_span: Iterable[GetDocumentByPointerRequest],
     ) -> list[list[Document]]:
-        get_docs_by_pointers_response = self.infini_gram_engine.get_docs_by_ptrs_2(
-            requests=[
-                {
-                    "docs": document_request.docs,
-                    "span_ids": document_request.span_ids,
-                    "needle_len": document_request.needle_length,
-                    "max_ctx_len": document_request.maximum_context_length,
-                }
-                for document_request in document_request_by_span
-            ],
+        get_docs_by_pointers_response = (
+            self.infini_gram_engine.get_docs_by_ptrs_2_grouped(
+                requests=[
+                    {
+                        "docs": document_request.docs,
+                        "span_ids": document_request.span_ids,
+                        "needle_len": document_request.needle_length,
+                        "max_ctx_len": document_request.maximum_context_length,
+                    }
+                    for document_request in document_request_by_span
+                ],
+            )
         )
 
         documents_by_span_result = self.__handle_error(get_docs_by_pointers_response)

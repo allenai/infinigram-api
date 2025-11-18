@@ -40,6 +40,11 @@ if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt-llama ]; then
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt-llama
 fi
 
+if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt ]; then
+    echo "creating a link from v4_pileval_llama to v4-tulu-3-8b-adapt"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-8b-adapt
+fi
+
 if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-70b-adapt-llama ]; then
     echo "creating a link from v4_pileval_llama to v4-tulu-3-70b-adapt-llama"
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-70b-adapt-llama
@@ -48,6 +53,18 @@ fi
 if [ ! -d $INFINIGRAM_ARRAY_DIR/v4-tulu-3-405b-adapt-llama ]; then
     echo "creating a link from v4_pileval_llama to v4-tulu-3-405b-adapt-llama"
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/v4-tulu-3-405b-adapt-llama
+fi
+
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/dolma2-0625-base-shared ]; then
+    echo "creating a link from v4_pileval_llama to dolma2-0625-base-shared"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/dolma2-0625-base-shared
+fi
+
+
+if [ ! -d $INFINIGRAM_ARRAY_DIR/dolma2-0625-v01-7b ]; then
+    echo "creating a link from v4_pileval_llama to dolma2-0625-v01-7b"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/dolma2-0625-v01-7b
 fi
 
 

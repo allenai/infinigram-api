@@ -180,7 +180,7 @@ class AttributionService:
                 ex, attributes={"job_key": job_key, "index": index.value}
             )
 
-            await abort_attribution_job(job_key)
+            await abort_attribution_job(job_key, index=index)
 
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."

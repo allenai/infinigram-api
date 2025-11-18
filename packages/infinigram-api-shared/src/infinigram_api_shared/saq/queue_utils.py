@@ -15,16 +15,22 @@ def get_attribute_job_name_for_index(index_id: AvailableInfiniGramIndexId) -> st
 @lru_cache
 def get_queue_connection_pool(queue_url: str) -> AsyncConnectionPool:
     return AsyncConnectionPool(
-        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=False
+        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=True
     )
 
 
 @lru_cache
 def get_queue_for_index(
-    queue_url: str, base_queue_name: str, index_id: AvailableInfiniGramIndexId
+    queue_url: str,
+    base_queue_name: str,
+    index_id: AvailableInfiniGramIndexId,
+    *,
+    manage_pool_lifecycle: bool = False,
 ) -> Queue:
     connection_pool = get_queue_connection_pool(queue_url)
     queue_name = f"${base_queue_name}_${index_id.value}"
     return PostgresQueue(
-        pool=connection_pool, name=queue_name, manage_pool_lifecycle=True
+        pool=connection_pool,
+        name=queue_name,
+        manage_pool_lifecycle=manage_pool_lifecycle,
     )

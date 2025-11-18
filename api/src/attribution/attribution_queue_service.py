@@ -3,7 +3,11 @@ from typing import Annotated, Any
 from fastapi import Depends
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
-from infinigram_api_shared.saq.queue_utils import get_attribute_job_name_for_index
+from infinigram_api_shared.saq.queue_utils import (
+    get_attribute_job_name_for_index,
+    get_queue_connection_pool,
+    get_queue_for_index,
+)
 from opentelemetry import trace
 from opentelemetry.semconv.trace import SpanAttributes
 from opentelemetry.trace import SpanKind
@@ -13,21 +17,26 @@ from saq import Queue
 from src.attribution.attribution_request import AttributionRequest
 from src.config import get_config
 
-queue = Queue.from_url(
-    get_config().attribution_queue_url, name=get_config().attribution_queue_name
-)
-
 
 async def connect_to_attribution_queue() -> None:
-    await queue.connect()
+    config = get_config()
+    connection_pool = get_queue_connection_pool(config.attribution_queue_url)
+    await connection_pool.open()
 
 
 async def disconnect_from_attribution_queue() -> None:
-    await queue.disconnect()
+    config = get_config()
+    connection_pool = get_queue_connection_pool(config.attribution_queue_url)
+    await connection_pool.close()
 
 
-def get_queue() -> Queue:
-    return queue
+def get_queue(index_id: AvailableInfiniGramIndexId) -> Queue:
+    config = get_config()
+    return get_queue_for_index(
+        queue_url=config.attribution_queue_url,
+        base_queue_name=config.attribution_queue_name,
+        index_id=index_id,
+    )
 
 
 AttributionQueueDependency = Annotated[Queue, Depends(get_queue)]
@@ -52,7 +61,7 @@ async def publish_attribution_job(
         otel_context: dict[str, Any] = {}
         TraceContextTextMapPropagator().inject(otel_context)
 
-        return await get_queue().apply(
+        return await get_queue(index).apply(
             get_attribute_job_name_for_index(index),
             timeout=60,
             key=job_key,
@@ -72,8 +81,10 @@ async def publish_attribution_job(
         )
 
 
-async def abort_attribution_job(job_key: str) -> None:
-    job_to_abort = await get_queue().job(job_key)
+async def abort_attribution_job(
+    job_key: str, index: AvailableInfiniGramIndexId
+) -> None:
+    job_to_abort = await get_queue(index).job(job_key)
 
     if job_to_abort is not None:
-        await get_queue().abort(job_to_abort, "Client timeout")
+        await get_queue(index).abort(job_to_abort, "Client timeout")

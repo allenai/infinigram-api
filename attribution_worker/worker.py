@@ -8,7 +8,6 @@ from infinigram_api_shared.saq.queue_utils import (
     get_attribute_job_name_for_index,
     get_queue_for_index,
 )
-from saq import Queue
 from saq.types import SettingsDict
 
 from attribution_worker.attribution_worker_context import AttributionWorkerContext
@@ -17,8 +16,6 @@ from .attribution_handler import attribution_job
 from .config import get_config
 
 config = get_config()
-
-queue = Queue.from_url(config.attribution_queue_url, name=config.attribution_queue_name)
 
 
 try:
@@ -47,6 +44,7 @@ settings = SettingsDict(
         queue_url=config.attribution_queue_url,
         base_queue_name=config.attribution_queue_name,
         index_id=assigned_index_enum,
+        manage_pool_lifecycle=True,
     ),
     functions=[
         (get_attribute_job_name_for_index(assigned_index_enum), attribution_job)  # type: ignore[list-item] # The type for this isn't general enough to work with our fns

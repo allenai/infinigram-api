@@ -5,17 +5,17 @@ from psycopg_pool import AsyncConnectionPool
 from saq import Queue
 from saq.queue.postgres import PostgresQueue
 
-BASE_JOB_NAME = "attribute"
+_BASE_JOB_NAME = "attribute"
 
 
 def get_attribute_job_name_for_index(index_id: AvailableInfiniGramIndexId) -> str:
-    return f"${BASE_JOB_NAME}_${index_id.value}"
+    return f"${_BASE_JOB_NAME}_${index_id.value}"
 
 
 @lru_cache
 def get_queue_connection_pool(queue_url: str) -> AsyncConnectionPool:
     return AsyncConnectionPool(
-        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=True
+        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=False
     )
 
 

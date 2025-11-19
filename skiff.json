@@ -3,9 +3,9 @@
     "contact": "reviz",
     "team": "reviz",
     "replicas": {
-        "prod": 2
+        "prod": 4
     },
     "attributionWorkerReplicas": {
-        "prod": 2
+        "prod": 6
     }
 }

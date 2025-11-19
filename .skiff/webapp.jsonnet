@@ -345,9 +345,6 @@ function(
                             ]
                         },
                     },
-                    nodeSelector: {
-                        "cloud.google.com/gke-nodepool": "cpu64-256g"
-                    },
                     containers: [
                         {
                             name: fullyQualifiedName + '-api',

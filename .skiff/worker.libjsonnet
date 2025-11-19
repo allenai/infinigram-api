@@ -44,7 +44,7 @@ function(
             strategy: {
                 type: 'RollingUpdate',
                 rollingUpdate: {
-                    maxSurge: attributionWorkerReplicas // This makes deployments faster.
+                    maxSurge: attributionWorkerReplicas, // This makes deployments faster.
                     maxUnavailable: attributionWorkerReplicas - 1
                 }
             },

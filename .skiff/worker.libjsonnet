@@ -21,7 +21,7 @@ function(
         env: env
     };
     local attributionWorkerPodLabels = podLabels + { app: config.appName + attributionWorkerSuffix };
-    local attributionWorkerFullyQualifiedName = appName + '-' + (if (env == 'separate-workers-per-index') then 'swpi' else env) + attributionWorkerSuffix;
+    local attributionWorkerFullyQualifiedName = appName + '-' + env + attributionWorkerSuffix;
 
     // This is used to verify that the worker is functional.
     local workerHealthCheck = {
@@ -45,6 +45,7 @@ function(
                 type: 'RollingUpdate',
                 rollingUpdate: {
                     maxSurge: attributionWorkerReplicas // This makes deployments faster.
+                    maxUnavailable: attributionWorkerReplicas - 1
                 }
             },
             revisionHistoryLimit: 3,
@@ -136,8 +137,8 @@ function(
                             # https://skiff.allenai.org/resources.html
                             resources: {
                                 requests: {
-                                    cpu: 63,
-                                    memory: '257G'
+                                    cpu: 32,
+                                    memory: '128G'
                                 },
                             },
                             env: envVariables + [

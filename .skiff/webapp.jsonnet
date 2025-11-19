@@ -598,6 +598,40 @@ function(
             }
         ]
     );
+    
+    local olmo3_32b_instruct_worker = curriedCreateWorker(
+        'olmo-3-0625-32b-instruct',
+        env,
+        sharedEnv,
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-v6-dolma2-0625-v02-32b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                readOnly: true,
+            }
+        ]
+    );
 
     local defaultObjects = [
         namespace,
@@ -608,7 +642,8 @@ function(
         pdb,
         olmo3_7b_instruct_worker,
         olmo3_32b_think_worker,
-        olmo3_7b_think_worker
+        olmo3_7b_think_worker,
+        olmo3_32b_instruct_worker
     ];
 
     if std.length(scholarHosts) > 0 then

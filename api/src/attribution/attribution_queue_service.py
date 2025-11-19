@@ -60,7 +60,7 @@ async def publish_attribution_job(
 
         return await get_queue(index).apply(
             get_attribute_job_name_for_index(index),
-            timeout=60,
+            timeout=90,
             key=job_key,
             index=index.value,
             input=request.response,

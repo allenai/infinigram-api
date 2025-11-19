@@ -6,6 +6,6 @@
         "prod": 4
     },
     "attributionWorkerReplicas": {
-        "prod": 6
+        "prod": 3
     }
 }

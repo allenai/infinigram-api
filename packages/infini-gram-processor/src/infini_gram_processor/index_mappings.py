@@ -129,7 +129,7 @@ index_mappings: IndexMappings = {
         "tokenizer_factory": get_dolma_2_tokenizer,
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
-            f"{tokenizer_config.index_base_path}/dolma2-0625-v02-32b",
+            f"{tokenizer_config.index_base_path}/v6-dolma2-0625-v02-32b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",
@@ -138,7 +138,7 @@ index_mappings: IndexMappings = {
         "tokenizer_factory": get_dolma_2_tokenizer,
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
-            f"{tokenizer_config.index_base_path}/dolma2-0625-v02-32b",
+            f"{tokenizer_config.index_base_path}/v6-dolma2-0625-v02-32b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",

@@ -477,10 +477,10 @@ function(
         },
     };
 
-    local curriedCreateWorker = function(indexId, env, envVariables, volumes, volumeMounts) createWorker (
+    local curriedCreateWorker = function(indexId, volumes, volumeMounts) createWorker (
         indexId,
         env,
-        envVariables,
+        sharedEnv,
         volumes,
         volumeMounts,
         config,
@@ -496,8 +496,6 @@ function(
 
     local olmo3_7b_instruct_worker = curriedCreateWorker(
         'olmo-3-0625-7b-instruct',
-        env,
-        sharedEnv,
         [
             {
                 name: "infinigram-array-dolma2-0625-base-shared",
@@ -530,8 +528,6 @@ function(
 
     local olmo3_7b_think_worker = curriedCreateWorker(
         'olmo-3-0625-7b-think',
-        env,
-        sharedEnv,
         [
             {
                 name: "infinigram-array-dolma2-0625-base-shared",
@@ -564,8 +560,6 @@ function(
 
     local olmo3_32b_think_worker = curriedCreateWorker(
         'olmo-3-0625-32b-think',
-        env,
-        sharedEnv,
         [
             {
                 name: "infinigram-array-dolma2-0625-base-shared",
@@ -596,37 +590,81 @@ function(
         ]
     );
     
-    local olmo3_32b_instruct_worker = curriedCreateWorker(
-        'olmo-3-0625-32b-instruct',
-        env,
-        sharedEnv,
+    // local olmo3_32b_instruct_worker = curriedCreateWorker(
+    //     'olmo-3-0625-32b-instruct',
+    //     [
+    //         {
+    //             name: "infinigram-array-dolma2-0625-base-shared",
+    //             persistentVolumeClaim: {
+    //                 claimName: "infinigram-dolma2-0625-base-shared",
+    //                 readOnly: true
+    //             }
+    //         },
+    //         {
+    //             name: "infinigram-array-v6-dolma2-0625-v02-32b",
+    //             persistentVolumeClaim: {
+    //                 claimName: "infinigram-v6-dolma2-0625-v02-32b",
+    //                 readOnly: true
+    //             }
+    //         }
+    //     ],
+    //     [
+    //         {
+    //             mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+    //             name: "infinigram-array-dolma2-0625-base-shared",
+    //             readOnly: true,
+    //         },
+    //         {
+    //             mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
+    //             name: "infinigram-array-v6-dolma2-0625-v02-32b",
+    //             readOnly: true,
+    //         }
+    //     ]
+    // );
+
+
+    local olmo2_32b_worker = curriedCreateWorker(
+        'olmo-2-0325-32b',
         [
             {
-                name: "infinigram-array-dolma2-0625-base-shared",
+                name: "infinigram-array-olmoe-mix-0924-dclm",
                 persistentVolumeClaim: {
-                    claimName: "infinigram-dolma2-0625-base-shared",
-                    readOnly: true
+                    // olmoe-mix-0924 was made before we split dclm and nodclm, this claim is JUST dclm data!
+                    claimName: "infinigram-olmoe-mix-0924",
+                    readOnly: true,
                 }
             },
             {
-                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                name: "infinigram-array-olmoe-mix-0924-nodclm",
                 persistentVolumeClaim: {
-                    claimName: "infinigram-v6-dolma2-0625-v02-32b",
-                    readOnly: true
+                    claimName: "infinigram-olmoe-mix-0924-nodclm",
+                    readOnly: true,
                 }
-            }
+            },
+            {
+                name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-v4-olmo-2-0325-32b-anneal-adapt",
+                    readOnly: true,
+                }
+            },
         ],
         [
             {
-                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
-                name: "infinigram-array-dolma2-0625-base-shared",
+                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-dclm",
+                name: "infinigram-array-olmoe-mix-0924-dclm",
                 readOnly: true,
             },
             {
-                mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
-                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                mountPath: "/mnt/infinigram-array/olmoe-mix-0924-nodclm",
+                name: "infinigram-array-olmoe-mix-0924-nodclm",
                 readOnly: true,
-            }
+            },
+            {
+                mountPath: "/mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt",
+                name: "infinigram-array-v4-olmo-2-0325-32b-anneal-adapt",
+                readOnly: true,
+            },
         ]
     );
 
@@ -640,7 +678,8 @@ function(
         olmo3_7b_instruct_worker,
         olmo3_32b_think_worker,
         olmo3_7b_think_worker,
-        olmo3_32b_instruct_worker
+        // olmo3_32b_instruct_worker
+        olmo2_32b_worker
     ];
 
     if std.length(scholarHosts) > 0 then

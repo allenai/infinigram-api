@@ -1,0 +1,17 @@
+key,size,subset,category
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000000.npy,4756699588,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000001.npy,4617393780,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000002.npy,5347971092,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000003.npy,4974478296,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000004.npy,4742412624,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000005.npy,4982308712,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000006.npy,4365648292,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software/000007.npy,5081208452,s2pdf,software
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000000.npy,36113452932,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000001.npy,33775999648,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000002.npy,36405139324,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000003.npy,33701349444,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000004.npy,34091706000,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000005.npy,35178421612,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000006.npy,32653343448,s2pdf,software_development
+s3://ai2-llm/preprocessed/dolma2-0625/v0.1/allenai/dolma2-tokenizer/s2pdf_redacted/software_development/000007.npy,36887849280,s2pdf,software_development

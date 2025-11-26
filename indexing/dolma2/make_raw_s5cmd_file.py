@@ -31,23 +31,9 @@ with open(args.s5cmd_output_path, 'w') as f:
         elif 'pretraining-data' in raw_s3_path: # stack-edu, s2pdf
             raw_s3_path = 's3://ai2-llm/pretraining-data' + 'pretraining-data'.join(raw_s3_path.split('pretraining-data')[1:])
         elif '/mnt/raid0/pdfs-reshard/software_dev/' in raw_s3_path:
-            raise NotImplementedError('Software dev is not supported')
-            import re
-            match = re.search(r'/shard_0*([0-9]+)\.jsonl\.zst$', raw_s3_path)
-            if match:
-                shard_num = match.group(1).zfill(4) if len(match.group(1)) < 4 else match.group(1)
-            else:
-                raise ValueError(f"Cannot extract shard number from {raw_s3_path}")
-            raw_s3_path = f's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/software_dev/step_final/step_final/s2pdf_datadelve_software_dev-{shard_num}.jsonl.gz'
+            raw_s3_path = raw_s3_path.replace('/mnt/raid0/pdfs-reshard/software_dev/', 's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard/software_dev/')
         elif '/mnt/raid0/pdfs-reshard/software/' in raw_s3_path:
-            raise NotImplementedError('Software is not supported')
-            import re
-            match = re.search(r'/shard_0*([0-9]+)\.jsonl\.zst$', raw_s3_path)
-            if match:
-                shard_num = match.group(1).zfill(4) if len(match.group(1)) < 4 else match.group(1)
-            else:
-                raise ValueError(f"Cannot extract shard number from {raw_s3_path}")
-            raw_s3_path = f's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted/software/step_final/step_final/s2pdf_datadelve_software-{shard_num}.jsonl.gz'
+            raw_s3_path = raw_s3_path.replace('/mnt/raid0/pdfs-reshard/software/', 's3://ai2-llm/pretraining-data/sources/s2pdf_dedupe_minhash_v1_with_no_pii_basic_quality_datadelve_norefs_mdtables_v2_denylisted_reshard/software/')
         elif raw_s3_path.startswith('/mnt/raid0/dolmino-official-flat'):
             raw_s3_path = raw_s3_path.replace('/mnt/raid0/dolmino-official-flat', 's3://ai2-llm/pretraining-data/sources/dolma3-dolmino-official/100B')
         else:

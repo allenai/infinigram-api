@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--num-nodes", type=int, default=1)
 parser.add_argument("--remote-dir", type=str, default="s3://infini-gram/index/dolma2-0625-v02")
 parser.add_argument("--s5cmd-files-dir", type=str, default="s5cmd_files_dolmino")
+parser.add_argument("--dolci", action="store_true", help="Generate Dolci indexing workflow")
 args = parser.parse_args()
 
 num_nodes = args.num_nodes
@@ -13,12 +14,27 @@ remote_dir = args.remote_dir
 s5cmd_files_dir = args.s5cmd_files_dir
 os.makedirs(output_dir, exist_ok=True)
 
-for rank in range(num_nodes):
-    with open(f"aws_workflow_template.sh", "r") as f:
+if args.dolci:
+    # Single rank workflow for all datasets (assuming they fit on one node)
+    # If they need multiple nodes, we'd need to shard, but user didn't specify, so assuming 1 node is enough for these SFT sets.
+    # SFT sets are usually small.
+    with open("aws_workflow_template_dolci.sh", "r") as f:
         content = f.read()
-    content = content.replace("[[RANK]]", str(rank))
+    content = content.replace("[[RANK]]", "0")
     content = content.replace("[[REMOTE_DIR]]", remote_dir)
-    content = content.replace("[[S5CMD_FILES_DIR]]", s5cmd_files_dir)
-    with open(f"{output_dir}/rank_{rank:04d}.sh", "w") as f:
+    
+    with open(f"{output_dir}/rank_0000.sh", "w") as f:
         f.write(content)
-    os.chmod(f"{output_dir}/rank_{rank:04d}.sh", 0o755)
+    os.chmod(f"{output_dir}/rank_0000.sh", 0o755)
+    print("Generated rank_0000.sh for Dolci workflow.")
+
+else:
+    for rank in range(num_nodes):
+        with open(f"aws_workflow_template.sh", "r") as f:
+            content = f.read()
+        content = content.replace("[[RANK]]", str(rank))
+        content = content.replace("[[REMOTE_DIR]]", remote_dir)
+        content = content.replace("[[S5CMD_FILES_DIR]]", s5cmd_files_dir)
+        with open(f"{output_dir}/rank_{rank:04d}.sh", "w") as f:
+            f.write(content)
+        os.chmod(f"{output_dir}/rank_{rank:04d}.sh", 0o755)

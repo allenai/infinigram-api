@@ -1,7 +1,7 @@
-NUM_SHARDS=25
-NUM_NODES=25
+NUM_SHARDS=1
+NUM_NODES=1
 RANK=0
-REMOTE_DIR=s3://infini-gram/index/dolma2-0625-v01/
+REMOTE_DIR=s3://infini-gram/index/dolci
 
 # Mount volumes
 echo "Mount volumes: Starting ..."
@@ -52,6 +52,7 @@ conda config --system --add channels conda-forge
 conda config --system --set channel_priority strict
 conda env create -f environment.yml -y
 conda activate he-indexing-dolma2
+pip install datasets transformers tokenizers sentencepiece
 wget https://github.com/peak/s5cmd/releases/download/v2.2.2/s5cmd_2.2.2_Linux-64bit.tar.gz
 mkdir -p s5cmd_2.2.2
 tar -xvzf s5cmd_2.2.2_Linux-64bit.tar.gz -C s5cmd_2.2.2
@@ -61,46 +62,43 @@ rm s5cmd_2.2.2_Linux-64bit.tar.gz
 echo "Install conda: Done"
 echo "================================================"
 
-# # Compile things
-# echo "Compile things: Starting ..."
-# cp ~/miniconda3/envs/hg-dedup/lib/python3.12/site-packages/infini_gram/rust_indexing .
-# c++ -std=c++20 -O3 -shared -fPIC $(python3 -m pybind11 --includes) cpp_engine_dedup.cpp -o cpp_engine_dedup$(python3-config --extension-suffix)
-# echo "Compile things: Done"
-# echo "================================================"
-
 # Run workflow
-for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
+echo "Prepare data: Starting ..."
+# Ensure the transform script is available. It should be in ../../indexing/transform_hf_to_raw_dolci.py relative to here (here is indexing/dolma2)
+# But we cloned into infinigram-api/indexing/dolma2
+# So transform script is at ../transform_hf_to_raw_dolci.py
+time python ../transform_hf_to_raw_dolci.py
+# Output is in ./raw (relative to script execution dir, which is indexing/dolma2 if we ran it there, or relative to where python ran?)
+# The script uses output_dir = './raw'.
+# So it is in infinigram-api/indexing/dolma2/raw or ../raw?
+# Let's check where we are. 'cd infinigram-api/indexing/dolma2'
+# So ./raw is infinigram-api/indexing/dolma2/raw
+mkdir -p /data_c/raw
+mv raw/* /data_c/raw/
+echo "Prepare data: Done"
 
-    echo "Run workflow for shard $shard: Starting ..."
-    export NAME=$(printf "%02d" $shard)
-    export INDEX_NAME="v6_${NAME}_u32"
+echo "Extract Meta: Starting ..."
+time python extract_meta.py
+echo "Extract Meta: Done"
 
-    echo "Download data: Starting ..."
-    time s5cmd run ./s5cmd_files_v01_missing_pdfs/shard_${NAME}.s5cmd
-    time python make_raw_s5cmd_file.py --s5cmd-output-path ./s5cmd_files_v01_missing_pdfs/raw.s5cmd
-    time s5cmd run ./s5cmd_files_v01_missing_pdfs/raw.s5cmd
-    echo "Download data: Done"
-    echo "------------------------------------------------"
+DATASETS=("Dolci-Think-SFT-7B" "Dolci-Think-SFT-32B" "Dolci-Instruct-SFT-7B")
 
-    echo "Indexing: Starting ..."
-    time python extract_meta.py
-    time python indexing_v6.py --data_dir /data_c/tokenized --temp_dir /data_t/${INDEX_NAME} --save_dir /data_i/${INDEX_NAME} --pretokenized --token_dtype u32 --cpus 192 --mem 1800 --add_metadata
-    echo "Indexing: Done"
-    echo "------------------------------------------------"
-
+for DS_NAME in "${DATASETS[@]}"; do
+    echo "Indexing $DS_NAME: Starting ..."
+    INDEX_NAME="v6_${DS_NAME}_u32"
+    
+    time python indexing_v6.py --data_dir "/data_c/raw/${DS_NAME}" --temp_dir "/data_t/${INDEX_NAME}" --save_dir "/data_i/${INDEX_NAME}" --token_dtype u32 --cpus 192 --mem 1800 --add_metadata --tokenizer "allenai/dolma2-tokenizer"
+    
     echo "Upload data: Starting ..."
-    time s5cmd cp -sp "/data_i/${INDEX_NAME}/*" "${REMOTE_DIR}/${NAME}/"
+    time s5cmd cp -sp "/data_i/${INDEX_NAME}/*" "${REMOTE_DIR}/${DS_NAME}/"
     echo "Upload data: Done"
     echo "------------------------------------------------"
-
-    # rm -r /data_c/tokenized
-    # rm -r /data_c/raw
+    
+    # Cleanup to save space? These are small, so maybe not needed.
     # rm -r /data_t/${INDEX_NAME}
     # rm -r /data_i/${INDEX_NAME}
-
-    screen -X hardcopy -h ~/screen_output.txt
-    # rm -r /data_c/tokenized
-    echo "Run workflow for shard $shard: Done"
-    echo "================================================"
-
 done
+
+screen -X hardcopy -h ~/screen_output.txt
+echo "All Done"
+

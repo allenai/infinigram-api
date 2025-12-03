@@ -326,7 +326,7 @@ def prepare(args):
             # from dolma.tokenizer import Tokenizer
             # tokenizer = Tokenizer.from_pretrained('allenai/gpt-neox-olmo-dolma-v1_5', bos_token_id=None, eos_token_id=None, pad_token_id=1, segment_before_tokenization=True)
         else:
-            raise ValueError(f'Unknown tokenizer: {args.tokenizer}')
+            tokenizer = transformers.AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True, add_bos_token=False, add_eos_token=False)
 
     if args.prepare_mode == 'fewfiles':
         prepare_fewfiles(args)
@@ -444,7 +444,7 @@ def main():
     parser.add_argument('--save_dir', type=str, required=True, help='Directory where the final index files are stored. Must be absolute path.')
     parser.add_argument('--version', type=int, default=6, choices=[6], help='Version of the index.')
     parser.add_argument('--reversed', default=False, action='store_true', help='Whether to reverse the tokens in each document.')
-    parser.add_argument('--tokenizer', type=str, default=None, choices=[None, 'gpt2', 'llama', 'olmo'])
+    parser.add_argument('--tokenizer', type=str, default=None, help='Tokenizer to use. Can be a preset (gpt2, llama, olmo) or a Hugging Face model ID.')
     parser.add_argument('--prepare_mode', type=str, default='manyfiles', choices=['fewfiles', 'manyfiles'], help='Mode for preparing the data.')
     parser.add_argument('--pretokenized', default=False, action='store_true', help='Whether the data is already tokenized.')
     parser.add_argument('--token_dtype', type=str, default='u16', choices=['u8', 'u16', 'u32'], help='Data type for tokens.')

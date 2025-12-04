@@ -67,24 +67,18 @@ echo "Install conda: Done"
 echo "================================================"
 
 # Set cache directories to larger volume
+export HF_HOME="/data_t/hf_home"
 export HF_DATASETS_CACHE="/data_t/hf_cache"
 export TMPDIR="/data_t/tmp"
+mkdir -p $HF_HOME
 mkdir -p $HF_DATASETS_CACHE
 mkdir -p $TMPDIR
 
 # Run workflow
 echo "Prepare data: Starting ..."
-# Ensure the transform script is available. It should be in ../../indexing/transform_hf_to_raw_dolci.py relative to here (here is indexing/dolma2)
-# But we cloned into infinigram-api/indexing/dolma2
-# So transform script is at ../transform_hf_to_raw_dolci.py
-time python ../transform_hf_to_raw_dolci.py
-# Output is in ./raw (relative to script execution dir, which is indexing/dolma2 if we ran it there, or relative to where python ran?)
-# The script uses output_dir = './raw'.
-# So it is in infinigram-api/indexing/dolma2/raw or ../raw?
-# Let's check where we are. 'cd infinigram-api/indexing/dolma2'
-# So ./raw is infinigram-api/indexing/dolma2/raw
+# Ensure the transform script is available.
 mkdir -p /data_c/raw
-mv raw/* /data_c/raw/
+time python ../transform_hf_to_raw_dolci.py --output_dir /data_c/raw
 echo "Prepare data: Done"
 
 echo "Extract Meta: Starting ..."

@@ -22,5 +22,5 @@ To index the Dolci SFT datasets (7B/32B/Instruct):
    ```
 3. Monitor progress:
    ```bash
-   poormanray run --name ${NAME} --command 's=$(screen -ls 2>/dev/null | awk "/Detached|Attached/{print \$1}" | tail -n1); [ -n "$s" ] && screen -r "$s" -X hardcopy -h /tmp/screen.out && tail -n 200 /tmp/screen.out || echo "no screen session"'
+   poormanray run --name ${NAME} --command 'tail -f ~/script_log.txt'
    ```

@@ -37,6 +37,8 @@ for ds_path in ds_names:
                 for message in item['messages']:
                     role = message['role']
                     content = message['content']
+                    if content is None:
+                        content = ''
                     # assert role in ['user', 'assistant', 'system']
                     text += '\n' + f'<|{role}|>' + '\n' + content
             else:

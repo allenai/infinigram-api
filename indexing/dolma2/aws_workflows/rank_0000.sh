@@ -3,6 +3,10 @@ NUM_NODES=1
 RANK=0
 REMOTE_DIR=s3://infini-gram/index/dolci
 
+set -e
+set -x
+exec > >(tee -a ~/script_log.txt) 2>&1
+
 # Mount volumes
 echo "Mount volumes: Starting ..."
 # Dynamically find the first 8 devices with size 3.4T
@@ -61,6 +65,12 @@ rm -r s5cmd_2.2.2
 rm s5cmd_2.2.2_Linux-64bit.tar.gz
 echo "Install conda: Done"
 echo "================================================"
+
+# Set cache directories to larger volume
+export HF_DATASETS_CACHE="/data_t/hf_cache"
+export TMPDIR="/data_t/tmp"
+mkdir -p $HF_DATASETS_CACHE
+mkdir -p $TMPDIR
 
 # Run workflow
 echo "Prepare data: Starting ..."

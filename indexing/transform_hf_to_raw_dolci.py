@@ -1,9 +1,14 @@
 import datasets
 import json
 import os
+import argparse
 
-# Base output directory (local to where script runs)
-output_dir = './raw'
+parser = argparse.ArgumentParser()
+parser.add_argument('--output_dir', type=str, default='/data_c/raw')
+args = parser.parse_args()
+
+# Base output directory
+output_dir = args.output_dir
 
 # Datasets to index
 ds_names = [

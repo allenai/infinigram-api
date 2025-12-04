@@ -81,10 +81,6 @@ mkdir -p /data_c/raw
 time python ../transform_hf_to_raw_dolci.py --output_dir /data_c/raw
 echo "Prepare data: Done"
 
-echo "Extract Meta: Starting ..."
-time python extract_meta.py
-echo "Extract Meta: Done"
-
 DATASETS=("Dolci-Think-SFT-7B" "Dolci-Think-SFT-32B" "Dolci-Instruct-SFT-7B")
 
 for DS_NAME in "${DATASETS[@]}"; do

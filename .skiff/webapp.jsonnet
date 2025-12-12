@@ -678,7 +678,7 @@ function(
         olmo3_7b_instruct_worker,
         olmo3_32b_think_worker,
         olmo3_7b_think_worker,
-        // olmo3_32b_instruct_worker
+        olmo3_32b_instruct_worker,
         olmo2_32b_worker
     ];
 

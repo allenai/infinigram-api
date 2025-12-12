@@ -590,37 +590,37 @@ function(
         ]
     );
     
-    // local olmo3_32b_instruct_worker = curriedCreateWorker(
-    //     'olmo-3-0625-32b-instruct',
-    //     [
-    //         {
-    //             name: "infinigram-array-dolma2-0625-base-shared",
-    //             persistentVolumeClaim: {
-    //                 claimName: "infinigram-dolma2-0625-base-shared",
-    //                 readOnly: true
-    //             }
-    //         },
-    //         {
-    //             name: "infinigram-array-v6-dolma2-0625-v02-32b",
-    //             persistentVolumeClaim: {
-    //                 claimName: "infinigram-v6-dolma2-0625-v02-32b",
-    //                 readOnly: true
-    //             }
-    //         }
-    //     ],
-    //     [
-    //         {
-    //             mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
-    //             name: "infinigram-array-dolma2-0625-base-shared",
-    //             readOnly: true,
-    //         },
-    //         {
-    //             mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
-    //             name: "infinigram-array-v6-dolma2-0625-v02-32b",
-    //             readOnly: true,
-    //         }
-    //     ]
-    // );
+    local olmo3_32b_instruct_worker = curriedCreateWorker(
+        'olmo-3-0625-32b-instruct',
+        [
+            {
+                name: "infinigram-array-dolma2-0625-base-shared",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolma2-0625-base-shared",
+                    readOnly: true
+                }
+            },
+            {
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-v6-dolma2-0625-v02-32b",
+                    readOnly: true
+                }
+            }
+        ],
+        [
+            {
+                mountPath: "/mnt/infinigram-array/dolma2-0625-base-shared",
+                name: "infinigram-array-dolma2-0625-base-shared",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
+                name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                readOnly: true,
+            }
+        ]
+    );
 
 
     local olmo2_32b_worker = curriedCreateWorker(

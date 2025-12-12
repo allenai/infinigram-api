@@ -17,7 +17,7 @@ class AvailableInfiniGramIndexId(Enum):
     OLMO_3_0625_7B_THINK = "olmo-3-0625-7b-think"
     OLMO_3_0625_7B_INSTRUCT = "olmo-3-0625-7b-instruct"
     OLMO_3_0625_32B_THINK = "olmo-3-0625-32b-think"
-    # OLMO_3_0625_32B_INSTRUCT = "olmo-3-0625-32b-instruct"
+    OLMO_3_0625_32B_INSTRUCT = "olmo-3-0625-32b-instruct"
 
 
 class IndexMapping(TypedDict):
@@ -42,7 +42,7 @@ IndexMappings = TypedDict(
         "olmo-3-0625-7b-think": IndexMapping,
         "olmo-3-0625-7b-instruct": IndexMapping,
         "olmo-3-0625-32b-think": IndexMapping,
-        # "olmo-3-0625-32b-instruct": IndexMapping,
+        "olmo-3-0625-32b-instruct": IndexMapping,
     },
 )
 
@@ -134,13 +134,13 @@ index_mappings: IndexMappings = {
         "index_dir_diff": [],
         "token_dtype": "u32",
     },
-    # AvailableInfiniGramIndexId.OLMO_3_0625_32B_INSTRUCT.value: {
-    #     "tokenizer_factory": get_dolma_2_tokenizer,
-    #     "index_dir": [
-    #         f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
-    #         f"{tokenizer_config.index_base_path}/v6-dolma2-0625-v02-32b",
-    #     ],
-    #     "index_dir_diff": [],
-    #     "token_dtype": "u32",
-    # },
+    AvailableInfiniGramIndexId.OLMO_3_0625_32B_INSTRUCT.value: {
+        "tokenizer_factory": get_dolma_2_tokenizer,
+        "index_dir": [
+            f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
+            f"{tokenizer_config.index_base_path}/v6-dolma2-0625-v02-32b",
+        ],
+        "index_dir_diff": [],
+        "token_dtype": "u32",
+    },
 }

@@ -112,6 +112,7 @@ index_mappings: IndexMappings = {
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
+            f"{tokenizer_config.index_base_path}/dolci-think-sft-7b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",
@@ -121,6 +122,7 @@ index_mappings: IndexMappings = {
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/dolma2-0625-v01-7b",
+            f"{tokenizer_config.index_base_path}/dolci-instruct-sft-7b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",
@@ -130,6 +132,7 @@ index_mappings: IndexMappings = {
         "index_dir": [
             f"{tokenizer_config.index_base_path}/dolma2-0625-base-shared",
             f"{tokenizer_config.index_base_path}/v6-dolma2-0625-v02-32b",
+            f"{tokenizer_config.index_base_path}/dolci-think-sft-32b",
         ],
         "index_dir_diff": [],
         "token_dtype": "u32",

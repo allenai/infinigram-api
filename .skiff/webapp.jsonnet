@@ -512,7 +512,7 @@ function(
                 }
             },
             {
-                name: "infinigram-dolci-instruct-sft-7b",
+                name: "infinigram-array-dolci-instruct-sft-7b",
                 persistentVolumeClaim: {
                     claimName: "infinigram-dolci-instruct-sft-7b",
                     readOnly: true
@@ -556,7 +556,7 @@ function(
                 }
             },
             {
-                name: "infinigram-dolci-think-sft-7b",
+                name: "infinigram-array-dolci-think-sft-7b",
                 persistentVolumeClaim: {
                     claimName: "infinigram-dolci-think-sft-7b",
                     readOnly: true
@@ -600,7 +600,7 @@ function(
                 }
             },
             {
-                name: "infinigram-dolci-think-sft-32b",
+                name: "infinigram-array-dolci-think-sft-32b",
                 persistentVolumeClaim: {
                     claimName: "infinigram-dolci-think-sft-32b",
                     readOnly: true

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-dolci-think-sft-32b
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: 190Gi 
+  accessModes:
+    - ReadOnlyMany
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-dolci-think-sft-32b
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-dolci-think-sft-32b
+    fsType: ext4
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-dolci-think-sft-32b
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-dolci-think-sft-32b
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 190Gi

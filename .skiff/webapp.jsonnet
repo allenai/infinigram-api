@@ -510,6 +510,13 @@ function(
                     claimName: "infinigram-dolma2-0625-v01-7b",
                     readOnly: true
                 }
+            },
+            {
+                name: "infinigram-array-dolci-instruct-sft-7b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolci-instruct-sft-7b",
+                    readOnly: true
+                }
             }
         ],
         [
@@ -521,6 +528,11 @@ function(
             {
                 mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
                 name: "infinigram-array-dolma2-0625-v01-7b",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolci-instruct-sft-7b",
+                name: "infinigram-array-dolci-instruct-sft-7b",
                 readOnly: true,
             }
         ]
@@ -542,6 +554,13 @@ function(
                     claimName: "infinigram-dolma2-0625-v01-7b",
                     readOnly: true
                 }
+            },
+            {
+                name: "infinigram-array-dolci-think-sft-7b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolci-think-sft-7b",
+                    readOnly: true
+                }
             }
         ],
         [
@@ -553,6 +572,11 @@ function(
             {
                 mountPath: "/mnt/infinigram-array/dolma2-0625-v01-7b",
                 name: "infinigram-array-dolma2-0625-v01-7b",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolci-think-sft-7b",
+                name: "infinigram-array-dolci-think-sft-7b",
                 readOnly: true,
             }
         ]
@@ -574,6 +598,13 @@ function(
                     claimName: "infinigram-v6-dolma2-0625-v02-32b",
                     readOnly: true
                 }
+            },
+            {
+                name: "infinigram-array-dolci-think-sft-32b",
+                persistentVolumeClaim: {
+                    claimName: "infinigram-dolci-think-sft-32b",
+                    readOnly: true
+                }
             }
         ],
         [
@@ -585,6 +616,11 @@ function(
             {
                 mountPath: "/mnt/infinigram-array/v6-dolma2-0625-v02-32b",
                 name: "infinigram-array-v6-dolma2-0625-v02-32b",
+                readOnly: true,
+            },
+            {
+                mountPath: "/mnt/infinigram-array/dolci-think-sft-32b",
+                name: "infinigram-array-dolci-think-sft-32b",
                 readOnly: true,
             }
         ]

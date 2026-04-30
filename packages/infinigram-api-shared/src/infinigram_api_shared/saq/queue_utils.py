@@ -15,7 +15,7 @@ def get_attribute_job_name_for_index(index_id: AvailableInfiniGramIndexId) -> st
 @lru_cache
 def get_queue_connection_pool(queue_url: str) -> AsyncConnectionPool:
     return AsyncConnectionPool(
-        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=False
+        conninfo=queue_url, check=AsyncConnectionPool.check_connection, open=False, max_size=10
     )
 
 

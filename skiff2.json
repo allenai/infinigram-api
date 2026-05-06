@@ -1,0 +1,40 @@
+{
+    "$schema": "https://storage.googleapis.com/skiff2-general/skiff2-config.schema.json",
+    "projectName": "playground",
+    "environments": [
+        "main"
+    ],
+    "services": [
+        {
+            "name": "infinigram-api",
+            "cwd": "./api",
+            "vpc": {
+                "network": "default",
+                "subnetwork": "default"
+            },
+            "sidecars": [
+                {
+                    "name": "api-otel-collector",
+                    "cwd": "./api/apps/otel-collector",
+                    "liveness": {
+                        "path": "/",
+                        "port": 13133,
+                        "timeoutSeconds": 30,
+                        "periodSeconds": 30
+                    },
+                    "startup": {
+                        "path": "/",
+                        "port": 13133,
+                        "timeoutSeconds": 30,
+                        "periodSeconds": 30
+                    }
+                }
+            ]
+        },
+        {
+            "name": "infinigram-worker",
+            "cwd": "./attribution_worker",
+            "deploy": false
+        }
+    ]
+}

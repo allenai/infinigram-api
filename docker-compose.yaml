@@ -64,7 +64,7 @@ services:
   otelcol:
     image: otel/opentelemetry-collector-contrib:0.115.1
     volumes:
-      - ./otel-collector/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - ./otel-collector/otel-collector-config-dev.yaml:/etc/otelcol-contrib/config.yaml:ro
       - logs:/var/log:ro
     environment:
       - GOOGLE_CLOUD_PROJECT

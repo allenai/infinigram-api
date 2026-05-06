@@ -3,8 +3,8 @@
 
 FROM python:3.12-slim AS builder
 
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 COPY --from=ghcr.io/astral-sh/uv:0.6.8 /uv /bin/uv
 
@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 
 # Then, use a final image without uv
-FROM python:3.12-slim-bookworm as runner
+FROM python:3.12-slim-bookworm AS runner
 
 # It is important to use the image that matches the builder, as the path to the
 # Python executable must be the same, e.g., using `python:3.11-slim-bookworm`
@@ -45,10 +45,10 @@ COPY vendor/llama-2-7b-hf/ vendor/llama-2-7b-hf/
 COPY vendor/olmo-7b-hf/ vendor/olmo-7b-hf/
 COPY vendor/llama-2_bow_ids.txt vendor/llama-2_bow_ids.tx
 
-ENV PATH "/app/.venv/bin:$PATH"
-ENV TRANSFORMERS_NO_ADVISORY_WARNINGS 1
+ENV PATH="/app/.venv/bin:$PATH"
+ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
 
-FROM runner as dev
+FROM runner AS dev
 ENV OTEL_SERVICE_NAME=infinigram-api-dev
 ENV OTEL_TRACES_EXPORTER=otlp
 ENV OTEL_METRICS_EXPORTER=otlp
@@ -57,8 +57,8 @@ ENV ENV=development
 
 CMD ["fastapi", "dev", "app.py", "--port", "8000", "--proxy-headers", "--host", "0.0.0.0"]
 
-FROM runner as prod
+FROM runner AS prod
 ENV OTEL_SERVICE_NAME=infinigram-api
 ENV ENV=production
 
-CMD ["fastapi", "run", "app.py", "--port", "8000", "--proxy-headers"]
+CMD ["fastapi", "run", "app.py", "--port", "8080", "--proxy-headers"]

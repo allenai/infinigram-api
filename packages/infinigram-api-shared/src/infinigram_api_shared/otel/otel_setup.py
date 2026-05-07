@@ -1,26 +1,41 @@
 import os
 
-from opentelemetry import trace
-from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
+from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.metrics import set_meter_provider
+from opentelemetry.sdk.metrics import MeterProvider
+from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+from opentelemetry.sdk.resources import (
+    DEPLOYMENT_ENVIRONMENT,
+    SERVICE_INSTANCE_ID,
+    SERVICE_NAME,
+    Resource,
+)
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, SimpleSpanProcessor
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.trace import set_tracer_provider
 
-from .service_name_span_processor import ServiceNameSpanProcessor
+from api.src.config import get_config
 
 
-def set_up_tracing(service_name: str = "infinigram-api") -> None:
-    tracer_provider = TracerProvider()
-
-    if os.getenv("ENV") == "development":
-        tracer_provider.add_span_processor(
-            span_processor=SimpleSpanProcessor(OTLPSpanExporter())
+def set_up_tracing() -> None:
+    settings = get_config()
+    if settings.is_otel_enabled or settings.is_prod_environment:
+        resource = Resource.create(
+            attributes={
+                SERVICE_NAME: settings.otel_service_name,
+                SERVICE_INSTANCE_ID: f"worker-{os.getpid()}",
+                DEPLOYMENT_ENVIRONMENT: settings.skiff_env,
+            }
         )
-    else:
-        tracer_provider.add_span_processor(
-            BatchSpanProcessor(CloudTraceSpanExporter(project_id="ai2-reviz"))  # type:ignore[no-untyped-call]
-        )
 
-    tracer_provider.add_span_processor(ServiceNameSpanProcessor(service_name))
+        tracer_provider = TracerProvider(resource=resource)
 
-    trace.set_tracer_provider(tracer_provider)
+        metric_reader = PeriodicExportingMetricReader(OTLPMetricExporter())
+        meter_provider = MeterProvider(metric_readers=[metric_reader], resource=resource)
+
+        tracer_provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter()))
+
+        set_tracer_provider(tracer_provider)
+        set_meter_provider(meter_provider)
+

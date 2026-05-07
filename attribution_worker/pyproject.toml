@@ -10,8 +10,7 @@ dependencies = [
     "infini-gram-processor",
     "infinigram-api-shared",
     "numpy<2.0.0",
-    "opentelemetry-api==1.38.0",
-    "opentelemetry-exporter-gcp-trace==1.11.0",
-    "opentelemetry-exporter-otlp-proto-http==1.38.0",
-    "opentelemetry-sdk==1.38.0",
+    "opentelemetry-api>=1.41.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.41.1",
+    "opentelemetry-sdk>=1.41.1",
 ]

@@ -1,0 +1,5 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- infini-gram-worker-olmo-2-32b.yaml
+- infini-gram-worker-olmo-3-32b-instruct.yaml

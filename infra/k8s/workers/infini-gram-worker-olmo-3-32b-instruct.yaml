@@ -56,7 +56,7 @@ spec:
           value: infinigram-api-worker
         - name: ASSIGNED_INDEX
           value: olmo-3-0625-32b-instruct
-        image: gcr.io/ai2-skiff2-playground/infinigram-api-attribution-worker:1e1b21f46bd2d88e820d4570133b2bea745d65ec
+        image: WORKER_IMAGE:TAG
         imagePullPolicy: IfNotPresent
         name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
         readinessProbe:

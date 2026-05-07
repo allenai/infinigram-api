@@ -77,3 +77,36 @@ jobs:
         with:
           project_id: ${{ vars.SKIFF2_PROJECT_ID }}
           command: apply
+
+  deploy-workers:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: main-workers
+      deployment: true
+      
+    steps:
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.SKIFF2_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.SKIFF2_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/get-gke-credentials@v3
+        with:
+          cluster_name: ${{ vars.GKE_CLUSTER }}
+          location: ${{ vars.GKE_LOCATION }}
+
+      - name: Set up Kustomize
+        run: |-
+          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v5.8.1/kustomize_5.8.1_linux_amd64
+          chmod u+x ./kustomize
+
+      - name: Deploy
+        env:
+          DEPLOYMENT_NAME: infinigram-worker
+        run: |-
+          ./kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          kubectl apply -k .
+          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl get services -o wide

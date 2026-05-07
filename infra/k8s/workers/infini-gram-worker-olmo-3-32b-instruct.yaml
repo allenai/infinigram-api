@@ -1,12 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
+  namespace: infinigram-ap
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: infinigram-api-worker-olmo-2-0325-32b
+      app: infinigram-api-worker-olmo-3-0625-32b-instruct
       env: prod
   strategy:
     rollingUpdate:
@@ -15,10 +18,19 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        apps.allenai.org/branch: main
+        apps.allenai.org/build: e9c5cb3a-624f-47ed-a527-d19e0a2c93ef
+        apps.allenai.org/repo: infinigram-api
+        apps.allenai.org/sha: 1e1b21f46bd2d88e820d4570133b2bea745d65ec
       creationTimestamp: null
       labels:
-        app: infinigram-api-worker-olmo-2-0325-32b
-      name: infinigram-api-prod-worker-olmo-2-0325-32b
+        app: infinigram-api-worker-olmo-3-0625-32b-instruct
+        contact: reviz
+        env: prod
+        onlyOneOfPerNode: infinigram-api-prod
+        team: reviz
+      name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
       namespace: infinigram-api
     spec:
       affinity:
@@ -43,10 +55,10 @@ spec:
         - name: OTEL_SERVICE_NAME
           value: infinigram-api-worker
         - name: ASSIGNED_INDEX
-          value: olmo-2-0325-32b
+          value: olmo-3-0625-32b-instruct
         image: gcr.io/ai2-reviz/infinigram-api-attribution-worker:1e1b21f46bd2d88e820d4570133b2bea745d65ec
         imagePullPolicy: IfNotPresent
-        name: infinigram-api-prod-worker-olmo-2-0325-32b
+        name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
         readinessProbe:
           failureThreshold: 3
           httpGet:
@@ -63,14 +75,11 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - mountPath: /mnt/infinigram-array/olmoe-mix-0924-dclm
-          name: infinigram-array-olmoe-mix-0924-dclm
+        - mountPath: /mnt/infinigram-array/dolma2-0625-base-shared
+          name: infinigram-array-dolma2-0625-base-shared
           readOnly: true
-        - mountPath: /mnt/infinigram-array/olmoe-mix-0924-nodclm
-          name: infinigram-array-olmoe-mix-0924-nodclm
-          readOnly: true
-        - mountPath: /mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
-          name: infinigram-array-v4-olmo-2-0325-32b-anneal-adapt
+        - mountPath: /mnt/infinigram-array/v6-dolma2-0625-v02-32b
+          name: infinigram-array-v6-dolma2-0625-v02-32b
           readOnly: true
       dnsPolicy: ClusterFirst
       nodeSelector:
@@ -80,15 +89,11 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: infinigram-array-olmoe-mix-0924-dclm
+      - name: infinigram-array-dolma2-0625-base-shared
         persistentVolumeClaim:
-          claimName: infinigram-olmoe-mix-0924
+          claimName: infinigram-dolma2-0625-base-shared
           readOnly: true
-      - name: infinigram-array-olmoe-mix-0924-nodclm
+      - name: infinigram-array-v6-dolma2-0625-v02-32b
         persistentVolumeClaim:
-          claimName: infinigram-olmoe-mix-0924-nodclm
-          readOnly: true
-      - name: infinigram-array-v4-olmo-2-0325-32b-anneal-adapt
-        persistentVolumeClaim:
-          claimName: infinigram-v4-olmo-2-0325-32b-anneal-adapt
+          claimName: infinigram-v6-dolma2-0625-v02-32b
           readOnly: true

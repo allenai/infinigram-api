@@ -26,7 +26,7 @@ class Config(BaseSettings):
 
         return f"{queue_prefix}-{self.skiff_env}"
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def is_prod_environment(self) -> bool:
         return self.skiff_env == "prod"

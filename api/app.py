@@ -1,7 +1,5 @@
 import logging
 import os
-from contextlib import asynccontextmanager
-from typing import Any, AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi_problem.handler import add_exception_handler
@@ -11,11 +9,6 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
 from src import glog
 from src.attribution import attribution_router
-from src.attribution.attribution_queue_service import (
-    connect_to_attribution_queue,
-    disconnect_from_attribution_queue,
-)
-from src.cache.redis import create_connection_pool
 from src.config import get_config
 from src.health import health_router
 from src.infini_gram_exception_handler import infini_gram_engine_exception_handler
@@ -30,19 +23,7 @@ level = os.environ.get("LOG_LEVEL", default=logging.INFO)
 logging.basicConfig(level=level, handlers=handlers)
 
 
-# https://fastapi.tiangolo.com/advanced/events/
-@asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
-    config = get_config()
-    create_connection_pool(config.cache_url)
-    # Things before yield on on startup
-    await connect_to_attribution_queue()
-    yield
-    # Things after yield run on shutdown
-    await disconnect_from_attribution_queue()
-
-
-app = FastAPI(title="infini-gram API", version="0.0.1", lifespan=lifespan)
+app = FastAPI(title="infini-gram API", version="0.0.1")
 add_exception_handler(
     app,
     handlers={InfiniGramEngineException: infini_gram_engine_exception_handler},  # type: ignore
@@ -52,6 +33,13 @@ app.include_router(health_router)
 app.include_router(router=infinigram_router)
 app.include_router(router=attribution_router)
 
-set_up_tracing()
+config = get_config()
+
+set_up_tracing(
+    is_otel_enabled=config.is_otel_enabled,
+    is_prod_environment=config.is_prod_environment,
+    otel_service_name=config.otel_service_name,
+    env=config.skiff_env,
+)
 
 FastAPIInstrumentor.instrument_app(app, excluded_urls="health")

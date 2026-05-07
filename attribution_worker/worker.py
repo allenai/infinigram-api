@@ -24,7 +24,12 @@ try:
 except Exception as e:
     raise Exception("Invalid index ID") from e
 
-set_up_tracing()
+set_up_tracing(
+    is_otel_enabled=config.is_otel_enabled,
+    is_prod_environment=config.is_prod_environment,
+    otel_service_name=config.otel_service_name,
+    env=config.skiff_env,
+)
 
 queue = Queue.from_url(
     config.attribution_queue_url,

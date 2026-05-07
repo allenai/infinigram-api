@@ -15,27 +15,31 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.trace import set_tracer_provider
 
-from api.src.config import get_config
 
-
-def set_up_tracing() -> None:
-    settings = get_config()
-    if settings.is_otel_enabled or settings.is_prod_environment:
+def set_up_tracing(
+    *,
+    is_otel_enabled: bool = True,
+    is_prod_environment: bool = True,
+    otel_service_name: str = "infinigram-api",
+    env: str = "prod",
+) -> None:
+    if is_otel_enabled or is_prod_environment:
         resource = Resource.create(
             attributes={
-                SERVICE_NAME: settings.otel_service_name,
+                SERVICE_NAME: otel_service_name,
                 SERVICE_INSTANCE_ID: f"worker-{os.getpid()}",
-                DEPLOYMENT_ENVIRONMENT: settings.skiff_env,
+                DEPLOYMENT_ENVIRONMENT: env,
             }
         )
 
         tracer_provider = TracerProvider(resource=resource)
 
         metric_reader = PeriodicExportingMetricReader(OTLPMetricExporter())
-        meter_provider = MeterProvider(metric_readers=[metric_reader], resource=resource)
+        meter_provider = MeterProvider(
+            metric_readers=[metric_reader], resource=resource
+        )
 
         tracer_provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter()))
 
         set_tracer_provider(tracer_provider)
         set_meter_provider(meter_provider)
-

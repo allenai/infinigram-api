@@ -12,7 +12,7 @@ services:
     build:
       context: .
       dockerfile: ./api/Dockerfile
-      target: dev
+      target: prod
     volumes:
       - ./api:/app/api
       # If you add an volume here make sure you add it to /bin/download-infini-gram-array.sh too

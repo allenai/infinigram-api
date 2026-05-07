@@ -8,6 +8,7 @@
         {
             "name": "infinigram-api",
             "cwd": ".",
+            "dockerFile": "./api/Dockerfile",
             "vpc": {
                 "network": "default",
                 "subnetwork": "default"
@@ -34,6 +35,7 @@
         {
             "name": "infinigram-worker",
             "cwd": ".",
+            "dockerFile": "./attribution_worker/Dockerfile",
             "deploy": false
         }
     ]

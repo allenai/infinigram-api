@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: infinigram-api-worker-olmo-3-0625-32b-instruct
+      env: prod
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        apps.allenai.org/branch: main
+        apps.allenai.org/build: e9c5cb3a-624f-47ed-a527-d19e0a2c93ef
+        apps.allenai.org/repo: infinigram-api
+        apps.allenai.org/sha: 1e1b21f46bd2d88e820d4570133b2bea745d65ec
+      creationTimestamp: null
+      labels:
+        app: infinigram-api-worker-olmo-3-0625-32b-instruct
+        contact: reviz
+        env: prod
+        onlyOneOfPerNode: infinigram-api-prod
+        team: reviz
+      name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
+      namespace: infinigram-api
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: onlyOneOfPerNode
+                operator: In
+                values:
+                - infinigram-api-prod
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - env:
+        - name: PYTHON_ENV
+          value: prod
+        - name: ATTRIBUTION_QUEUE_URL
+          valueFrom:
+            secretKeyRef:
+              key: ATTRIBUTION_QUEUE_URL
+              name: attribution-worker
+        - name: OTEL_SERVICE_NAME
+          value: infinigram-api-worker
+        - name: ASSIGNED_INDEX
+          value: olmo-3-0625-32b-instruct
+        image: gcr.io/ai2-reviz/infinigram-api-attribution-worker:1e1b21f46bd2d88e820d4570133b2bea745d65ec
+        imagePullPolicy: IfNotPresent
+        name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: '32'
+            memory: 128G
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /mnt/infinigram-array/dolma2-0625-base-shared
+          name: infinigram-array-dolma2-0625-base-shared
+          readOnly: true
+        - mountPath: /mnt/infinigram-array/v6-dolma2-0625-v02-32b
+          name: infinigram-array-v6-dolma2-0625-v02-32b
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        cloud.google.com/gke-nodepool: cpu64-256g
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: infinigram-array-dolma2-0625-base-shared
+        persistentVolumeClaim:
+          claimName: infinigram-dolma2-0625-base-shared
+          readOnly: true
+      - name: infinigram-array-v6-dolma2-0625-v02-32b
+        persistentVolumeClaim:
+          claimName: infinigram-v6-dolma2-0625-v02-32b
+          readOnly: true

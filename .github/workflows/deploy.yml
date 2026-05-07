@@ -99,16 +99,15 @@ jobs:
           cluster_name: ${{ vars.GKE_CLUSTER }}
           location: ${{ vars.GKE_LOCATION }}
 
-      - name: Set up Kustomize
-        run: |-
-          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v5.8.1/kustomize_5.8.1_linux_amd64
-          chmod u+x ./kustomize
+      - uses: alexellis/arkade-get@master
+        with:
+          kustomize: 5.8.1
 
       - name: Deploy
         env:
           PROJECT_ID: ${{ vars.SKIFF2_PROJECT_ID }}
           IMAGE: "infinigram-api-infinigram-worker"
         run: |-
-          ./kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           kubectl apply -k .
           kubectl rollout status -k .

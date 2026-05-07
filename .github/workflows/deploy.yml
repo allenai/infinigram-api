@@ -99,9 +99,7 @@ jobs:
           cluster_name: ${{ vars.GKE_CLUSTER }}
           location: ${{ vars.GKE_LOCATION }}
 
-      - uses: alexellis/arkade-get@master
-        with:
-          kustomize: 5.0.3
+      - uses: imranismail/setup-kustomize@v3
 
       - name: Deploy
         env:

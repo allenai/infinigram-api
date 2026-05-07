@@ -13,7 +13,7 @@ spec:
     name: infinigram-v4-olmo-2-0325-32b-anneal-adapt
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-v4-olmo-2-0325-32b-anneal-adapt
+    volumeHandle: projects/ai2-skiff2-playground/zones/us-west1-b/disks/infinigram-v4-olmo-2-0325-32b-anneal-adapt
     fsType: ext4
     readOnly: true
 ---

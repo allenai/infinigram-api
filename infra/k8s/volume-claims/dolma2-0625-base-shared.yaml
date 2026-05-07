@@ -13,7 +13,7 @@ spec:
     name: infinigram-dolma2-0625-base-shared
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-dolma2-0625-base-shared
+    volumeHandle: projects/ai2-skiff2-playground/zones/us-west1-b/disks/infinigram-dolma2-0625-base-shared
     fsType: ext4
     readOnly: true
 ---

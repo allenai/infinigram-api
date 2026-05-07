@@ -101,7 +101,7 @@ jobs:
 
       - uses: alexellis/arkade-get@master
         with:
-          kustomize: 5.8.1
+          kustomize: 5.0.3
 
       - name: Deploy
         env:

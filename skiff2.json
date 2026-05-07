@@ -7,7 +7,7 @@
     "services": [
         {
             "name": "infinigram-api",
-            "cwd": "./api",
+            "cwd": ".",
             "vpc": {
                 "network": "default",
                 "subnetwork": "default"
@@ -33,7 +33,7 @@
         },
         {
             "name": "infinigram-worker",
-            "cwd": "./attribution_worker",
+            "cwd": ".",
             "deploy": false
         }
     ]

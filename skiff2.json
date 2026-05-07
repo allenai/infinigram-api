@@ -15,7 +15,7 @@
             "sidecars": [
                 {
                     "name": "api-otel-collector",
-                    "cwd": "./api/apps/otel-collector",
+                    "cwd": "./otel-collector",
                     "liveness": {
                         "path": "/",
                         "port": 13133,

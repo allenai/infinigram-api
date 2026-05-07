@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
 - volumes
 - workers
+images:
+- name: WORKER_IMAGE:TAG
+  newName: gcr.io/ai2-skiff2-playground/infinigram-api-attribution-worker
+  newTag: foo

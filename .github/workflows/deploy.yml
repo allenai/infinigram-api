@@ -104,9 +104,9 @@ jobs:
 
       - name: Deploy
         env:
-          DEPLOYMENT_NAME: infinigram-worker
+          PROJECT_ID: ${{ vars.SKIFF2_PROJECT_ID }}
+          IMAGE: "infinigram-api-infinigram-worker"
         run: |-
           ./kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           kubectl apply -k .
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
-          kubectl get services -o wide
+          kubectl rollout status -k .

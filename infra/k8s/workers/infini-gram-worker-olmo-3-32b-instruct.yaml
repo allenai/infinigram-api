@@ -81,6 +81,8 @@ spec:
         - mountPath: /mnt/infinigram-array/v6-dolma2-0625-v02-32b
           name: infinigram-array-v6-dolma2-0625-v02-32b
           readOnly: true
+        - mountPath: /var/secrets
+          name: worker-secrets
       dnsPolicy: ClusterFirst
       nodeSelector:
         cloud.google.com/gke-nodepool: cpu64-256g
@@ -97,3 +99,9 @@ spec:
         persistentVolumeClaim:
           claimName: infinigram-v6-dolma2-0625-v02-32b
           readOnly: true
+      - name: worker-secrets
+        csi:
+          driver: secrets-store-gke.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: worker-secret-provider

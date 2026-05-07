@@ -95,3 +95,9 @@ spec:
         persistentVolumeClaim:
           claimName: infinigram-v4-olmo-2-0325-32b-anneal-adapt
           readOnly: true
+      - name: attribution_queue_url
+        csi:
+          driver: secrets-store-gke.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: worker-secret-provider

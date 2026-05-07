@@ -3,10 +3,13 @@ on:
   push:
     branches:
       - main # will need to add more branches here if you plan on deploying to other environments.
-    paths:
-      - skiff2.json
-      - api/**
-      - .github/workflows/deploy-api.yml
+    paths-ignore:
+      - '.vscode/**'
+      - 'bin/**'
+      - 'compute_stats/**'
+      - 'docs/**'
+      - 'load-test/**'
+      - 'scripts/**'
 
 # needed to authenticate with google
 permissions:
@@ -41,7 +44,7 @@ jobs:
         with:
           project_id: ${{ vars.SKIFF2_PROJECT_ID }}
             
-  deploy:
+  deploy-api:
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -66,3 +69,10 @@ jobs:
       # Deploy with Terraform
       - name: Terraform Init
         run: terraform init
+
+      - name: Deploy API Services
+        id: deploy-services
+        uses: allenai/skiff2-actions/shared-actions/deploy-services@main
+        with:
+          project_id: ${{ vars.SKIFF2_PROJECT_ID }}
+          command: apply

@@ -2,7 +2,7 @@ from functools import lru_cache
 from typing import Annotated
 
 from fastapi import Depends
-from pydantic import computed_field
+from pydantic import Field, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -12,9 +12,9 @@ class Config(BaseSettings):
     index_base_path: str = "/mnt/infinigram-array"
     profiling_enabled: bool = False
     application_name: str = "infini-gram-api"
-    attribution_queue_url: str
+    attribution_queue_url: str = Field(init=False)
     python_env: str = "prod"
-    cache_url: str
+    cache_url: str = Field(init=False)
 
     @computed_field  # type: ignore[prop-decorator]
     @property

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main # will need to add more branches here if you plan on deploying to other environments.
+      - playground-project-migration
     paths-ignore:
       - '.vscode/**'
       - 'bin/**'

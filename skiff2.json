@@ -9,6 +9,7 @@
             "name": "infinigram-api",
             "cwd": ".",
             "dockerFile": "./api/Dockerfile",
+            "allowUnauthenticated": true,
             "vpc": {
                 "network": "default",
                 "subnetwork": "default"

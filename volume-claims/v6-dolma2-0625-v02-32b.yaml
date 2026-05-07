@@ -13,7 +13,7 @@ spec:
     name: infinigram-v6-dolma2-0625-v02-32b
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-skiff2-playground/zones/us-west1-b/disks/infinigram-v6-dolma2-0625-v02-32b
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-v6-dolma2-0625-v02-32b
     fsType: ext4
     readOnly: true
 ---

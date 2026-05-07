@@ -105,6 +105,7 @@ jobs:
         env:
           PROJECT_ID: ${{ vars.SKIFF2_PROJECT_ID }}
           IMAGE: "infinigram-api-infinigram-worker"
+        working-directory: ./infra/k8s
         run: |-
           kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           kubectl apply -k .

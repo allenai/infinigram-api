@@ -5,8 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "pydantic-settings==2.3.4",
     "pydantic==2.10.6",
-    "saq[postgres,web]>=0.26.0",
-    "psycopg[binary,pool]>=3.2.6",
+    "saq[redis,web]>=0.26.3",
     "transformers==4.57.1",
     "infini-gram-processor",
     "infinigram-api-shared",

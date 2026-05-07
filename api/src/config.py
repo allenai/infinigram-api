@@ -13,7 +13,7 @@ class Config(BaseSettings):
     profiling_enabled: bool = False
     application_name: str = "infini-gram-api"
     attribution_queue_url: str = Field(init=False)
-    python_env: str = "prod"
+    skiff_env: str = "prod"
     cache_url: str = Field(init=False)
 
     @computed_field  # type: ignore[prop-decorator]
@@ -21,7 +21,7 @@ class Config(BaseSettings):
     def attribution_queue_name(self) -> str:
         queue_prefix = "infini-gram-attribution"
 
-        return f"{queue_prefix}-{self.python_env}"
+        return f"{queue_prefix}-{self.skiff_env}"
 
 
 @lru_cache

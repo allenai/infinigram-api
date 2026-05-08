@@ -14,14 +14,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: infinigram-api-prod-worker
+      app: infinigram-api-worker-olmo-2-0325-32b
   template:
     metadata:
       creationTimestamp: null
       name: infinigram-api-worker-olmo-2-0325-32b
       namespace: infinigram-api
       labels:
-        app: infinigram-api-worker-olmo-3-0625-32b-instruct
+        app: infinigram-api-worker-olmo-2-0325-32b
     spec:
       affinity:
         podAntiAffinity:
@@ -77,8 +77,6 @@ spec:
         - mountPath: /var/secrets
           name: worker-secrets
       dnsPolicy: ClusterFirst
-      nodeSelector:
-        cloud.google.com/gke-nodepool: cpu64-256g
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

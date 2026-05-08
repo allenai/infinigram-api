@@ -61,7 +61,7 @@ spec:
         - mountPath: /mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
           name: infinigram-array-v4-olmo-2-0325-32b-anneal-adapt
           readOnly: true
-        - mountPath: /var/secrets
+        - mountPath: /secret/env
           name: worker-secrets
       dnsPolicy: ClusterFirst
       restartPolicy: Always

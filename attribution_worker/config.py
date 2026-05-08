@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Config(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env", extra="ignore", secrets_dir="/run/secrets"
+        env_file=".env", extra="ignore", secrets_dir="/secret/env"
     )
     index_base_path: str = "/mnt/infinigram-array"
     application_name: str = "infini-gram-api-worker"

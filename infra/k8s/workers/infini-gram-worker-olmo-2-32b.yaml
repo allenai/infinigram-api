@@ -22,25 +22,13 @@ spec:
       labels:
         app: infinigram-api-worker-olmo-2-0325-32b
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: onlyOneOfPerNode
-                operator: In
-                values:
-                - infinigram-api-prod
-            topologyKey: kubernetes.io/hostname
+      serviceAccountName: infinigram-worker-service-account
+      nodeSelector:
+        topology.kubernetes.io/zone: "us-west1-b"
       containers:
       - env:
         - name: PYTHON_ENV
           value: prod
-        - name: ATTRIBUTION_QUEUE_URL
-          valueFrom:
-            secretKeyRef:
-              key: ATTRIBUTION_QUEUE_URL
-              name: attribution-worker
         - name: OTEL_SERVICE_NAME
           value: infinigram-api-worker
         - name: ASSIGNED_INDEX

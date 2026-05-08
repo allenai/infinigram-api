@@ -17,7 +17,6 @@ spec:
       app: infinigram-api-worker-olmo-2-0325-32b
   template:
     metadata:
-      creationTimestamp: null
       name: infinigram-api-worker-olmo-2-0325-32b
       namespace: infinigram-api
       labels:
@@ -84,7 +83,7 @@ spec:
       volumes:
       - name: infinigram-array-olmoe-mix-0924-dclm
         persistentVolumeClaim:
-          claimName: infinigram-olmoe-mix-0924
+          claimName: infinigram-olmoe-mix-0924-dclm
           readOnly: true
       - name: infinigram-array-olmoe-mix-0924-nodclm
         persistentVolumeClaim:

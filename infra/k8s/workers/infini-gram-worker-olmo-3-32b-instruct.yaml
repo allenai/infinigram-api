@@ -18,13 +18,9 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: infinigram-api-worker-olmo-3-0625-32b-instruct
-        contact: reviz
         env: prod
-        onlyOneOfPerNode: infinigram-api-prod
-        team: reviz
       name: infinigram-api-worker-olmo-3-0625-32b-instruct
       namespace: infinigram-api
     spec:

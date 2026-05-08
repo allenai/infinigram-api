@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
-  namespace: infinigram-ap
+  namespace: infinigram-api
 spec:
   progressDeadlineSeconds: 600
   replicas: 2

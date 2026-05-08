@@ -19,8 +19,6 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      labels:
-        app: infinigram-api-worker-olmo-2-0325-32b
       name: infinigram-api-prod-worker-olmo-2-0325-32b
       namespace: infinigram-api
     spec:
@@ -75,6 +73,8 @@ spec:
         - mountPath: /mnt/infinigram-array/v4-olmo-2-0325-32b-anneal-adapt
           name: infinigram-array-v4-olmo-2-0325-32b-anneal-adapt
           readOnly: true
+        - mountPath: /var/secrets
+          name: worker-secrets
       dnsPolicy: ClusterFirst
       nodeSelector:
         cloud.google.com/gke-nodepool: cpu64-256g
@@ -95,7 +95,7 @@ spec:
         persistentVolumeClaim:
           claimName: infinigram-v4-olmo-2-0325-32b-anneal-adapt
           readOnly: true
-      - name: attribution_queue_url
+      - name: worker-secrets
         csi:
           driver: secrets-store-gke.csi.k8s.io
           readOnly: true

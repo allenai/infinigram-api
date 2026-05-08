@@ -1,12 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
+  name: infinigram-api-worker-olmo-3-0625-32b-instruct
   namespace: infinigram-api
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
   revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: infinigram-api-worker-olmo-3-0625-32b-instruct
+      env: prod
   strategy:
     rollingUpdate:
       maxSurge: 2
@@ -14,11 +18,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        apps.allenai.org/branch: main
-        apps.allenai.org/build: e9c5cb3a-624f-47ed-a527-d19e0a2c93ef
-        apps.allenai.org/repo: infinigram-api
-        apps.allenai.org/sha: 1e1b21f46bd2d88e820d4570133b2bea745d65ec
       creationTimestamp: null
       labels:
         app: infinigram-api-worker-olmo-3-0625-32b-instruct
@@ -26,7 +25,7 @@ spec:
         env: prod
         onlyOneOfPerNode: infinigram-api-prod
         team: reviz
-      name: infinigram-api-prod-worker-olmo-3-0625-32b-instruct
+      name: infinigram-api-worker-olmo-3-0625-32b-instruct
       namespace: infinigram-api
     spec:
       affinity:

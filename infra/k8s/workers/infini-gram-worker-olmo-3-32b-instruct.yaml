@@ -7,10 +7,6 @@ spec:
   progressDeadlineSeconds: 600
   replicas: 2
   revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: infinigram-api-worker-olmo-3-0625-32b-instruct
-      env: prod
   strategy:
     rollingUpdate:
       maxSurge: 2
@@ -71,7 +67,7 @@ spec:
         resources:
           requests:
             cpu: '32'
-            memory: 128G
+            memory: 110G
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

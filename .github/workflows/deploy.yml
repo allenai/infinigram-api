@@ -1,0 +1,112 @@
+name: Deploy API
+on:
+  push:
+    branches:
+      - main # will need to add more branches here if you plan on deploying to other environments.
+      - playground-project-migration-workers
+    paths-ignore:
+      - '.vscode/**'
+      - 'bin/**'
+      - 'compute_stats/**'
+      - 'docs/**'
+      - 'load-test/**'
+      - 'scripts/**'
+
+# needed to authenticate with google
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: main-api
+      
+    outputs:
+      build-images: ${{ steps.build.outputs.built-images }}
+
+    steps:
+      - name: Skiff2 Setup
+        id: setup
+        uses: allenai/skiff2-actions/shared-actions/setup@main
+        with:
+          workload_identity_provider: ${{ vars.SKIFF2_WORKLOAD_IDENTITY_PROVIDER }} # prepopulated on project setup
+          service_account: ${{ vars.SKIFF2_SERVICE_ACCOUNT }} # prepopulated on project setup
+          project_id: ${{ vars.SKIFF2_PROJECT_ID }} # prepopulated on project setup
+
+      - name: Skiff2 Build
+        id: build
+        uses: allenai/skiff2-actions/shared-actions/build@main
+        with:
+          project_id: ${{ vars.SKIFF2_PROJECT_ID }}
+            
+  deploy-api:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: main-api
+      deployment: true
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.SKIFF2_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.SKIFF2_SERVICE_ACCOUNT }}
+
+      # Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15"
+
+      # Deploy with Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Deploy API Services
+        id: deploy-services
+        uses: allenai/skiff2-actions/shared-actions/deploy-services@main
+        with:
+          project_id: ${{ vars.SKIFF2_PROJECT_ID }}
+          command: apply
+
+  deploy-workers:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: main-workers
+      deployment: true
+      
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.SKIFF2_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.SKIFF2_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/get-gke-credentials@v3
+        with:
+          cluster_name: ${{ vars.GKE_CLUSTER }}
+          location: ${{ vars.GKE_LOCATION }}
+
+      - uses: imranismail/setup-kustomize@v3
+
+      - name: Deploy
+        env:
+          PROJECT_ID: ${{ vars.SKIFF2_PROJECT_ID }}
+          IMAGE: "infinigram-api-infinigram-worker"
+        working-directory: ./infra/k8s
+        run: |-
+          kustomize edit set image WORKER_IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          kubectl apply -k .
+          kubectl rollout status -k .

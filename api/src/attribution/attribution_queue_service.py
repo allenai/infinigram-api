@@ -4,7 +4,6 @@ from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from infinigram_api_shared.saq.queue_utils import (
     get_attribute_job_name_for_index,
-    get_queue_connection_pool,
     get_queue_for_index,
 )
 from opentelemetry import trace
@@ -15,18 +14,6 @@ from saq import Queue
 
 from src.attribution.attribution_request import AttributionRequest
 from src.config import get_config
-
-
-async def connect_to_attribution_queue() -> None:
-    config = get_config()
-    connection_pool = get_queue_connection_pool(config.attribution_queue_url)
-    await connection_pool.open()
-
-
-async def disconnect_from_attribution_queue() -> None:
-    config = get_config()
-    connection_pool = get_queue_connection_pool(config.attribution_queue_url)
-    await connection_pool.close()
 
 
 def get_queue(index_id: AvailableInfiniGramIndexId) -> Queue:

@@ -31,7 +31,12 @@
                         "periodSeconds": 30
                     }
                 }
-            ]
+            ],
+            "customDomains": [
+                "infinigram-api.apps.allenai.org",
+                "infinigram-api.allen.ai"
+            ],
+            "includeDNSAuthorizationForExternalDomains": true
         },
         {
             "name": "infinigram-worker",

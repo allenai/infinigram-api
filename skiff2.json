@@ -16,7 +16,7 @@
             },
             "sidecars": [
                 {
-                    "name": "api-otel-collector",
+                    "name": "api-otelcol",
                     "cwd": "./otel-collector",
                     "liveness": {
                         "path": "/",

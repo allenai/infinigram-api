@@ -14,6 +14,9 @@
                 "network": "default",
                 "subnetwork": "default"
             },
+            "machine": {
+                "minInstances": 1
+            },
             "sidecars": [
                 {
                     "name": "api-otelcol",

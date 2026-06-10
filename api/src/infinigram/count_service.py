@@ -63,7 +63,7 @@ class CountService:
     async def count_cnf(
         self, index: AvailableInfiniGramIndexId, request: CountCnfRequest
     ) -> CountCnfResponse:
-        job_key = f"count_${index}${str(request.__hash__())}"
+        job_key = f"count_${index}_${str(request.__hash__())}"
 
         try:
             logger.debug("Adding count request to queue", extra={"index": index})

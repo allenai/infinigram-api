@@ -2,6 +2,7 @@ import json
 import logging
 from typing import (
     Iterable,
+    Optional,
     Sequence,
     cast,
 )
@@ -18,6 +19,8 @@ from transformers.tokenization_utils_base import (
     TextInput,
 )
 
+from infini_gram_processor.models.models import CountCnfResponse, CountResponse
+
 from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
 from .models import (
@@ -26,7 +29,6 @@ from .models import (
     GetDocumentByPointerRequest,
     GetDocumentByRankRequest,
     InfiniGramAttributionResponse,
-    InfiniGramCountResponse,
     InfiniGramSearchResponse,
 )
 from .models.is_infini_gram_error_response import (
@@ -155,15 +157,49 @@ class InfiniGramProcessor:
 
         return cnf, tokens
 
-    @tracer.start_as_current_span("infini_gram_processor/count_n_gram")
-    def count_n_gram(self, query: str) -> InfiniGramCountResponse:
-        tokenized_query_ids = self.tokenize(query)
+    @tracer.start_as_current_span("infini_gram_processor/count")
+    def count(self, query: str | list[int]) -> CountResponse:
+        query_ids, tokens = self.validate_and_tokenize_query(query)
 
-        count_response = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
+        count_response = self.infini_gram_engine.count(input_ids=query_ids)
 
         count_result = self.__handle_error(count_response)
 
-        return InfiniGramCountResponse(index=self.index, **count_result)
+        return CountResponse(
+            index=self.index, token_ids=query_ids, tokens=tokens, **count_result
+        )
+
+    @tracer.start_as_current_span("infini_gram_processor/count_cnf")
+    def count_cnf(
+        self,
+        query: str | list[list[list[int]]],
+        max_clause_freq: Optional[int] = None,
+        max_diff_tokens: Optional[int] = None,
+    ) -> CountCnfResponse:
+        if max_clause_freq is not None and not (
+            1 <= max_clause_freq <= tokenizer_config.MAX_CLAUSE_FREQ
+        ):
+            raise InfiniGramEngineException(
+                detail=f"max_clause_freq must be an integer in [1, {tokenizer_config.MAX_CLAUSE_FREQ}]!"
+            )
+        if max_diff_tokens is not None and not (
+            1 <= max_diff_tokens <= tokenizer_config.MAX_DIFF_TOKENS
+        ):
+            raise InfiniGramEngineException(
+                detail=f"max_diff_tokens must be an integer in [1, {tokenizer_config.MAX_DIFF_TOKENS}]!"
+            )
+
+        cnf, tokens = self.validate_and_tokenize_query_cnf(query)
+
+        count_cnf_response = self.infini_gram_engine.count_cnf(
+            cnf=cnf, max_clause_freq=max_clause_freq, max_diff_tokens=max_diff_tokens
+        )
+
+        count_cnf_result = self.__handle_error(count_cnf_response)
+
+        return CountCnfResponse(
+            index=self.index, token_ids=cnf, tokens=tokens, **count_cnf_result
+        )
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_rank")
     def get_document_by_rank(

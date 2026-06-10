@@ -54,9 +54,18 @@ class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
-class InfiniGramCountResponse(BaseInfiniGramResponse):
-    approx: bool
+class CountResponse(BaseInfiniGramResponse):
     count: int
+    approx: bool
+    token_ids: list[int]
+    tokens: list[str] | str
+
+
+class CountCnfResponse(BaseInfiniGramResponse):
+    count: int
+    approx: bool
+    token_ids: list[list[list[int]]]
+    tokens: list[list[list[str] | str]]
 
 
 class Document(CamelCaseModel):

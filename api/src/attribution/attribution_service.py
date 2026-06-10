@@ -14,7 +14,6 @@ from pydantic import Field, ValidationError
 from redis.asyncio import Redis
 from rfc9457 import StatusProblem
 
-from api.src.queue_service import abort_job
 from src.attribution.attribution_queue_service import (
     publish_attribution_job,
 )
@@ -22,6 +21,7 @@ from src.attribution.attribution_request import AttributionRequest
 from src.cache import CacheDependency
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
+from src.queue_service import abort_job
 
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")

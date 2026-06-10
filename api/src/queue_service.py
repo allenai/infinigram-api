@@ -11,7 +11,7 @@ from opentelemetry.semconv._incubating.attributes.messaging_attributes import (
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 from saq import Queue
 
-from api.src.config import get_config
+from src.config import get_config
 
 tracer = trace.get_tracer(__name__)
 
@@ -33,8 +33,11 @@ async def abort_job(job_key: str, index: AvailableInfiniGramIndexId) -> None:
 
 
 async def publish_job(
-    index: AvailableInfiniGramIndexId, job_key: str, job_name: Jobs, **kwargs
-):
+    index: AvailableInfiniGramIndexId,
+    job_key: str,
+    job_name: Jobs,
+    **kwargs: Any,
+) -> Any:
     with tracer.start_as_current_span(
         name="count_service/publish_count_job",
         kind=trace.SpanKind.PRODUCER,

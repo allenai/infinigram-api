@@ -1,8 +1,12 @@
 from fastapi import APIRouter
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
-from infini_gram_processor.models.models import CountCnfRequest, CountRequest
+from infini_gram_processor.models.models import (
+    CountCnfRequest,
+    CountCnfResponse,
+    CountRequest,
+)
 
-from api.src.infinigram.count_service import CountServiceDependency
+from src.infinigram.count_service import CountResponse, CountServiceDependency
 
 infinigram_router = APIRouter()
 
@@ -17,7 +21,7 @@ async def count(
     index: AvailableInfiniGramIndexId,
     body: CountRequest,
     count_service: CountServiceDependency,
-):
+) -> CountResponse:
     return await count_service.count(index, body)
 
 
@@ -26,5 +30,5 @@ async def count_cnf(
     index: AvailableInfiniGramIndexId,
     body: CountCnfRequest,
     count_service: CountServiceDependency,
-):
+) -> CountCnfResponse:
     return await count_service.count_cnf(index, body)

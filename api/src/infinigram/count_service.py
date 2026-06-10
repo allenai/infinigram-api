@@ -12,9 +12,9 @@ from infinigram_api_shared.saq.queue_utils import Jobs
 from opentelemetry import trace
 from opentelemetry.trace import Status, StatusCode
 
-from api.src.attribution.attribution_service import AttributionTimeoutError
-from api.src.camel_case_model import CamelCaseModel
-from api.src.queue_service import abort_job, publish_job
+from src.attribution.attribution_service import AttributionTimeoutError
+from src.camel_case_model import CamelCaseModel
+from src.queue_service import abort_job, publish_job
 
 tracer = trace.get_tracer(__name__)
 logger = logging.getLogger("uvicorn.error")

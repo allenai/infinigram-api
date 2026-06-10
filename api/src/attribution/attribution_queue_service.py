@@ -13,9 +13,9 @@ from opentelemetry.semconv._incubating.attributes.messaging_attributes import (
 from opentelemetry.trace import SpanKind
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from api.src.queue_service import get_queue
 from src.attribution.attribution_request import AttributionRequest
 from src.config import get_config
+from src.queue_service import get_queue
 
 tracer = trace.get_tracer(get_config().application_name)
 

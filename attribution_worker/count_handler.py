@@ -59,7 +59,7 @@ async def count_cnf_job(
     max_clause_freq: int | None = None,
     max_diff_tokens: int | None = None,
     otel_context: dict[str, Any],
-):
+) -> str:
     extracted_context = TraceContextTextMapPropagator().extract(otel_context)
 
     with tracer.start_as_current_span(

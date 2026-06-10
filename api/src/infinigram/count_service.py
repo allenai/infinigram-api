@@ -8,6 +8,7 @@ from infini_gram_processor.models.models import (
     CountCnfResponse,
     CountRequest,
 )
+from infinigram_api_shared.saq.queue_utils import Jobs
 from opentelemetry import trace
 from opentelemetry.trace import Status, StatusCode
 
@@ -35,7 +36,7 @@ class CountService:
             logger.debug("Adding count request to queue", extra={"index": index})
 
             count_result_json = await publish_job(
-                index, job_key=job_key, task_name="count", query=request.query
+                index, job_key=job_key, job_name=Jobs.COUNT, query=request.query
             )
             count_result = CountResponse.model_validate_json(count_result_json)
 
@@ -70,7 +71,7 @@ class CountService:
             count_result_json = await publish_job(
                 index=index,
                 job_key=job_key,
-                task_name="count_cnf",
+                job_name=Jobs.COUNT_CNF,
                 query=request.query,
                 max_clause_freq=request.max_clause_freq,
                 max_diff_tokens=request.max_diff_tokens,

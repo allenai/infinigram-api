@@ -1,13 +1,18 @@
+from enum import StrEnum
 from functools import lru_cache
 
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from saq import Queue
 
-_BASE_JOB_NAME = "attribute"
+
+class Jobs(StrEnum):
+    ATTRIBUTE = "attribute"
+    COUNT = "count"
+    COUNT_CNF = "count_cnf"
 
 
 def get_attribute_job_name_for_index(index_id: AvailableInfiniGramIndexId) -> str:
-    return _BASE_JOB_NAME
+    return Jobs.ATTRIBUTE
 
 
 def get_queue_name(index_id: AvailableInfiniGramIndexId, base_queue_name: str) -> str:

@@ -104,9 +104,9 @@ class InfiniGramProcessor:
         # this function checks the upper limits, but doesn't check anything else
 
         if isinstance(query, str):
-            if len(query) > tokenizer_config.MAX_QUERY_CHARS:
+            if len(query) > tokenizer_config.max_query_chars:
                 raise InfiniGramEngineException(
-                    detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_CHARS} characters!"
+                    detail=f"Please limit your input to <= {tokenizer_config.max_query_chars} characters!"
                 )
             query_ids = self.tokenize(query)
         else:
@@ -122,9 +122,9 @@ class InfiniGramProcessor:
         # this function checks the upper limits, but doesn't check anything else
 
         if isinstance(query, str):
-            if len(query) > tokenizer_config.MAX_QUERY_CHARS:
+            if len(query) > tokenizer_config.max_query_chars:
                 raise InfiniGramEngineException(
-                    detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_CHARS} characters!"
+                    detail=f"Please limit your input to <= {tokenizer_config.max_query_chars} characters!"
                 )
             cnf = [
                 [self.tokenize(term) for term in clause.split(" OR ")]
@@ -135,19 +135,19 @@ class InfiniGramProcessor:
 
         if (
             sum(sum(len(term) for term in clause) for clause in cnf)
-            > tokenizer_config.MAX_QUERY_TOKENS
+            > tokenizer_config.max_query_tokens
         ):
             raise InfiniGramEngineException(
-                detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_TOKENS} tokens!"
+                detail=f"Please limit your input to <= {tokenizer_config.max_query_tokens} tokens!"
             )
-        if len(cnf) > tokenizer_config.MAX_CLAUSES_PER_CNF:
+        if len(cnf) > tokenizer_config.max_clauses_per_cnf:
             raise InfiniGramEngineException(
-                detail=f"Please enter at most {tokenizer_config.MAX_CLAUSES_PER_CNF} disjunctive clauses!"
+                detail=f"Please enter at most {tokenizer_config.max_clauses_per_cnf} disjunctive clauses!"
             )
         for clause in cnf:
-            if len(clause) > tokenizer_config.MAX_TERMS_PER_CLAUSE:
+            if len(clause) > tokenizer_config.max_terms_per_clause:
                 raise InfiniGramEngineException(
-                    detail=f"Please enter at most {tokenizer_config.MAX_TERMS_PER_CLAUSE} terms in each disjunctive clause!"
+                    detail=f"Please enter at most {tokenizer_config.max_terms_per_clause} terms in each disjunctive clause!"
                 )
 
         tokens = [
@@ -177,16 +177,16 @@ class InfiniGramProcessor:
         max_diff_tokens: Optional[int] = None,
     ) -> CountCnfResponse:
         if max_clause_freq is not None and not (
-            1 <= max_clause_freq <= tokenizer_config.MAX_CLAUSE_FREQ
+            1 <= max_clause_freq <= tokenizer_config.max_clause_freq
         ):
             raise InfiniGramEngineException(
-                detail=f"max_clause_freq must be an integer in [1, {tokenizer_config.MAX_CLAUSE_FREQ}]!"
+                detail=f"max_clause_freq must be an integer in [1, {tokenizer_config.max_clause_freq}]!"
             )
         if max_diff_tokens is not None and not (
-            1 <= max_diff_tokens <= tokenizer_config.MAX_DIFF_TOKENS
+            1 <= max_diff_tokens <= tokenizer_config.max_diff_tokens
         ):
             raise InfiniGramEngineException(
-                detail=f"max_diff_tokens must be an integer in [1, {tokenizer_config.MAX_DIFF_TOKENS}]!"
+                detail=f"max_diff_tokens must be an integer in [1, {tokenizer_config.max_diff_tokens}]!"
             )
 
         cnf, tokens = self.validate_and_tokenize_query_cnf(query)

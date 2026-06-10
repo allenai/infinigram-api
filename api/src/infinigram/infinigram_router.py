@@ -22,8 +22,9 @@ async def count(
 
 
 @infinigram_router.post("/{index}/count_cnf")
-def count_cnf(
+async def count_cnf(
     index: AvailableInfiniGramIndexId,
     body: CountCnfRequest,
     count_service: CountServiceDependency,
-): ...
+):
+    return await count_service.count_cnf(index, body)

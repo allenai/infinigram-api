@@ -33,6 +33,7 @@ from .models.is_infini_gram_error_response import (
     TInfiniGramResponse,
     is_infini_gram_error_response,
 )
+from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
@@ -94,6 +95,65 @@ class InfiniGramProcessor:
             raise exception
 
         return cast(TInfiniGramResponse, result)
+
+    def validate_and_tokenize_query(
+        self, query: str | list[int]
+    ) -> tuple[list[int], list[str] | str]:
+        # this function checks the upper limits, but doesn't check anything else
+
+        if isinstance(query, str):
+            if len(query) > tokenizer_config.MAX_QUERY_CHARS:
+                raise InfiniGramEngineException(
+                    detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_CHARS} characters!"
+                )
+            query_ids = self.tokenize(query)
+        else:
+            query_ids = query
+
+        tokens = self.tokenizer.hf_tokenizer.convert_ids_to_tokens(query_ids)
+
+        return query_ids, tokens
+
+    def validate_and_tokenize_query_cnf(
+        self, query: str | list[list[list[int]]]
+    ) -> tuple[list[list[list[int]]], list[list[list[str] | str]]]:
+        # this function checks the upper limits, but doesn't check anything else
+
+        if isinstance(query, str):
+            if len(query) > tokenizer_config.MAX_QUERY_CHARS:
+                raise InfiniGramEngineException(
+                    detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_CHARS} characters!"
+                )
+            cnf = [
+                [self.tokenize(term) for term in clause.split(" OR ")]
+                for clause in query.split(" AND ")
+            ]
+        else:
+            cnf = query
+
+        if (
+            sum(sum(len(term) for term in clause) for clause in cnf)
+            > tokenizer_config.MAX_QUERY_TOKENS
+        ):
+            raise InfiniGramEngineException(
+                detail=f"Please limit your input to <= {tokenizer_config.MAX_QUERY_TOKENS} tokens!"
+            )
+        if len(cnf) > tokenizer_config.MAX_CLAUSES_PER_CNF:
+            raise InfiniGramEngineException(
+                detail=f"Please enter at most {tokenizer_config.MAX_CLAUSES_PER_CNF} disjunctive clauses!"
+            )
+        for clause in cnf:
+            if len(clause) > tokenizer_config.MAX_TERMS_PER_CLAUSE:
+                raise InfiniGramEngineException(
+                    detail=f"Please enter at most {tokenizer_config.MAX_TERMS_PER_CLAUSE} terms in each disjunctive clause!"
+                )
+
+        tokens = [
+            [self.tokenizer.hf_tokenizer.convert_ids_to_tokens(term) for term in clause]
+            for clause in cnf
+        ]
+
+        return cnf, tokens
 
     @tracer.start_as_current_span("infini_gram_processor/count_n_gram")
     def count_n_gram(self, query: str) -> InfiniGramCountResponse:

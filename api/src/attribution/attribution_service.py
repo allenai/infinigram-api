@@ -14,8 +14,8 @@ from pydantic import Field, ValidationError
 from redis.asyncio import Redis
 from rfc9457 import StatusProblem
 
+from api.src.queue_service import abort_job
 from src.attribution.attribution_queue_service import (
-    abort_attribution_job,
     publish_attribution_job,
 )
 from src.attribution.attribution_request import AttributionRequest
@@ -180,7 +180,7 @@ class AttributionService:
                 ex, attributes={"job_key": job_key, "index": index.value}
             )
 
-            await abort_attribution_job(job_key, index=index)
+            await abort_job(job_key, index=index)
 
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."

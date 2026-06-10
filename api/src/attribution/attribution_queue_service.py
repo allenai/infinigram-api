@@ -4,26 +4,18 @@ from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from infinigram_api_shared.saq.queue_utils import (
     get_attribute_job_name_for_index,
-    get_queue_for_index,
 )
 from opentelemetry import trace
-from opentelemetry.semconv.trace import SpanAttributes
+from opentelemetry.semconv._incubating.attributes.messaging_attributes import (
+    MESSAGING_MESSAGE_ID,
+    MESSAGING_SYSTEM,
+)
 from opentelemetry.trace import SpanKind
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
-from saq import Queue
 
+from api.src.queue_service import get_queue
 from src.attribution.attribution_request import AttributionRequest
 from src.config import get_config
-
-
-def get_queue(index_id: AvailableInfiniGramIndexId) -> Queue:
-    config = get_config()
-    return get_queue_for_index(
-        queue_url=config.attribution_queue_url,
-        base_queue_name=config.attribution_queue_name,
-        index_id=index_id,
-    )
-
 
 tracer = trace.get_tracer(get_config().application_name)
 
@@ -36,9 +28,9 @@ async def publish_attribution_job(
         kind=SpanKind.PRODUCER,
         attributes={
             TASK_NAME_KEY: "attribute",
-            SpanAttributes.MESSAGING_MESSAGE_ID: job_key,
+            MESSAGING_MESSAGE_ID: job_key,
             TASK_TAG_KEY: "apply_async",
-            SpanAttributes.MESSAGING_SYSTEM: "saq",
+            MESSAGING_SYSTEM: "saq",
             "index": index.value,
         },
     ):
@@ -63,12 +55,3 @@ async def publish_attribution_job(
             maximum_documents_per_span=request.maximum_documents_per_span,
             otel_context=otel_context,
         )
-
-
-async def abort_attribution_job(
-    job_key: str, index: AvailableInfiniGramIndexId
-) -> None:
-    job_to_abort = await get_queue(index).job(job_key)
-
-    if job_to_abort is not None:
-        await get_queue(index).abort(job_to_abort, "Client timeout")

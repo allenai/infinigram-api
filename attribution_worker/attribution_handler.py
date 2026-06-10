@@ -11,7 +11,11 @@ from infini_gram_processor.models.models import (
 )
 from infinigram_api_shared.saq.queue_constants import TASK_NAME_KEY, TASK_TAG_KEY
 from opentelemetry import trace
-from opentelemetry.semconv.trace import SpanAttributes
+from opentelemetry.semconv._incubating.attributes.messaging_attributes import (
+    MESSAGING_CLIENT_ID,
+    MESSAGING_MESSAGE_ID,
+    MESSAGING_SYSTEM,
+)
 from opentelemetry.trace import SpanKind
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
@@ -54,18 +58,18 @@ async def attribution_job(
         kind=SpanKind.CLIENT,
         context=extracted_context,
         attributes={
-            SpanAttributes.MESSAGING_SYSTEM: "saq",
+            MESSAGING_SYSTEM: "saq",
             TASK_NAME_KEY: "attribute",
             TASK_TAG_KEY: "apply_async",
         },
     ) as otel_span:
         job = ctx.get("job")
         if job is not None:
-            otel_span.set_attribute(SpanAttributes.MESSAGING_MESSAGE_ID, job.key)
+            otel_span.set_attribute(MESSAGING_MESSAGE_ID, job.key)
 
         worker = ctx.get("worker")
         if worker is not None:
-            otel_span.set_attribute(SpanAttributes.MESSAGING_CLIENT_ID, worker.id)
+            otel_span.set_attribute(MESSAGING_CLIENT_ID, worker.id)
 
         infini_gram_index = ctx["infini_gram_processor"]
 

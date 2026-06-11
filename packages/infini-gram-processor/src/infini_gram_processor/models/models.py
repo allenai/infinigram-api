@@ -18,8 +18,8 @@ class CountRequest(ApiRequest, frozen=True):
 
 class CountCnfRequest(ApiRequest, frozen=True):
     query: str | list[list[list[int]]]
-    max_clause_freq: Optional[int] = None
-    max_diff_tokens: Optional[int] = None
+    max_clause_freq: int | None = Field(None, ge=1)
+    max_diff_tokens: int | None = Field(None, ge=1)
 
 
 class GetDocumentByRankRequest(BaseModel):

@@ -2,7 +2,6 @@ import json
 import logging
 from typing import (
     Iterable,
-    Optional,
     Sequence,
     cast,
 )
@@ -40,6 +39,9 @@ from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
 logger = logging.getLogger("uvicorn.error")
+
+TokenizedCnfRequest = list[list[list[int]]]
+CnfTokens = list[list[list[str] | str]]
 
 
 class InfiniGramProcessor:
@@ -118,7 +120,7 @@ class InfiniGramProcessor:
 
     def validate_and_tokenize_query_cnf(
         self, query: str | list[list[list[int]]]
-    ) -> tuple[list[list[list[int]]], list[list[list[str] | str]]]:
+    ) -> tuple[TokenizedCnfRequest, CnfTokens]:
         # this function checks the upper limits, but doesn't check anything else
 
         if isinstance(query, str):
@@ -172,9 +174,9 @@ class InfiniGramProcessor:
     @tracer.start_as_current_span("infini_gram_processor/count_cnf")
     def count_cnf(
         self,
-        query: str | list[list[list[int]]],
-        max_clause_freq: Optional[int] = None,
-        max_diff_tokens: Optional[int] = None,
+        query: str | TokenizedCnfRequest,
+        max_clause_freq: int | None = None,
+        max_diff_tokens: int | None = None,
     ) -> CountCnfResponse:
         if max_clause_freq is not None and not (
             1 <= max_clause_freq <= tokenizer_config.max_clause_freq

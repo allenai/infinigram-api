@@ -18,6 +18,8 @@ from transformers.tokenization_utils_base import (
     TextInput,
 )
 
+from infini_gram_processor.models.models import CountCnfResponse, CountResponse
+
 from .index_mappings import AvailableInfiniGramIndexId, index_mappings
 from .infini_gram_engine_exception import InfiniGramEngineException
 from .models import (
@@ -26,17 +28,20 @@ from .models import (
     GetDocumentByPointerRequest,
     GetDocumentByRankRequest,
     InfiniGramAttributionResponse,
-    InfiniGramCountResponse,
     InfiniGramSearchResponse,
 )
 from .models.is_infini_gram_error_response import (
     TInfiniGramResponse,
     is_infini_gram_error_response,
 )
+from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
 logger = logging.getLogger("uvicorn.error")
+
+TokenizedCnfRequest = list[list[list[int]]]
+CnfTokens = list[list[list[str] | str]]
 
 
 class InfiniGramProcessor:
@@ -95,15 +100,108 @@ class InfiniGramProcessor:
 
         return cast(TInfiniGramResponse, result)
 
-    @tracer.start_as_current_span("infini_gram_processor/count_n_gram")
-    def count_n_gram(self, query: str) -> InfiniGramCountResponse:
-        tokenized_query_ids = self.tokenize(query)
+    def validate_and_tokenize_query(
+        self, query: str | list[int]
+    ) -> tuple[list[int], list[str] | str]:
+        # this function checks the upper limits, but doesn't check anything else
 
-        count_response = self.infini_gram_engine.count(input_ids=tokenized_query_ids)
+        if isinstance(query, str):
+            if len(query) > tokenizer_config.max_query_chars:
+                raise InfiniGramEngineException(
+                    detail=f"Please limit your input to <= {tokenizer_config.max_query_chars} characters!"
+                )
+            query_ids = self.tokenize(query)
+        else:
+            query_ids = query
+
+        tokens = self.tokenizer.hf_tokenizer.convert_ids_to_tokens(query_ids)
+
+        return query_ids, tokens
+
+    def validate_and_tokenize_query_cnf(
+        self, query: str | list[list[list[int]]]
+    ) -> tuple[TokenizedCnfRequest, CnfTokens]:
+        # this function checks the upper limits, but doesn't check anything else
+
+        if isinstance(query, str):
+            if len(query) > tokenizer_config.max_query_chars:
+                raise InfiniGramEngineException(
+                    detail=f"Please limit your input to <= {tokenizer_config.max_query_chars} characters!"
+                )
+            cnf = [
+                [self.tokenize(term) for term in clause.split(" OR ")]
+                for clause in query.split(" AND ")
+            ]
+        else:
+            cnf = query
+
+        if (
+            sum(sum(len(term) for term in clause) for clause in cnf)
+            > tokenizer_config.max_query_tokens
+        ):
+            raise InfiniGramEngineException(
+                detail=f"Please limit your input to <= {tokenizer_config.max_query_tokens} tokens!"
+            )
+        if len(cnf) > tokenizer_config.max_clauses_per_cnf:
+            raise InfiniGramEngineException(
+                detail=f"Please enter at most {tokenizer_config.max_clauses_per_cnf} disjunctive clauses!"
+            )
+        for clause in cnf:
+            if len(clause) > tokenizer_config.max_terms_per_clause:
+                raise InfiniGramEngineException(
+                    detail=f"Please enter at most {tokenizer_config.max_terms_per_clause} terms in each disjunctive clause!"
+                )
+
+        tokens = [
+            [self.tokenizer.hf_tokenizer.convert_ids_to_tokens(term) for term in clause]
+            for clause in cnf
+        ]
+
+        return cnf, tokens
+
+    @tracer.start_as_current_span("infini_gram_processor/count")
+    def count(self, query: str | list[int]) -> CountResponse:
+        query_ids, tokens = self.validate_and_tokenize_query(query)
+
+        count_response = self.infini_gram_engine.count(input_ids=query_ids)
 
         count_result = self.__handle_error(count_response)
 
-        return InfiniGramCountResponse(index=self.index, **count_result)
+        return CountResponse(
+            index=self.index, token_ids=query_ids, tokens=tokens, **count_result
+        )
+
+    @tracer.start_as_current_span("infini_gram_processor/count_cnf")
+    def count_cnf(
+        self,
+        query: str | TokenizedCnfRequest,
+        max_clause_freq: int | None = None,
+        max_diff_tokens: int | None = None,
+    ) -> CountCnfResponse:
+        if max_clause_freq is not None and not (
+            1 <= max_clause_freq <= tokenizer_config.max_clause_freq
+        ):
+            raise InfiniGramEngineException(
+                detail=f"max_clause_freq must be an integer in [1, {tokenizer_config.max_clause_freq}]!"
+            )
+        if max_diff_tokens is not None and not (
+            1 <= max_diff_tokens <= tokenizer_config.max_diff_tokens
+        ):
+            raise InfiniGramEngineException(
+                detail=f"max_diff_tokens must be an integer in [1, {tokenizer_config.max_diff_tokens}]!"
+            )
+
+        cnf, tokens = self.validate_and_tokenize_query_cnf(query)
+
+        count_cnf_response = self.infini_gram_engine.count_cnf(
+            cnf=cnf, max_clause_freq=max_clause_freq, max_diff_tokens=max_diff_tokens
+        )
+
+        count_cnf_result = self.__handle_error(count_cnf_response)
+
+        return CountCnfResponse(
+            index=self.index, token_ids=cnf, tokens=tokens, **count_cnf_result
+        )
 
     @tracer.start_as_current_span("infini_gram_processor/get_document_by_rank")
     def get_document_by_rank(

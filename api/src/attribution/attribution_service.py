@@ -15,13 +15,13 @@ from redis.asyncio import Redis
 from rfc9457 import StatusProblem
 
 from src.attribution.attribution_queue_service import (
-    abort_attribution_job,
     publish_attribution_job,
 )
 from src.attribution.attribution_request import AttributionRequest
 from src.cache import CacheDependency
 from src.camel_case_model import CamelCaseModel
 from src.config import get_config
+from src.queue_service import abort_job
 
 tracer = trace.get_tracer(get_config().application_name)
 logger = logging.getLogger("uvicorn.error")
@@ -180,7 +180,7 @@ class AttributionService:
                 ex, attributes={"job_key": job_key, "index": index.value}
             )
 
-            await abort_attribution_job(job_key, index=index)
+            await abort_job(job_key, index=index)
 
             raise AttributionTimeoutError(
                 "The server wasn't able to process your request in time. It is likely overloaded. Please try again later."

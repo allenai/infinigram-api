@@ -9,7 +9,17 @@ from infini_gram.models import (
 )
 from pydantic import BaseModel, Field
 
-from .camel_case_model import CamelCaseModel
+from .camel_case_model import ApiRequest, CamelCaseModel
+
+
+class CountRequest(ApiRequest, frozen=True):
+    query: str | list[int]
+
+
+class CountCnfRequest(ApiRequest, frozen=True):
+    query: str | list[list[list[int]]]
+    max_clause_freq: int | None = Field(None, ge=1)
+    max_diff_tokens: int | None = Field(None, ge=1)
 
 
 class GetDocumentByRankRequest(BaseModel):
@@ -44,9 +54,18 @@ class InfiniGramErrorResponse(CamelCaseModel):
     error: str
 
 
-class InfiniGramCountResponse(BaseInfiniGramResponse):
-    approx: bool
+class CountResponse(BaseInfiniGramResponse):
     count: int
+    approx: bool
+    token_ids: list[int]
+    tokens: list[str] | str
+
+
+class CountCnfResponse(BaseInfiniGramResponse):
+    count: int
+    approx: bool
+    token_ids: list[list[list[int]]]
+    tokens: list[list[list[str] | str]]
 
 
 class Document(CamelCaseModel):

@@ -1,16 +1,19 @@
 import logging
 import os
+from typing import cast
 
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.processor import InfiniGramProcessor
 from infinigram_api_shared.saq.queue_utils import (
+    Jobs,
     get_attribute_job_name_for_index,
     get_queue_name,
 )
 from saq import Queue
-from saq.types import SettingsDict
+from saq.types import Function, SettingsDict
 
 from attribution_worker.attribution_worker_context import AttributionWorkerContext
+from attribution_worker.count_handler import count_cnf_job, count_job
 
 from .attribution_handler import attribution_job
 from .config import get_config
@@ -53,7 +56,12 @@ async def startup(ctx: AttributionWorkerContext) -> None:
 settings = SettingsDict(
     queue=queue,
     functions=[
-        (get_attribute_job_name_for_index(assigned_index_enum), attribution_job)  # type: ignore[list-item] # The type for this isn't general enough to work with our fns
+        (
+            get_attribute_job_name_for_index(assigned_index_enum),
+            cast(Function[AttributionWorkerContext], attribution_job),
+        ),
+        (Jobs.COUNT, cast(Function[AttributionWorkerContext], count_job)),
+        (Jobs.COUNT_CNF, cast(Function[AttributionWorkerContext], count_cnf_job)),
     ],
     startup=startup,
     concurrency=1,

@@ -22,6 +22,7 @@ tracer = trace.get_tracer(config.application_name)
 async def count_job(
     ctx: AttributionWorkerContext,
     *,
+    index: str,
     query: str,
     otel_context: dict[str, Any],
 ) -> str:
@@ -55,6 +56,7 @@ async def count_job(
 async def count_cnf_job(
     ctx: AttributionWorkerContext,
     *,
+    index: str,
     query: str | list[list[list[int]]],
     max_clause_freq: int | None = None,
     max_diff_tokens: int | None = None,

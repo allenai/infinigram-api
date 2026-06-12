@@ -4,9 +4,10 @@ from infini_gram_processor.models.models import (
     CountCnfRequest,
     CountCnfResponse,
     CountRequest,
+    CountResponse,
 )
 
-from src.infinigram.count_service import CountResponse, CountServiceDependency
+from src.infinigram.count_service import CountServiceDependency
 
 infinigram_router = APIRouter()
 

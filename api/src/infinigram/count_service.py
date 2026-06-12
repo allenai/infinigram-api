@@ -7,22 +7,17 @@ from infini_gram_processor.models.models import (
     CountCnfRequest,
     CountCnfResponse,
     CountRequest,
+    CountResponse,
 )
 from infinigram_api_shared.saq.queue_utils import Jobs
 from opentelemetry import trace
 from opentelemetry.trace import Status, StatusCode
 
 from src.attribution.attribution_service import AttributionTimeoutError
-from src.camel_case_model import CamelCaseModel
 from src.queue_service import abort_job, publish_job
 
 tracer = trace.get_tracer(__name__)
 logger = logging.getLogger("uvicorn.error")
-
-
-class CountResponse(CamelCaseModel):
-    approx: bool
-    count: int
 
 
 class CountService:

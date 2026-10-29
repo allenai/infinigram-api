@@ -14,11 +14,13 @@ remote_dir = args.remote_dir
 s5cmd_files_dir = args.s5cmd_files_dir
 os.makedirs(output_dir, exist_ok=True)
 
+dirname = os.path.dirname(__file__)
+
 if args.dolci:
     # Single rank workflow for all datasets (assuming they fit on one node)
     # If they need multiple nodes, we'd need to shard, but user didn't specify, so assuming 1 node is enough for these SFT sets.
     # SFT sets are usually small.
-    with open("aws_workflow_template_dolci.sh", "r") as f:
+    with open(os.path.join(dirname, "aws_workflow_template_dolci.sh"), "r") as f:
         content = f.read()
     content = content.replace("[[RANK]]", "0")
     content = content.replace("[[REMOTE_DIR]]", remote_dir)
@@ -30,7 +32,7 @@ if args.dolci:
 
 else:
     for rank in range(num_nodes):
-        with open(f"aws_workflow_template.sh", "r") as f:
+        with open(os.path.join(dirname, "aws_workflow_template.sh"), "r") as f:
             content = f.read()
         content = content.replace("[[RANK]]", str(rank))
         content = content.replace("[[REMOTE_DIR]]", remote_dir)

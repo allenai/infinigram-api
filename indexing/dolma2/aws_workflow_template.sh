@@ -2,6 +2,7 @@ NUM_SHARDS=[[NUM_SHARDS]]
 NUM_NODES=[[NUM_NODES]]
 RANK=[[RANK]]
 REMOTE_DIR=[[REMOTE_DIR]]
+INDEXING_FOLDER=[[INDEXING_FOLDER]]
 
 # Mount volumes
 echo "Mount volumes: Starting ..."
@@ -32,8 +33,8 @@ echo "================================================"
 
 # Clone repo
 echo "Clone repo: Starting ..."
-git clone https://github.com/allenai/infinigram-api.git -b dolma2
-cd infinigram-api/indexing/dolma2
+git clone https://github.com/allenai/infinigram-api.git -b [[BRANCH]]
+cd infinigram-api/indexing/[[INDEXING_FOLDER]]
 echo "Clone repo: Done"
 echo "================================================"
 

@@ -8,6 +8,8 @@ parser.add_argument("--remote-dir", type=str, default="s3://infini-gram/index/do
 parser.add_argument("--s5cmd-files-dir", type=str, default="s5cmd_files_dolmino")
 parser.add_argument("--dolci", action="store_true", help="Generate Dolci indexing workflow")
 parser.add_argument("--output-dir", type=str, default="aws_workflows")
+parser.add_argument("--branch", type=str, default="dolma2")
+parser.add_argument("--indexing-folder", type=str, default="dolma2", help="Sets the folder to use inside the indexing folder")
 args = parser.parse_args()
 
 num_shards = args.num_shards
@@ -15,6 +17,8 @@ num_nodes = args.num_nodes
 output_dir = args.output_dir
 remote_dir = args.remote_dir
 s5cmd_files_dir = args.s5cmd_files_dir
+branch = args.branch
+indexing_folder = args.indexing_folder
 os.makedirs(output_dir, exist_ok=True)
 
 dirname = os.path.dirname(__file__)
@@ -42,6 +46,8 @@ else:
         content = content.replace("[[RANK]]", str(rank))
         content = content.replace("[[REMOTE_DIR]]", remote_dir)
         content = content.replace("[[S5CMD_FILES_DIR]]", s5cmd_files_dir)
+        content = content.replace("[[BRANCH]]", branch)
+        content = content.replace("[[INDEXING_FOLDER]]", indexing_folder)
         with open(f"{output_dir}/rank_{rank:04d}.sh", "w") as f:
             f.write(content)
         os.chmod(f"{output_dir}/rank_{rank:04d}.sh", 0o755)

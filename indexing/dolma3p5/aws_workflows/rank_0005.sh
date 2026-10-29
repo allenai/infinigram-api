@@ -2,6 +2,7 @@ NUM_SHARDS=57
 NUM_NODES=10
 RANK=5
 REMOTE_DIR=s3://infini-gram/index/dolma3p5-14t
+INDEXING_FOLDER=dolma3p5
 
 # Mount volumes
 echo "Mount volumes: Starting ..."
@@ -32,8 +33,8 @@ echo "================================================"
 
 # Clone repo
 echo "Clone repo: Starting ..."
-git clone https://github.com/allenai/infinigram-api.git -b dolma2
-cd infinigram-api/indexing/dolma2
+git clone https://github.com/allenai/infinigram-api.git -b dolma3
+cd infinigram-api/indexing/dolma3p5
 echo "Clone repo: Done"
 echo "================================================"
 

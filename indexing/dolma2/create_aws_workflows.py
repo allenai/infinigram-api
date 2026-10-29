@@ -2,14 +2,17 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--num-shards", type=int, default=1)
 parser.add_argument("--num-nodes", type=int, default=1)
 parser.add_argument("--remote-dir", type=str, default="s3://infini-gram/index/dolma2-0625-v02")
 parser.add_argument("--s5cmd-files-dir", type=str, default="s5cmd_files_dolmino")
 parser.add_argument("--dolci", action="store_true", help="Generate Dolci indexing workflow")
+parser.add_argument("--output-dir", type=str, default="aws_workflows")
 args = parser.parse_args()
 
+num_shards = args.num_shards
 num_nodes = args.num_nodes
-output_dir = "aws_workflows"
+output_dir = args.output_dir
 remote_dir = args.remote_dir
 s5cmd_files_dir = args.s5cmd_files_dir
 os.makedirs(output_dir, exist_ok=True)
@@ -34,6 +37,8 @@ else:
     for rank in range(num_nodes):
         with open(os.path.join(dirname, "aws_workflow_template.sh"), "r") as f:
             content = f.read()
+        content=content.replace("[[NUM_SHARDS]]", str(num_shards))
+        content = content.replace("[[NUM_NODES]]", str(num_nodes))
         content = content.replace("[[RANK]]", str(rank))
         content = content.replace("[[REMOTE_DIR]]", remote_dir)
         content = content.replace("[[S5CMD_FILES_DIR]]", s5cmd_files_dir)

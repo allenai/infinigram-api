@@ -1,5 +1,5 @@
-NUM_SHARDS=25
-NUM_NODES=25
+NUM_SHARDS=57
+NUM_NODES=10
 RANK=0
 REMOTE_DIR=s3://infini-gram/index/dolma3p5-14t
 

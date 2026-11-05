@@ -12,7 +12,7 @@
   * Example gcloud command:
     ```
     gcloud compute instances create infini-gram-transfer-agent-1 \
-      --project=ai2-reviz \
+      --project=ai2-skiff2-playground \
       --zone=us-west1-a \
       --machine-type=n2-standard-4 \
       --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=main \
@@ -36,15 +36,11 @@
       export AWS_ACCESS_KEY_ID=<AWS_ACCES_KEY_ID>
       export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
       curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo systemctl enable docker
-      gcloud transfer agents install --pool=infini-gram-transfer  \
+      gcloud transfer agents install --pool=infini-gram-transfer-pool  \
         --creds-file=~/infini-gram-transfer-account.json
       ```
 
 #### Starting the transfer job
-  Run this from infinigram-api root folder:
-  `./bin/transfer-index-from-s3.sh <S3_SOURCE> <INDEX_NAME>`
-  Example:
-  `./bin/transfer-index-from-s3.sh s3://infini-gram/index/v4_olmo-2-1124-13b-anneal-adapt_llama/ v4-olmo-2-1124-13b-anneal-adapt`
 
   S3_SOURCE will be prefixed with `s3://`
   INDEX_NAME may need to be shortened to fit GCP requirements! You'll want to keep it as close to the actual index name as possible.

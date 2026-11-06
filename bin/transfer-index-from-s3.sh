@@ -15,5 +15,5 @@ fi
 
 gcloud transfer jobs create $INDEX_SOURCE gs://infinigram/index/$INDEX_NAME/ \
     --name=infini-gram-transfer-$INDEX_NAME \
-    --source-agent-pool=projects/ai2-reviz/agentPools/infini-gram-transfer \
+    --source-agent-pool=infini-gram-transfer-pool \
     --source-endpoint=s3.us-east-1.amazonaws.com

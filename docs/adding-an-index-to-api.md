@@ -1,5 +1,7 @@
 
-# Adding a new infini-gram index
+# Adding a new infini-gram index to infinigram-api
+
+Once an Infini-gram index is made, we need to get it into our system. This doc walks through transferring an index in an AWS S3 bucket to a GCP project making it into a disk then setting it up on infinigram-api. If you need to make the index, go to [the creation doc](./creating-an-infini-gram-index.md)!
 
 ## On the prod server
 

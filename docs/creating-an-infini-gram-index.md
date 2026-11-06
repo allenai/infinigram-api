@@ -1,4 +1,6 @@
-# Dolma2 indexing (aka Dolma3)
+# Creating an Infini-gram index
+
+This assumes that the training data needed is in AWS S3 and is complete.
 
 1. make a file like `indexing/dolma2/dolma2-0625-v01.csv` (example script `python scripts/generate_dolma3_csv.py --output indexing/dolma2/dolma3-dolmino-official-100b.csv --prefix s3://ai2-llm/preprocessed/dolma3-dolmino-official/100B-v2/`)
 2. `python make_s5cmd_files.py --csv-path dolma3-dolmino-official-100b.csv --output-dir s5cmd_files_dolmino`

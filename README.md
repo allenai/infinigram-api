@@ -12,7 +12,8 @@ This application is only made possible by researchers that worked on the infini-
 To develop in this repo, see the [contributing doc](./docs/CONTRIBUTING.md).
 
 ## Indexes
-You can find the index documentation [here](./docs/indexes.md).
+To make an Infini-gram index, see [Creating an Infini-gram index](./docs/creating-an-infini-gram-index.md).
+To transfer an index and use it on this API, see [Adding a new infini-gram index to infinigram-api](./docs/adding-an-index-to-api.md).
 
 ## Architecture
 

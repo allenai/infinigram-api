@@ -67,4 +67,7 @@ if [ ! -d $INFINIGRAM_ARRAY_DIR/dolma2-0625-v01-7b ]; then
     ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/dolma2-0625-v01-7b
 fi
 
-
+if [ ! -d $INFINIGRAM_ARRAY_DIR/dolma-3p5-14t ]; then
+    echo "creating a link from v4_pileval_llama to dolma-3p5-14t"
+    ln -s $INFINIGRAM_ARRAY_DIR/v4_pileval_llama $INFINIGRAM_ARRAY_DIR/dolma-3p5-14t
+fi

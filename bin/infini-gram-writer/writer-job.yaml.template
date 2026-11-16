@@ -6,9 +6,12 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: infini-gram-disk-writer
+      nodeSelector:
+        topology.kubernetes.io/zone: "us-west1-b"
       containers:
       - name: $INDEX_NAME-infini-gram-writer
-        image: gcr.io/ai2-reviz/infinigram-api-writer
+        image: gcr.io/ai2-skiff2-playground/infinigram-api-writer
         volumeMounts:
           - mountPath: /mnt/infini-gram-array/
             name: infinigram-array
@@ -41,7 +44,7 @@ spec:
     name: infinigram-$INDEX_NAME-writer
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/$DISK_NAME
+    volumeHandle: projects/ai2-skiff2-playground/zones/us-west1-b/disks/$DISK_NAME
     fsType: ext4
 ---
 apiVersion: v1

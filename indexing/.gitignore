@@ -1,0 +1,4 @@
+*.csv
+**/aws_workflows
+*.log
+*.s5cmd

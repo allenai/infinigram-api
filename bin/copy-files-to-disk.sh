@@ -18,12 +18,13 @@ DISK_NAME=infinigram-$INDEX_NAME
 
 echo "Creating disk $DISK_NAME"
 gcloud compute disks create $DISK_NAME \
-    --project=ai2-reviz \
+    --project=ai2-skiff2-playground \
     --type=pd-balanced \
     --size=$INDEX_SIZE \
     --labels=project=infini-gram \
     --zone=us-west1-b
 
+# TODO: figure out how to make GCP's "TiB" requirement and k8's "Ti" requirement both work for the same script
 echo "Creating writer job for $INDEX_NAME"
 # we use envsubst to replace variables in the kubectl yaml template
 INDEX_NAME=$INDEX_NAME \

@@ -71,25 +71,26 @@ Once an Infini-gram index is made, we need to get it into our system. This doc w
   INDEX_SIZE should match what you used when starting the transfer job and making the disk
   DISK_NAME is optional, it defaults to 'infinigram-$INDEX_NAME', which the script above creates.
 
-### Adding the volume to webapp.jsonnet
-  1. Add a volume to the indexVolumes
-     ```
-      {
-        name: "infinigram-array-<ARRAY_NAME>>",
-        persistentVolumeClaim: {
-            claimName: "infinigram-<ARRAY_NAME>",
-            readOnly: true,
-        }
-      }
-     ```
-  2. Add a volumeMount to the indexVolumeMounts
-     ```
-      {
-          mountPath: "/mnt/infinigram-array/<VOLUME_NAME>",
-          name: "infinigram-array-<ARRAY_NAME>",
-          readOnly: true,
-      }
-     ```
+### Adding the volume to a worker
+
+#### Adding to an existing worker
+Add the volume to the worker's `volumeMounts` like this:
+```yaml
+- mountPath: /mnt/infinigram-array/<INDEX_NAME>
+  name: infinigram-array-<INDEX_NAME>
+  readOnly: true
+```
+
+And also add it to the worker's `volumes` like this:
+```yaml
+- name: infinigram-array-<INDEX_NAME>
+  persistentVolumeClaim:
+    claimName: infinigram-<INDEX_NAME> # the same as the persistent volume's name that you made with the create-readonly-volume-claim script
+    readOnly: true
+```
+
+#### Making a new worker
+Copy the `infini-gram-worker-template.yaml` file and replace values as appropriate.
 
 ### Updating the transfer docker image
 If you update the docker image or script we use in the writer job, you'l need to rebuild the image and push it to GCP. 

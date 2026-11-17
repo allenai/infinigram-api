@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: infinigram-dolma3p5-14t
+spec:
+  storageClassName: "infinigram"
+  capacity:
+    storage: 28.5Ti 
+  accessModes:
+    - ReadOnlyMany
+  claimRef:
+    namespace: infinigram-api
+    name: infinigram-dolma3p5-14t
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/ai2-reviz/zones/us-west1-b/disks/infinigram-dolma3p5-14t
+    fsType: ext4
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: infinigram-api
+  name: infinigram-dolma3p5-14t
+spec:
+  storageClassName: "infinigram"
+  volumeName: infinigram-dolma3p5-14t
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 28.5Ti

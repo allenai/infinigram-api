@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infinigram-api-worker-<WORKER_NAME>
+  namespace: infinigram-api
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: infinigram-api-worker-<WORKER_NAME>
+      env: prod
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: infinigram-api-worker-<WORKER_NAME>
+        env: prod
+      name: infinigram-api-worker-<WORKER_NAME>
+      namespace: infinigram-api
+    spec:
+      serviceAccountName: infinigram-worker-service-account
+      nodeSelector:
+        topology.kubernetes.io/zone: "us-west1-b"
+      containers:
+      - env:
+        - name: PYTHON_ENV
+          value: prod
+        - name: OTEL_SERVICE_NAME
+          value: infinigram-api-worker
+        - name: ASSIGNED_INDEX
+          value: <WORKER_NAME>
+        image: WORKER_IMAGE:TAG
+        imagePullPolicy: IfNotPresent
+        name: infinigram-api-prod-worker-<WORKER_NAME>
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: '10'
+            memory: 70G
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /mnt/infinigram-array/<INDEX_NAME>
+          name: infinigram-array-<INDEX_NAME>
+          readOnly: true
+        - mountPath: /secret/env
+          name: worker-secrets
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: infinigram-array-<INDEX_NAME>
+        persistentVolumeClaim:
+          claimName: infinigram-<INDEX_NAME>
+          readOnly: true
+      - name: worker-secrets
+        csi:
+          driver: secrets-store-gke.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: worker-secret-provider

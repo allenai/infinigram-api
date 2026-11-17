@@ -150,7 +150,8 @@ index_mappings: IndexMappings = {
     },
     AvailableInfiniGramIndexId.OLMO_3P5.value: {
         "tokenizer_factory": get_dolma_2_tokenizer,
-        "index_dir": [f"{tokenizer_config.index_base_path}/dolma-3p5-14t"],
+        # I copied the data over incorrectly so we need a subfolder in here
+        "index_dir": [f"{tokenizer_config.index_base_path}/dolma-3p5-14t/dolma3p5-14t"],
         "index_dir_diff": [],
         "token_dtype": "u32",
     },

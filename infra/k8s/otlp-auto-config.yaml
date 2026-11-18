@@ -13,7 +13,7 @@ spec:
         parent_based:
           root:
             trace_id_ratio_based:
-              ratio: 1.0
+              ratio: "1.0"
     meter_provider:
       readers:
       - periodic:

@@ -50,9 +50,14 @@ class InfiniGramProcessor:
     infini_gram_engine: InfiniGramEngineDiff
 
     def __init__(self, index: AvailableInfiniGramIndexId):
-        logger.debug("Initializing index %s", index.value)
         self.index = index.value
         index_mapping = index_mappings[index.value]
+        logger.debug(
+            "Initializing index %s at path %s with tokenizer factory %s",
+            index.value,
+            index_mapping["index_dir"],
+            index_mapping["tokenizer_factory"].__name__,
+        )
 
         self.tokenizer = index_mapping["tokenizer_factory"]()
 

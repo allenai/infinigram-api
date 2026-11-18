@@ -1,0 +1,20 @@
+apiVersion: telemetry.googleapis.com/v1alpha1
+kind: Instrumentation
+metadata:
+  namespace: infinigram-api
+  name: infinigram-api-otlp-config
+spec:
+  autoInstrumentationConfig:
+    configInjection:
+      enabled: true
+  otelSDKConfig:
+    tracer_provider:
+      sampler:
+        parent_based:
+          root:
+            trace_id_ratio_based:
+              ratio: 1.0
+    meter_provider:
+      readers:
+      - periodic:
+          interval: 30000

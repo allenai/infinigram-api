@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - volumes
 - workers
+- otlp-auto-config.yaml
 images:
 - name: WORKER_IMAGE:TAG
   newName: gcr.io/ai2-skiff2-playground/infinigram-api-attribution-worker

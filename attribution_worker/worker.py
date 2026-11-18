@@ -4,6 +4,7 @@ from typing import cast
 
 from infini_gram_processor.index_mappings import AvailableInfiniGramIndexId
 from infini_gram_processor.processor import InfiniGramProcessor
+from infinigram_api_shared.otel.otel_setup import set_up_tracing
 from infinigram_api_shared.saq.queue_utils import (
     Jobs,
     get_attribute_job_name_for_index,
@@ -26,12 +27,12 @@ try:
 except Exception as e:
     raise Exception("Invalid index ID") from e
 
-# set_up_tracing(
-#     is_otel_enabled=config.is_otel_enabled,
-#     is_prod_environment=config.is_prod_environment,
-#     otel_service_name=config.otel_service_name,
-#     env=config.skiff_env,
-# )
+set_up_tracing(
+    is_otel_enabled=config.is_otel_enabled,
+    is_prod_environment=config.is_prod_environment,
+    otel_service_name=config.otel_service_name,
+    env=config.skiff_env,
+)
 
 queue = Queue.from_url(
     config.attribution_queue_url,

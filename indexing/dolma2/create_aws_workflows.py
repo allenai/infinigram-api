@@ -8,7 +8,7 @@ parser.add_argument("--remote-dir", type=str, default="s3://infini-gram/index/do
 parser.add_argument("--s5cmd-files-dir", type=str, default="s5cmd_files_dolmino")
 parser.add_argument("--dolci", action="store_true", help="Generate Dolci indexing workflow")
 parser.add_argument("--output-dir", type=str, default="aws_workflows")
-parser.add_argument("--branch", type=str, default="dolma2")
+parser.add_argument("--branch", type=str, default="main")
 parser.add_argument("--indexing-folder", type=str, default="dolma2", help="Sets the folder to use inside the indexing folder")
 args = parser.parse_args()
 

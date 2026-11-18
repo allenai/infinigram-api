@@ -69,6 +69,8 @@ echo "================================================"
 # echo "Compile things: Done"
 # echo "================================================"
 
+screen -X hardcopy_append on
+
 # Run workflow
 for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
 
@@ -94,10 +96,10 @@ for ((shard=$RANK; shard<$NUM_SHARDS; shard+=$NUM_NODES)); do
     echo "Upload data: Done"
     echo "------------------------------------------------"
 
-    # rm -r /data_c/tokenized
-    # rm -r /data_c/raw
-    # rm -r /data_t/${INDEX_NAME}
-    # rm -r /data_i/${INDEX_NAME}
+    rm -r /data_c/tokenized
+    rm -r /data_c/raw
+    rm -r /data_t/${INDEX_NAME}
+    rm -r /data_i/${INDEX_NAME}
 
     screen -X hardcopy -h ~/screen_output.txt
     # rm -r /data_c/tokenized

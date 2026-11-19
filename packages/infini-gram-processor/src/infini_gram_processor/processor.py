@@ -48,7 +48,7 @@ CnfTokens = list[list[list[str] | str]]
 SHARD_FILE_PREFIXES = ("tokenized", "table")
 
 
-def _file_names(path: Path) -> set[str]:
+def _get_file_names_in_path(path: Path) -> set[str]:
     return {entry.name for entry in path.iterdir() if entry.is_file()}
 
 
@@ -60,27 +60,30 @@ def _resolve_shard_dirs(index_dirs: Iterable[str]) -> list[str]:
         if not path.is_dir():
             raise FileNotFoundError(f"Index directory {index_dir} does not exist")
 
-        if any(name.startswith("tokenized") for name in _file_names(path)):
+        if any(name.startswith("tokenized") for name in _get_file_names_in_path(path)):
             shard_candidates = [path]
         else:
             shard_candidates = sorted(
                 entry for entry in path.iterdir() if entry.is_dir()
             )
             if not shard_candidates:
-                raise RuntimeError(
-                    f"Index directory {index_dir} contains no shard files and no shard subdirectories"
+                logger.error(
+                    "Index directory %s contains no shard files or shard subdirectories",
+                    index_dir,
                 )
 
         for shard_dir in shard_candidates:
-            names = _file_names(shard_dir)
+            names = _get_file_names_in_path(shard_dir)
             missing = [
                 prefix
                 for prefix in SHARD_FILE_PREFIXES
                 if not any(name.startswith(prefix) for name in names)
             ]
             if missing:
-                raise RuntimeError(
-                    f"Shard directory {shard_dir} is missing {missing} files"
+                logger.error(
+                    "Shard directory %s is missing these file types: %s",
+                    shard_dir,
+                    ",".join(missing),
                 )
             shard_dirs.append(str(shard_dir))
 

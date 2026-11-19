@@ -1,5 +1,6 @@
 import json
 import logging
+from pathlib import Path
 from typing import (
     Iterable,
     Sequence,
@@ -43,6 +44,51 @@ logger = logging.getLogger("uvicorn.error")
 TokenizedCnfRequest = list[list[list[int]]]
 CnfTokens = list[list[list[str] | str]]
 
+# infini-gram finds shards by substring-matching these prefixes on file names
+SHARD_FILE_PREFIXES = ("tokenized", "table")
+
+
+def _get_file_names_in_path(path: Path) -> set[str]:
+    return {entry.name for entry in path.iterdir() if entry.is_file()}
+
+
+# infini-gram doesn't search in subdirectories so we need to get all subdirectories and send them to the engine
+def _resolve_shard_dirs(index_dirs: Iterable[str]) -> list[str]:
+    shard_dirs: list[str] = []
+    for index_dir in index_dirs:
+        path = Path(index_dir)
+        if not path.is_dir():
+            raise FileNotFoundError(f"Index directory {index_dir} does not exist")
+
+        if any(name.startswith("tokenized") for name in _get_file_names_in_path(path)):
+            shard_candidates = [path]
+        else:
+            shard_candidates = sorted(
+                entry for entry in path.iterdir() if entry.is_dir()
+            )
+            if not shard_candidates:
+                logger.error(
+                    "Index directory %s contains no shard files or shard subdirectories",
+                    index_dir,
+                )
+
+        for shard_dir in shard_candidates:
+            names = _get_file_names_in_path(shard_dir)
+            missing = [
+                prefix
+                for prefix in SHARD_FILE_PREFIXES
+                if not any(name.startswith(prefix) for name in names)
+            ]
+            if missing:
+                logger.error(
+                    "Shard directory %s is missing these file types: %s",
+                    shard_dir,
+                    ",".join(missing),
+                )
+            shard_dirs.append(str(shard_dir))
+
+    return shard_dirs
+
 
 class InfiniGramProcessor:
     index: str
@@ -50,14 +96,20 @@ class InfiniGramProcessor:
     infini_gram_engine: InfiniGramEngineDiff
 
     def __init__(self, index: AvailableInfiniGramIndexId):
-        logger.debug("Initializing index %s", index.value)
         self.index = index.value
         index_mapping = index_mappings[index.value]
+        shard_dirs = _resolve_shard_dirs(index_mapping["index_dir"])
+        logger.info(
+            "Initializing index %s from %d shard dir(s): %s",
+            index.value,
+            len(shard_dirs),
+            shard_dirs,
+        )
 
         self.tokenizer = index_mapping["tokenizer_factory"]()
 
         self.infini_gram_engine = InfiniGramEngineDiff(
-            index_dir=index_mapping["index_dir"],
+            index_dir=shard_dirs,
             index_dir_diff=index_mapping["index_dir_diff"],
             eos_token_id=self.tokenizer.eos_token_id,
             bow_ids_path=self.tokenizer.bow_ids_path,
@@ -70,7 +122,15 @@ class InfiniGramProcessor:
             vocab_size=self.tokenizer.hf_tokenizer.vocab_size,
             token_dtype=index_mapping["token_dtype"],
         )
-        logger.debug("Finished initializing processor for index %s", index.value)
+
+        num_shards = self.infini_gram_engine.engine.get_num_shards()
+        if num_shards == 0:
+            raise RuntimeError(
+                f"Loaded 0 shards for index {index.value} from {shard_dirs}"
+            )
+        logger.info(
+            "Finished initializing index %s with %d shards", index.value, num_shards
+        )
 
     def tokenize(
         self, input: TextInput | PreTokenizedInput | EncodedInput

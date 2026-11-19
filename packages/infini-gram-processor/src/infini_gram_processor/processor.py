@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from pathlib import Path
 from typing import (
     Iterable,
@@ -39,13 +40,23 @@ from .processor_config import tokenizer_config
 from .tokenizers.tokenizer import Tokenizer
 
 tracer = trace.get_tracer(__name__)
-logger = logging.getLogger("uvicorn.error")
+logger = logging.getLogger(__name__)
 
 TokenizedCnfRequest = list[list[list[int]]]
 CnfTokens = list[list[list[str] | str]]
 
 # infini-gram finds shards by substring-matching these prefixes on file names
-SHARD_FILE_PREFIXES = ("tokenized", "table")
+SHARD_FILE_PREFIXES = ("tokenized", "table", "offset", "metadata", "metaoff", "unigram")
+
+v6_index_folder_name_regex = re.compile(r"\d*")
+
+
+def _get_v6_index_subfolders(path: Path) -> list[Path]:
+    return list(
+        child
+        for child in path.iterdir()
+        if child.is_dir() and v6_index_folder_name_regex.fullmatch(child.name)
+    )
 
 
 def _get_file_names_in_path(path: Path) -> set[str]:
@@ -63,9 +74,7 @@ def _resolve_shard_dirs(index_dirs: Iterable[str]) -> list[str]:
         if any(name.startswith("tokenized") for name in _get_file_names_in_path(path)):
             shard_candidates = [path]
         else:
-            shard_candidates = sorted(
-                entry for entry in path.iterdir() if entry.is_dir()
-            )
+            shard_candidates = _get_v6_index_subfolders(path)
             if not shard_candidates:
                 logger.error(
                     "Index directory %s contains no shard files or shard subdirectories",

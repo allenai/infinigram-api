@@ -57,8 +57,8 @@ spec:
         - mountPath: /mnt/infinigram-array/dolma2-0625-base-shared
           name: infinigram-array-dolma2-0625-base-shared
           readOnly: true
-        - mountPath: /mnt/infinigram-array/v6-dolma2-0625-v02-32b
-          name: infinigram-array-v6-dolma2-0625-v02-32b
+        - mountPath: /mnt/infinigram-array/dolma2-0625-v02-32b
+          name: infinigram-array-dolma2-0625-v02-32b
           readOnly: true
         - mountPath: /secret/env
           name: worker-secrets
@@ -72,9 +72,9 @@ spec:
         persistentVolumeClaim:
           claimName: infinigram-dolma2-0625-base-shared
           readOnly: true
-      - name: infinigram-array-v6-dolma2-0625-v02-32b
+      - name: infinigram-array-dolma2-0625-v02-32b
         persistentVolumeClaim:
-          claimName: infinigram-v6-dolma2-0625-v02-32b
+          claimName: infinigram-dolma2-0625-v02-32b
           readOnly: true
       - name: worker-secrets
         csi:
